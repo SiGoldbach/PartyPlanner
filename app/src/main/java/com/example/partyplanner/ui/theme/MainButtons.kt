@@ -1,52 +1,108 @@
 package com.example.partyplanner.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun MainScreen() {
 
-    var count = 0
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.width(200.dp),
-        verticalArrangement = Arrangement.Center
+        modifier = Modifier
+            .width(200.dp)
+            .height(100.dp)
     ) {
-        Button(onClick = {
-            count++
+        TopScreen()
+        Box(
+            contentAlignment = Alignment.Center,
 
-        }, colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)) {
-            Text(text = "Simple button")
-            Spacer(
-                modifier = Modifier
-                    .width(50.dp)
-                    .height(30.dp)
-            )
+            ) {
+            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(5.dp)) {
+                Text(text = "Upcoming events", modifier = Modifier.padding(start = 100.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(1.0F)
+                        .height(5.dp)
+                        .background(dustyRose)
+                        .clip(shape = RectangleShape)
+                )
+            }
+
+
         }
-        Button(onClick = {
-            count++
-
-        }) {
-            Text(text = "Simple button1")
-        }
-        Button(onClick = {
-            count++
-
-        }) {
-            Text(text = "Simple button2")
+        Column {
+            StandardButton(output = "50'th birthday party")
+            StandardButton(output = "Uncles Marty's wedding")
+            StandardButton(output = "Button 3")
         }
 
 
     }
 
 
+}
+
+/**
+ * This is supposed to be the standard button used for navigating the app.
+ */
+@Composable
+fun StandardButton(output: String) {
+    Button(
+        onClick = { /*TODO*/ },
+        colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        StandardText(text = output)
+        Spacer(modifier = Modifier.fillMaxWidth(1F))
+
+    }
+
+}
+
+@Composable
+fun StandardText(text: String) {
+    Text(
+        text = text,
+        fontStyle = FontStyle.Normal,
+        fontSize = 16.sp
+    )
+
+}
+
+/**
+ * This method will later take a lot of information in to display the correct stuff now
+ * It just a dummy to kinda make it look like the reel thing.
+ */
+@Composable
+fun TopScreen() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(10.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .clip(shape = CircleShape)
+                .background(Color.Black)
+        )
+        Box(modifier = Modifier.padding(10.dp)) {
+            StandardText(text = "MyMan\nMyManMail@mail.com")
+
+        }
+
+    }
 }
 
 
