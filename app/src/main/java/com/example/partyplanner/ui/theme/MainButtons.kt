@@ -31,14 +31,19 @@ fun MainScreen() {
             contentAlignment = Alignment.Center,
 
             ) {
-            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(5.dp)) {
-                Text(text = "Upcoming events", modifier = Modifier.padding(start = 100.dp))
+            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(9.dp)) {
+                Text(text = "Upcoming events",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.Center) )// .padding(start = 140.dp)
+
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(1.0F)
                         .height(5.dp)
                         .background(dustyRose)
                         .clip(shape = RectangleShape)
+
                 )
             }
 
