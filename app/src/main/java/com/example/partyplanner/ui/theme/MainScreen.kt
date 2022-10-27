@@ -16,10 +16,12 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MainScreen() {
-
+fun MainScreen(navController: NavHostController) {
+    val navController = rememberNavController()
     Column(
         modifier = Modifier
             .width(200.dp)
@@ -48,7 +50,11 @@ fun MainScreen() {
             StandardButton(output = "Uncles Marty's wedding")
             StandardButton(output = "Button 3")
         }
-
+        Button(onClick = {
+            navController.navigate(Screen.EventScreen.route)
+        }) {
+            Text(text = "Event")
+        }
 
     }
 
