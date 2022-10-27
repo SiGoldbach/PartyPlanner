@@ -32,7 +32,7 @@ fun MainScreen() {
 
             ) {
             Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(9.dp)) {
-                Text(text = "Upcoming events",
+                Text(text = "Kommende begivenheder",
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentSize(Alignment.Center) )// .padding(start = 140.dp)
@@ -98,7 +98,9 @@ fun StandardText(text: String) {
 @Composable
 fun TopScreen() {
     Row(
-        verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(10.dp)
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(10.dp)
     ) {
         Box(
             modifier = Modifier
