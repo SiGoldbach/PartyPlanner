@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,14 +33,19 @@ fun MainScreen(navController: NavHostController) {
             contentAlignment = Alignment.Center,
 
             ) {
-            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(5.dp)) {
-                Text(text = "Upcoming events", modifier = Modifier.padding(start = 100.dp))
+            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(9.dp)) {
+                Text(text = "Kommende begivenheder",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.Center) )// .padding(start = 140.dp)
+
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(1.0F)
                         .height(5.dp)
                         .background(dustyRose)
                         .clip(shape = RectangleShape)
+
                 )
             }
 
@@ -65,15 +71,18 @@ fun MainScreen(navController: NavHostController) {
  * This is supposed to be the standard button used for navigating the app.
  */
 @Composable
-fun StandardButton(output: String) {
+fun StandardButton(output: String, modifier: Modifier = Modifier) {
     Button(
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(20.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentSize(Alignment.Center),
+
     ) {
         StandardText(text = output)
-        Spacer(modifier = Modifier.fillMaxWidth(1F))
-
+        Spacer(modifier = Modifier.fillMaxWidth(0.89F))
     }
 
 }
@@ -95,7 +104,9 @@ fun StandardText(text: String) {
 @Composable
 fun TopScreen() {
     Row(
-        verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(10.dp)
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(10.dp)
     ) {
         Box(
             modifier = Modifier
