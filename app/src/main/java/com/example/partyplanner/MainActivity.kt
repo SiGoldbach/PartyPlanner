@@ -6,10 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,27 +36,41 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     },
+                    //Gør så man ikke kan "dragge" hvis menuen er lukket
+                    drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
                     drawerContent = {
                         DrawerHeader()
                         DrawerBody(
                             items = listOf(
                                 MenuItem(
-                                    id = "home",
-                                    title = "Home",
-                                    contentDescription = "Home",
-                                    icon = Icons.Filled.Home
+                                    id = "menu",
+                                    title = "Menu",
+                                    contentDescription = "The menu",
+                                    icon = Icons.Filled.Menu
                                 ),
                                 MenuItem(
-                                    id = "event",
-                                    title = "Begivenhed",
-                                    contentDescription = "Home",
+                                    id = "profile",
+                                    title = "Profil",
+                                    contentDescription = "Go to profile",
                                     icon = Icons.Filled.Face
                                 ),
                                 MenuItem(
-                                    id = "account",
-                                    title = "Account",
-                                    contentDescription = "Account",
-                                    icon = Icons.Filled.Person
+                                    id = "begivenhed",
+                                    title = "Begivenheder",
+                                    contentDescription = "Begivenheder",
+                                    icon = Icons.Filled.Add
+                                ),
+                                MenuItem(
+                                    id = "ønskeliste",
+                                    title = "Ønskeliste",
+                                    contentDescription = "Wishlist",
+                                    icon = Icons.Filled.Edit
+                                ),
+                                MenuItem(
+                                    id = "hjælp",
+                                    title = "Hjælp",
+                                    contentDescription = "support",
+                                    icon = Icons.Filled.Info
                                 ),
                             ),
                             onItemClick = {
