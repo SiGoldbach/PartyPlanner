@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PartyPlanner</string>
+    <string name="Kommende_Events">kommende events</string>
 </resources>

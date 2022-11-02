@@ -49,7 +49,7 @@ fun ComingEvents(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentSize(Alignment.Center)
-                )// .padding(start = 140.dp)
+                )
 
                 Box(
                     modifier = Modifier

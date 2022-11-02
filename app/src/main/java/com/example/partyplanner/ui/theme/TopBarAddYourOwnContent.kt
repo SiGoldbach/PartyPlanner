@@ -1,16 +1,15 @@
 package com.example.partyplanner.ui.theme
 
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import com.example.partyplanner.AppBar
-import com.example.partyplanner.DrawerBody
-import com.example.partyplanner.DrawerHeader
-import com.example.partyplanner.MenuItem
+import com.example.partyplanner.*
 import kotlinx.coroutines.launch
 
 @Composable
@@ -21,7 +20,7 @@ fun TempMain(navController: NavController) {
         backgroundColor = beige,
         scaffoldState = scaffoldState,
         topBar = {
-            AppBar(
+            AppBar(stringResource = stringResource(id = R.string.Kommende_Events),
                 onNavigationIconClick = {
                     scope.launch { scaffoldState.drawerState.open() }
                 }
