@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainScreen(navController: NavHostController) {
+
     val navController = rememberNavController()
     Column(
         modifier = Modifier
@@ -33,10 +35,12 @@ fun MainScreen(navController: NavHostController) {
 
             ) {
             Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(9.dp)) {
-                Text(text = "Kommende begivenheder",
+                Text(
+                    text = "Kommende begivenheder",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentSize(Alignment.Center) )// .padding(start = 140.dp)
+                        .wrapContentSize(Alignment.Center)
+                )// .padding(start = 140.dp)
 
                 Box(
                     modifier = Modifier
@@ -79,7 +83,7 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .wrapContentSize(Alignment.Center),
 
-    ) {
+        ) {
         StandardText(text = output)
         Spacer(modifier = Modifier.fillMaxWidth(0.89F))
     }
