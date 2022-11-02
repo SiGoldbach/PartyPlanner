@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 }
                 //Change here
 
-                MainScreen(navController = navController)
+                TempMain(navController = navController)
             }
         }
     }

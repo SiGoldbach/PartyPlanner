@@ -1,6 +1,5 @@
 package com.example.partyplanner.ui.theme
 
-import android.widget.RelativeLayout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -18,15 +17,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun MainScreen(navController: NavController) {
 
-    val navController = rememberNavController()
     Column {
-        TopScreen(navController)
         Box(
             contentAlignment = Alignment.Center,
 
@@ -54,7 +49,7 @@ fun MainScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxHeight(0.8F),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             StandardButton(output = "50'th birthday party")
@@ -67,6 +62,9 @@ fun MainScreen(navController: NavHostController) {
             Text(text = "Event")
         }
 */
+        Spacer(modifier = Modifier.height(10.dp))
+        TopScreen(navController)
+
     }
 
 
@@ -115,7 +113,7 @@ fun TopScreen(navController: NavController) {
     ) {
         Box(
             modifier = Modifier
-                .size(50.dp)
+                .size(75.dp)
                 .clip(shape = CircleShape)
                 .background(Color.Black)
         )

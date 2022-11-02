@@ -18,6 +18,7 @@ fun TempMain(navController: NavController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
+        backgroundColor = beige,
         scaffoldState = scaffoldState,
         topBar = {
             AppBar(
@@ -76,7 +77,8 @@ fun TempMain(navController: NavController) {
 
         },
     ) {
-
+        MainScreen(navController = navController)
     }
 }
+
 
