@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 fun DefaultPreview() {
     PartyPlannerTheme {
         val navController = rememberNavController()
-        MainScreen(navController = navController)
+        ComingEvents(navController = navController)
     }
 }
 

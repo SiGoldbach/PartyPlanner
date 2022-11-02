@@ -77,7 +77,7 @@ fun TempMain(navController: NavController) {
 
         },
     ) {
-        MainScreen(navController = navController)
+        ComingEvents(navController = navController)
     }
 }
 

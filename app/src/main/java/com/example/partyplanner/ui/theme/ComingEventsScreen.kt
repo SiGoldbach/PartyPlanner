@@ -2,6 +2,8 @@ package com.example.partyplanner.ui.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -19,7 +21,22 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun ComingEvents(navController: NavController) {
+    val a = Event("event1")
+    val b = Event("event1")
+    val c = Event("event1")
+    val d = Event("event1")
+    val e = Event("event1")
+    val f = Event("event1")
+    val g = Event("event1")
+    val h = Event("event1")
+    val ea = Event("event1")
+    val fa = Event("event1")
+    val ga = Event("event1")
+    val ha = Event("event1")
+
+
+    val list = listOf<Event>(a, b, c, d, e, f, g, h,ea,fa,ga,ha)
 
     Column {
         Box(
@@ -36,7 +53,7 @@ fun MainScreen(navController: NavController) {
 
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth(1.0F)
+                        .fillMaxWidth()
                         .height(5.dp)
                         .background(dustyRose)
                         .clip(shape = RectangleShape)
@@ -46,15 +63,10 @@ fun MainScreen(navController: NavController) {
 
 
         }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.8F),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            StandardButton(output = "50'th birthday party")
-            StandardButton(output = "Uncles Marty's wedding")
-            StandardButton(output = "Button 3")
+        LazyColumn(modifier = Modifier.fillMaxHeight().fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            items(list) { item ->
+                StandardButton2(item)
+            }
         }
         /*Button(onClick = {
             navController.navigate(Screen.EventScreen.route)
@@ -62,8 +74,7 @@ fun MainScreen(navController: NavController) {
             Text(text = "Event")
         }
 */
-        Spacer(modifier = Modifier.height(10.dp))
-        TopScreen(navController)
+
 
     }
 
@@ -91,11 +102,28 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
+fun StandardButton2(event: Event) {
+    Button(
+
+        onClick = { /*TODO*/ },
+        colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+        shape = RoundedCornerShape(30.dp),
+        modifier = Modifier
+            .size(width = 350.dp, height = 50.dp)
+
+    ) {
+        StandardText(text = event.name)
+    }
+    Spacer(modifier = Modifier.height(10.dp))
+
+}
+
+@Composable
 fun StandardText(text: String) {
     Text(
         text = text,
         fontStyle = FontStyle.Normal,
-        fontSize = 16.sp
+        fontSize = 16.sp, color = Color.White
     )
 
 }
