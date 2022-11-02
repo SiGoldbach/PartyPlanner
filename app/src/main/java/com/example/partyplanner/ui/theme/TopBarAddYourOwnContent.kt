@@ -76,6 +76,8 @@ fun TempMain(navController: NavController) {
 
         },
     ) {
+        //Down here you can add your own screen to this bas Christian Hyltoft has made,
+        //Later this will come as dependency injection as a composable function.
         ComingEvents(navController = navController)
     }
 }
