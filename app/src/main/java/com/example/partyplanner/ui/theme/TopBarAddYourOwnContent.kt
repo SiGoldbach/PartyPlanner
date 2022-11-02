@@ -20,7 +20,7 @@ fun TempMain(navController: NavController) {
         backgroundColor = beige,
         scaffoldState = scaffoldState,
         topBar = {
-            AppBar(stringResource = stringResource(id = R.string.Kommende_Events),
+            AppBar(stringResource = stringResource(id = R.string.Kommende_Begivenheder),
                 onNavigationIconClick = {
                     scope.launch { scaffoldState.drawerState.open() }
                 }

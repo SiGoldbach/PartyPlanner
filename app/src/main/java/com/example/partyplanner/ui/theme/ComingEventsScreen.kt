@@ -16,9 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
+val standardDP: Dp = 10.dp
 
 @Composable
 fun ComingEvents(navController: NavController) {
@@ -36,21 +39,30 @@ fun ComingEvents(navController: NavController) {
     val ha = Event("event1")
 
 
-    val list = listOf<Event>(a, b, c, d, e, f, g, h,ea,fa,ga,ha)
+    val list = listOf<Event>(a, b, c, d, e, f, g, h, ea, fa, ga, ha)
 
-    Column {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         Box(
             contentAlignment = Alignment.Center,
 
             ) {
-            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(9.dp)) {
-                Text(
-                    text = "Kommende begivenheder",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentSize(Alignment.Center)
-                )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+                    .padding(9.dp)
+                    .fillMaxWidth()
+            ) {
+                Button(
 
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier
+                        .size(width = 250.dp, height = 50.dp)
+
+                ) {
+                    StandardText(text = "Gamle begivenheder")
+                }
+                Spacer(modifier = Modifier.height(standardDP))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -63,9 +75,13 @@ fun ComingEvents(navController: NavController) {
 
 
         }
-        LazyColumn(modifier = Modifier.fillMaxHeight().fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             items(list) { item ->
-                StandardButton2(item)
+                EventComposer(item)
             }
         }
         /*Button(onClick = {
@@ -97,12 +113,12 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
     ) {
         StandardText(text = output)
     }
-    Spacer(modifier = Modifier.height(10.dp))
+    Spacer(modifier = Modifier.height(standardDP))
 
 }
 
 @Composable
-fun StandardButton2(event: Event) {
+fun EventComposer(event: Event) {
     Button(
 
         onClick = { /*TODO*/ },
