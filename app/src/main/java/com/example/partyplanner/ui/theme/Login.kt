@@ -27,7 +27,6 @@ fun LoginScreen() {
             .width(200.dp)
             .height(100.dp)
     ) {
-        TopScreen()
         Box(
             contentAlignment = Alignment.Center,
 

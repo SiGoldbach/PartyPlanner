@@ -1,12 +1,12 @@
 package com.example.partyplanner.ui.theme
 
+import android.widget.RelativeLayout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
@@ -24,12 +25,8 @@ import androidx.navigation.compose.rememberNavController
 fun MainScreen(navController: NavHostController) {
 
     val navController = rememberNavController()
-    Column(
-        modifier = Modifier
-            .width(200.dp)
-            .height(100.dp)
-    ) {
-        TopScreen()
+    Column {
+        TopScreen(navController)
         Box(
             contentAlignment = Alignment.Center,
 
@@ -54,17 +51,22 @@ fun MainScreen(navController: NavHostController) {
 
 
         }
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             StandardButton(output = "50'th birthday party")
             StandardButton(output = "Uncles Marty's wedding")
             StandardButton(output = "Button 3")
         }
-        Button(onClick = {
+        /*Button(onClick = {
             navController.navigate(Screen.EventScreen.route)
         }) {
             Text(text = "Event")
         }
-
+*/
     }
 
 
@@ -76,17 +78,17 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun StandardButton(output: String, modifier: Modifier = Modifier) {
     Button(
+
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-        shape = RoundedCornerShape(20.dp),
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center),
+        shape = RoundedCornerShape(30.dp),
+        modifier = Modifier
+            .size(width = 350.dp, height = 50.dp)
 
-        ) {
+    ) {
         StandardText(text = output)
-        Spacer(modifier = Modifier.fillMaxWidth(0.89F))
     }
+    Spacer(modifier = Modifier.height(10.dp))
 
 }
 
@@ -105,7 +107,7 @@ fun StandardText(text: String) {
  * It just a dummy to kinda make it look like the reel thing.
  */
 @Composable
-fun TopScreen() {
+fun TopScreen(navController: NavController) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -118,7 +120,7 @@ fun TopScreen() {
                 .background(Color.Black)
         )
         Box(modifier = Modifier.padding(10.dp)) {
-            StandardText(text = "MyMan\nMyManMail@mail.com")
+            StandardText(text = "MyMan")
 
         }
 

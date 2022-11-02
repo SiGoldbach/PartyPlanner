@@ -10,6 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import org.w3c.dom.Text
 
 @Composable fun EventScreen() {
@@ -24,7 +25,6 @@ import org.w3c.dom.Text
                 .width(200.dp)
                 .height(100.dp)
         ) {
-            TopScreen()
             Box(
                 contentAlignment = Alignment.Center,
 
