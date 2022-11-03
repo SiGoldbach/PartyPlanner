@@ -8,18 +8,24 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 val standardDP: Dp = 10.dp
 
@@ -39,7 +45,7 @@ fun ComingEvents(navController: NavController) {
     val ha = Event("event1")
 
 
-    val list = listOf<Event>(a, b, c, d, e, f, g, h, ea, fa, ga, ha)
+    val list = listOf(a, b, c, d, e, f, g, h, ea, fa, ga, ha)
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         Box(
@@ -167,6 +173,32 @@ fun TopScreen(navController: NavController) {
         }
 
     }
+}
+
+@Composable
+fun CreateNewEvent(navController: NavController) {
+    var eventName by remember { mutableStateOf(TextFieldValue("")) }
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+        Spacer(modifier = Modifier.height(standardDP))
+        OutlinedTextField(
+            value = eventName,
+            label = { Text(text = "Event navn") },
+            onValueChange = { eventName = it }
+
+
+        )
+        Spacer(modifier = Modifier.height(standardDP))
+        StandardButton(output = "Start event")
+
+
+    }
+
+}
+
+@Composable
+fun TextField() {
+
+
 }
 
 
