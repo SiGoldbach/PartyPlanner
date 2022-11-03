@@ -38,9 +38,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                 }
                 //Change here
+                Navigation()
 
-                NewEvent(navController = navController)
             }
+
         }
     }
 }

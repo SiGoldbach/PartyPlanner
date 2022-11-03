@@ -1,4 +1,5 @@
 package com.example.partyplanner.ui.theme
+
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -23,27 +24,31 @@ import androidx.navigation.compose.composable
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
-        composable(route = Screen.MainScreen.route) {
-            ComingEvents(navController = navController)
+    NavHost(navController = navController, startDestination = Screen.EventScreen.route) {
+        composable(route = Screen.EventScreen.route) {
+            Events(navController = navController)
+        }
+        composable(route = Screen.NewEventScreen.route) {
+            NewEvent(navController = navController)
         }
     }
 }
 
 @Composable
 fun EventScreen(navController: NavController) {
-Column(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.White)
             .padding(horizontal = 50.dp)
     ) {
-        Button(onClick = {
-            navController.navigate(Screen.EventScreen.route)
-        }, modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp)
-            .padding(top = 50.dp),
+        Button(
+            onClick = {
+                navController.navigate(Screen.EventScreen.route)
+            }, modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+                .padding(top = 50.dp),
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
         ) {

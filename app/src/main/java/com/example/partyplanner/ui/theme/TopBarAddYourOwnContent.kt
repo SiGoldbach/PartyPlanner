@@ -1,9 +1,7 @@
 package com.example.partyplanner.ui.theme
 
-import android.app.assist.AssistContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.rememberScaffoldState
@@ -15,7 +13,7 @@ import com.example.partyplanner.*
 import kotlinx.coroutines.launch
 
 @Composable
-fun TopOfScreenReusable(navController: NavController) {
+fun TopOfScreenReusable(navController: NavController, content: @Composable () -> Unit) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -68,8 +66,9 @@ fun TopOfScreenReusable(navController: NavController) {
                 onItemClick = {
                     when (it.id) {
                         "home" -> navController.navigate("home")
-                        "event" -> navController.navigate("has")
+                        "begivenhed" -> navController.navigate(Screen.NewEventScreen.route)
                         "account" -> navController.navigate("account")
+                        "menu" -> navController.navigate(Screen.EventScreen.route)
                     }
 
                     println("Clicked on ${it.title}")
@@ -78,9 +77,9 @@ fun TopOfScreenReusable(navController: NavController) {
 
         },
     ) {
+        content()
         //Down here you can add your own screen to this bas Christian Hyltoft has made,
         //Later this will come as dependency injection as a composable function.
-        CreateNewEvent(navController = navController)
     }
 }
 
@@ -92,10 +91,10 @@ fun TopOfScreenReusable(navController: NavController) {
 
 @Composable
 fun NewEvent(navController: NavController) {
-    Column() {
-        TopOfScreenReusable(navController = navController)
-        CreateNewEvent(navController = navController)
-
+    Column {
+        TopOfScreenReusable(
+            navController = navController
+        ) { NewEvent(navController = navController) }
 
     }
 
@@ -107,8 +106,12 @@ fun NewEvent(navController: NavController) {
  */
 @Composable
 fun Events(navController: NavController) {
-    TopOfScreenReusable(navController = navController)
-    ComingEvents(navController = navController)
+    Column {
+        TopOfScreenReusable(
+            navController = navController
+        ) { ComingEvents(navController = navController) }
+    }
+
 }
 
 
