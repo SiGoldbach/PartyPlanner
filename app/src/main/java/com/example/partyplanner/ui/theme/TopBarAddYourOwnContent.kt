@@ -1,5 +1,7 @@
 package com.example.partyplanner.ui.theme
 
+import android.app.assist.AssistContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -13,7 +15,7 @@ import com.example.partyplanner.*
 import kotlinx.coroutines.launch
 
 @Composable
-fun TempMain(navController: NavController) {
+fun TopOfScreenReusable(navController: NavController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -66,7 +68,7 @@ fun TempMain(navController: NavController) {
                 onItemClick = {
                     when (it.id) {
                         "home" -> navController.navigate("home")
-                        "event" -> navController.navigate("event")
+                        "event" -> navController.navigate("has")
                         "account" -> navController.navigate("account")
                     }
 
@@ -80,6 +82,33 @@ fun TempMain(navController: NavController) {
         //Later this will come as dependency injection as a composable function.
         CreateNewEvent(navController = navController)
     }
+}
+
+/**
+ * Here one can use this way of making the screen with the appbar
+ * So this is now high cohesion so the appbar on top can be used againg and again.
+ */
+
+
+@Composable
+fun NewEvent(navController: NavController) {
+    Column() {
+        TopOfScreenReusable(navController = navController)
+        CreateNewEvent(navController = navController)
+
+
+    }
+
+}
+
+/**
+ * This Events composable should be called with a list of event,
+ * Or a function which acquires this list
+ */
+@Composable
+fun Events(navController: NavController) {
+    TopOfScreenReusable(navController = navController)
+    ComingEvents(navController = navController)
 }
 
 

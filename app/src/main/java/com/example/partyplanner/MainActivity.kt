@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 }
                 //Change here
 
-                TempMain(navController = navController)
+                NewEvent(navController = navController)
             }
         }
     }
