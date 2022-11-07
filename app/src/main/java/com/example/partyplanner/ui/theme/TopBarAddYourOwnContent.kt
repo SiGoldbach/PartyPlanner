@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.partyplanner.*
 import kotlinx.coroutines.launch
 
@@ -33,8 +34,8 @@ fun TopOfScreenReusable(navController: NavController, content: @Composable () ->
             DrawerBody(
                 items = listOf(
                     MenuItem(
-                        id = "menu",
-                        title = "Menu",
+                        id = "testpage",
+                        title = "TestPage",
                         contentDescription = "The menu",
                         icon = Icons.Filled.Menu
                     ),
@@ -65,10 +66,10 @@ fun TopOfScreenReusable(navController: NavController, content: @Composable () ->
                 ),
                 onItemClick = {
                     when (it.id) {
-                        "home" -> navController.navigate("home")
-                        "begivenhed" -> navController.navigate(Screen.NewEventScreen.route)
+                        "testpage" -> navController.navigate(Destination.TestScreen.route)
+                        "begivenhed" -> navController.navigate(Destination.NewEvent.route)
                         "account" -> navController.navigate("account")
-                        "menu" -> navController.navigate(Screen.EventScreen.route)
+                        "menu" -> navController.navigate(Destination.Event.route)
                     }
 
                     println("Clicked on ${it.title}")
@@ -90,7 +91,7 @@ fun TopOfScreenReusable(navController: NavController, content: @Composable () ->
 
 
 @Composable
-fun NewEvent(navController: NavController) {
+fun NewEvent(navController: NavHostController) {
     Column {
         TopOfScreenReusable(
             navController = navController
@@ -105,7 +106,7 @@ fun NewEvent(navController: NavController) {
  * Or a function which acquires this list
  */
 @Composable
-fun Events(navController: NavController) {
+fun Event(navController: NavHostController) {
     Column {
         TopOfScreenReusable(
             navController = navController
