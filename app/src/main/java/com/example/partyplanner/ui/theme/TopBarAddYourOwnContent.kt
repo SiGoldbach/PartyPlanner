@@ -8,13 +8,13 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.partyplanner.*
 import kotlinx.coroutines.launch
 
+//, content: @Composable () -> Unit
 @Composable
-fun TopOfScreenReusable(navController: NavController, content: @Composable () -> Unit) {
+fun TopOfScreenReusable(navController: NavHostController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -78,8 +78,78 @@ fun TopOfScreenReusable(navController: NavController, content: @Composable () ->
 
         },
     ) {
-        content()
-        //Down here you can add your own screen to this bas Christian Hyltoft has made,
+        ComingEvents(navController = navController)        //Down here you can add your own screen to this bas Christian Hyltoft has made,
+        //Later this will come as dependency injection as a composable function.
+    }
+}
+
+
+@Composable
+fun TopOfScreenReusable2(navController: NavHostController) {
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        backgroundColor = beige,
+        scaffoldState = scaffoldState,
+        topBar = {
+            AppBar(stringResource = stringResource(id = R.string.Kommende_Begivenheder),
+                onNavigationIconClick = {
+                    scope.launch { scaffoldState.drawerState.open() }
+                }
+            )
+        },
+        //Gør så man ikke kan "dragge" hvis menuen er lukket
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+        drawerContent = {
+            DrawerHeader()
+            DrawerBody(
+                items = listOf(
+                    MenuItem(
+                        id = "testpage",
+                        title = "TestPage",
+                        contentDescription = "The menu",
+                        icon = Icons.Filled.Menu
+                    ),
+                    MenuItem(
+                        id = "profile",
+                        title = "Profil",
+                        contentDescription = "Go to profile",
+                        icon = Icons.Filled.Face
+                    ),
+                    MenuItem(
+                        id = "begivenhed",
+                        title = "Begivenheder",
+                        contentDescription = "Begivenheder",
+                        icon = Icons.Filled.Add
+                    ),
+                    MenuItem(
+                        id = "ønskeliste",
+                        title = "Ønskeliste",
+                        contentDescription = "Wishlist",
+                        icon = Icons.Filled.Edit
+                    ),
+                    MenuItem(
+                        id = "hjælp",
+                        title = "Hjælp",
+                        contentDescription = "support",
+                        icon = Icons.Filled.Info
+                    ),
+                ),
+                onItemClick = {
+                    when (it.id) {
+                        "testpage" -> navController.navigate(Destination.TestScreen.route)
+                        "begivenhed" -> navController.navigate(Destination.NewEvent.route)
+                        "account" -> navController.navigate("account")
+                        "menu" -> navController.navigate(Destination.Event.route)
+                    }
+
+                    println("Clicked on ${it.title}")
+                }
+            )
+
+        },
+    ) {
+        Event(navController = navController)        //Down here you can add your own screen to this bas Christian Hyltoft has made,
         //Later this will come as dependency injection as a composable function.
     }
 }
@@ -92,12 +162,8 @@ fun TopOfScreenReusable(navController: NavController, content: @Composable () ->
 
 @Composable
 fun NewEvent(navController: NavHostController) {
-    Column {
-        TopOfScreenReusable(
-            navController = navController
-        ) { NewEvent(navController = navController) }
+    TopOfScreenReusable(navController = navController)
 
-    }
 
 }
 
@@ -107,11 +173,7 @@ fun NewEvent(navController: NavHostController) {
  */
 @Composable
 fun Event(navController: NavHostController) {
-    Column {
-        TopOfScreenReusable(
-            navController = navController
-        ) { ComingEvents(navController = navController) }
-    }
+    TopOfScreenReusable2(navController = navController)
 
 }
 
