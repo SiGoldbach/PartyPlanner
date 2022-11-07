@@ -108,7 +108,7 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
 fun EventComposer(event: Event, navController: NavHostController) {
     Card(
         border = BorderStroke(width = 2.dp, color = dustyRose),
-        modifier = Modifier.size(width = 350.dp, height = 300.dp), backgroundColor = beige
+        modifier = Modifier.size(width = 350.dp, height = 300.dp).padding(10.dp), backgroundColor = beige
     ) {
         Column(
             modifier = Modifier
@@ -117,14 +117,14 @@ fun EventComposer(event: Event, navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = event.name)
-            Text(text = "Begivenheds beskrivelse i mget store ord: e industry's standard dummy text ever since the 1500s, when an unknown printer took  ")
             Text(text = "11-01-2044")
             Spacer(modifier = Modifier.weight(1f))
-            Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
+            Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
                 Column() {
                     Text(text = "35 Deltager")
-                    Text(text = "15 Mangler svar")
+                    Text(text = "15 Invitationer")
                 }
+                Spacer(modifier = Modifier.weight(1F))
                 Button(
                     onClick = { /*TODO*/ },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
@@ -141,6 +141,8 @@ fun EventComposer(event: Event, navController: NavHostController) {
 
 
 }
+//Til eventcomposer skal importeres 2 billeder 1 til personer der deltager og et til ikke-besvarede invitationer.
+//Desuden skal al teksten inkapsuleres i en box mere...
 
 
 @Composable
