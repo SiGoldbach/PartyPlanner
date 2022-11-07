@@ -23,11 +23,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavHostController
 
 val standardDP: Dp = 10.dp
 
 @Composable
-fun ComingEvents(navController: NavController) {
+fun ComingEvents(navController: NavHostController) {
     val a = Event("event1")
     val b = Event("event1")
     val c = Event("event1")
@@ -84,15 +85,9 @@ fun ComingEvents(navController: NavController) {
                 .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(list) { item ->
-                EventComposer(item)
+                EventComposer(item,navController)
             }
         }
-        /*Button(onClick = {
-            navController.navigate(Screen.EventScreen.route)
-        }) {
-            Text(text = "Event")
-        }
-*/
 
 
     }
@@ -121,10 +116,10 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun EventComposer(event: Event) {
+fun EventComposer(event: Event, navController: NavHostController) {
     Button(
 
-        onClick = { /*TODO*/ },
+        onClick = { navController.navigate(Destination.NewEvent.route) },
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
         shape = RoundedCornerShape(30.dp),
         modifier = Modifier

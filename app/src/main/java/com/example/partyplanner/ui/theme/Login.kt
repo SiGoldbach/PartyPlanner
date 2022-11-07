@@ -12,11 +12,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.partyplanner.ui.theme.*
 
 val standardDP: Dp = 10.dp
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
     val a = Event("Login")
     val b = Event("Opret Bruger")
 
@@ -62,7 +63,7 @@ fun LoginScreen() {
                 .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(list) { item ->
-                EventComposer(item)
+                EventComposer(item, navController)
             }
         }
         /* Column{
