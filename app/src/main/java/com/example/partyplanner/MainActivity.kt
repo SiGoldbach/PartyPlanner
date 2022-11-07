@@ -1,6 +1,6 @@
 package com.example.partyplanner
 
-import LoginScreen
+import WelcomeScreen
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
