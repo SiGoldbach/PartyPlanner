@@ -11,33 +11,25 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.partyplanner.ui.theme.dustyRose
 
-
-// this shit dosent work
 @Composable
-fun OpretBruger(navController: NavController) {
-    var PersonalInformation by remember { mutableStateOf(TextFieldValue("")) }
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
-    ) {
+fun CreateNewEvent(navController: NavHostController) {
+    var eventName by remember { mutableStateOf(TextFieldValue("")) }
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = PersonalInformation,
-            label = { Text(text = "Fornavn", color = dustyRose) },
-            onValueChange = { PersonalInformation = it }
-        )
-        Spacer(modifier = Modifier.height(standardDP))
-        OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-        value = PersonalInformation,
-        label = { Text(text= "Efternavn", color = dustyRose)},
-        onValueChange = {PersonalInformation = it }
-        )
+            value = eventName,
+            label = { Text(text = "Event navn", color = dustyRose) },
+            onValueChange = { eventName = it }
 
+
+        )
         Spacer(modifier = Modifier.height(standardDP))
-        StandardButton(output = "Opret")
+        StandardButton(output = "Start event")
+
 
     }
+
 }

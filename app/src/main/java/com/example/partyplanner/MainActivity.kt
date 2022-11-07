@@ -1,8 +1,6 @@
 package com.example.partyplanner
 
-import WelcomeScreen
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,12 +15,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
+import com.example.partyplanner.ui.theme.screens.ComingEvents
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
  * When testing change the method called under the **ComposeTheme
  */
-
 
 
 class MainActivity : ComponentActivity() {
@@ -48,39 +46,37 @@ class MainActivity : ComponentActivity() {
                 }
                 //Change here
                 val navController = rememberNavController()
-                NavigationAppHost(navController = navController)            }
+                ComingEvents(navController = navController)
+            }
+        }
+    }
+
+    @Composable
+    fun NavigationAppHost(navController: NavHostController) {
+        val ctx = LocalContext.current
+
+        NavHost(navController = navController, startDestination = Destination.Event.route) {
+            composable(Destination.Event.route) { Event(navController) }
+            composable(Destination.NewEvent.route) { NewEvent(navController) }
+            composable(Destination.TestScreen.route) { TestScreen(navController) }
+            /*composable(Destination.Detail.route) { backStackEntry ->
+                val elementId = backStackEntry.arguments?.getString("elementId")
+                if(elementId == null){
+                    Toast.makeText(ctx, "No elementId found", Toast.LENGTH_SHORT).show()
+                } else  {
+                    DetailScreen(elementId = elementId.toInt())
+                }*/
 
         }
     }
-}
-
-@Composable
-fun NavigationAppHost (navController: NavHostController) {
-    val ctx = LocalContext.current
-
-    NavHost(navController = navController, startDestination = "event" ){
-        composable(Destination.Event.route) { Event(navController) }
-        composable(Destination.NewEvent.route) { NewEvent(navController) }
-        composable(Destination.TestScreen.route) { TestScreen(navController) }
-        /*composable(Destination.Detail.route) { backStackEntry ->
-            val elementId = backStackEntry.arguments?.getString("elementId")
-            if(elementId == null){
-                Toast.makeText(ctx, "No elementId found", Toast.LENGTH_SHORT).show()
-            } else  {
-                DetailScreen(elementId = elementId.toInt())
-            }*/
-
-    }
-}
 
 
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    PartyPlannerTheme {
-        val navController = rememberNavController()
-        ComingEvents(navController = navController)
+    @Preview(showBackground = true)
+    @Composable
+    fun DefaultPreview() {
+        PartyPlannerTheme {
+            val navController = rememberNavController()
+        }
     }
 }
 

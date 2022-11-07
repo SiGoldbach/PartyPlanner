@@ -1,32 +1,36 @@
-package com.example.partyplanner.ui.theme
+package com.example.partyplanner.ui.theme.screens
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
+import com.example.partyplanner.ui.theme.Event
+import com.example.partyplanner.ui.theme.beige
+import com.example.partyplanner.ui.theme.dustyRose
 
 val standardDP: Dp = 10.dp
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ComingEvents(navController: NavHostController) {
     val a = Event("event1")
@@ -55,37 +59,21 @@ fun ComingEvents(navController: NavHostController) {
                     .padding(9.dp)
                     .fillMaxWidth()
             ) {
-                Button(
 
-                    onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-                    shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier
-                        .size(width = 250.dp, height = 50.dp)
-
-                ) {
-                    StandardText(text = "Gamle begivenheder")
-                }
                 Spacer(modifier = Modifier.height(standardDP))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(5.dp)
-                        .background(dustyRose)
-                        .clip(shape = RectangleShape)
-
-                )
             }
 
 
         }
-        LazyColumn(
+        LazyVerticalGrid(
             modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxHeight(),
+            cells = GridCells.Adaptive(minSize = 160.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(list) { item ->
-                EventComposer(item,navController)
+                EventComposer(item, navController)
             }
         }
 
@@ -94,6 +82,7 @@ fun ComingEvents(navController: NavHostController) {
 
 
 }
+
 
 /**
  * This is supposed to be the standard button used for navigating the app.
@@ -117,20 +106,42 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun EventComposer(event: Event, navController: NavHostController) {
-    Button(
-
-        onClick = { navController.navigate(Destination.NewEvent.route) },
-        colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-        shape = RoundedCornerShape(30.dp),
-        modifier = Modifier
-            .size(width = 350.dp, height = 50.dp)
-
+    Card(
+        border = BorderStroke(width = 2.dp, color = dustyRose),
+        modifier = Modifier.size(width = 350.dp, height = 300.dp), backgroundColor = beige
     ) {
-        StandardText(text = event.name)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(1F),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = event.name)
+            Text(text = "Begivenheds beskrivelse i mget store ord: e industry's standard dummy text ever since the 1500s, when an unknown printer took  ")
+            Text(text = "11-01-2044")
+            Spacer(modifier = Modifier.weight(1f))
+            Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
+                Column() {
+                    Text(text = "35 Deltager")
+                    Text(text = "15 Mangler svar")
+                }
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+                ) {
+                    Text(text = "Gå til")
+
+                }
+
+            }
+
+
+        }
     }
-    Spacer(modifier = Modifier.height(10.dp))
+
 
 }
+
 
 @Composable
 fun StandardText(text: String) {
@@ -167,30 +178,6 @@ fun TopScreen(navController: NavController) {
     }
 }
 
-@Composable
-fun CreateNewEvent(navController: NavController) {
-    var eventName by remember { mutableStateOf(TextFieldValue("")) }
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-        Spacer(modifier = Modifier.height(standardDP))
-        OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = eventName,
-            label = { Text(text = "Event navn", color = dustyRose) },
-            onValueChange = { eventName = it }
 
-
-        )
-        Spacer(modifier = Modifier.height(standardDP))
-        StandardButton(output = "Start event")
-
-
-    }
-
-}
-
-@Composable
-fun TextField() {
-
-
-}
 
 

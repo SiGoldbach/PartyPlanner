@@ -15,8 +15,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.partyplanner.ui.theme.*
 import com.example.partyplanner.R
+import com.example.partyplanner.ui.theme.screens.StandardButton
+import com.example.partyplanner.ui.theme.screens.standardDP
 
 
 @Composable
@@ -63,7 +64,7 @@ fun WelcomeScreen() {
                     WelcomeText(text = "Velkommen")
                 }
 
-                Spacer(modifier = Modifier.height(com.example.partyplanner.ui.theme.standardDP))
+                Spacer(modifier = Modifier.height(standardDP))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()

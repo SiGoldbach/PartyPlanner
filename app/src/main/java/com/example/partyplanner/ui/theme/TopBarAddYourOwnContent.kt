@@ -1,6 +1,5 @@
 package com.example.partyplanner.ui.theme
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -10,6 +9,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.partyplanner.*
+import com.example.partyplanner.ui.theme.screens.ComingEvents
 import kotlinx.coroutines.launch
 
 //, content: @Composable () -> Unit
@@ -78,7 +78,6 @@ fun TopOfScreenReusable(navController: NavHostController) {
 
         },
     ) {
-        ComingEvents(navController = navController)        //Down here you can add your own screen to this bas Christian Hyltoft has made,
         //Later this will come as dependency injection as a composable function.
     }
 }
@@ -149,7 +148,6 @@ fun TopOfScreenReusable2(navController: NavHostController) {
 
         },
     ) {
-        Event(navController = navController)        //Down here you can add your own screen to this bas Christian Hyltoft has made,
         //Later this will come as dependency injection as a composable function.
     }
 }
@@ -173,8 +171,7 @@ fun NewEvent(navController: NavHostController) {
  */
 @Composable
 fun Event(navController: NavHostController) {
-    TopOfScreenReusable2(navController = navController)
-
+    ComingEvents(navController = navController)
 }
 
 
