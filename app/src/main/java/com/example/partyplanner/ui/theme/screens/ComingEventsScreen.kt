@@ -2,6 +2,7 @@ package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -18,12 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.Event
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -104,6 +108,10 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
 
 }
 
+/**
+ * Here is the standard eventComposer, now with just a default image of loading.
+ * Since no picture has been loaded yet from the viewmodels apis.
+ */
 @Composable
 fun EventComposer(event: Event, navController: NavHostController) {
     Card(
@@ -118,6 +126,16 @@ fun EventComposer(event: Event, navController: NavHostController) {
         ) {
             Text(text = event.name)
             Text(text = "11-01-2044")
+            Box (modifier = Modifier.fillMaxHeight(0.8F)){
+                Image(
+                    painter = painterResource(id = R.drawable.loading_picture),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Crop,
+                )
+            }
             Spacer(modifier = Modifier.weight(1f))
             Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
                 Column() {
