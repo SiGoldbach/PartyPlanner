@@ -28,9 +28,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
-import com.example.partyplanner.ui.theme.Event
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.viewModel.Event
 
 val standardDP: Dp = 10.dp
 
@@ -54,21 +54,7 @@ fun ComingEvents(navController: NavHostController) {
     val list = listOf(a, b, c, d, e, f, g, h, ea, fa, ga, ha)
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-        Box(
-            contentAlignment = Alignment.Center,
 
-            ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
-                    .padding(9.dp)
-                    .fillMaxWidth()
-            ) {
-
-                Spacer(modifier = Modifier.height(standardDP))
-            }
-
-
-        }
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxHeight(),

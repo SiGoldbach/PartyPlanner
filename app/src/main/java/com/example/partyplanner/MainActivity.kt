@@ -15,7 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
-import com.example.partyplanner.ui.theme.screens.ComingEvents
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
@@ -46,18 +45,19 @@ class MainActivity : ComponentActivity() {
                 }
                 //Change here
                 val navController = rememberNavController()
-                ComingEvents(navController = navController)
+                //TopOfScreenReusable(navController = navController)
+                NavigationAppHost(navController = navController)
             }
         }
     }
-
+//I have made some changes here to test the navigation
     @Composable
     fun NavigationAppHost(navController: NavHostController) {
         val ctx = LocalContext.current
 
         NavHost(navController = navController, startDestination = Destination.Event.route) {
-            composable(Destination.Event.route) { Event(navController) }
-            composable(Destination.NewEvent.route) { NewEvent(navController) }
+            composable(Destination.Event.route) { TopOfScreenReusable(navController) }
+            composable(Destination.NewEvent.route) { TopOfScreenReusable2(navController) }
             composable(Destination.TestScreen.route) { TestScreen(navController) }
             /*composable(Destination.Detail.route) { backStackEntry ->
                 val elementId = backStackEntry.arguments?.getString("elementId")

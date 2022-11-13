@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.partyplanner.*
 import com.example.partyplanner.ui.theme.screens.ComingEvents
+import com.example.partyplanner.ui.theme.screens.CreateNewEvent
 import kotlinx.coroutines.launch
 
 //, content: @Composable () -> Unit
@@ -78,6 +79,7 @@ fun TopOfScreenReusable(navController: NavHostController) {
 
         },
     ) {
+        ComingEvents(navController = navController)
         //Later this will come as dependency injection as a composable function.
     }
 }
@@ -148,7 +150,8 @@ fun TopOfScreenReusable2(navController: NavHostController) {
 
         },
     ) {
-        //Later this will come as dependency injection as a composable function.
+        CreateNewEvent(navController = navController)
+
     }
 }
 
