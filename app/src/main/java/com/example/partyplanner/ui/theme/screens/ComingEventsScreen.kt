@@ -59,8 +59,8 @@ fun ComingEvents(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxHeight(),
             cells = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+            horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             items(list) { item ->
                 EventComposer(item, navController)
@@ -101,7 +101,9 @@ fun StandardButton(output: String, modifier: Modifier = Modifier) {
 fun EventComposer(event: Event, navController: NavHostController) {
     Card(
         border = BorderStroke(width = 2.dp, color = dustyRose),
-        modifier = Modifier.size(width = 350.dp, height = 300.dp).padding(10.dp), backgroundColor = beige
+        modifier = Modifier
+            .size(width = 350.dp, height = 300.dp)
+            .padding(10.dp), backgroundColor = beige
     ) {
         Column(
             modifier = Modifier
@@ -124,8 +126,22 @@ fun EventComposer(event: Event, navController: NavHostController) {
             Spacer(modifier = Modifier.weight(1f))
             Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
                 Column() {
-                    Text(text = "35 Deltager")
-                    Text(text = "15 Invitationer")
+                    Row() {
+                        Text(text = "35 ")
+                        Image(
+                            painter = painterResource(id = R.drawable.attending_picture),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth(),
+                            contentScale = ContentScale.Fit
+
+                        )
+
+                    }
+                    Row() {
+                        Text(text = "15")
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1F))
                 Button(
