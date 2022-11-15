@@ -80,7 +80,6 @@ fun ComingEvents(navController: NavHostController) {
 @Composable
 fun StandardButton(output: String, modifier: Modifier = Modifier) {
     Button(
-
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
         shape = RoundedCornerShape(30.dp),

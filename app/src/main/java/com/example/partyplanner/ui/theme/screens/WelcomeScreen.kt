@@ -46,7 +46,7 @@ fun WelcomeScreenImage() {
         )
     }
 }
-@Preview
+
 @Composable
 fun WelcomeScreen() {
     WelcomeScreenImage()
@@ -71,7 +71,6 @@ fun WelcomeScreen() {
                         .height(2.dp)
                         .background(Color.Black)
                         .clip(shape = RectangleShape)
-
                 )
             }
         }

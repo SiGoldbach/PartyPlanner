@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
@@ -80,12 +81,21 @@ fun OpretBruger(navController: NavController) {
         StandardButton(output = "Opret")
 
         Box() {
-            Text(
-                text = "Kan ikke oprette bruger?",
-                fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp, color = Color.Black
-            )
+            Button(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .size(width = 250.dp, height = 42.dp)
+
+            ) {
+                Text(
+                    text = "Kan ikke oprette bruger?",
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp, color = Color.Black
+                )
+            }
         }
     }
     // Skal være en "tilbage" button.

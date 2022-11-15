@@ -2,9 +2,8 @@ package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
@@ -63,12 +63,21 @@ fun LoginScreen(navController: NavController) {
         StandardButton(output = "Log på")
         Spacer(modifier = Modifier.height(standardDP))
         Box() {
-            Text(
-                text = "Glemt adgangskode?",
-                fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp, color = Color.Black
-            )
+            Button(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .size(width = 250.dp, height = 42.dp)
+
+            ) {
+                Text(
+                    text = "Glemt adgangskode?",
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp, color = Color.Black
+                )
+            }
         }
     }
 }

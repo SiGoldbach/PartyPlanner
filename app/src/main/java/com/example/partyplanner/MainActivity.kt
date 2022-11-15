@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
+import com.example.partyplanner.ui.theme.screens.TopPicture
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 //Change here
                 val navController = rememberNavController()
                 //TopOfScreenReusable(navController = navController)
-                NavigationAppHost(navController = navController)
+                TopPicture(navController = navController)
             }
         }
     }
