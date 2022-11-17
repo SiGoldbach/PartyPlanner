@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
+import com.example.partyplanner.ui.theme.StdText
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.Event
@@ -62,16 +63,14 @@ fun MyEventScreen(event: Event, navController: NavController) {
                         contentScale = ContentScale.Crop,
                     )
                 }
-
-
             }
-
-
         }
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
+                .padding(10.dp),
+            backgroundColor = beige,
+            border = BorderStroke(width = 2.dp, color = dustyRose)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 // Her skal Event name komme fra "event".
@@ -80,42 +79,65 @@ fun MyEventScreen(event: Event, navController: NavController) {
                     text = event.name,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 26.sp, color = Color.Black,
+                    fontSize = 30.sp, color = Color.Black,
                     modifier = Modifier
                 )
-                // Description text here comes from "event".
-                Text(
-                    text = event.dato,
-                    fontStyle = FontStyle.Normal
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                // Date text here comes from "event".
+                StdText(string = event.dato)
 
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
                 )
-                Text(
-                    text = event.description,
-                    fontStyle = FontStyle.Normal
-                )
+                // Description here comes from "event".
+                StdText(string = event.description)
+
             }
+        }
+        // insert 2 buttons for Attending and NOT attending. (amount + face picture)
+        // insert wish-list button with default text.
+        Column() {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier
+                        .size(width = 180.dp, height = 80.dp)
+
+                ) {
+                    Image(painter = painterResource(id = R.drawable.wishlistpicture),
+                        contentDescription = null)
+                    Spacer(modifier = Modifier
+                        .width(7.dp))
+                    StdText(string = "Ønsker")
+
+                }
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier
+                        .size(width = 180.dp, height = 80.dp),
+
+                ) {
+                    Image(painter = painterResource(id = R.drawable.attending_picture),
+                        contentDescription = null)
+                    Spacer(modifier = Modifier
+                        .width(7.dp))
+                    StdText(string = "Gæster")
+                }
+            }
+
         }
     }
 }
-
-// InformationText
-/*   Box() {
-       Card(
-           border = BorderStroke(width = 2.dp, color = dustyRose),
-           modifier = Modifier
-               .fillMaxWidth()
-               .height(250.dp)
-               .padding(10.dp), backgroundColor = beige
-       ) {
-           Column(
-               modifier = Modifier
-                   .fillMaxWidth()
-                   .fillMaxHeight(1F),
-               horizontalAlignment = Alignment.CenterHorizontally
-           ) {
-               Text(text = "28-09-2022")
-               Spacer(modifier = Modifier.height(5.dp))
-               Text(text = "hey")
-           }
-       }
-   } */
