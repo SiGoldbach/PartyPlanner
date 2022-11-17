@@ -129,16 +129,6 @@ fun EventComposer(event: Event, navController: NavHostController) {
                 Column() {
                     Row() {
                         Text(text = "35 ")
-                        Image(
-                            painter = painterResource(id = R.drawable.attending_picture),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .fillMaxWidth(),
-                            contentScale = ContentScale.Fit
-
-                        )
-
                     }
                     Row() {
                         Text(text = "15")
