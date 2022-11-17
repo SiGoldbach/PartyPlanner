@@ -4,10 +4,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -55,7 +57,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                 Box(modifier = Modifier.fillMaxHeight(1F)) {
                     Image(
                         // billede her skal komme fra event.
-                        painter = painterResource(id = R.drawable.loading_picture),
+                        painter = painterResource(id = R.drawable.weddinghands),
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxHeight()
@@ -105,7 +107,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
+            ) {
 
                 Button(
                     onClick = { /*TODO*/ },
@@ -115,10 +117,14 @@ fun MyEventScreen(event: Event, navController: NavController) {
                         .size(width = 180.dp, height = 80.dp)
 
                 ) {
-                    Image(painter = painterResource(id = R.drawable.wishlistpicture),
-                        contentDescription = null)
-                    Spacer(modifier = Modifier
-                        .width(7.dp))
+                    Image(
+                        painter = painterResource(id = R.drawable.wishlistpicture),
+                        contentDescription = null
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .width(7.dp)
+                    )
                     StdText(string = "Ønsker")
 
                 }
@@ -129,15 +135,43 @@ fun MyEventScreen(event: Event, navController: NavController) {
                     modifier = Modifier
                         .size(width = 180.dp, height = 80.dp),
 
-                ) {
-                    Image(painter = painterResource(id = R.drawable.attending_picture),
-                        contentDescription = null)
-                    Spacer(modifier = Modifier
-                        .width(7.dp))
+                    ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.attending_picture),
+                        contentDescription = null
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .width(7.dp)
+                    )
                     StdText(string = "Gæster")
                 }
             }
+            // new row can be added here
 
         }
     }
+    // Here we have the edit button
+    /*
+    Box(v) {
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+            shape = RoundedCornerShape(30.dp),
+            modifier = Modifier
+                .size(width = 60.dp, height = 60.dp),
+
+            ) {
+            Image(
+                painter = painterResource(id = R.drawable.editpencilfour),
+                contentDescription = null,
+                modifier = Modifier
+                    .height(800.dp)
+                    .width(70.dp)
+                    .clip(CircleShape),
+            )
+        }
+
+    } */
+
 }
