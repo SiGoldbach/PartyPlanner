@@ -37,21 +37,9 @@ val standardDP: Dp = 10.dp
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ComingEvents(navController: NavHostController) {
-    val a = Event("event1")
-    val b = Event("event1")
-    val c = Event("event1")
-    val d = Event("event1")
-    val e = Event("event1")
-    val f = Event("event1")
-    val g = Event("event1")
-    val h = Event("event1")
-    val ea = Event("event1")
-    val fa = Event("event1")
-    val ga = Event("event1")
-    val ha = Event("event1")
+    val a = Event("event1", "123", "123")
 
-
-    val list = listOf(a, b, c, d, e, f, g, h, ea, fa, ga, ha)
+    val list = listOf(a)
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
 
@@ -80,7 +68,6 @@ fun ComingEvents(navController: NavHostController) {
 @Composable
 fun StandardButton(output: String, modifier: Modifier = Modifier) {
     Button(
-
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
         shape = RoundedCornerShape(30.dp),
