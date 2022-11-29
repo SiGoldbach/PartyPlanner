@@ -16,18 +16,41 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
 import com.example.partyplanner.ui.theme.screens.MyEventScreen
+import com.example.partyplanner.ui.theme.screens.OpretBruger
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 
 /**
  * When testing change the method called under the **ComposeTheme
+ * Link to video used for google authentication.
+ * https://www.youtube.com/watch?v=dPeS92y4gRs&ab_channel=DeveloperChunk
  */
 
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        const val SIGN_IN = 100
+    }
+    private lateinit var mAuth:FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+        //firebase auth instance
+        mAuth= FirebaseAuth.getInstance()
+
+        //Configure google sign in
+
+        val googleSignInBUilder= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(androidx.compose.ui.R.string.default_error_message))
+            .requestEmail()
+            .build()
+
+
         setContent {
             val navController = rememberNavController()
             PartyPlannerTheme {
@@ -47,12 +70,18 @@ class MainActivity : ComponentActivity() {
                 //Change here
                 val navController = rememberNavController()
                 //TopOfScreenReusable(navController = navController)
-                val a = com.example.partyplanner.viewModel.Event("Thomas bryllup","22/08/22","Vi holder bryllup fordi vi bliver gift")
-                MyEventScreen(a, navController = navController)
+                val a = com.example.partyplanner.model.Event(
+                    "Thomas bryllup",
+                    "22/08/22",
+                    "Vi holder bryllup fordi vi bliver gift"
+                )
+                OpretBruger(navController = navController)
+                //MyEventScreen(a, navController = navController)
             }
         }
     }
-//I have made some changes here to test the navigation
+
+    //I have made some changes here to test the navigation
     @Composable
     fun NavigationAppHost(navController: NavHostController) {
         val ctx = LocalContext.current

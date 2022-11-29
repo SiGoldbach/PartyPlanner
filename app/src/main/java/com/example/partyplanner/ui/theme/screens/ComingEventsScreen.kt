@@ -30,7 +30,7 @@ import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.viewModel.Event
+import com.example.partyplanner.model.Event
 
 val standardDP: Dp = 10.dp
 
