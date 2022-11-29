@@ -1,6 +1,5 @@
 package com.example.partyplanner.ui.theme.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -25,7 +24,6 @@ import com.example.partyplanner.viewModel.Gift
 
 // The mainscreen for wishlist
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun Wishlist(navController: NavController) {
     val gift1 = Gift("Konfirmation", "Se ønskelisten her")

@@ -25,7 +25,7 @@ import com.example.partyplanner.model.Event
 
 @Composable
 fun MyEventScreen(event: Event, navController: NavController) {
-    Column() {
+    Column {
 
         //Top picture with event name
         Card(
@@ -91,7 +91,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
         }
         // insert 2 buttons for Attending and NOT attending. (amount + face picture)
         // insert wish-list button with default text.
-        Column() {
+        Column {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),

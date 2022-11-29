@@ -1,11 +1,9 @@
 package com.example.partyplanner.ui.theme.screens
 
-import android.graphics.drawable.shapes.OvalShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,11 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -26,17 +22,17 @@ import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
 fun OpretBruger(navController: NavController) {
-    var Fornavn by remember { mutableStateOf(TextFieldValue("")) }
-    var Efternavn by remember { mutableStateOf(TextFieldValue("")) }
-    var Email by remember { mutableStateOf(TextFieldValue("")) }
-    var Kodeord by remember { mutableStateOf(TextFieldValue("")) }
+    var forNavn by remember { mutableStateOf(TextFieldValue("")) }
+    var efterNavn by remember { mutableStateOf(TextFieldValue("")) }
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var kodeord by remember { mutableStateOf(TextFieldValue("")) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
         Spacer(modifier = Modifier.height(35.dp))
 
-        Box() {
+        Box {
             Text(
                 text = "Opret Bruger",
                 fontStyle = FontStyle.Normal,
@@ -54,33 +50,33 @@ fun OpretBruger(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = Fornavn,
+            value = forNavn,
             label = { Text(text = "Fornavn", color = dustyRose) },
-            onValueChange = { Fornavn = it }
+            onValueChange = { forNavn = it }
         )
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = Efternavn,
+            value = efterNavn,
             label = { Text(text = "Efternavn", color = dustyRose) },
-            onValueChange = { Efternavn = it }
+            onValueChange = { efterNavn = it }
         )
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = Email,
+            value = email,
             label = { Text(text = "E-mail", color = dustyRose) },
-            onValueChange = { Email = it }
+            onValueChange = { email = it }
         )
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = Kodeord,
+            value = kodeord,
             label = { Text(text = "Kodeord", color = dustyRose) },
-            onValueChange = { Kodeord = it }
+            onValueChange = { kodeord = it }
         )
 
         Spacer(modifier = Modifier.height(50.dp))
         StandardButton(output = "Opret")
 
-        Box() {
+        Box {
             Button(
                 onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(backgroundColor = beige),

@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -22,15 +21,15 @@ import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var Email by remember { mutableStateOf(TextFieldValue("")) }
-    var Kodeord by remember { mutableStateOf(TextFieldValue("")) }
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var kodeord by remember { mutableStateOf(TextFieldValue("")) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
         Spacer(modifier = Modifier.height(35.dp))
 
-        Box() {
+        Box {
             Text(
                 text = "Log ind",
                 fontStyle = FontStyle.Normal,
@@ -48,21 +47,21 @@ fun LoginScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = Email,
+            value = email,
             label = { Text(text = "E-mail", color = dustyRose) },
-            onValueChange = { Email = it }
+            onValueChange = { email = it }
         )
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = Kodeord,
+            value = kodeord,
             label = { Text(text = "Kodeord", color = dustyRose) },
-            onValueChange = { Kodeord = it }
+            onValueChange = { kodeord = it }
         )
 
         Spacer(modifier = Modifier.height(50.dp))
         StandardButton(output = "Log på")
         Spacer(modifier = Modifier.height(standardDP))
-        Box() {
+        Box {
             Button(
                 onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(backgroundColor = beige),
