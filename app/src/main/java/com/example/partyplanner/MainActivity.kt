@@ -15,12 +15,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
-import com.example.partyplanner.ui.theme.screens.MyEventScreen
-import com.example.partyplanner.ui.theme.screens.OpretBruger
+import com.example.partyplanner.ui.theme.screens.ComingEvents
+import com.example.partyplanner.ui.theme.screens.Wishlist
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-//import com.google.android.gms.auth.api.signin.GoogleSignInClient
-//import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-//import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+
 
 /**
  * When testing change the method called under the **ComposeTheme
@@ -33,22 +34,23 @@ class MainActivity : ComponentActivity() {
     companion object {
         const val SIGN_IN = 100
     }
-  //  private lateinit var mAuth:FirebaseAuth
-   // private lateinit var googleSignInClient: GoogleSignInClient
+
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
         //firebase auth instance
-     //   mAuth= FirebaseAuth.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
         //Configure google sign in
 
-       // val googleSignInBUilder= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-         //   .requestIdToken(getString(androidx.compose.ui.R.string.default_error_message))
-          //  .requestEmail()
-           // .build()
+        val googleSignInBUilder = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(androidx.compose.ui.R.string.default_error_message))
+            .requestEmail()
+            .build()
 
 
         setContent {
@@ -75,7 +77,8 @@ class MainActivity : ComponentActivity() {
                     "22/08/22",
                     "Vi holder bryllup fordi vi bliver gift"
                 )
-                OpretBruger(navController = navController)
+                //OpretBruger(navController = navController)
+                Wishlist(navController = navController)
                 //MyEventScreen(a, navController = navController)
             }
         }

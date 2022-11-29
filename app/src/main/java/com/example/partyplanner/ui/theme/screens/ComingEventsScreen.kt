@@ -1,13 +1,12 @@
 package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -34,7 +33,6 @@ import com.example.partyplanner.model.Event
 
 val standardDP: Dp = 10.dp
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ComingEvents(navController: NavHostController) {
     val a = Event("event1", "123", "123")
@@ -46,7 +44,8 @@ fun ComingEvents(navController: NavHostController) {
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxHeight(),
-            cells = GridCells.Adaptive(minSize = 160.dp),
+            columns = GridCells.Adaptive(minSize = 160.dp),
+            // cells = GridCells.Adaptive(minSize = 160.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
@@ -101,7 +100,7 @@ fun EventComposer(event: Event, navController: NavHostController) {
         ) {
             Text(text = event.name)
             Text(text = "11-01-2044")
-            Box (modifier = Modifier.fillMaxHeight(0.8F)){
+            Box(modifier = Modifier.fillMaxHeight(0.8F)) {
                 Image(
                     painter = painterResource(id = R.drawable.loading_picture),
                     contentDescription = null,
@@ -113,11 +112,11 @@ fun EventComposer(event: Event, navController: NavHostController) {
             }
             Spacer(modifier = Modifier.weight(1f))
             Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
-                Column() {
-                    Row() {
+                Column {
+                    Row {
                         Text(text = "35 ")
                     }
-                    Row() {
+                    Row {
                         Text(text = "15")
                     }
                 }
