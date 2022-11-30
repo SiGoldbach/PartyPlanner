@@ -1,6 +1,9 @@
 package com.example.partyplanner
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,11 +19,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
 import com.example.partyplanner.ui.theme.screens.ComingEvents
+import com.example.partyplanner.ui.theme.screens.OpretBruger
 import com.example.partyplanner.ui.theme.screens.Wishlist
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 /**
@@ -46,16 +54,19 @@ class MainActivity : ComponentActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         //Configure google sign in
-
-        val googleSignInBUilder = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(androidx.compose.ui.R.string.default_error_message))
             .requestEmail()
             .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
 
         setContent {
             val navController = rememberNavController()
             PartyPlannerTheme {
+
                 val systemUiController = rememberSystemUiController()
                 SideEffect {
                     systemUiController.setStatusBarColor(
@@ -68,7 +79,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = beige
                 ) {
+
                 }
+                //After these side effects the app will either begin on coming events or login screen
+                OpretBruger(navController = navController)
                 //Change here
                 val navController = rememberNavController()
                 //TopOfScreenReusable(navController = navController)
@@ -78,11 +92,83 @@ class MainActivity : ComponentActivity() {
                     "Vi holder bryllup fordi vi bliver gift"
                 )
                 //OpretBruger(navController = navController)
-                Wishlist(navController = navController)
+                //Wishlist(navController = navController)
                 //MyEventScreen(a, navController = navController)
             }
         }
+
     }
+
+    private fun signIn() {
+        println("Getting to signInLL")
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, SIGN_IN)
+
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val exception = task.exception
+            if (task.isSuccessful) {
+                try {
+                    //Google sign in was succesfull
+                    val account = task.getResult(ApiException::class.java)!!
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } catch (e: java.lang.Exception) {
+                    Log.d("SignIn", "Sign in failed ")
+                }
+            } else {
+                Log.d("SignIn", exception.toString())
+            }
+        }
+
+
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                //Sign in done
+                Toast.makeText(this, "SignIn SuccessFull", Toast.LENGTH_SHORT).show()
+            } else {
+                //Sign in failed
+                Toast.makeText(this, "SignIn Failed", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+    }
+
+    private fun signOut() {
+        //Getting the google account
+        val googleSignInClient: GoogleSignInClient
+        //Client
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(androidx.compose.ui.R.string.default_error_message))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+
+        //Signing out
+        mAuth.signOut()
+        googleSignInClient.signOut().addOnCompleteListener {
+            setContent() {
+                //OpretBruger(navController = n) {
+
+            }
+
+        }.addOnFailureListener {
+            Toast.makeText(this, "Sign out failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     //I have made some changes here to test the navigation
     @Composable

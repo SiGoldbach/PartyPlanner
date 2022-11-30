@@ -93,21 +93,22 @@ fun OpretBruger(navController: NavController) {
                 )
             }
         }
+
     }
     // Skal være en "tilbage" button.
-    Box (contentAlignment = Alignment.BottomStart) {
-    Button(
-        onClick = { /*TODO*/ },
-        colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-        shape = CircleShape,
-        modifier = Modifier
-            .size(width = 40.dp, height = 40.dp)
-    ) {
-        Text(
-            text = "<",
-            fontStyle = FontStyle.Normal,
-            fontSize = 20.sp, color = Color.White
-        )
-    }
+    Box(contentAlignment = Alignment.BottomStart) {
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+            shape = CircleShape,
+            modifier = Modifier
+                .size(width = 40.dp, height = 40.dp)
+        ) {
+            Text(
+                text = "<",
+                fontStyle = FontStyle.Normal,
+                fontSize = 20.sp, color = Color.White
+            )
+        }
     }
 }
