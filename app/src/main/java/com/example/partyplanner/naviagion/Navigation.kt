@@ -1,14 +1,13 @@
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.TestScreen
-import com.example.partyplanner.ui.theme.ComingEventsWithScaffold
-import com.example.partyplanner.ui.theme.CreateNewEventWithScaffold
+import com.example.partyplanner.ui.theme.screens.ComingEventsWithScaffold
+import com.example.partyplanner.ui.theme.screens.CreateNewEventWithScaffold
 import com.example.partyplanner.ui.theme.screens.*
 
 @Composable
@@ -33,6 +32,7 @@ fun NavigationAppHost(navController: NavHostController) {
         composable(Destination.MakeUserScreen.route) { OpretBruger(navController = navController) }
         composable(Destination.Profile.route) { Profile(navController = navController) }
         composable(Destination.Welcome.route) { WelcomeScreen(navController = navController) }
+        composable(Destination.WishList.route) { Wishlist(navController = navController) }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")
             if(elementId == null){

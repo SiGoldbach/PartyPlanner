@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme
+package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -10,11 +10,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.partyplanner.*
 import com.example.partyplanner.naviagion.Destination
-import com.example.partyplanner.ui.theme.screens.ComingEvents
-import com.example.partyplanner.ui.theme.screens.CreateNewEvent
+import com.example.partyplanner.ui.theme.beige
 import kotlinx.coroutines.launch
 
-//, content: @Composable () -> Unit
 @Composable
 fun ComingEventsWithScaffold(navController: NavHostController) {
     val scaffoldState = rememberScaffoldState()

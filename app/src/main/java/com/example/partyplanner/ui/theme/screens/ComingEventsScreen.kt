@@ -14,6 +14,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,11 +31,18 @@ import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
+import com.example.partyplanner.viewModel.ComingEventsScreenViewModel
+import androidx.compose.runtime.*
+
 
 val standardDP: Dp = 10.dp
 
 @Composable
 fun ComingEvents(navController: NavHostController) {
+    val viewModel = ComingEventsScreenViewModel()
+    val eventState by viewModel.uiState.collectAsState()
+
+
     val a = Event("event1", "123", "123")
 
     val list = listOf(a)
@@ -49,7 +57,7 @@ fun ComingEvents(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            items(list) { item ->
+            items(eventState.list) { item ->
                 EventComposer(item, navController)
             }
         }
