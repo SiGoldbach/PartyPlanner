@@ -33,6 +33,7 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.viewModel.ComingEventsScreenViewModel
 import androidx.compose.runtime.*
+import com.example.partyplanner.naviagion.Destination
 
 
 val standardDP: Dp = 10.dp
@@ -130,7 +131,7 @@ fun EventComposer(event: Event, navController: NavHostController) {
                 }
                 Spacer(modifier = Modifier.weight(1F))
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(Destination.Event.route) },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
                 ) {
                     Text(text = "Gå til")
