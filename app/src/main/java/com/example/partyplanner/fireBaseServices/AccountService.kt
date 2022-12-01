@@ -1,4 +1,4 @@
-package com.example.partyplanner.viewModel
+package com.example.partyplanner.fireBaseServices
 
 interface AccountService {
     fun createAnonymousAccount(onResult: (Throwable?)->Unit)

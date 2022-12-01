@@ -19,9 +19,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 
 @Composable
-fun OpretBruger(navController: NavController) {
+fun OpretBruger(
+    navController: NavController,
+    viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel()
+) {
+    val uiState by viewModel.state.collectAsState()
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
     var efterNavn by remember { mutableStateOf(TextFieldValue("")) }
     var email by remember { mutableStateOf(TextFieldValue("")) }
@@ -74,7 +79,17 @@ fun OpretBruger(navController: NavController) {
         )
 
         Spacer(modifier = Modifier.height(50.dp))
-        StandardButton(output = "Opret")
+        //MAKING A STANDARD BUTTON FOR TRYING THE LOGIN
+        Button(onClick = {
+            viewModel.putCredentialsAndCreateUser(
+                email = email.text,
+                password = kodeord.text
+            )
+        }) {
+
+        }
+
+
 
         Box {
             Button(

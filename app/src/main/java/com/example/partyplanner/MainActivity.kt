@@ -84,7 +84,6 @@ class MainActivity : ComponentActivity() {
                 //After these side effects the app will either begin on coming events or login screen
                 OpretBruger(navController = navController)
                 //Change here
-                val navController = rememberNavController()
                 //TopOfScreenReusable(navController = navController)
                 val a = com.example.partyplanner.model.Event(
                     "Thomas bryllup",
