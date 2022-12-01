@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme
+package com.example.partyplanner.naviagion
 
 sealed class Destination (val route: String) {
     object Event : Destination("event")
@@ -9,5 +9,6 @@ sealed class Destination (val route: String) {
     object ComingEvents: Destination("mineEventsScreen")
     object WishList: Destination("WishlistScreen")
     object Welcome: Destination("WelcomeScreen")
+    object Profile: Destination("Profile")
 
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavHostController
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
@@ -27,7 +28,9 @@ fun CreateNewEvent(navController: NavHostController) {
 
         )
         Spacer(modifier = Modifier.height(standardDP))
-        StandardButton(output = "Start event")
+        StandardButton(
+            output = "Start event",
+            lambda = { navController.navigate(Destination.Event.route) })
 
 
     }

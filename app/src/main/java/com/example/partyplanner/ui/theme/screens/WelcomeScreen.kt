@@ -16,7 +16,9 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.partyplanner.R
+import com.example.partyplanner.naviagion.Destination
 
 
 @Composable
@@ -47,7 +49,7 @@ fun WelcomeScreenImage() {
 }
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavController) {
     WelcomeScreenImage()
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         Box(
@@ -75,8 +77,13 @@ fun WelcomeScreen() {
         }
 
         Spacer(modifier = Modifier.height(425.dp))
-        StandardButton(output = "Login")
-        StandardButton(output = "Opret Bruger")
+        StandardButton(
+            output = "Login",
+            lambda = { navController.navigate(Destination.LoginScreen.route) }
+        )
+        StandardButton(
+            output = "Opret Bruger",
+            lambda = { navController.navigate(Destination.MakeUserScreen.route) })
     }
 
 }

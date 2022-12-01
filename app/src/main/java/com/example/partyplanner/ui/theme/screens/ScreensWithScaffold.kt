@@ -9,13 +9,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.partyplanner.*
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.screens.ComingEvents
 import com.example.partyplanner.ui.theme.screens.CreateNewEvent
 import kotlinx.coroutines.launch
 
 //, content: @Composable () -> Unit
 @Composable
-fun TopOfScreenReusable(navController: NavHostController) {
+fun ComingEventsWithScaffold(navController: NavHostController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -71,6 +72,8 @@ fun TopOfScreenReusable(navController: NavHostController) {
                         "begivenhed" -> navController.navigate(Destination.NewEvent.route)
                         "account" -> navController.navigate("account")
                         "menu" -> navController.navigate(Destination.Event.route)
+                        "ønskeliste" -> navController.navigate(Destination.WishList.route)
+                        "profile" -> navController.navigate(Destination.Profile.route)
                     }
 
                     println("Clicked on ${it.title}")
@@ -86,14 +89,14 @@ fun TopOfScreenReusable(navController: NavHostController) {
 
 
 @Composable
-fun TopOfScreenReusable2(navController: NavHostController) {
+fun CreateNewEventWithScaffold(navController: NavHostController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
         backgroundColor = beige,
         scaffoldState = scaffoldState,
         topBar = {
-            AppBar(stringResource = stringResource(id = R.string.Kommende_Begivenheder),
+            AppBar(stringResource = stringResource(id = R.string.Create_event),
                 onNavigationIconClick = {
                     scope.launch { scaffoldState.drawerState.open() }
                 }
@@ -142,6 +145,10 @@ fun TopOfScreenReusable2(navController: NavHostController) {
                         "begivenhed" -> navController.navigate(Destination.NewEvent.route)
                         "account" -> navController.navigate("account")
                         "menu" -> navController.navigate(Destination.Event.route)
+                        "ønskeliste" -> navController.navigate(Destination.WishList.route)
+                        "profile" -> navController.navigate(Destination.Profile.route)
+
+
                     }
 
                     println("Clicked on ${it.title}")
@@ -163,7 +170,7 @@ fun TopOfScreenReusable2(navController: NavHostController) {
 
 @Composable
 fun NewEvent(navController: NavHostController) {
-    TopOfScreenReusable(navController = navController)
+    ComingEventsWithScaffold(navController = navController)
 
 
 }

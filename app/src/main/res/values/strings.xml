@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">s213456 Lykkehjulet</string>
     <string name="Kommende_Begivenheder">Kommende begivenheder</string>
+    <string name="Create_event">Lav nyt event</string>
+
 </resources>

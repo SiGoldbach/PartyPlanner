@@ -16,6 +16,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 
@@ -59,7 +60,7 @@ fun LoginScreen(navController: NavController) {
         )
 
         Spacer(modifier = Modifier.height(50.dp))
-        StandardButton(output = "Log på")
+        StandardButton(output = "Log på", lambda = { navController.navigate(Destination.ComingEvents.route) })
         Spacer(modifier = Modifier.height(standardDP))
         Box {
             Button(

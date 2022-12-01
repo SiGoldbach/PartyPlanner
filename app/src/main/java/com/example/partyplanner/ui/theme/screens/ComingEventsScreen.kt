@@ -65,9 +65,9 @@ fun ComingEvents(navController: NavHostController) {
  * This is supposed to be the standard button used for navigating the app.
  */
 @Composable
-fun StandardButton(output: String, modifier: Modifier = Modifier) {
+fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = lambda,
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
         shape = RoundedCornerShape(30.dp),
         modifier = Modifier
