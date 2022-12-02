@@ -78,7 +78,6 @@ class MainActivity : ComponentActivity() {
 
     //I have made some changes here to test the navigation
 
-
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {

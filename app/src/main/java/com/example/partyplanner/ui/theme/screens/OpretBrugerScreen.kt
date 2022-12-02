@@ -99,7 +99,6 @@ fun OpretBruger(
                 shape = RoundedCornerShape(30.dp),
                 modifier = Modifier
                     .size(width = 250.dp, height = 42.dp)
-
             ) {
                 Text(
                     text = "Kan ikke oprette bruger?",

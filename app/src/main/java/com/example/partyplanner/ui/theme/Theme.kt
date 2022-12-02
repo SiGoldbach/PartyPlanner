@@ -2,9 +2,15 @@ package com.example.partyplanner.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -44,7 +50,10 @@ fun PartyPlannerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Comp
 }
 
 @Composable
-fun NavigationDrawerComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun NavigationDrawerComposeTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
@@ -58,3 +67,17 @@ fun NavigationDrawerComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), con
         content = content
     )
 }
+
+@Composable
+fun StdText(string: String) {
+    Text(
+        text = string,
+        fontSize = 20.sp, color = Color.Black,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Bold
+
+
+    )
+}
+
+
