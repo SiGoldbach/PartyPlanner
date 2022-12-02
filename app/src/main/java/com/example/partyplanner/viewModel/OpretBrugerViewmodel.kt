@@ -1,6 +1,5 @@
 package com.example.partyplanner.viewModel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.AccountServiceIMPL
 import com.example.partyplanner.model.LoginUiState
@@ -12,7 +11,7 @@ import kotlinx.coroutines.flow.update
 
 class OpretBrugerViewmodel : ViewModel() {
     private val accountService = AccountServiceIMPL()
-    var uiState = MutableStateFlow(LoginUiState())
+    private var uiState = MutableStateFlow(LoginUiState())
     val state: StateFlow<LoginUiState> = uiState.asStateFlow()
 
 

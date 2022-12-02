@@ -1,13 +1,12 @@
+package com.example.partyplanner.naviagion
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.partyplanner.model.Event
-import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.TestScreen
-import com.example.partyplanner.ui.theme.screens.ComingEventsWithScaffold
-import com.example.partyplanner.ui.theme.screens.CreateNewEventWithScaffold
 import com.example.partyplanner.ui.theme.screens.*
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.partyplanner
+package com.example.partyplanner.ui.theme
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -7,7 +7,6 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
-import com.example.partyplanner.ui.theme.dustyRose
 
 //I am changing the name to "Dependency injection since different screens need,
 //Different tittles.

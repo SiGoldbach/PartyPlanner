@@ -10,11 +10,4 @@ class EventViewModel : ViewModel() {
     private val gameUiState = MutableStateFlow(Event())
     val uiState: StateFlow<Event> = gameUiState.asStateFlow()
 
-    /**
-     * Here the specific event should be initialized
-     */
-    init {
-
-    }
-
 }

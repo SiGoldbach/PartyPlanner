@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.viewModel.Gift
+import com.example.partyplanner.model.Gift
 
 // The mainscreen for wishlist
 

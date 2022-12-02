@@ -1,4 +1,4 @@
-package com.example.partyplanner.viewModel
+package com.example.partyplanner.model
 
 /**
  * This is the initial thought i have on

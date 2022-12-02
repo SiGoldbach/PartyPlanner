@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import com.example.partyplanner.*
 import com.example.partyplanner.model.MenuItem
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.ui.theme.AppBar
 import com.example.partyplanner.ui.theme.beige
 import kotlinx.coroutines.launch
 

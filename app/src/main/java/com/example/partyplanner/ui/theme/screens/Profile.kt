@@ -41,7 +41,7 @@ fun Profile(navController: NavController) {
                 .clip(RoundedCornerShape(20.dp))
                 .background(dustyRose).padding(10.dp)
         ) {
-            Column() {
+            Column {
                 StandardText(text = "Sebastian Goldbach")
                 StandardText(text = "This is a descriptive text about Sebastian")
             }
