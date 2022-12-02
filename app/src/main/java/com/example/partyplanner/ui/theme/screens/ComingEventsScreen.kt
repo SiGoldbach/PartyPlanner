@@ -44,10 +44,6 @@ fun ComingEvents(navController: NavHostController) {
     val eventState by viewModel.uiState.collectAsState()
 
 
-    val a = Event("event1", "123", "123")
-
-    val list = listOf(a)
-
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
 
         LazyVerticalGrid(

@@ -9,6 +9,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.partyplanner.*
+import com.example.partyplanner.model.MenuItem
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import kotlinx.coroutines.launch

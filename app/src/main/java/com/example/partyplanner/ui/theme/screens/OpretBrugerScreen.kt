@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
@@ -80,14 +81,14 @@ fun OpretBruger(
 
         Spacer(modifier = Modifier.height(50.dp))
         //MAKING A STANDARD BUTTON FOR TRYING THE LOGIN
-        Button(onClick = {
-            viewModel.putCredentialsAndCreateUser(
-                email = email.text,
-                password = kodeord.text
-            )
-        }) {
+        StandardButton(
+            output = "Opret bruger",
+            lambda = { navController.navigate(Destination.ComingEvents.route) }
 
-        }
+        )
+
+
+
 
 
 

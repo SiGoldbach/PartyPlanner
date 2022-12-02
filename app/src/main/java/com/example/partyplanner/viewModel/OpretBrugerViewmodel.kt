@@ -21,6 +21,11 @@ class OpretBrugerViewmodel : ViewModel() {
 
     }
 
+    private fun createDummyUser() {
+        //DUMMY METHOD THAT GETS CALLED INSTEAD OF SOMETHING ELSE
+
+    }
+
     private fun createUser() {
         accountService.authenticate(uiState.value.email, uiState.value.password) { error ->
             if (error == null) {

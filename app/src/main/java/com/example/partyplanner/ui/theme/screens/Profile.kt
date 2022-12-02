@@ -1,9 +1,11 @@
 package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +19,11 @@ import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
 fun Profile(navController: NavController) {
-    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Spacer(modifier = Modifier.height(10.dp))
         Image(
             painter = painterResource(id = R.drawable.profilepic),
@@ -28,6 +34,20 @@ fun Profile(navController: NavController) {
                 .clip(CircleShape)                       // clip to the circle shape
                 .border(4.dp, color = dustyRose, CircleShape)
         )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.8F)
+                .fillMaxHeight(0.6F)
+                .clip(RoundedCornerShape(20.dp))
+                .background(dustyRose).padding(10.dp)
+        ) {
+            Column() {
+                StandardText(text = "Sebastian Goldbach")
+                StandardText(text = "This is a descriptive text about Sebastian")
+            }
+
+        }
+
 
     }
 
