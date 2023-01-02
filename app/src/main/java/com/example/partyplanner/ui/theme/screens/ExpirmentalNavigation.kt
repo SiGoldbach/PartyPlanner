@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun ExperimentalScreen(navController: NavHostController, internalNav: NavHostController) {
+fun ExperimentalScreen(externalNav: NavHostController, internalNav: NavHostController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -83,7 +83,7 @@ fun ExperimentalScreen(navController: NavHostController, internalNav: NavHostCon
 
         },
     ) {
-        InnerNav(internalNav)
+        InnerNav(internalNav, externalNav)
         //Later this will come as dependency injection as a composable function.
     }
 }

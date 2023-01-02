@@ -406,7 +406,6 @@ fun ExperimentalScreenForDemoWishProfile(navController: NavHostController) {
 
         },
     ) {
-        Profile(navController = navController)
     }
 
 

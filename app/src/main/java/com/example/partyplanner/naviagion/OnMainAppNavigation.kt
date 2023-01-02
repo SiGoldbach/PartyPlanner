@@ -13,8 +13,14 @@ import com.example.partyplanner.ui.theme.screens.*
  */
 
 @Composable
-fun InnerNav(onMainAppNavHostController: NavHostController) {
-    NavHost(navController = onMainAppNavHostController, startDestination = Destination.ComingEvents.route) {
+fun InnerNav(
+    onMainAppNavHostController: NavHostController,
+    externalNavHostController: NavHostController
+) {
+    NavHost(
+        navController = onMainAppNavHostController,
+        startDestination = Destination.ComingEvents.route
+    ) {
         //Here there is no dependency injection yet so a standard event just get put in.
         composable(Destination.ComingEvents.route) { ComingEvents(onMainAppNavHostController) }
         composable(Destination.Event.route) {
@@ -25,7 +31,12 @@ fun InnerNav(onMainAppNavHostController: NavHostController) {
         }
         composable(Destination.NewEvent.route) { CreateNewEvent(navController = onMainAppNavHostController) }
         composable(Destination.TestScreen.route) { TestScreen(navController = onMainAppNavHostController) }
-        composable(Destination.Profile.route) { Profile(navController = onMainAppNavHostController) }
+        composable(Destination.Profile.route) {
+            Profile(
+                internalNavController = onMainAppNavHostController,
+                externalNavController = externalNavHostController
+            )
+        }
         composable(Destination.WishList.route) { Wishlist(navController = onMainAppNavHostController) }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")
