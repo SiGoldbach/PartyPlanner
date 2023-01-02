@@ -37,7 +37,7 @@ fun ComingEventsWithScaffold(navController: NavHostController) {
                 items = listOf(
                     MenuItem(
                         id = "testpage",
-                        title = "TestPage",
+                        title = "Home",
                         contentDescription = "The menu",
                         icon = Icons.Filled.Menu
                     ),
@@ -110,7 +110,7 @@ fun CreateNewEventWithScaffold(navController: NavHostController) {
                 items = listOf(
                     MenuItem(
                         id = "testpage",
-                        title = "TestPage",
+                        title = "Home",
                         contentDescription = "The menu",
                         icon = Icons.Filled.Menu
                     ),
@@ -183,5 +183,237 @@ fun NewEvent(navController: NavHostController) {
 fun Event(navController: NavHostController) {
     ComingEvents(navController = navController)
 }
+
+@Composable
+fun ExperimentalScreenForDemoForEvent(navController: NavHostController) {
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        backgroundColor = beige,
+        scaffoldState = scaffoldState,
+        topBar = {
+            AppBar(stringResource = stringResource(id = R.string.Dit_Event),
+                onNavigationIconClick = {
+                    scope.launch { scaffoldState.drawerState.open() }
+                }
+            )
+        },
+        //Gør så man ikke kan "dragge" hvis menuen er lukket
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+        drawerContent = {
+            DrawerHeader()
+            DrawerBody(
+                items = listOf(
+                    MenuItem(
+                        id = "testpage",
+                        title = "Home",
+                        contentDescription = "The menu",
+                        icon = Icons.Filled.Menu
+                    ),
+                    MenuItem(
+                        id = "profile",
+                        title = "Profil",
+                        contentDescription = "Go to profile",
+                        icon = Icons.Filled.Face
+                    ),
+                    MenuItem(
+                        id = "begivenhed",
+                        title = "Begivenheder",
+                        contentDescription = "Begivenheder",
+                        icon = Icons.Filled.Add
+                    ),
+                    MenuItem(
+                        id = "ønskeliste",
+                        title = "Ønskeliste",
+                        contentDescription = "Wishlist",
+                        icon = Icons.Filled.Edit
+                    ),
+                    MenuItem(
+                        id = "hjælp",
+                        title = "Hjælp",
+                        contentDescription = "support",
+                        icon = Icons.Filled.Info
+                    ),
+                ),
+                onItemClick = {
+                    when (it.id) {
+                        "testpage" -> navController.navigate(Destination.TestScreen.route)
+                        "begivenhed" -> navController.navigate(Destination.NewEvent.route)
+                        "account" -> navController.navigate("account")
+                        "menu" -> navController.navigate(Destination.Event.route)
+                        "ønskeliste" -> navController.navigate(Destination.WishList.route)
+                        "profile" -> navController.navigate(Destination.Profile.route)
+
+
+                    }
+
+                    println("Clicked on ${it.title}")
+                }
+            )
+
+        },
+    ) {
+        MyEventScreen(
+            event = com.example.partyplanner.model.Event("Wedding", "20/08/2030", "Nice wedding"),
+            navController = navController
+        )
+    }
+
+
+}
+
+@Composable
+fun ExperimentalScreenForDemoWishList(navController: NavHostController) {
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        backgroundColor = beige,
+        scaffoldState = scaffoldState,
+        topBar = {
+            AppBar(stringResource = stringResource(id = R.string.Dine_wisList),
+                onNavigationIconClick = {
+                    scope.launch { scaffoldState.drawerState.open() }
+                }
+            )
+        },
+        //Gør så man ikke kan "dragge" hvis menuen er lukket
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+        drawerContent = {
+            DrawerHeader()
+            DrawerBody(
+                items = listOf(
+                    MenuItem(
+                        id = "testpage",
+                        title = "Home",
+                        contentDescription = "The menu",
+                        icon = Icons.Filled.Menu
+                    ),
+                    MenuItem(
+                        id = "profile",
+                        title = "Profil",
+                        contentDescription = "Go to profile",
+                        icon = Icons.Filled.Face
+                    ),
+                    MenuItem(
+                        id = "begivenhed",
+                        title = "Begivenheder",
+                        contentDescription = "Begivenheder",
+                        icon = Icons.Filled.Add
+                    ),
+                    MenuItem(
+                        id = "ønskeliste",
+                        title = "Ønskeliste",
+                        contentDescription = "Wishlist",
+                        icon = Icons.Filled.Edit
+                    ),
+                    MenuItem(
+                        id = "hjælp",
+                        title = "Hjælp",
+                        contentDescription = "support",
+                        icon = Icons.Filled.Info
+                    ),
+                ),
+                onItemClick = {
+                    when (it.id) {
+                        "testpage" -> navController.navigate(Destination.TestScreen.route)
+                        "begivenhed" -> navController.navigate(Destination.NewEvent.route)
+                        "account" -> navController.navigate("account")
+                        "menu" -> navController.navigate(Destination.Event.route)
+                        "ønskeliste" -> navController.navigate(Destination.WishList.route)
+                        "profile" -> navController.navigate(Destination.Profile.route)
+
+
+                    }
+
+                    println("Clicked on ${it.title}")
+                }
+            )
+
+        },
+    ) {
+        Wishlist(navController = navController)
+    }
+
+
+}
+
+@Composable
+fun ExperimentalScreenForDemoWishProfile(navController: NavHostController) {
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        backgroundColor = beige,
+        scaffoldState = scaffoldState,
+        topBar = {
+            AppBar(stringResource = stringResource(id = R.string.Din_profil),
+                onNavigationIconClick = {
+                    scope.launch { scaffoldState.drawerState.open() }
+                }
+            )
+        },
+        //Gør så man ikke kan "dragge" hvis menuen er lukket
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+        drawerContent = {
+            DrawerHeader()
+            DrawerBody(
+                items = listOf(
+                    MenuItem(
+                        id = "testpage",
+                        title = "Home",
+                        contentDescription = "The menu",
+                        icon = Icons.Filled.Menu
+                    ),
+                    MenuItem(
+                        id = "profile",
+                        title = "Profil",
+                        contentDescription = "Go to profile",
+                        icon = Icons.Filled.Face
+                    ),
+                    MenuItem(
+                        id = "begivenhed",
+                        title = "Begivenheder",
+                        contentDescription = "Begivenheder",
+                        icon = Icons.Filled.Add
+                    ),
+                    MenuItem(
+                        id = "ønskeliste",
+                        title = "Ønskeliste",
+                        contentDescription = "Wishlist",
+                        icon = Icons.Filled.Edit
+                    ),
+                    MenuItem(
+                        id = "hjælp",
+                        title = "Hjælp",
+                        contentDescription = "support",
+                        icon = Icons.Filled.Info
+                    ),
+                ),
+                onItemClick = {
+                    when (it.id) {
+                        "testpage" -> navController.navigate(Destination.TestScreen.route)
+                        "begivenhed" -> navController.navigate(Destination.NewEvent.route)
+                        "account" -> navController.navigate("account")
+                        "menu" -> navController.navigate(Destination.Event.route)
+                        "ønskeliste" -> navController.navigate(Destination.WishList.route)
+                        "profile" -> navController.navigate(Destination.Profile.route)
+
+
+                    }
+
+                    println("Clicked on ${it.title}")
+                }
+            )
+
+        },
+    ) {
+        Profile(navController = navController)
+    }
+
+
+}
+
+
+
+
 
 

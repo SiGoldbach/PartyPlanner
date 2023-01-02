@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.partyplanner.ui.theme.*
+import com.example.partyplanner.ui.theme.screens.ExperimentalScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -34,10 +35,10 @@ class MainActivity : ComponentActivity() {
         //Configure google sign in
 
 
-
-
         setContent {
             val navController = rememberNavController()
+            val internalNavController = rememberNavController()
+
             PartyPlannerTheme {
 
                 val systemUiController = rememberSystemUiController()
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
                 }
                 //After these side effects the app will either begin on coming events or login screen
                 //OpretBruger(navController = navController)
-                NavigationAppHost(navController = navController)
+                ExperimentalScreen(navController, internalNavController)
                 //Change here
                 //TopOfScreenReusable(navController = navController)
                 val a = com.example.partyplanner.model.Event(
@@ -71,9 +72,6 @@ class MainActivity : ComponentActivity() {
         }
 
     }
-
-
-
 
 
     //I have made some changes here to test the navigation

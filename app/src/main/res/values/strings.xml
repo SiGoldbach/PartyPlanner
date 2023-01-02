@@ -2,5 +2,9 @@
     <string name="app_name">s213456 Lykkehjulet</string>
     <string name="Kommende_Begivenheder">Kommende begivenheder</string>
     <string name="Create_event">Lav nyt event</string>
+    <string name="Dit_Event">Dit Event</string>
+    <string name="Dine_wisList">Dine Ønskelister</string>
+    <string name="Din_profil">Dine Profil</string>
+
 
 </resources>
