@@ -89,7 +89,7 @@ fun Profile(internalNavController: NavController, externalNavController: NavCont
 
         }
         Button(
-            onClick = {  },
+            onClick = { externalNavController.navigate(Destination.Welcome.route) },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
         ) {
             Text(text = "Log ud")

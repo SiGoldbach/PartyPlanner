@@ -1,6 +1,5 @@
 package com.example.partyplanner
 
-import com.example.partyplanner.naviagion.NavigationAppHost
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,8 +10,10 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.partyplanner.ui.theme.*
-import com.example.partyplanner.ui.theme.screens.ExperimentalScreen
+import com.example.partyplanner.naviagion.NavigationAppHost
+import com.example.partyplanner.ui.theme.PartyPlannerTheme
+import com.example.partyplanner.ui.theme.beige
+import com.example.partyplanner.ui.theme.dustyRose
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -36,8 +37,8 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            val navController = rememberNavController()
-            val internalNavController = rememberNavController()
+            val rootNavController = rememberNavController()
+            rememberNavController()
 
             PartyPlannerTheme {
 
@@ -57,7 +58,6 @@ class MainActivity : ComponentActivity() {
                 }
                 //After these side effects the app will either begin on coming events or login screen
                 //OpretBruger(navController = navController)
-                ExperimentalScreen(navController, internalNavController)
                 //Change here
                 //TopOfScreenReusable(navController = navController)
                 val a = com.example.partyplanner.model.Event(
@@ -65,6 +65,7 @@ class MainActivity : ComponentActivity() {
                     "22/08/22",
                     "Vi holder bryllup fordi vi bliver gift"
                 )
+                NavigationAppHost(navController = rootNavController)
                 //OpretBruger(navController = navController)
                 //Wishlist(navController = navController)
                 //MyEventScreen(a, navController = navController)
