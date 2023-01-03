@@ -5,7 +5,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.partyplanner.ui.theme.screens.*
+import androidx.navigation.compose.rememberNavController
+import com.example.partyplanner.ui.theme.screens.ExperimentalScreen
+import com.example.partyplanner.ui.theme.screens.LoginScreen
+import com.example.partyplanner.ui.theme.screens.OpretBruger
+import com.example.partyplanner.ui.theme.screens.WelcomeScreen
 
 @Composable
 fun NavigationAppHost(navController: NavHostController) {
@@ -13,17 +17,16 @@ fun NavigationAppHost(navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = Destination.Welcome.route) {
         //Here there is no dependency injection yet so a standard event just get put in.
-        composable(Destination.ComingEvents.route) { ComingEventsWithScaffold(navController = navController) }
-        composable(Destination.Event.route) {
-            ExperimentalScreenForDemoForEvent(navController = navController)
-        }
-        composable(Destination.NewEvent.route) { CreateNewEventWithScaffold(navController = navController) }
-        composable(Destination.TestScreen.route) { ComingEventsWithScaffold(navController = navController) }
+
         composable(Destination.LoginScreen.route) { LoginScreen(navController = navController) }
         composable(Destination.MakeUserScreen.route) { OpretBruger(navController = navController) }
-        composable(Destination.Profile.route) { ExperimentalScreenForDemoWishProfile(navController = navController) }
         composable(Destination.Welcome.route) { WelcomeScreen(navController = navController) }
-        composable(Destination.WishList.route) { ExperimentalScreenForDemoWishList(navController = navController) }
+        composable(Destination.ComingEvents.route) {
+            ExperimentalScreen(
+                externalNav = navController,
+                internalNav = rememberNavController()
+            )
+        }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")
             if(elementId == null){
