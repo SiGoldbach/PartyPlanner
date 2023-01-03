@@ -95,9 +95,7 @@ fun WishesComposer(event: Event, navController: NavHostController) {
                     ) {
                         Text(text = "Gå til")
                     }
-
                 }
-
             }
         }
     }
@@ -117,8 +115,6 @@ fun WishesComposer(event: Event, navController: NavHostController) {
                     Text("Close")
                 }
             }
-
-
         }
     }
 }
