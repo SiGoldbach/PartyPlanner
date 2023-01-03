@@ -23,7 +23,11 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.viewModel.ComingEventsScreenViewModel
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupPositionProvider
 import com.example.partyplanner.naviagion.Destination
 
 @Composable
@@ -58,12 +62,13 @@ fun Wishes(navController: NavHostController) {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WishesComposer(event: Event, navController: NavHostController) {
+    var popupControl by remember { mutableStateOf(false) }
     Card(
-        onClick = { navController.navigate(Destination.Event.route) },
+        onClick = { popupControl = true },
         border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
             .size(width = 350.dp, height = 150.dp)
-           .padding(5.dp), backgroundColor = beige
+            .padding(5.dp), backgroundColor = beige
     ) {
         Column(
             modifier = Modifier
@@ -82,16 +87,38 @@ fun WishesComposer(event: Event, navController: NavHostController) {
                     contentScale = ContentScale.Crop,
                 )
 
-                Row (horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.Bottom) {
-                        Button(
-                            onClick = { navController.navigate(Destination.Event.route) },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-                        ) {
-                            Text(text = "Gå til")
-                        }
+                Row(horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.Bottom) {
+
+                    Button(
+                        onClick = { popupControl = true },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+                    ) {
+                        Text(text = "Gå til")
+                    }
 
                 }
+
             }
+        }
+    }
+    if (popupControl) {
+        Popup(
+            alignment = Alignment.Center,
+        ) {
+            // What has to be shown in the pop-up.
+            Card (
+                border = BorderStroke(width = 2.dp, color = Color.Black),
+                modifier = Modifier
+                    .size(width = 350.dp, height = 500.dp)
+                    .padding(5.dp), backgroundColor = Color.Cyan,
+            ) {
+                Text("hello")
+                Button(onClick = {popupControl = false}) {
+                    Text("Close")
+                }
+            }
+
+
         }
     }
 }
