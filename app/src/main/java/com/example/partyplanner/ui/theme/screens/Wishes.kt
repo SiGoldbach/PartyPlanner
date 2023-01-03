@@ -21,7 +21,6 @@ import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
-import com.example.partyplanner.viewModel.ComingEventsScreenViewModel
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -29,10 +28,11 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupPositionProvider
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
 
 @Composable
 fun Wishes(navController: NavHostController) {
-    val viewModel = ComingEventsScreenViewModel()
+    val viewModel = ViewModelComingEventsScreen()
     val eventState by viewModel.uiState.collectAsState()
     viewModel.values()
 

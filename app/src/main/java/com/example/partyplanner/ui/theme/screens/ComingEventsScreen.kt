@@ -34,14 +34,16 @@ import com.example.partyplanner.model.Event
 import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
 import androidx.compose.runtime.*
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
 val standardDP: Dp = 10.dp
 
 @Composable
-fun ComingEvents(navController: NavHostController) {
+fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     val viewModel = ViewModelComingEventsScreen()
     val eventState by viewModel.uiState.collectAsState()
+    val appState by viewModelOnApp.uiState.collectAsState()
     viewModel.values()
 
 
