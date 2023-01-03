@@ -18,11 +18,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun FBOpretBruger(navController: NavController) {
+fun FBOpretBruger(
+    viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel()
+    ,navController: NavController) {
+
     val auth = FirebaseAuth.getInstance()
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
     var efterNavn by remember { mutableStateOf(TextFieldValue("")) }
@@ -53,15 +58,13 @@ fun FBOpretBruger(navController: NavController) {
 
         )
         Button(onClick = {
-            auth.createUserWithEmailAndPassword(email.text.toString(), kodeord.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // User has been successfully created
-                        navController.navigate("login")
-                    } else {
-                        // There was an error creating the user
-                    }
-                }
+            OpretBrugerViewmodel().putCredentialsAndCreateUser(
+                forNavn = forNavn.text,
+                efterNavn = efterNavn.text,
+                email = email.text,
+                kodeord = kodeord.text
+            )
+            navController.navigate("LoginScreen")
         }) {
             Text("Opret Bruger")
         }
