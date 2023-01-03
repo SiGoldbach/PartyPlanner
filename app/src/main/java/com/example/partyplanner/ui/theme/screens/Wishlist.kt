@@ -28,7 +28,7 @@ import com.example.partyplanner.model.Gift
 fun Wishlist(navController: NavController) {
     val gift1 = Gift("Konfirmation", "Se ønskelisten her")
     val gift2 = Gift("Juleaften", "Se ønskelisten her")
-    val gift3 = Gift("Fødseldsdags-ønsker", "Se ønskelisten her")
+    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
     val gift4 = Gift("Gaveideer", "Se ønskelisten her")
     val gift5 = Gift("Lejlighed", "Se ønskelisten her")
 
