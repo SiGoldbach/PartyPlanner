@@ -5,36 +5,35 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
-import com.example.partyplanner.viewModel.ComingEventsScreenViewModel
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupPositionProvider
-import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.model.Gift
+
 
 @Composable
 fun Wishes(navController: NavHostController) {
-    val viewModel = ComingEventsScreenViewModel()
-    val eventState by viewModel.uiState.collectAsState()
-    viewModel.values()
+    val gift1 = Gift("Konfirmation", "Se ønskelisten her")
+    val gift2 = Gift("Juleaften", "Se ønskelisten her")
+    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
+    val gift4 = Gift("Gaveideer", "Se ønskelisten her")
+    val gift5 = Gift("Lejlighed", "Se ønskelisten her")
+
+    val list = listOf(gift1, gift2, gift3, gift4, gift5)
 
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
@@ -47,13 +46,12 @@ fun Wishes(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(1.dp),
             horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
-            items(eventState.list) { item ->
+            items(list) { item ->
                 WishesComposer(item, navController)
             }
         }
     }
 }
-
 /**
  * Here is the standard WishesComposer, now with just a default image of loading.
  * Since no picture has been loaded yet from the viewmodels apis.
@@ -61,7 +59,7 @@ fun Wishes(navController: NavHostController) {
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishesComposer(event: Event, navController: NavHostController) {
+fun WishesComposer(event: Gift, navController: NavHostController) {
     var popupControl by remember { mutableStateOf(false) }
     Card(
         onClick = { popupControl = true },
