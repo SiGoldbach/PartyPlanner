@@ -42,6 +42,7 @@ val standardDP: Dp = 10.dp
 fun ComingEvents(navController: NavHostController) {
     val viewModel = ComingEventsScreenViewModel()
     val eventState by viewModel.uiState.collectAsState()
+    viewModel.values()
 
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
