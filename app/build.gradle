@@ -94,6 +94,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-perf-ktx'
     implementation 'com.google.firebase:firebase-config-ktx'
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
     testImplementation 'junit:junit:4.+'
 
