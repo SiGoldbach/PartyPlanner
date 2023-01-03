@@ -76,6 +76,7 @@ fun ExperimentalScreen(externalNav: NavHostController, internalNav: NavHostContr
                         "ønskeliste" -> internalNav.navigate(Destination.WishList.route)
                         "hjælp" -> internalNav.navigate(Destination.TestScreen.route)
                     }
+                    scope.launch { scaffoldState.drawerState.close() }
 
                     println("Clicked on ${it.title}")
                 }
