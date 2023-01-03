@@ -83,7 +83,8 @@ fun ExperimentalScreen(externalNav: NavHostController, internalNav: NavHostContr
 
         },
     ) {
+        //Here the internal navigation is, this makes this scaffold and top bar be reused every time and,
+        //Only this value will be changed.
         InnerNav(internalNav, externalNav)
-        //Later this will come as dependency injection as a composable function.
     }
 }

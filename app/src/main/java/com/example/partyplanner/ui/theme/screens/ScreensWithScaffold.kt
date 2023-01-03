@@ -168,13 +168,6 @@ fun CreateNewEventWithScaffold(navController: NavHostController) {
  */
 
 
-@Composable
-fun NewEvent(navController: NavHostController) {
-    ComingEventsWithScaffold(navController = navController)
-
-
-}
-
 /**
  * This Events composable should be called with a list of event,
  * Or a function which acquires this list
