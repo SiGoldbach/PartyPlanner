@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class EventViewModel : ViewModel() {
+class ViewModelEvent : ViewModel() {
     private val gameUiState = MutableStateFlow(Event())
     val uiState: StateFlow<Event> = gameUiState.asStateFlow()
 

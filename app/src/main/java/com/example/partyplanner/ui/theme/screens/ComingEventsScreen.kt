@@ -31,7 +31,7 @@ import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
-import com.example.partyplanner.viewModel.ComingEventsScreenViewModel
+import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
 import androidx.compose.runtime.*
 import com.example.partyplanner.naviagion.Destination
 
@@ -40,7 +40,7 @@ val standardDP: Dp = 10.dp
 
 @Composable
 fun ComingEvents(navController: NavHostController) {
-    val viewModel = ComingEventsScreenViewModel()
+    val viewModel = ViewModelComingEventsScreen()
     val eventState by viewModel.uiState.collectAsState()
     viewModel.values()
 
