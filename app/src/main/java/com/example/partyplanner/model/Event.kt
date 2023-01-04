@@ -4,6 +4,7 @@ data class Event(
     val name: String = "",
     val date: String = "",
     val description: String = "",
-    val participants: Int = 0
+    val participants: Int = 0,
+    val totalInvites: Int = 0
 )
 

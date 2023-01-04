@@ -98,7 +98,7 @@ fun EventComposer(event: Event, navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = event.name)
-            Text(text = "11-01-2044")
+            Text(text = event.date)
             Box(modifier = Modifier.fillMaxHeight(0.8F)) {
                 Image(
                     painter = painterResource(id = R.drawable.loading_picture),
@@ -111,12 +111,13 @@ fun EventComposer(event: Event, navController: NavHostController) {
             }
             Spacer(modifier = Modifier.weight(1f))
             Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
+                Spacer(modifier = Modifier.padding(5.dp))
                 Column {
                     Row {
-                        Text(text = "35 ")
+                        Text(text = event.totalInvites.toString())
                     }
                     Row {
-                        Text(text = "15")
+                        Text(text = event.participants.toString())
                     }
                 }
                 Spacer(modifier = Modifier.weight(1F))
