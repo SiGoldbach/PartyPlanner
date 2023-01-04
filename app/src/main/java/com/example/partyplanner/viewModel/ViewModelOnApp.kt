@@ -38,7 +38,8 @@ class ViewModelOnApp : ViewModel() {
             "name" to eventName,
             "date" to date,
             "description" to description,
-            "Participants" to 0
+            "Participants" to 0,
+            "totalInvites" to 0
 
         )
         addEvent.document(eventName).set(data1)
@@ -79,7 +80,6 @@ class ViewModelOnApp : ViewModel() {
 
         }
         Log.v("Events", tempEventsList.size.toString() + " List has size ")
-
 
 
     }
