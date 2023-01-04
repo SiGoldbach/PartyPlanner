@@ -9,6 +9,7 @@ import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
 import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
+import java.sql.Date
 
 /**
  * This is the internal naviagtion of the app this should work with now having two navcontrollers
@@ -37,7 +38,7 @@ fun InnerNav(
         composable(Destination.Event.route) {
             MyEventScreen(
                 navController = onMainAppNavHostController,
-                event = Event("Event", "tomorow", "tomorow", 0)
+                event = Event(date = "date")
             )
         }
         composable(Destination.NewEvent.route) {

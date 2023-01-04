@@ -60,11 +60,6 @@ class MainActivity : ComponentActivity() {
                 //OpretBruger(navController = navController)
                 //Change here
                 //TopOfScreenReusable(navController = navController)
-                val a = com.example.partyplanner.model.Event(
-                    "Thomas bryllup",
-                    "22/08/22",
-                    "Vi holder bryllup fordi vi bliver gift"
-                )
                 NavigationAppHost(navController = rootNavController)
                 //OpretBruger(navController = navController)
                 //Wishlist(navController = navController)

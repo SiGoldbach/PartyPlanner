@@ -5,6 +5,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.EventHelper
 import com.example.partyplanner.model.EventsDataState
 import com.example.partyplanner.model.OnAppModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,11 +36,12 @@ class ViewModelOnApp : ViewModel() {
         var boolean = false
         val addEvent = db.collection("DB").document(uiState.value.uid).collection("events")
         val data1 = hashMapOf(
-            "name" to eventName,
-            "date" to date,
-            "description" to description,
-            "Participants" to 0,
-            "totalInvites" to 0
+            EventHelper().NAME to eventName,
+            EventHelper().DATE to date,
+            EventHelper().DESCRIPTION to description,
+            EventHelper().PARTICIPANTS to 0,
+            EventHelper().TOTAL_INVITES to 0
+
 
         )
         addEvent.document(eventName).set(data1)
@@ -49,44 +51,61 @@ class ViewModelOnApp : ViewModel() {
 
 
     fun updateEventList() {
-        getAllEvents(uiState.value.uid)
+        getAllEvents()
 
 
     }
 
 
+    private fun getAllEvents() {
 
-    fun getAllEvents(uid: String) {
-
-        val events = db.collection("DB").document(uid).collection("events")
+        val events = db.collection("DB").document(uiState.value.uid).collection("events")
         val tempEventsList = mutableListOf<Event>()
         allEventsResponse.value = EventsDataState.Loading
 
         events.get().addOnSuccessListener { docs ->
-                for (doc in docs) {
-                    val event = doc.toObject(Event::class.java)
-                    Log.v("events", event.name)
-                    event.name
-                    event.date
-                    if (!tempEventsList.add(event)) {
-                        Log.v("Events", "Element was not added for some retarded reason")
-                    }
-                    Log.v("Events", tempEventsList.size.toString() + " List has size ")
-
-
+            for (doc in docs) {
+                val event = doc.toObject(Event::class.java)
+                Log.v("events", event.name)
+                event.name
+                event.date
+                if (!tempEventsList.add(event)) {
+                    Log.v("Events", "Element was not added for some retarded reason")
                 }
+                Log.v("Events", tempEventsList.size.toString() + " List has size ")
+
+
+            }
             userInfo.update { t -> t.copy(events = tempEventsList) }
 
 
-
         }.addOnFailureListener {
-                allEventsResponse.value = EventsDataState.Failure("FAILURE")
+            allEventsResponse.value = EventsDataState.Failure("FAILURE")
 
-            }
+        }
 
         Log.v("Events", tempEventsList.size.toString() + " List has size in the end ")
 
 
+    }
+
+    /**
+     * This updates the whole event and should be fine for this project,
+     * Maybe in the future some changes are so common values might be changed one at a time.
+     */
+    fun updateEventValues(event: Event) {
+        val addEvent = db.collection("DB").document(uiState.value.uid).collection("events")
+            .document(event.name)
+        val data1 = hashMapOf(
+            EventHelper().NAME to event.name,
+            EventHelper().DATE to event.date,
+            EventHelper().DESCRIPTION to event.description,
+            EventHelper().PARTICIPANTS to event.participants,
+            EventHelper().TOTAL_INVITES to event.description
+        )
+        addEvent.set(data1)
+            .addOnSuccessListener { Log.d("Firestore", "Event updated successfully") }
+            .addOnFailureListener { e -> Log.d("Firestore", "Fail in update", e) }
 
     }
 
