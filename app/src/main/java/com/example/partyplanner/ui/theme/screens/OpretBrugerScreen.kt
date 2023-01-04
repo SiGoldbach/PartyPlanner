@@ -21,17 +21,22 @@ import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
+import com.google.firebase.auth.FirebaseAuth
+
+//Import and use topbar
+
 
 @Composable
 fun OpretBruger(
     navController: NavController,
     viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel()
 ) {
-    val uiState by viewModel.state.collectAsState()
+
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
     var efterNavn by remember { mutableStateOf(TextFieldValue("")) }
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var kodeord by remember { mutableStateOf(TextFieldValue("")) }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -81,37 +86,22 @@ fun OpretBruger(
 
         Spacer(modifier = Modifier.height(50.dp))
         //MAKING A STANDARD BUTTON FOR TRYING THE LOGIN
-        StandardButton(
-            output = "Opret bruger",
-            lambda = { navController.navigate(Destination.ComingEvents.route) }
-
-        )
-
-
-
-
-
-
-        Box {
-            Button(
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-                shape = RoundedCornerShape(30.dp),
-                modifier = Modifier
-                    .size(width = 250.dp, height = 42.dp)
-            ) {
-                Text(
-                    text = "Kan ikke oprette bruger?",
-                    fontStyle = FontStyle.Normal,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp, color = Color.Black
-                )
-            }
+        Button(onClick = {
+            OpretBrugerViewmodel().putCredentialsAndCreateUser(
+                forNavn = forNavn.text,
+                efterNavn = efterNavn.text,
+                email = email.text,
+                kodeord = kodeord.text
+            )
+            //Navigation skal lige fixes
+            navController.navigate(Destination.ComingEvents.route)
+        }) {
+            Text("Opret Bruger")
         }
 
     }
     // Skal være en "tilbage" button.
-    Box(contentAlignment = Alignment.BottomStart) {
+    Box(contentAlignment = Alignment.Center) {
         Button(
             onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
