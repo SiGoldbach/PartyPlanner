@@ -80,7 +80,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                         .height(10.dp)
                 )
                 // Date text here comes from "event".
-                StdText(string = event.date.toString())
+                StdText(string = event.date)
 
                 Spacer(
                     modifier = Modifier
@@ -139,6 +139,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                 }
 
             }
+            Box(contentAlignment = Alignment.BottomEnd) {
             Row(horizontalArrangement = Arrangement.End) {
                 Button(
                     onClick = { /*TODO*/ },
@@ -154,6 +155,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                     )
                 }
             }
+        }
             // new row can be added here
 
         }
