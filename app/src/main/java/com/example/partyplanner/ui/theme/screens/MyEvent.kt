@@ -80,7 +80,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                         .height(10.dp)
                 )
                 // Date text here comes from "event".
-                StdText(string = event.date)
+                StdText(string = event.date.toString())
 
                 Spacer(
                     modifier = Modifier

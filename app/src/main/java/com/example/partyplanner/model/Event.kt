@@ -1,10 +1,25 @@
 package com.example.partyplanner.model
 
+import com.example.partyplanner.naviagion.Destination
+import java.sql.Date
+import java.util.Objects
+
 data class Event(
     val name: String = "",
     val date: String = "",
     val description: String = "",
     val participants: Int = 0,
-    val totalInvites: Int = 0
+    val totalInvites: Int = 0,
+    //These are all the corresponding values you can add so only use these instead of you own string.
+
 )
+
+data class EventHelper(
+    val NAME: String = "name",
+    val DATE: String = "date",
+    val DESCRIPTION: String = "description",
+    val PARTICIPANTS: String = "participants",
+    val TOTAL_INVITES: String = "totalInvites",
+
+    )
 
