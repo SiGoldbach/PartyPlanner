@@ -1,8 +1,8 @@
 package com.example.partyplanner.model
 
 data class OnAppModel(
-    val uid: String,
-    val event: Event,
-    val currentEvent: String,
-    val events: List<Event>
+    var uid: String = "TEST2",
+    var event: Event = Event(),
+    var currentEvent: String = "",
+    var events: List<Event> = listOf()
 )
