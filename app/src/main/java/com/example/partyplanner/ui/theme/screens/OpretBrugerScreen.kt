@@ -23,11 +23,15 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 import com.google.firebase.auth.FirebaseAuth
 
+//Import and use topbar
+
+
 @Composable
 fun OpretBruger(
     navController: NavController,
     viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel()
 ) {
+
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
     var efterNavn by remember { mutableStateOf(TextFieldValue("")) }
     var email by remember { mutableStateOf(TextFieldValue("")) }
@@ -89,36 +93,15 @@ fun OpretBruger(
                 email = email.text,
                 kodeord = kodeord.text
             )
+            //Navigation skal lige fixes
             navController.navigate(Destination.ComingEvents.route)
         }) {
             Text("Opret Bruger")
         }
 
-
-
-
-
-
-        Box {
-            Button(
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-                shape = RoundedCornerShape(30.dp),
-                modifier = Modifier
-                    .size(width = 250.dp, height = 42.dp)
-            ) {
-                Text(
-                    text = "Kan ikke oprette bruger?",
-                    fontStyle = FontStyle.Normal,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp, color = Color.Black
-                )
-            }
-        }
-
     }
     // Skal være en "tilbage" button.
-    Box(contentAlignment = Alignment.BottomStart) {
+    Box(contentAlignment = Alignment.Center) {
         Button(
             onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
