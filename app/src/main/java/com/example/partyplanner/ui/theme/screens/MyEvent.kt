@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -136,14 +137,20 @@ fun MyEventScreen(event: Event, navController: NavController) {
                     )
                     StdText(string = "Gæster")
                 }
+
+            }
+            Row(horizontalArrangement = Arrangement.End) {
                 Button(
                     onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = beige),
                     shape = CircleShape,
-                    ) {
+                    modifier = Modifier.size(width = 54.dp, height = 45.dp)
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.pencildrawing),
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.size(width = 20.dp, height = 20.dp),
+                        contentScale = ContentScale.Crop
                     )
                 }
             }
