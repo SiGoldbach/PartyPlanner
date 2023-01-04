@@ -3,6 +3,7 @@ package com.example.partyplanner.ui.theme.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -134,6 +135,16 @@ fun MyEventScreen(event: Event, navController: NavController) {
                             .width(7.dp)
                     )
                     StdText(string = "Gæster")
+                }
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                    shape = CircleShape,
+                    ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.pencildrawing),
+                        contentDescription = null
+                    )
                 }
             }
             // new row can be added here

@@ -36,7 +36,7 @@ fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOn
                 .size(width = 350.dp, height = 50.dp)
 
         ) {
-            StandardText(text = "Create event")
+            StandardText(text = "Opret begivenhed")
         }
         Spacer(modifier = Modifier.height(standardDP))
 
