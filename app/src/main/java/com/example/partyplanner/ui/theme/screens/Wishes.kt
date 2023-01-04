@@ -5,10 +5,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -16,13 +15,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
+import com.example.partyplanner.model.Gift
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.model.Event
-import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.window.Popup
-import com.example.partyplanner.model.Gift
 
 
 @Composable
@@ -52,6 +47,7 @@ fun Wishes(navController: NavHostController) {
         }
     }
 }
+
 /**
  * Here is the standard WishesComposer, now with just a default image of loading.
  * Since no picture has been loaded yet from the viewmodels apis.
@@ -59,10 +55,10 @@ fun Wishes(navController: NavHostController) {
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishesComposer(event: Gift, navController: NavHostController) {
+fun WishesComposer(gave: Gift, navController: NavHostController) {
     var popupControl by remember { mutableStateOf(false) }
     Card(
-        onClick = { popupControl = true },
+        // onClick = { popupControl = true },
         border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
             .size(width = 350.dp, height = 150.dp)
@@ -97,25 +93,47 @@ fun WishesComposer(event: Gift, navController: NavHostController) {
             }
         }
     }
-    if (popupControl) {
-        Popup(
-            alignment = Alignment.Center,
-        ) {
-            // What has to be shown in the pop-up.
-            Card (
-                border = BorderStroke(width = 2.dp, color = Color.Black),
-                modifier = Modifier
-                    .size(width = 350.dp, height = 500.dp)
-                    .padding(5.dp), backgroundColor = Color.Cyan,
-            ) {
-                Text("hello")
-                Button(onClick = {popupControl = false}) {
-                    Text("Close")
-                }
+    /*  if (popupControl) {
+          Popup(
+              alignment = Alignment.Center,
+          ) {
+
+          }
+
+
+  // What has to be shown in the pop-up.
+    Card(
+        border = BorderStroke(width = 2.dp, color = Color.Black),
+        onClick = { popupControl = false },
+        modifier = Modifier
+            .size(width = 350.dp, height = 500.dp)
+            .padding(5.dp),
+        backgroundColor = Color.Cyan,
+    ) {
+        Text("hello")
+        Button(onClick = { popupControl = false }) {
+            Text("Close")
+        }
+   }
+  }
+  } */
+}
+/*
+@Composable
+fun PopupWindow() {
+    var popupControl by remember { mutableStateOf(false) }
+    val buttonTitle by remember { mutableStateOf("close") }
+
+    Column(modifier = Modifier
+        .size(350.dp, 500.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center) {
+        Button(modifier = Modifier.fillMaxWidth(), onClick = { popupControl = false }) {
+            if (popupControl == false) {
+                buttonTitle.value = "testtest"
             }
         }
     }
 }
-
-
+*/
 
