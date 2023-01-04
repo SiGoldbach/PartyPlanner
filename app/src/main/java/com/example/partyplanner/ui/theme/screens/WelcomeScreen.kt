@@ -84,7 +84,12 @@ fun WelcomeScreen(navController: NavController) {
         StandardButton(
             output = "Opret Bruger",
             lambda = { navController.navigate(Destination.MakeUserScreen.route) })
+        StandardButton(
+            output = "Test",
+            lambda = { navController.navigate(Destination.ComingEvents.route) })
     }
 
 }
+
+
 

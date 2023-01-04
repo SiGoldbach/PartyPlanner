@@ -11,11 +11,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.viewModel.ViewModelCreateEvent
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 @Composable
-fun CreateNewEvent(navController: NavHostController) {
-    val viewModel = ViewModelCreateEvent()
+fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     //There is no need for a state collector here only to create the event in the firebase.
 
     var eventName by remember { mutableStateOf(TextFieldValue("")) }
@@ -30,14 +29,14 @@ fun CreateNewEvent(navController: NavHostController) {
         )
         Spacer(modifier = Modifier.height(standardDP))
         Button(
-            onClick = { onclickForButton(navController, viewModel, eventName.text) },
+            onClick = { onclickForButton(navController, viewModelOnApp, eventName.text) },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
             shape = RoundedCornerShape(30.dp),
             modifier = Modifier
                 .size(width = 350.dp, height = 50.dp)
 
         ) {
-            StandardText(text = "Event navn")
+            StandardText(text = "Create event")
         }
         Spacer(modifier = Modifier.height(standardDP))
 
@@ -45,12 +44,13 @@ fun CreateNewEvent(navController: NavHostController) {
 
 }
 
+//Function required since the click requires more than one method to be run.
 fun onclickForButton(
     navController: NavHostController,
-    viewModel: ViewModelCreateEvent,
+    viewModel: ViewModelOnApp,
     name: String
 ) {
     navController.navigate(Destination.Event.route)
-    viewModel.createEvent(name)
+    viewModel.createEvent(name,"Date","Fun times ")
 }
 

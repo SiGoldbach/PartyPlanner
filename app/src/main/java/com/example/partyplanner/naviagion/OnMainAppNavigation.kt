@@ -4,8 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.partyplanner.model.Event
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
+import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 /**
  * This is the internal naviagtion of the app this should work with now having two navcontrollers
@@ -17,19 +20,32 @@ fun InnerNav(
     onMainAppNavHostController: NavHostController,
     externalNavHostController: NavHostController
 ) {
+    //Here i am making a viewmodel since this nav function will only be called once every time,
+    //a new user logs into the app
+    val viewModel = ViewModelOnApp()
     NavHost(
         navController = onMainAppNavHostController,
         startDestination = Destination.ComingEvents.route
     ) {
         //Here there is no dependency injection yet so a standard event just get put in.
-        composable(Destination.ComingEvents.route) { ComingEvents(onMainAppNavHostController) }
+        composable(Destination.ComingEvents.route) {
+            ComingEvents(
+                navController = onMainAppNavHostController,
+                viewModelOnApp = viewModel
+            )
+        }
         composable(Destination.Event.route) {
             MyEventScreen(
                 navController = onMainAppNavHostController,
-                event = com.example.partyplanner.model.Event("Event", "tomorow", "tomorow")
+                event = Event("Event", "tomorow", "tomorow", 0)
             )
         }
-        composable(Destination.NewEvent.route) { CreateNewEvent(navController = onMainAppNavHostController) }
+        composable(Destination.NewEvent.route) {
+            CreateNewEvent(
+                navController = onMainAppNavHostController,
+                viewModel
+            )
+        }
         composable(Destination.TestScreen.route) { TestScreen(navController = onMainAppNavHostController) }
         composable(Destination.Profile.route) {
             Profile(

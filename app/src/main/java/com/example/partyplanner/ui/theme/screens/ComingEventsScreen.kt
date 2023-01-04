@@ -2,12 +2,10 @@ package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -15,9 +13,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -25,28 +23,23 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
+import com.example.partyplanner.model.Event
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.model.Event
-import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
-import androidx.compose.runtime.*
-import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
 val standardDP: Dp = 10.dp
 
 @Composable
-fun ComingEvents(navController: NavHostController) {
-    val viewModel = ViewModelComingEventsScreen()
-    val eventState by viewModel.uiState.collectAsState()
-    viewModel.values()
-
+fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
+    val appState by viewModelOnApp.uiState.collectAsState()
+    viewModelOnApp.updateEventList()
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxHeight(),
@@ -55,7 +48,7 @@ fun ComingEvents(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            items(eventState.list) { item ->
+            items(appState.events) { item ->
                 EventComposer(item, navController)
             }
         }
@@ -157,30 +150,7 @@ fun StandardText(text: String) {
 
 }
 
-/**
- * This method will later take a lot of information in to display the correct stuff now
- * It just a dummy to kinda make it look like the reel thing.
- */
-@Composable
-fun TopScreen(navController: NavController) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .padding(10.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .size(75.dp)
-                .clip(shape = CircleShape)
-                .background(Color.Black)
-        )
-        Box(modifier = Modifier.padding(10.dp)) {
-            StandardText(text = "MyMan")
 
-        }
-
-    }
-}
 
 
 
