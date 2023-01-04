@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class ViewModelOnApp : ViewModel() {
+    private val allEventsResponse: MutableState<EventsDataState> =
+        mutableStateOf(EventsDataState.Empty)
+
     private val userInfo =
         MutableStateFlow(
             OnAppModel(
@@ -21,15 +24,12 @@ class ViewModelOnApp : ViewModel() {
         )
     val uiState: StateFlow<OnAppModel> = userInfo.asStateFlow()
 
-    val allEventsResponse: MutableState<EventsDataState> = mutableStateOf(EventsDataState.Empty)
 
     init {
         userInfo.update { t -> t.copy(uid = "TEST2") }
     }
 
-
     private val db = FirebaseFirestore.getInstance()
-
 
     fun createEvent(eventName: String, date: String, description: String): Boolean {
         var boolean = false
@@ -47,39 +47,45 @@ class ViewModelOnApp : ViewModel() {
         return boolean
     }
 
-    fun setCurrentEvent() {
-
-    }
 
     fun updateEventList() {
-        getAllEvents()
+        getAllEvents(uiState.value.uid)
+
+
     }
 
-    private fun getAllEvents() {
-        val events = db.collection("DB").document(uiState.value.uid).collection("events")
+
+
+    fun getAllEvents(uid: String) {
+
+        val events = db.collection("DB").document(uid).collection("events")
         val tempEventsList = mutableListOf<Event>()
         allEventsResponse.value = EventsDataState.Loading
 
         events.get().addOnSuccessListener { docs ->
-            for (doc in docs) {
-                val event = doc.toObject(Event::class.java)
-                Log.v("events", event.name)
-                event.name
-                event.date
-                if (!tempEventsList.add(event)) {
-                    Log.v("Events", "Element was not added for some retarded reason")
-                }
-                Log.v("Events", tempEventsList.size.toString() + " List has size ")
+                for (doc in docs) {
+                    val event = doc.toObject(Event::class.java)
+                    Log.v("events", event.name)
+                    event.name
+                    event.date
+                    if (!tempEventsList.add(event)) {
+                        Log.v("Events", "Element was not added for some retarded reason")
+                    }
+                    Log.v("Events", tempEventsList.size.toString() + " List has size ")
 
+
+                }
+            userInfo.update { t -> t.copy(events = tempEventsList) }
+
+
+
+        }.addOnFailureListener {
+                allEventsResponse.value = EventsDataState.Failure("FAILURE")
 
             }
-            userInfo.update { t -> t.copy(events = tempEventsList) }
-            Log.v("Events", uiState.value.events.size.toString() + " List has size after update ")
-        }.addOnFailureListener {
-            allEventsResponse.value = EventsDataState.Failure("FAILURE")
 
-        }
-        Log.v("Events", tempEventsList.size.toString() + " List has size ")
+        Log.v("Events", tempEventsList.size.toString() + " List has size in the end ")
+
 
 
     }
