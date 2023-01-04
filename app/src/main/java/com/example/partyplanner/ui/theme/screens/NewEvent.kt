@@ -51,6 +51,6 @@ fun onclickForButton(
     name: String
 ) {
     navController.navigate(Destination.Event.route)
-    viewModel.createEvent(name)
+    viewModel.createEvent(name,"Date","Fun times ")
 }
 
