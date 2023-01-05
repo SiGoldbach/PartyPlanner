@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class ViewModelOnApp : ViewModel() {
+
     private val allEventsResponse: MutableState<EventsDataState> =
         mutableStateOf(EventsDataState.Empty)
 
@@ -33,18 +34,26 @@ class ViewModelOnApp : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
 
     fun createEvent(eventName: String, date: String, description: String): Boolean {
+        val generatedID = (0..99999999999).random().toString()
+
         var boolean = false
         val addEvent = db.collection("DB").document(uiState.value.uid).collection("events")
         val data1 = hashMapOf(
+            EventHelper().id to generatedID,
             EventHelper().NAME to eventName,
             EventHelper().DATE to date,
             EventHelper().DESCRIPTION to description,
             EventHelper().PARTICIPANTS to 0,
-            EventHelper().TOTAL_INVITES to 0
+            EventHelper().TOTAL_INVITES to 0,
+            EventHelper().LOCATION to "EMPTY"
 
 
         )
-        addEvent.document(eventName).set(data1)
+        //This function is only used when creating an event so setting the current eventId to the
+        //On just being made is fine.
+        userInfo.update { t -> t.copy(currentEventID = generatedID) }
+
+        addEvent.document(generatedID).set(data1)
             .addOnSuccessListener { boolean = true }.addOnFailureListener { println("Failure") }
         return boolean
     }
@@ -59,7 +68,13 @@ class ViewModelOnApp : ViewModel() {
 
     private fun getAllEvents() {
 
-        val events = db.collection("DB").document(uiState.value.uid).collection("events")
+
+        try {
+
+        } catch (e: java.lang.Exception) {
+
+        }
+        val events = db.collection("DB2").document(uiState.value.uid).collection("events")
         val tempEventsList = mutableListOf<Event>()
         allEventsResponse.value = EventsDataState.Loading
 
@@ -76,11 +91,30 @@ class ViewModelOnApp : ViewModel() {
 
 
             }
-            userInfo.update { t -> t.copy(events = tempEventsList) }
+            if (tempEventsList.size == 0) {
+                userInfo.update { t ->
+                    t.copy(
+                        events = tempEventsList,
+                        eventsDataState = EventsDataState.Empty
+                    )
+                }
+            } else {
+                userInfo.update { t ->
+                    t.copy(
+                        events = tempEventsList,
+                        eventsDataState = EventsDataState.Success(tempEventsList)
+                    )
+                }
+            }
 
 
         }.addOnFailureListener {
-            allEventsResponse.value = EventsDataState.Failure("FAILURE")
+            userInfo.update { t ->
+                t.copy(
+                    events = tempEventsList,
+                    eventsDataState = EventsDataState.Failure("Error Finding events")
+                )
+            }
 
         }
 
@@ -106,6 +140,12 @@ class ViewModelOnApp : ViewModel() {
         addEvent.set(data1)
             .addOnSuccessListener { Log.d("Firestore", "Event updated successfully") }
             .addOnFailureListener { e -> Log.d("Firestore", "Fail in update", e) }
+
+    }
+
+    fun setCurrentEventId(id: String) {
+        userInfo.update { t -> t.copy(currentEventID = id) }
+
 
     }
 
