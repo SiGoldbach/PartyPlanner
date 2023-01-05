@@ -7,9 +7,7 @@ import androidx.navigation.compose.composable
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
-import com.example.partyplanner.viewModel.ViewModelComingEventsScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
-import java.sql.Date
 
 /**
  * This is the internal naviagtion of the app this should work with now having two navcontrollers
