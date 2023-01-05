@@ -10,6 +10,7 @@ data class Event(
     val description: String = "",
     val participants: Int = 0,
     val totalInvites: Int = 0,
+    val location: String = "",
     //These are all the corresponding values you can add so only use these instead of you own string.
 
 )
