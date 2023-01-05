@@ -91,7 +91,12 @@ class ViewModelOnApp : ViewModel() {
 
 
             }
-            userInfo.update { t -> t.copy(events = tempEventsList) }
+            userInfo.update { t ->
+                t.copy(
+                    events = tempEventsList,
+                    eventsDataState = EventsDataState.Success(tempEventsList)
+                )
+            }
             allEventsResponse.value = EventsDataState.Success(tempEventsList)
 
 

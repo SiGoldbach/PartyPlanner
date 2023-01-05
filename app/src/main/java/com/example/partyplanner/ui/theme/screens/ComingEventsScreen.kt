@@ -26,7 +26,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.EventsDataState
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.ui.theme.StdText
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
@@ -38,22 +40,47 @@ val standardDP: Dp = 10.dp
 fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.updateEventList()
-
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-        LazyVerticalGrid(
+    if (appState.eventsDataState is EventsDataState.Loading) {
+        Column(
             modifier = Modifier
-                .fillMaxHeight(),
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            // cells = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(2.dp),
-            horizontalArrangement = Arrangement.spacedBy(2.dp)
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(appState.events) { item ->
-                EventComposer(item, navController)
-            }
+
+            Image(
+                painter = painterResource(id = R.drawable.loading_pic),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxHeight(0.5F)
+                    .fillMaxWidth(0.5F),
+            )
+
+            Text(text = "Loading events", fontSize = 20.sp)
         }
 
 
+    }
+    if (appState.eventsDataState is EventsDataState.Success) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .fillMaxHeight(),
+                columns = GridCells.Adaptive(minSize = 160.dp),
+                // cells = GridCells.Adaptive(minSize = 160.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+                horizontalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                items(appState.events) { item ->
+                    EventComposer(item, navController)
+                }
+            }
+
+
+        }
     }
 
 
