@@ -98,7 +98,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
 
                 Button(
