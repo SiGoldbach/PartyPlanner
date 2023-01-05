@@ -33,9 +33,11 @@ class ViewModelOnApp : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
 
     fun createEvent(eventName: String, date: String, description: String): Boolean {
+        val random = (0..99999999999).random().toString()
         var boolean = false
         val addEvent = db.collection("DB").document(uiState.value.uid).collection("events")
         val data1 = hashMapOf(
+            EventHelper().id to random,
             EventHelper().NAME to eventName,
             EventHelper().DATE to date,
             EventHelper().DESCRIPTION to description,
@@ -44,7 +46,7 @@ class ViewModelOnApp : ViewModel() {
 
 
         )
-        addEvent.document(eventName).set(data1)
+        addEvent.document(random).set(data1)
             .addOnSuccessListener { boolean = true }.addOnFailureListener { println("Failure") }
         return boolean
     }
@@ -59,7 +61,13 @@ class ViewModelOnApp : ViewModel() {
 
     private fun getAllEvents() {
 
-        val events = db.collection("DB").document(uiState.value.uid).collection("events")
+
+        try {
+
+        } catch (e: java.lang.Exception) {
+
+        }
+        val events = db.collection("DB2").document(uiState.value.uid).collection("events")
         val tempEventsList = mutableListOf<Event>()
         allEventsResponse.value = EventsDataState.Loading
 
@@ -77,6 +85,7 @@ class ViewModelOnApp : ViewModel() {
 
             }
             userInfo.update { t -> t.copy(events = tempEventsList) }
+            allEventsResponse.value = EventsDataState.Success(tempEventsList)
 
 
         }.addOnFailureListener {
