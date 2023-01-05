@@ -91,17 +91,30 @@ class ViewModelOnApp : ViewModel() {
 
 
             }
-            userInfo.update { t ->
-                t.copy(
-                    events = tempEventsList,
-                    eventsDataState = EventsDataState.Success(tempEventsList)
-                )
+            if (tempEventsList.size == 0) {
+                userInfo.update { t ->
+                    t.copy(
+                        events = tempEventsList,
+                        eventsDataState = EventsDataState.Empty
+                    )
+                }
+            } else {
+                userInfo.update { t ->
+                    t.copy(
+                        events = tempEventsList,
+                        eventsDataState = EventsDataState.Success(tempEventsList)
+                    )
+                }
             }
-            allEventsResponse.value = EventsDataState.Success(tempEventsList)
 
 
         }.addOnFailureListener {
-            allEventsResponse.value = EventsDataState.Failure("FAILURE")
+            userInfo.update { t ->
+                t.copy(
+                    events = tempEventsList,
+                    eventsDataState = EventsDataState.Failure("Error Finding events")
+                )
+            }
 
         }
 

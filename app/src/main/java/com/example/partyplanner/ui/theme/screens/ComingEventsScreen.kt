@@ -28,7 +28,6 @@ import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.model.EventsDataState
 import com.example.partyplanner.naviagion.Destination
-import com.example.partyplanner.ui.theme.StdText
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
@@ -79,6 +78,23 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
                 }
             }
 
+
+        }
+    }
+    if (appState.eventsDataState is EventsDataState.Failure) {
+        Text(text = "Could not get the events ", fontSize = 20.sp)
+
+    }
+    if (appState.eventsDataState is EventsDataState.Empty) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(5.dp)
+        ) {
+            Text(text = "No events where found on the server.", fontSize = 20.sp)
+            Text(
+                text = "Create a new one by presseing the three stripes on the top left ",
+                fontSize = 20.sp
+            )
 
         }
     }
