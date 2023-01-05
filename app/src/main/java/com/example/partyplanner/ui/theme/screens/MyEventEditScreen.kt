@@ -23,6 +23,7 @@ import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
@@ -85,7 +86,10 @@ fun UpdateEvent(navController: NavController,event: Event, viewModelOnApp: ViewM
         )
         Spacer(modifier = Modifier.height(50.dp))
         
-        Button(onClick = { viewModelOnApp.updateEventValues(event) }) {
+        Button(onClick = {
+            viewModelOnApp.updateEventValues(event);
+            navController.navigate(Destination.Event.route) }
+        ) {
             Text(text = "Gem Ændringer")
         }
     }

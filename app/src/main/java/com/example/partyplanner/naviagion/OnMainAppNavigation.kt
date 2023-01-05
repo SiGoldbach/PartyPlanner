@@ -45,6 +45,13 @@ fun InnerNav(
                 viewModel
             )
         }
+        composable(Destination.MyEventEditScreen.route) {
+            UpdateEvent(
+                navController = onMainAppNavHostController,
+                event = Event(),
+                viewModelOnApp = viewModel
+            )
+        }
         composable(Destination.TestScreen.route) { TestScreen(navController = onMainAppNavHostController) }
         composable(Destination.Profile.route) {
             Profile(
