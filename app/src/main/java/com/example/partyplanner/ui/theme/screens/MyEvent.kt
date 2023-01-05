@@ -23,6 +23,7 @@ import com.example.partyplanner.ui.theme.StdText
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Event
+import com.example.partyplanner.naviagion.Destination
 
 
 @Composable
@@ -140,22 +141,22 @@ fun MyEventScreen(event: Event, navController: NavController) {
 
             }
             Box(contentAlignment = Alignment.BottomEnd) {
-            Row(horizontalArrangement = Arrangement.End) {
-                Button(
-                    onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-                    shape = CircleShape,
-                    modifier = Modifier.size(width = 54.dp, height = 45.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.pencildrawing),
-                        contentDescription = null,
-                        modifier = Modifier.size(width = 20.dp, height = 20.dp),
-                        contentScale = ContentScale.Crop
-                    )
+                Row(horizontalArrangement = Arrangement.End) {
+                    Button(
+                        onClick = { navController.navigate(Destination.MyEventEditScreen.route) },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+                        shape = CircleShape,
+                        modifier = Modifier.size(width = 54.dp, height = 45.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.pencildrawing),
+                            contentDescription = null,
+                            modifier = Modifier.size(width = 20.dp, height = 20.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
             }
-        }
             // new row can be added here
 
         }
