@@ -1,5 +1,8 @@
 package com.example.partyplanner.model
 
+import com.example.partyplanner.naviagion.Destination
+import java.sql.Date
+import java.util.Objects
 
 data class Event(
     val name: String = "",
@@ -9,6 +12,7 @@ data class Event(
     val totalInvites: Int = 0,
     val id: String = "",
 
+    val location: String = "",
     //These are all the corresponding values you can add so only use these instead of you own string.
 
 )
