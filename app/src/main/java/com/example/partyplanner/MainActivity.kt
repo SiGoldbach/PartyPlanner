@@ -10,11 +10,16 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.naviagion.NavigationAppHost
 import com.example.partyplanner.ui.theme.PartyPlannerTheme
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.ComingEvents
+import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 /**
@@ -60,6 +65,19 @@ class MainActivity : ComponentActivity() {
                 //OpretBruger(navController = navController)
                 //Change here
                 //TopOfScreenReusable(navController = navController)
+                val user = Firebase.auth.currentUser
+                if (user != null) {
+                    ComingEvents(
+                        navController = rootNavController,
+                        viewModelOnApp = ViewModelOnApp()
+                    )
+
+                    println(
+                        "           oidfngpodsifgjopdsfkg" +
+                                "       iopdnfgpoisdjgiopsdjfgiopndsogpunreiopgdfmgm logged in already"
+                    )
+
+                }
                 NavigationAppHost(navController = rootNavController)
                 //OpretBruger(navController = navController)
                 //Wishlist(navController = navController)

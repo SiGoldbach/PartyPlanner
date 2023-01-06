@@ -4,10 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.partyplanner.model.Event
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
-import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 /**
@@ -37,7 +35,7 @@ fun InnerNav(
         composable(Destination.Event.route) {
             MyEventScreen(
                 navController = onMainAppNavHostController,
-                event = Event(date = "date")
+                viewModelOnApp = viewModel
             )
         }
         composable(Destination.NewEvent.route) {
@@ -49,7 +47,6 @@ fun InnerNav(
         composable(Destination.MyEventEditScreen.route) {
             UpdateEvent(
                 navController = onMainAppNavHostController,
-                event = Event(),
                 viewModelOnApp = viewModel
             )
         }

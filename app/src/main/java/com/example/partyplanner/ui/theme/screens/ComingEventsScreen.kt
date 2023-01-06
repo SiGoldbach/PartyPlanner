@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
-import com.example.partyplanner.model.EventsDataState
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -39,67 +38,25 @@ val standardDP: Dp = 10.dp
 fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.updateEventList()
-    if (appState.eventsDataState is EventsDataState.Loading) {
-        Column(
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        LazyVerticalGrid(
             modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxHeight(),
+            columns = GridCells.Adaptive(minSize = 160.dp),
+            // cells = GridCells.Adaptive(minSize = 160.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+            horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-
-            Image(
-                painter = painterResource(id = R.drawable.loading_pic),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxHeight(0.5F)
-                    .fillMaxWidth(0.5F),
-            )
-
-            Text(text = "Loading events", fontSize = 20.sp)
-        }
-
-
-    }
-    if (appState.eventsDataState is EventsDataState.Success) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            LazyVerticalGrid(
-                modifier = Modifier
-                    .fillMaxHeight(),
-                columns = GridCells.Adaptive(minSize = 160.dp),
-                // cells = GridCells.Adaptive(minSize = 160.dp),
-                verticalArrangement = Arrangement.spacedBy(2.dp),
-                horizontalArrangement = Arrangement.spacedBy(2.dp)
-            ) {
-                items(appState.events) { item ->
-                    EventComposer(item, navController)
-                }
+            items(appState.events) { item ->
+                EventComposer(item, navController, viewModelOnApp)
             }
-
-
         }
-    }
-    if (appState.eventsDataState is EventsDataState.Failure) {
-        Text(text = "Could not get the events ", fontSize = 20.sp)
+
 
     }
-    if (appState.eventsDataState is EventsDataState.Empty) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(5.dp)
-        ) {
-            Text(text = "No events where found on the server.", fontSize = 20.sp)
-            Text(
-                text = "Create a new one by presseing the three stripes on the top left ",
-                fontSize = 20.sp
-            )
-
-        }
-    }
-
-
 }
 
 
@@ -127,7 +84,7 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
  * Since no picture has been loaded yet from the viewmodels apis.
  */
 @Composable
-fun EventComposer(event: Event, navController: NavHostController) {
+fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     Card(
         border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
@@ -165,7 +122,13 @@ fun EventComposer(event: Event, navController: NavHostController) {
                 }
                 Spacer(modifier = Modifier.weight(1F))
                 Button(
-                    onClick = { navController.navigate(Destination.Event.route) },
+                    onClick = {
+                        clickOnEvent(
+                            navController = navController,
+                            viewModelOnApp = viewModelOnApp,
+                            event = event
+                        )
+                    },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
                 ) {
                     Text(text = "Gå til")
@@ -178,7 +141,11 @@ fun EventComposer(event: Event, navController: NavHostController) {
         }
     }
 
+}
 
+fun clickOnEvent(navController: NavHostController, event: Event, viewModelOnApp: ViewModelOnApp) {
+    navController.navigate(Destination.Event.route)
+    viewModelOnApp.setCurrentEventId(event.id)
 }
 //Til eventcomposer skal importeres 2 billeder 1 til personer der deltager og et til ikke-besvarede invitationer.
 //Desuden skal al teksten inkapsuleres i en box mere...
