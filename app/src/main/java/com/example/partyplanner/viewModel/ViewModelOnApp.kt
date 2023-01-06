@@ -87,10 +87,10 @@ class ViewModelOnApp : ViewModel() {
                 if (!tempEventsList.add(event)) {
                     Log.v("Events", "Element was not added for some retarded reason")
                 }
-                Log.v("Events", tempEventsList.size.toString() + " List has size ")
 
 
             }
+            Log.v("Events", tempEventsList.size.toString() + " List has size ")
             if (tempEventsList.size == 0) {
                 userInfo.update { t ->
                     t.copy(
@@ -108,6 +108,8 @@ class ViewModelOnApp : ViewModel() {
             }
 
 
+
+
         }.addOnFailureListener {
             userInfo.update { t ->
                 t.copy(
@@ -118,7 +120,6 @@ class ViewModelOnApp : ViewModel() {
 
         }
 
-        Log.v("Events", tempEventsList.size.toString() + " List has size in the end ")
 
 
     }
