@@ -14,11 +14,16 @@ import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.naviagion.InnerNav
 import com.example.partyplanner.ui.theme.AppBar
 import com.example.partyplanner.ui.theme.beige
+import com.example.partyplanner.viewModel.ViewModelOnApp
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun ExperimentalScreen(externalNav: NavHostController, internalNav: NavHostController) {
+fun ExperimentalScreen(
+    externalNav: NavHostController,
+    internalNav: NavHostController,
+    viewModelOnApp: ViewModelOnApp
+) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -86,6 +91,6 @@ fun ExperimentalScreen(externalNav: NavHostController, internalNav: NavHostContr
     ) {
         //Here the internal navigation is, this makes this scaffold and top bar be reused every time and,
         //Only this value will be changed.
-        InnerNav(internalNav, externalNav)
+        InnerNav(internalNav, externalNav, viewModelOnApp)
     }
 }

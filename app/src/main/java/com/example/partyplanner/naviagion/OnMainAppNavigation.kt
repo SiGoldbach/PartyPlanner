@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
+import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 /**
@@ -17,11 +18,11 @@ import com.example.partyplanner.viewModel.ViewModelOnApp
 @Composable
 fun InnerNav(
     onMainAppNavHostController: NavHostController,
-    externalNavHostController: NavHostController
+    externalNavHostController: NavHostController,
+    viewModel: ViewModelOnApp
 ) {
     //Here i am making a viewmodel since this nav function will only be called once every time,
     //a new user logs into the app
-    val viewModel = ViewModelOnApp()
     NavHost(
         navController = onMainAppNavHostController,
         startDestination = Destination.ComingEvents.route
