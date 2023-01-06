@@ -25,8 +25,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun FBOpretBruger(
-    viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel()
-    ,navController: NavController) {
+    viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel(), navController: NavController
+) {
 
     val auth = FirebaseAuth.getInstance()
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
@@ -35,23 +35,12 @@ fun FBOpretBruger(
     var kodeord by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TextField(
-            value = forNavn,
-            onValueChange = { forNavn = it },
-            label = { Text("Fornavn") }
-        )
-        TextField(
-            value = efterNavn,
+        TextField(value = forNavn, onValueChange = { forNavn = it }, label = { Text("Fornavn") })
+        TextField(value = efterNavn,
             onValueChange = { efterNavn = it },
-            label = { Text("Efternavn") }
-        )
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") }
-        )
-        TextField(
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            label = { Text("Efternavn") })
+        TextField(value = email, onValueChange = { email = it }, label = { Text("Email") })
+        TextField(keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             value = kodeord,
             onValueChange = { kodeord = it },
             label = { Text("Kodeord") }
