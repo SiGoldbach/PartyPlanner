@@ -33,9 +33,9 @@ import java.util.*
 @Composable
 fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
-    var eventName by remember { mutableStateOf(TextFieldValue("")) }
-    var eventDescription by remember { mutableStateOf(TextFieldValue("")) }
-    var eventLocation by remember { mutableStateOf(TextFieldValue("")) }
+    var eventName by remember { mutableStateOf(TextFieldValue(appState.currentEvent.name)) }
+    var eventDescription by remember { mutableStateOf(TextFieldValue(appState.currentEvent.description)) }
+    var eventLocation by remember { mutableStateOf(TextFieldValue(appState.currentEvent.location)) }
     val year: Int
     val month: Int
     val day: Int
@@ -86,7 +86,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventName,
-            label = { Text(text = appState.currentEvent.name, color = dustyRose) },
+            label = { Text(text = "Event name", color = dustyRose) },
             onValueChange = { eventName = it },
             modifier = Modifier.width(350.dp)
         )
@@ -117,7 +117,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventDescription,
-            label = { Text(text = appState.currentEvent.description, color = dustyRose) },
+            label = { Text(text = "Event description", color = dustyRose) },
             onValueChange = { eventDescription = it },
             modifier = Modifier.width(350.dp)
 
@@ -128,7 +128,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventLocation,
-            label = { Text(text = appState.currentEvent.location, color = dustyRose) },
+            label = { Text(text = "Event location", color = dustyRose) },
             onValueChange = { eventLocation = it },
             modifier = Modifier.width(350.dp)
 
