@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 
@@ -55,7 +56,7 @@ fun Wishes(navController: NavHostController) {
  * Since no picture has been loaded yet from the viewmodels apis.
  * this is similar to eventComposer
  */
-@OptIn(ExperimentalMaterialApi::class)
+
 @Composable
 fun WishesComposer(gave: Gift, navController: NavHostController) {
     var popupControl by remember { mutableStateOf(false) }
@@ -94,33 +95,48 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
                     }
                 }
             }
+            /**
+             *  add button for "add a wish"
+             * */
+            Box() {
+                Image(painter = painterResource(id = R.drawable.addpresentpicture), contentDescription = "Add wish")
+                Button(onClick = { navController.navigate(Destination.AddWishToList.route)})
+                {
+                   //
+                }
+            }
+
         }
     }
-    /*  if (popupControl) {
-          Popup(
-              alignment = Alignment.Center,
-          ) {
 
-          }
-
-
-  // What has to be shown in the pop-up.
-    Card(
-        border = BorderStroke(width = 2.dp, color = Color.Black),
-        onClick = { popupControl = false },
-        modifier = Modifier
-            .size(width = 350.dp, height = 500.dp)
-            .padding(5.dp),
-        backgroundColor = Color.Cyan,
-    ) {
-        Text("hello")
-        Button(onClick = { popupControl = false }) {
-            Text("Close")
-        }
-   }
-  }
-  } */
 }
+
+// """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+/*  if (popupControl) {
+      Popup(
+          alignment = Alignment.Center,
+      ) {
+
+      }
+
+
+// What has to be shown in the pop-up.
+Card(
+    border = BorderStroke(width = 2.dp, color = Color.Black),
+    onClick = { popupControl = false },
+    modifier = Modifier
+        .size(width = 350.dp, height = 500.dp)
+        .padding(5.dp),
+    backgroundColor = Color.Cyan,
+) {
+    Text("hello")
+    Button(onClick = { popupControl = false }) {
+        Text("Close")
+    }
+}
+}
+} */
+
 /*
 @Composable
 fun PopupWindow() {
