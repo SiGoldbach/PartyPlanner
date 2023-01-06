@@ -5,7 +5,10 @@ import android.widget.DatePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -56,9 +59,13 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
     )
 
     Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+
     ) {
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -66,24 +73,15 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
                 .padding(10.dp),
             backgroundColor = beige
         ) {
-            Column(
+            Image(
+                // billede her skal komme fra event.
+                painter = painterResource(id = R.drawable.weddinghands),
+                contentDescription = null,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(1F),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Box(modifier = Modifier.fillMaxHeight(1F)) {
-                    Image(
-                        // billede her skal komme fra event.
-                        painter = painterResource(id = R.drawable.weddinghands),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Crop,
-                    )
-                }
-            }
+                    .fillMaxHeight()
+                    .fillMaxWidth(),
+                contentScale = ContentScale.Crop,
+            )
         }
         if (eventName.toString() == "") {
             OutlinedTextField(
@@ -102,64 +100,64 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
                 modifier = Modifier.width(350.dp)
             )
         }
-    }
 
-    Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
-    Button(
-        onClick = { mDatePickerDialog.show() },
-        colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-        border = BorderStroke(1.dp, color = Color.DarkGray),
-        shape = RoundedCornerShape(4.dp),
-        modifier = Modifier
-            .size(width = 350.dp, height = 58.dp)
-    ) {
-        StandardText(text = event.date)
-    }
-    /*  OutlinedTextField(
+        Button(
+            onClick = { mDatePickerDialog.show() },
+            colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+            border = BorderStroke(1.dp, color = Color.DarkGray),
+            shape = RoundedCornerShape(4.dp),
+            modifier = Modifier
+                .size(width = 350.dp, height = 58.dp)
+        ) {
+            StandardText(text = event.date)
+        }
+        /*  OutlinedTextField(
           colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
           value = eventDate,
           label = { Text(text = event.date, color = dustyRose) },
           onValueChange = { eventDate = it },
       ) */
-    Spacer(modifier = Modifier.height(standardDP))
-    // make so that if the user has not chosen a description,
-    // default value will be "Beskrivelse"
-    //    if () { }
-    OutlinedTextField(
-        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-        value = eventDescription,
-        label = { Text(text = event.description, color = dustyRose) },
-        onValueChange = { eventDescription = it },
-        modifier = Modifier.width(350.dp)
+        Spacer(modifier = Modifier.height(standardDP))
+        // make so that if the user has not chosen a description,
+        // default value will be "Beskrivelse"
+        //    if () { }
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+            value = eventDescription,
+            label = { Text(text = event.description, color = dustyRose) },
+            onValueChange = { eventDescription = it },
+            modifier = Modifier.width(350.dp)
 
-    )
-    Spacer(modifier = Modifier.height(standardDP))
-    // make so that if the user has not chosen a location
-    // default value will be "Lokation"
-    OutlinedTextField(
-        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-        value = eventLocation,
-        label = { Text(text = event.location, color = dustyRose) },
-        onValueChange = { eventLocation = it },
-        modifier = Modifier.width(350.dp)
+        )
+        Spacer(modifier = Modifier.height(standardDP))
+        // make so that if the user has not chosen a location
+        // default value will be "Lokation"
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+            value = eventLocation,
+            label = { Text(text = event.location, color = dustyRose) },
+            onValueChange = { eventLocation = it },
+            modifier = Modifier.width(350.dp)
 
-    )
-    Spacer(modifier = Modifier.height(50.dp))
-    Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-        Button(
-            onClick = {
-                viewModelOnApp.updateEventValues(event)
-                navController.navigate(Destination.Event.route)
-            },
-        ) {
-            Text(text = "Gem Ændringer")
-        }
-        Spacer(modifier = Modifier.width(standardDP))
-        Button(
-            onClick = { navController.navigate(Destination.Event.route) },
-        ) {
-            Text(text = "X")
+        )
+        Spacer(modifier = Modifier.height(50.dp))
+        Row(horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(
+                onClick = {
+                    //    viewModelOnApp.updateEventValues(event)
+                    navController.navigate(Destination.Event.route)
+                },
+            ) {
+                Text(text = "Gem Ændringer")
+            }
+            Spacer(modifier = Modifier.width(standardDP))
+            Button(
+                onClick = { navController.navigate(Destination.Event.route) },
+            ) {
+                Text(text = "X")
+            }
         }
     }
 }
