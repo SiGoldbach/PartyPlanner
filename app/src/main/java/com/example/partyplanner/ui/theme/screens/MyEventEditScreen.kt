@@ -1,11 +1,11 @@
 package com.example.partyplanner.ui.theme.screens
 
 import android.app.DatePickerDialog
+import android.util.Log
 import android.widget.DatePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -13,7 +13,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -21,12 +20,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.EventHelper
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -34,7 +33,7 @@ import com.example.partyplanner.viewModel.ViewModelOnApp
 import java.util.*
 
 @Composable
-fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: ViewModelOnApp) {
+fun UpdateEvent(navController: NavHostController, event: Event, viewModelOnApp: ViewModelOnApp) {
     var eventName by remember { mutableStateOf(TextFieldValue("")) }
     var eventDate by remember { mutableStateOf(TextFieldValue("")) }
     var eventDescription by remember { mutableStateOf(TextFieldValue("")) }
@@ -140,13 +139,21 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {
             Button(
                 onClick = {
-                    viewModelOnApp.updateEventValues(event)
+                    val newEvent: Event = Event(
+                        eventName.text, eventDate.text, eventDescription.text,
+                        event.participants, event.totalInvites, event.id,
+                        eventLocation.text, event.specificParticipants, event.ownerUID
+                    )
+                    viewModelOnApp.updateEventValues(newEvent)
                     navController.navigate(Destination.Event.route)
-                },
+                }
+
             ) {
                 Text(text = "Gem Ændringer")
             }
+
             Spacer(modifier = Modifier.width(standardDP))
+
             Button(
                 onClick = { navController.navigate(Destination.Event.route) },
             ) {
@@ -155,3 +162,20 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
         }
     }
 }
+
+fun onclickForButton2(
+    viewModel: ViewModelOnApp,
+    name: String,
+    date: String,
+    eventDescription: String,
+    eventLocation: String,
+) {
+    //  !! Has to update event not create event !!
+    viewModel.createEvent(name, date, eventDescription, eventLocation)
+}
+
+/**
+ * This updates the whole event and should be fine for this project,
+ * Maybe in the future some changes are so common values might be changed one at a time.
+ */
+

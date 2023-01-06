@@ -3,9 +3,8 @@ package com.example.partyplanner.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.model.*
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -161,13 +160,18 @@ class ViewModelOnApp : ViewModel() {
      * Maybe in the future some changes are so common values might be changed one at a time.
      */
     fun updateEventValues(event: Event) {
-        val addEvent = db.collection("events").document(event.name)
-        val data1 = hashMapOf(
-            EventHelper().NAME to event.name,
-            EventHelper().DATE to event.date,
-            EventHelper().DESCRIPTION to event.description,
-            EventHelper().PARTICIPANTS to event.participants,
-            EventHelper().TOTAL_INVITES to event.totalInvites,
+        val addEvent = db.collection("DB").document(uiState.value.uid).collection("events")
+            .document(event.name)
+            val data1 = hashMapOf(
+                EventHelper().id to event.id,
+        EventHelper().NAME to event.name,
+        EventHelper().DATE to event.date,
+        EventHelper().DESCRIPTION to event.description,
+        EventHelper().PARTICIPANTS to event.participants,
+        EventHelper().TOTAL_INVITES to event.totalInvites,
+        EventHelper().LOCATION to event.location,
+        EventHelper().SPECIFIC_PARTICIPANTS to event.specificParticipants,
+        EventHelper().OWNER_UID to event.ownerUID
         )
         addEvent.set(data1)
             .addOnSuccessListener { Log.d("Firestore", "Event updated successfully") }
