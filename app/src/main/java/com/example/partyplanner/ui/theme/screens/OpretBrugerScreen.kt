@@ -3,7 +3,6 @@ package com.example.partyplanner.ui.theme.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,11 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.naviagion.Destination
-import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
-import com.example.partyplanner.viewModel.ViewModelOnApp
-import com.google.firebase.auth.FirebaseAuth
 
 //Import and use topbar
 
@@ -31,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth
 fun OpretBruger(
     navController: NavController,
     viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel(),
-    viewModelOnApp: ViewModelOnApp
 ) {
 
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
@@ -89,7 +84,7 @@ fun OpretBruger(
         Spacer(modifier = Modifier.height(50.dp))
         //MAKING A STANDARD BUTTON FOR TRYING THE LOGIN
         Button(onClick = {
-            OpretBrugerViewmodel().putCredentialsAndCreateUser(
+            viewModel.putCredentialsAndCreateUser(
                 forNavn = forNavn.text,
                 efterNavn = efterNavn.text,
                 email = email.text,

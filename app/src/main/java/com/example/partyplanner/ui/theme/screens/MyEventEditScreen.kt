@@ -140,7 +140,7 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {
             Button(
                 onClick = {
-                    //    viewModelOnApp.updateEventValues(event)
+                    viewModelOnApp.updateEventValues(event)
                     navController.navigate(Destination.Event.route)
                 },
             ) {

@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -19,15 +18,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
+import com.example.partyplanner.model.Event
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.StdText
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.model.Event
-import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
 @Composable
-fun MyEventScreen(event: Event, navController: NavController) {
+fun MyEventScreen(event: Event, navController: NavController, viewModelOnApp: ViewModelOnApp) {
+    val appState by viewModelOnApp.uiState.collectAsState()
+    viewModelOnApp.getSingleEvent(appState.currentEventID)
+
     Column {
 
         //Top picture with event name
@@ -70,7 +73,7 @@ fun MyEventScreen(event: Event, navController: NavController) {
                 // Her skal Event name komme fra "event".
                 // Gør text større, tykkere og mere overskrift-agtigt.
                 Text(
-                    text = event.name,
+                    text = appState.currentEvent.name,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp, color = Color.Black,
@@ -81,14 +84,14 @@ fun MyEventScreen(event: Event, navController: NavController) {
                         .height(10.dp)
                 )
                 // Date text here comes from "event".
-                StdText(string = event.date)
+                StdText(string = appState.currentEvent.date)
 
                 Spacer(
                     modifier = Modifier
                         .height(10.dp)
                 )
                 // Description here comes from "event".
-                StdText(string = event.description)
+                StdText(string = appState.currentEvent.description)
 
             }
         }

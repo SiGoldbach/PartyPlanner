@@ -24,7 +24,6 @@ fun NavigationAppHost(navController: NavHostController) {
         composable(Destination.MakeUserScreen.route) {
             OpretBruger(
                 navController = navController,
-                viewModelOnApp = viewModel
             )
         }
         composable(Destination.Welcome.route) { WelcomeScreen(navController = navController) }

@@ -37,7 +37,8 @@ fun InnerNav(
         composable(Destination.Event.route) {
             MyEventScreen(
                 navController = onMainAppNavHostController,
-                event = Event(date = "date")
+                event = Event(date = "date"),
+                viewModelOnApp = viewModel
             )
         }
         composable(Destination.NewEvent.route) {
