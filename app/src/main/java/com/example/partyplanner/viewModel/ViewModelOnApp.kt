@@ -80,13 +80,11 @@ class ViewModelOnApp : ViewModel() {
 
         events.get().addOnSuccessListener { docs ->
             for (doc in docs) {
-                val event = doc.toObject(Event::class.java)
-                Log.v("events", event.name)
-                event.name
-                event.date
-                if (!tempEventsList.add(event)) {
-                    Log.v("Events", "Element was not added for some retarded reason")
-                }
+                // val event = doc.toObject(Event::class.java)
+                // Log.v("events", event.name)
+                //  if (!tempEventsList.add(event)) {
+                //    Log.v("Events", "Element was not added for some retarded reason")
+                //   }
 
 
             }
@@ -108,8 +106,6 @@ class ViewModelOnApp : ViewModel() {
             }
 
 
-
-
         }.addOnFailureListener {
             userInfo.update { t ->
                 t.copy(
@@ -119,7 +115,6 @@ class ViewModelOnApp : ViewModel() {
             }
 
         }
-
 
 
     }

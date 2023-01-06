@@ -5,7 +5,8 @@ data class User(
     val name: String = "",
     val surname: String = "",
     val uid: String = "TEST2",
-    val description: String = "Write a description about yourself here"
+    val description: String = "Write a description about yourself here",
+    val eventIdentifiers: List<String> = listOf()
 )
 
 
@@ -15,6 +16,7 @@ data class UserHelper(
     val SURNAME: String = "surname",
     val UID: String = "uid",
     val DESCRIPTION: String = "description",
+    val EVENT_IDS: String = "eventIdentifiers"
 
     )
 

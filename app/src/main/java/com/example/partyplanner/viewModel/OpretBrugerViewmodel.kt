@@ -45,6 +45,12 @@ class OpretBrugerViewmodel : ViewModel() {
         auth.createUserWithEmailAndPassword(uiState.value.email, uiState.value.password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+
+                    val id: String? = auth.uid
+                    if (id != null) {
+                        dbCreateUser(forNavn, auth.uid!!, efterNavn, email)
+                    }
+
                     // User has been successfully created
                 } else {
                     // User has not been created
@@ -56,16 +62,16 @@ class OpretBrugerViewmodel : ViewModel() {
     fun dbCreateUser(name: String, uid: String, surname: String, email: String) {
         val db = FirebaseFirestore.getInstance()
 
-        val addNewUser = db.collection(dbUsed)
+        val addNewUser = db.collection("USERS")
         val userMap = hashMapOf(
             UserHelper().EMAIl to email,
             UserHelper().NAME to name,
             UserHelper().UID to uid,
             UserHelper().SURNAME to surname,
-            UserHelper().DESCRIPTION to ""
+            UserHelper().DESCRIPTION to "",
+            UserHelper().EVENT_IDS to listOf<String>()
         )
         addNewUser.document(uid).set(userMap)
-        addNewUser.document(uid).collection("Events")
 
 
     }
