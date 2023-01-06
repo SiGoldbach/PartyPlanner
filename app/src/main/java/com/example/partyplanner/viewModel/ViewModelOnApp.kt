@@ -1,8 +1,6 @@
 package com.example.partyplanner.viewModel
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.model.*
 import com.google.firebase.auth.FirebaseAuth
@@ -14,8 +12,6 @@ import kotlinx.coroutines.flow.update
 
 class ViewModelOnApp : ViewModel() {
 
-    private val allEventsResponse: MutableState<EventsDataState> =
-        mutableStateOf(EventsDataState.Empty)
 
     private val userInfo =
         MutableStateFlow(
@@ -95,45 +91,33 @@ class ViewModelOnApp : ViewModel() {
 
     private fun getAllEvents() {
 
-        val events = db.collection("DB").document(uiState.value.uid).collection("events")
+        val user = db.collection("USERS").document(userInfo.value.uid)
+        val eventsInDB = db.collection("events")
         val tempEventsList = mutableListOf<Event>()
-        allEventsResponse.value = EventsDataState.Loading
 
-        events.get().addOnSuccessListener { docs ->
-            for (doc in docs) {
-                // val event = doc.toObject(Event::class.java)
-                // Log.v("events", event.name)
-                //  if (!tempEventsList.add(event)) {
-                //    Log.v("Events", "Element was not added for some retarded reason")
-                //   }
+        user.get().addOnSuccessListener { doc ->
+            val user = doc.toObject(User::class.java)
+            Log.v("events","Getting events")
 
-
-            }
-            Log.v("Events", tempEventsList.size.toString() + " List has size ")
-            if (tempEventsList.size == 0) {
+            for (event in user!!.eventIdentifiers) {
+                eventsInDB.document(event).get().addOnSuccessListener { doc ->
+                    val gotEvent = doc.toObject(Event::class.java)
+                    tempEventsList.add(gotEvent!!)
+                }
                 userInfo.update { t ->
                     t.copy(
                         events = tempEventsList,
-                        eventsDataState = EventsDataState.Empty
                     )
                 }
-            } else {
-                userInfo.update { t ->
-                    t.copy(
-                        events = tempEventsList,
-                        eventsDataState = EventsDataState.Success(tempEventsList)
-                    )
-                }
+
+
             }
-
-
-        }.addOnFailureListener {
             userInfo.update { t ->
                 t.copy(
-                    events = tempEventsList,
-                    eventsDataState = EventsDataState.Failure("Error Finding events")
+                    eventsDataState = EventsDataState.Success(tempEventsList),
                 )
             }
+
 
         }
 
