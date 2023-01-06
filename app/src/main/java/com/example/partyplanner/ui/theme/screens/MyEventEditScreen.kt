@@ -18,9 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
@@ -64,7 +67,7 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
 
         Card(
             modifier = Modifier
@@ -83,46 +86,37 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
                 contentScale = ContentScale.Crop,
             )
         }
-        if (eventName.toString() == "") {
-            OutlinedTextField(
-                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-                value = eventName,
-                label = { Text(text = "event navn", color = dustyRose) },
-                onValueChange = { eventName = it },
-                modifier = Modifier.width(350.dp)
-            )
-        } else {
-            OutlinedTextField(
-                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-                value = eventName,
-                label = { Text(text = event.name, color = dustyRose) },
-                onValueChange = { eventName = it },
-                modifier = Modifier.width(350.dp)
-            )
-        }
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+            value = eventName,
+            label = { Text(text = event.name, color = dustyRose) },
+            onValueChange = { eventName = it },
+            modifier = Modifier.width(350.dp)
+        )
 
         Spacer(modifier = Modifier.height(15.dp))
 
         Button(
             onClick = { mDatePickerDialog.show() },
             colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-            border = BorderStroke(1.dp, color = Color.DarkGray),
+            border = BorderStroke(1.dp, color = Color.Gray),
             shape = RoundedCornerShape(4.dp),
             modifier = Modifier
                 .size(width = 350.dp, height = 58.dp)
         ) {
-            StandardText(text = event.date)
+            Text(
+                text = "Valgte dato: ${date.value}",
+                modifier = Modifier
+                    .fillMaxWidth(),
+                fontStyle = FontStyle.Normal,
+                fontSize = 16.sp, color = Color.Black,
+                textAlign = TextAlign.Left
+            )
         }
-        /*  OutlinedTextField(
-          colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-          value = eventDate,
-          label = { Text(text = event.date, color = dustyRose) },
-          onValueChange = { eventDate = it },
-      ) */
+
         Spacer(modifier = Modifier.height(standardDP))
         // make so that if the user has not chosen a description,
         // default value will be "Beskrivelse"
-        //    if () { }
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventDescription,

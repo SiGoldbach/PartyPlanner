@@ -2,17 +2,28 @@ package com.example.partyplanner.ui.theme.screens
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import android.widget.TextView
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import java.util.*
@@ -23,6 +34,8 @@ fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOn
     //There is no need for a state collector here only to create the event in the firebase.
 
     var eventName by remember { mutableStateOf(TextFieldValue("")) }
+    var eventDescription by remember { mutableStateOf(TextFieldValue("")) }
+    var eventLocation by remember { mutableStateOf(TextFieldValue("")) }
     val year: Int
     val month: Int
     val day: Int
@@ -47,44 +60,81 @@ fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOn
 
 
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+    ) {
         Spacer(modifier = Modifier.height(standardDP))
-        OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventName,
             label = { Text(text = "Event navn", color = dustyRose) },
-            onValueChange = { eventName = it }
-
-
+            onValueChange = { eventName = it },
+            modifier = Modifier.width(width = 350.dp)
         )
-        Spacer(modifier = Modifier.height(standardDP))
-        Text(text = "Selected Date: ${date.value}")
+
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+            value = eventDescription,
+            label = { Text(text = "Tilføj beskrivelse", color = dustyRose) },
+            onValueChange = { eventDescription = it },
+            modifier = Modifier.width(width = 350.dp)
+        )
+
+
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+            value = eventLocation,
+            label = { Text(text = "Tilføj Lokation", color = dustyRose) },
+            onValueChange = { eventLocation = it },
+            modifier = Modifier.width(width = 350.dp)
+        )
+
         Spacer(modifier = Modifier.height(standardDP))
 
 
         Button(
             onClick = { mDatePickerDialog.show() },
-            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-            shape = RoundedCornerShape(30.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+            border = BorderStroke(1.dp, color = Color.Gray),
+            shape = RoundedCornerShape(4.dp),
             modifier = Modifier
-                .size(width = 350.dp, height = 50.dp)
+                .width(width = 350.dp)
+                .height(56.dp)
         ) {
-            StandardText(text = "Pick date")
+            Text(
+                text = "Valgte dato: ${date.value}",
+                modifier = Modifier
+                    .fillMaxWidth(),
+                //  fontStyle = FontStyle.Normal,
+                fontSize = 16.sp, color = dustyRose,
+                textAlign = TextAlign.Left
+
+
+            )
         }
 
+       // Spacer(modifier = Modifier.height(standardDP))
 
+        Spacer(modifier = Modifier.height(100.dp))
+        Column (modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom)
+        {
+            Button(
+                onClick = { onclickForButton(navController, viewModelOnApp, eventName.text, date.value) },
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .size(width = 220.dp, height = 50.dp)
 
-        Button(
-            onClick = { onclickForButton(navController, viewModelOnApp, eventName.text,date.value) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-            shape = RoundedCornerShape(30.dp),
-            modifier = Modifier
-                .size(width = 350.dp, height = 50.dp)
-
-        ) {
-            StandardText(text = "Opret begivenhed")
+            ) {
+                StandardText(text = "Opret begivenhed")
+            }
         }
         Spacer(modifier = Modifier.height(standardDP))
-
     }
 
 }
