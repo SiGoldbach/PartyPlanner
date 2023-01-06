@@ -85,71 +85,81 @@ fun UpdateEvent(navController: NavController, event: Event, viewModelOnApp: View
                 }
             }
         }
-
-        OutlinedTextField(
-            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = eventName,
-            label = { Text(text = event.name, color = dustyRose) },
-            onValueChange = { eventName = it },
-            modifier = Modifier.width(350.dp)
-        )
-        Spacer(modifier = Modifier.height(15.dp))
-
-        Button(
-            onClick = { mDatePickerDialog.show() },
-            colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-            border = BorderStroke(1.dp,color = Color.DarkGray),
-            shape = RoundedCornerShape(4.dp),
-            modifier = Modifier
-                .size(width = 350.dp, height = 58.dp)
-        ) {
-            StandardText(text = event.date)
+        if (eventName.toString() == "") {
+            OutlinedTextField(
+                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+                value = eventName,
+                label = { Text(text = "event navn", color = dustyRose) },
+                onValueChange = { eventName = it },
+                modifier = Modifier.width(350.dp)
+            )
+        } else {
+            OutlinedTextField(
+                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+                value = eventName,
+                label = { Text(text = event.name, color = dustyRose) },
+                onValueChange = { eventName = it },
+                modifier = Modifier.width(350.dp)
+            )
         }
-        /*  OutlinedTextField(
-              colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-              value = eventDate,
-              label = { Text(text = event.date, color = dustyRose) },
-              onValueChange = { eventDate = it },
-          ) */
-        Spacer(modifier = Modifier.height(standardDP))
-        // make so that if the user has not chosen a description,
-        // default value will be "Beskrivelse"
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+
+    Button(
+        onClick = { mDatePickerDialog.show() },
+        colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+        border = BorderStroke(1.dp, color = Color.DarkGray),
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier
+            .size(width = 350.dp, height = 58.dp)
+    ) {
+        StandardText(text = event.date)
+    }
+    /*  OutlinedTextField(
+          colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+          value = eventDate,
+          label = { Text(text = event.date, color = dustyRose) },
+          onValueChange = { eventDate = it },
+      ) */
+    Spacer(modifier = Modifier.height(standardDP))
+    // make so that if the user has not chosen a description,
+    // default value will be "Beskrivelse"
     //    if () { }
-        OutlinedTextField(
-            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = eventDescription,
-            label = { Text(text = event.description, color = dustyRose) },
-            onValueChange = { eventDescription = it },
-            modifier = Modifier.width(350.dp)
+    OutlinedTextField(
+        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+        value = eventDescription,
+        label = { Text(text = event.description, color = dustyRose) },
+        onValueChange = { eventDescription = it },
+        modifier = Modifier.width(350.dp)
 
-            )
-        Spacer(modifier = Modifier.height(standardDP))
-        // make so that if the user has not chosen a location
-        // default value will be "Lokation"
-        OutlinedTextField(
-            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-            value = eventLocation,
-            label = { Text(text = event.location, color = dustyRose) },
-            onValueChange = { eventLocation = it },
-            modifier = Modifier.width(350.dp)
+    )
+    Spacer(modifier = Modifier.height(standardDP))
+    // make so that if the user has not chosen a location
+    // default value will be "Lokation"
+    OutlinedTextField(
+        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+        value = eventLocation,
+        label = { Text(text = event.location, color = dustyRose) },
+        onValueChange = { eventLocation = it },
+        modifier = Modifier.width(350.dp)
 
-            )
-        Spacer(modifier = Modifier.height(50.dp))
-        Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-            Button(
-                onClick = {
-                    viewModelOnApp.updateEventValues(event)
-                    navController.navigate(Destination.Event.route)
-                },
-            ) {
-                Text(text = "Gem Ændringer")
-            }
-            Spacer(modifier = Modifier.width(standardDP))
-            Button(
-                onClick = { navController.navigate(Destination.Event.route) },
-            ) {
-                Text(text = "X")
-            }
+    )
+    Spacer(modifier = Modifier.height(50.dp))
+    Row(horizontalArrangement = Arrangement.SpaceEvenly) {
+        Button(
+            onClick = {
+                viewModelOnApp.updateEventValues(event)
+                navController.navigate(Destination.Event.route)
+            },
+        ) {
+            Text(text = "Gem Ændringer")
+        }
+        Spacer(modifier = Modifier.width(standardDP))
+        Button(
+            onClick = { navController.navigate(Destination.Event.route) },
+        ) {
+            Text(text = "X")
         }
     }
 }
