@@ -21,7 +21,12 @@ fun NavigationAppHost(navController: NavHostController) {
         //Here there is no dependency injection yet so a standard event just get put in.
 
         composable(Destination.LoginScreen.route) { LoginScreen(navController = navController) }
-        composable(Destination.MakeUserScreen.route) { OpretBruger(navController = navController) }
+        composable(Destination.MakeUserScreen.route) {
+            OpretBruger(
+                navController = navController,
+                viewModelOnApp = viewModel
+            )
+        }
         composable(Destination.Welcome.route) { WelcomeScreen(navController = navController) }
         composable(Destination.ComingEvents.route) {
             ExperimentalScreen(

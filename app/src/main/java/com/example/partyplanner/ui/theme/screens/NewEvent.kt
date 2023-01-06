@@ -2,9 +2,7 @@ package com.example.partyplanner.ui.theme.screens
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
-import android.widget.TextView
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,9 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -117,14 +113,26 @@ fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOn
             )
         }
 
-       // Spacer(modifier = Modifier.height(standardDP))
+        // Spacer(modifier = Modifier.height(standardDP))
 
         Spacer(modifier = Modifier.height(100.dp))
-        Column (modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
+        )
         {
             Button(
-                onClick = { onclickForButton(navController, viewModelOnApp, eventName.text, date.value) },
+                onClick = {
+                    onclickForButton(
+                        navController,
+                        viewModelOnApp,
+                        eventName.text,
+                        date.value,
+                        eventDescription = eventDescription.text,
+                        eventLocation = eventLocation.text
+                    )
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
                 shape = RoundedCornerShape(30.dp),
                 modifier = Modifier
@@ -144,9 +152,11 @@ fun onclickForButton(
     navController: NavHostController,
     viewModel: ViewModelOnApp,
     name: String,
-    date: String
+    date: String,
+    eventDescription: String,
+    eventLocation: String
 ) {
     navController.navigate(Destination.Event.route)
-    viewModel.createEvent(name, date, "Fun times ")
+    viewModel.createEvent(name, date, eventDescription, eventLocation)
 }
 

@@ -39,8 +39,10 @@ class OpretBrugerViewmodel : ViewModel() {
         forNavn: String,
         efterNavn: String,
         email: String,
-        kodeord: String
+        kodeord: String,
     ) {
+
+
         uiState.update { state -> state.copy(email = email, password = kodeord) }
         val auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(uiState.value.email, uiState.value.password)

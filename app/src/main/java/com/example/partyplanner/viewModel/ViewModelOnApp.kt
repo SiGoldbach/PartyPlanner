@@ -32,7 +32,12 @@ class ViewModelOnApp : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
 
-    fun createEvent(eventName: String, date: String, description: String): Boolean {
+    fun createEvent(
+        eventName: String,
+        date: String,
+        description: String,
+        location: String
+    ): Boolean {
         val generatedID = (0..99999999999).random().toString()
 
         var boolean = false
@@ -44,7 +49,7 @@ class ViewModelOnApp : ViewModel() {
             EventHelper().DESCRIPTION to description,
             EventHelper().PARTICIPANTS to 0,
             EventHelper().TOTAL_INVITES to 0,
-            EventHelper().LOCATION to "EMPTY",
+            EventHelper().LOCATION to location,
             EventHelper().SPECIFIC_PARTICIPANTS to listOf<String>(),
             EventHelper().OWNER_UID to userInfo.value.uid
 
@@ -97,7 +102,7 @@ class ViewModelOnApp : ViewModel() {
 
         user.get().addOnSuccessListener { doc ->
             val user = doc.toObject(User::class.java)
-            Log.v("events","Getting events")
+            Log.v("events", "Getting events")
 
             for (event in user!!.eventIdentifiers) {
                 eventsInDB.document(event).get().addOnSuccessListener { doc ->
@@ -136,7 +141,7 @@ class ViewModelOnApp : ViewModel() {
             EventHelper().DATE to event.date,
             EventHelper().DESCRIPTION to event.description,
             EventHelper().PARTICIPANTS to event.participants,
-            EventHelper().TOTAL_INVITES to event.description
+            EventHelper().TOTAL_INVITES to event.totalInvites,
         )
         addEvent.set(data1)
             .addOnSuccessListener { Log.d("Firestore", "Event updated successfully") }

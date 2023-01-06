@@ -21,6 +21,7 @@ import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
+import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.auth.FirebaseAuth
 
 //Import and use topbar
@@ -29,7 +30,8 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun OpretBruger(
     navController: NavController,
-    viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel()
+    viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel(),
+    viewModelOnApp: ViewModelOnApp
 ) {
 
     var forNavn by remember { mutableStateOf(TextFieldValue("")) }
