@@ -50,7 +50,6 @@ fun InnerNav(
         composable(Destination.MyEventEditScreen.route) {
             UpdateEvent(
                 navController = onMainAppNavHostController,
-                event = Event(),
                 viewModelOnApp = viewModel
             )
         }
