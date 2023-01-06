@@ -123,9 +123,7 @@ class ViewModelOnApp : ViewModel() {
                 )
             }
 
-
         }
-
 
     }
 
@@ -136,12 +134,16 @@ class ViewModelOnApp : ViewModel() {
     fun updateEventValues(event: Event) {
         val addEvent = db.collection("DB").document(uiState.value.uid).collection("events")
             .document(event.name)
-        val data1 = hashMapOf(
-            EventHelper().NAME to event.name,
-            EventHelper().DATE to event.date,
-            EventHelper().DESCRIPTION to event.description,
-            EventHelper().PARTICIPANTS to event.participants,
-            EventHelper().TOTAL_INVITES to event.totalInvites,
+            val data1 = hashMapOf(
+                EventHelper().id to event.id,
+        EventHelper().NAME to event.name,
+        EventHelper().DATE to event.date,
+        EventHelper().DESCRIPTION to event.description,
+        EventHelper().PARTICIPANTS to event.participants,
+        EventHelper().TOTAL_INVITES to event.totalInvites,
+        EventHelper().LOCATION to event.location,
+        EventHelper().SPECIFIC_PARTICIPANTS to event.specificParticipants,
+        EventHelper().OWNER_UID to event.ownerUID
         )
         addEvent.set(data1)
             .addOnSuccessListener { Log.d("Firestore", "Event updated successfully") }
