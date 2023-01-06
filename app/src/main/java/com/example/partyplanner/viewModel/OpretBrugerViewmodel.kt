@@ -1,5 +1,6 @@
 package com.example.partyplanner.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.AccountServiceIMPL
 import com.example.partyplanner.fireBaseServices.dbUsed
@@ -46,9 +47,14 @@ class OpretBrugerViewmodel : ViewModel() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
 
+
                     val id: String? = auth.uid
+                    if (id == null) {
+                        Log.v("makeUser", "id is null")
+                    }
                     if (id != null) {
                         dbCreateUser(forNavn, auth.uid!!, efterNavn, email)
+
                     }
 
                     // User has been successfully created
@@ -69,7 +75,8 @@ class OpretBrugerViewmodel : ViewModel() {
             UserHelper().UID to uid,
             UserHelper().SURNAME to surname,
             UserHelper().DESCRIPTION to "",
-            UserHelper().EVENT_IDS to listOf<String>()
+            UserHelper().EVENT_IDS to listOf<String>(),
+            UserHelper().PHONE_NUMBER to ""
         )
         addNewUser.document(uid).set(userMap)
 

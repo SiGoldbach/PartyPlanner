@@ -8,6 +8,8 @@ data class Event(
     val totalInvites: Int = 0,
     val id: String = "",
     val location: String = "",
+    val specificParticipants: List<String> = listOf(),
+    val ownerUID: String = "T2"
     //These are all the corresponding values you can add so only use these instead of you own string.
 
 )
@@ -19,7 +21,9 @@ data class EventHelper(
     val DESCRIPTION: String = "description",
     val PARTICIPANTS: String = "participants",
     val TOTAL_INVITES: String = "totalInvites",
-    val LOCATION: String = "location"
+    val LOCATION: String = "location",
+    val SPECIFIC_PARTICIPANTS: String = "specificParticipants",
+    val OWNER_UID: String = "ownerUID"
 
 )
 

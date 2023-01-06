@@ -10,9 +10,11 @@ import com.example.partyplanner.ui.theme.screens.ExperimentalScreen
 import com.example.partyplanner.ui.theme.screens.LoginScreen
 import com.example.partyplanner.ui.theme.screens.OpretBruger
 import com.example.partyplanner.ui.theme.screens.WelcomeScreen
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 @Composable
 fun NavigationAppHost(navController: NavHostController) {
+    val viewModel = ViewModelOnApp()
     val ctx = LocalContext.current
 
     NavHost(navController = navController, startDestination = Destination.Welcome.route) {
@@ -24,7 +26,8 @@ fun NavigationAppHost(navController: NavHostController) {
         composable(Destination.ComingEvents.route) {
             ExperimentalScreen(
                 externalNav = navController,
-                internalNav = rememberNavController()
+                internalNav = rememberNavController(),
+                viewModelOnApp = viewModel
             )
         }
         /*composable(Destination.Detail.route) { backStackEntry ->
