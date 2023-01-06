@@ -27,7 +27,7 @@ import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
 @Composable
-fun MyEventScreen(event: Event, navController: NavController, viewModelOnApp: ViewModelOnApp) {
+fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getSingleEvent(appState.currentEventID)
 
