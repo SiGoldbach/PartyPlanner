@@ -74,7 +74,7 @@ class ViewModelOnApp : ViewModel() {
         } catch (e: java.lang.Exception) {
 
         }
-        val events = db.collection("DB2").document(uiState.value.uid).collection("events")
+        val events = db.collection("DB").document(uiState.value.uid).collection("events")
         val tempEventsList = mutableListOf<Event>()
         allEventsResponse.value = EventsDataState.Loading
 

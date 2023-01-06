@@ -2,8 +2,12 @@ package com.example.partyplanner.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.AccountServiceIMPL
+import com.example.partyplanner.fireBaseServices.dbUsed
+import com.example.partyplanner.model.EventHelper
 import com.example.partyplanner.model.LoginUiState
+import com.example.partyplanner.model.UserHelper
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -46,6 +50,23 @@ class OpretBrugerViewmodel : ViewModel() {
                     // User has not been created
                 }
             }
+
+    }
+
+    fun dbCreateUser(name: String, uid: String, surname: String, email: String) {
+        val db = FirebaseFirestore.getInstance()
+
+        val addNewUser = db.collection(dbUsed)
+        val userMap = hashMapOf(
+            UserHelper().EMAIl to email,
+            UserHelper().NAME to name,
+            UserHelper().UID to uid,
+            UserHelper().SURNAME to surname,
+            UserHelper().DESCRIPTION to ""
+        )
+        addNewUser.document(uid).set(userMap)
+        addNewUser.document(uid).collection("Events")
+
 
     }
 
