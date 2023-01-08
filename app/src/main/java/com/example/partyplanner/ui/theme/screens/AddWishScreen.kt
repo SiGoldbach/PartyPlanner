@@ -5,4 +5,5 @@ import androidx.navigation.NavHostController
 
 fun AddWishToList (navController: NavHostController) {
 
+
 }

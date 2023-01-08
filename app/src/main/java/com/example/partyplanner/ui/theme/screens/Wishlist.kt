@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.naviagion.Destination
 
 // The mainscreen for wishlist
 
@@ -128,6 +129,16 @@ fun GiftComposer(gift: Gift, navController: NavController) {
 
                 }
             }
+            /*
+    *  ADD A "Add wish-list" button. Noget ala nedenstående.
+    * Button(onClick = { navController.navigate(Destination.AddWishToList.route) })
+        {
+            Image(
+                painter = painterResource(id = R.drawable.addpresentpicture),
+                contentDescription = "Tilføj ønskeliste"
+            )
+    }
+    */
 
         }
     }
