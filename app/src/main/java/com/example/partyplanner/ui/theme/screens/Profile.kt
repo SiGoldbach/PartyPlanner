@@ -47,10 +47,10 @@ fun Profile(
         Image(
             painter = painterResource(id = R.drawable.profilepicexample),
             contentDescription = stringResource(id = R.string.Profile_Picture),
-            contentScale = ContentScale.Crop,            // crop the image if it's not a square
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(128.dp)
-                .clip(RoundedCornerShape(10.dp))                       // clip to the circle shape
+                .clip(RoundedCornerShape(10.dp))
                 .border(2.dp, color = dustyRose, RoundedCornerShape(10.dp))
         )
         Spacer(modifier = Modifier.height(10.dp))
