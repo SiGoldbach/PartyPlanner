@@ -28,11 +28,11 @@ import com.example.partyplanner.naviagion.Destination
 
 @Composable
 fun Wishlist(navController: NavController) {
-    val gift1 = GiftList("Konfirmation", "Se ønskelisten her")
-    val gift2 = GiftList("Juleaften", "Se ønskelisten her")
-    val gift3 = GiftList("Fødselsdagsønsker", "Se ønskelisten her")
-    val gift4 = GiftList("Gaveideer", "Se ønskelisten her")
-    val gift5 = GiftList("Lejlighed", "Se ønskelisten her")
+    val gift1 = GiftList(name = "Konfirmation")
+    val gift2 = GiftList(name = "Juleaften")
+    val gift3 = GiftList(name = "Fødselsdagsønsker")
+    val gift4 = GiftList(name = "Gaveideer")
+    val gift5 = GiftList(name = "Lejlighed")
 
 
     val list = listOf(gift1, gift2, gift3, gift4, gift5)
@@ -95,7 +95,7 @@ fun WishListComposer(giftList: GiftList, navController: NavController) {
         modifier = Modifier
 
             .padding(start = 5.dp, end = 5.dp),
-        onClick = {navController.navigate(Destination.Wishes.route) },
+        onClick = { navController.navigate(Destination.Wishes.route) },
         backgroundColor = dustyRose,
 
         ) {
@@ -107,7 +107,9 @@ fun WishListComposer(giftList: GiftList, navController: NavController) {
         ) {
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(2.dp),
                 Arrangement.Start
             ) {
 
@@ -117,17 +119,17 @@ fun WishListComposer(giftList: GiftList, navController: NavController) {
                     .fillMaxWidth()
                     .align(alignment = Alignment.CenterVertically)
                 Image(
-                    painter = painterResource(id = R.drawable.attending_picture),
-                    contentDescription = null,
+                    painter = painterResource(id = R.drawable.gift),
+                    contentDescription = "Dette er ønskelisten for" + giftList.name,
                     contentScale = ContentScale.Crop,
-                    modifier = imageModifier
+                    modifier = imageModifier.padding(3.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(text = giftList.name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                     Text(
-                        text = giftList.description,
+                        text = "",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.align(alignment = Alignment.Start)

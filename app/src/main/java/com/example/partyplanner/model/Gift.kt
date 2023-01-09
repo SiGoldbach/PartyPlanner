@@ -6,13 +6,15 @@ package com.example.partyplanner.model
 data class GiftList(
     val id: String = "ID",
     val name: String = "",
-    val description: String = "",
-    val link: String = "",
     val picture: String = "",
-    val price: Int = 0,
-    val ownerUID: String = "ownerUID"
+    val ownerUID: String = "ownerUID",
+    var listOfGifts: MutableList<Gift> = mutableListOf(),
+    val giftAddressees: List<String> = listOf()
 
-    )
+
+
+)
+
 data class Gift(
     val id: String = "ID",
     val name: String = "",
