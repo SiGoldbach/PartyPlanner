@@ -2,9 +2,11 @@ package com.example.partyplanner.naviagion
 
 import AddWishToList
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
 import com.example.partyplanner.viewModel.ViewModelOnApp
@@ -28,18 +30,21 @@ fun InnerNav(
     ) {
         //Here there is no dependency injection yet so a standard event just get put in.
         composable(Destination.ComingEvents.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.ComingEvents))
             ComingEvents(
                 navController = onMainAppNavHostController,
                 viewModelOnApp = viewModel
             )
         }
         composable(Destination.Event.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.Dit_Event))
             MyEventScreen(
                 navController = onMainAppNavHostController,
                 viewModelOnApp = viewModel
             )
         }
         composable(Destination.NewEvent.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.Ny_Begivenhed))
             CreateNewEvent(
                 navController = onMainAppNavHostController,
                 viewModel
@@ -54,6 +59,8 @@ fun InnerNav(
 
         }
         composable(Destination.MyEventEditScreen.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.Edit_Event))
+
             UpdateEvent(
                 navController = onMainAppNavHostController,
                 viewModelOnApp = viewModel
@@ -61,12 +68,18 @@ fun InnerNav(
         }
         composable(Destination.TestScreen.route) { TestScreen(navController = onMainAppNavHostController) }
         composable(Destination.Profile.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.Profile_page))
+
             Profile(
                 internalNavController = onMainAppNavHostController,
                 externalNavController = externalNavHostController
             )
         }
-        composable(Destination.WishList.route) { Wishlist(navController = onMainAppNavHostController) }
+        composable(Destination.WishList.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.Dine_wisList))
+
+            Wishlist(navController = onMainAppNavHostController)
+        }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")
             if(elementId == null){

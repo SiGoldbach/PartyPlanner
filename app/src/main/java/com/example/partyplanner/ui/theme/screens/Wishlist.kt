@@ -22,7 +22,6 @@ import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Gift
-import com.example.partyplanner.naviagion.Destination
 
 // The mainscreen for wishlist
 
@@ -64,7 +63,7 @@ fun Wishlist(navController: NavController) {
 
         ) {
             items(list) { item ->
-                GiftComposer(item, navController)
+                WishListComposer(item, navController)
             }
 
         }
@@ -90,7 +89,7 @@ fun Wishlist(navController: NavController) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun GiftComposer(gift: Gift, navController: NavController) {
+fun WishListComposer(gift: Gift, navController: NavController) {
     Card(
         modifier = Modifier
 

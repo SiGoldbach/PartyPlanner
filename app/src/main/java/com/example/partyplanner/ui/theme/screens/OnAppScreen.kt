@@ -5,6 +5,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
@@ -24,13 +26,14 @@ fun ExperimentalScreen(
     internalNav: NavHostController,
     viewModelOnApp: ViewModelOnApp
 ) {
+    val appState by viewModelOnApp.uiState.collectAsState()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
         backgroundColor = beige,
         scaffoldState = scaffoldState,
         topBar = {
-            AppBar(stringResource = stringResource(id = R.string.Kommende_Begivenheder),
+            AppBar(stringResource = appState.topBarString,
                 onNavigationIconClick = {
                     scope.launch { scaffoldState.drawerState.open() }
                 }

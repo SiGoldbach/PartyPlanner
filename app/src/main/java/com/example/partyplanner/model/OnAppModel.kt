@@ -5,5 +5,7 @@ data class OnAppModel(
     var currentEventID: String = "",
     var events: List<Event> = listOf(),
     var eventsDataState: EventsDataState = EventsDataState.Loading,
-    var currentEvent: Event = Event()
+    var currentEvent: Event = Event(),
+    var topBarString: String = "",
+    var user: User = User()
 )

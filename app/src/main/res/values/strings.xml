@@ -4,7 +4,21 @@
     <string name="Create_event">Lav nyt event</string>
     <string name="Dit_Event">Dit Event</string>
     <string name="Dine_wisList">Dine Ønskelister</string>
-    <string name="Din_profil">Dine Profil</string>
+    <string name="Din_profil">Din Profil</string>
+    <string name="Coming_events">Go to coming events</string>
+    <string name="Event_Picture">Picture from coming event</string>
+    /Here under are the topBar strings
+    <string name="ComingEvents">Kommende begivenheder </string>
+    <string name="Specific_Event">Din begivenhed</string>
+    <string name="Profile_page">Din profil</string>
+    <string name="Dine_ønskeLister">Dine ønskelister </string>
+    <string name="Ny_Begivenhed">Ny begivenhed </string>
+    <string name="Edit_Event">Rediger din begivenhed </string>
+
+
+
+
+
 
 
 </resources>
