@@ -14,6 +14,7 @@ sealed class Destination (val route: String) {
     object Profile: Destination("Profile")
     object MyEventEditScreen: Destination("MyEventEditScreen")
     object AddWishToList: Destination("AddWishScreen")
+    object CreateWishlist: Destination("CreateWishlist")
 
 
     //Onboarding Navigation:

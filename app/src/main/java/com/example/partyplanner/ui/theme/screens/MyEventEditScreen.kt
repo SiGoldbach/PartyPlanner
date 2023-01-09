@@ -1,7 +1,9 @@
 package com.example.partyplanner.ui.theme.screens
 
 import android.app.DatePickerDialog
+import android.net.Uri
 import android.widget.DatePicker
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -14,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -172,3 +175,23 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
  * Maybe in the future some changes are so common values might be changed one at a time.
  */
 
+/*
+//  https://www.youtube.com/watch?v=kZKL_JvPDG0&ab_channel=KiloLoco
+// Guide how to pick a picture from users phone
+private var pictureUriState = mutableStateOf<Uri?>(null)
+private val pictureChooserLauncher = ActivityResultContracts.GetContent()
+
+@Composable
+fun PictureChoose() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.padding(vertical = 8.dp)
+            ) {
+                androidx.compose.material.Text("Vælg billede fra galleri")
+            }
+        }
+    }
+}
+*/

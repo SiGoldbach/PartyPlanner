@@ -27,7 +27,7 @@ fun NavigationAppHost(navController: NavHostController) {
                 navController = navController,
             )
         }
-        composable(Destination.AddWishToList.route) {AddWishToList(navController = navController) }
+
         composable(Destination.Welcome.route) { WelcomeScreen(navController = navController) }
         composable(Destination.ComingEvents.route) {
             ExperimentalScreen(

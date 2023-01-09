@@ -130,11 +130,7 @@ class ViewModelOnApp : ViewModel() {
                     eventsDataState = EventsDataState.Success(tempEventsList),
                 )
             }
-
-
         }
-
-
     }
 
     fun getSingleEvent(eventId: String) {

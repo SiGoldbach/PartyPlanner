@@ -1,13 +1,10 @@
 package com.example.partyplanner.ui.theme.screens
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -96,19 +93,21 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
                 }
             }
             /**
-             *  add button for "add a wish"
+             *  button for "add a wish"
              * */
-            Box() {
-                Image(painter = painterResource(id = R.drawable.addpresentpicture), contentDescription = "Add wish")
-                Button(onClick = { navController.navigate(Destination.AddWishToList.route)})
-                {
-                   //
-                }
-            }
+            Image(
+                modifier = Modifier
+                    .size(70.dp, 70.dp)
+                    .clickable(
+                        onClick = { navController.navigate(Destination.AddWishToList.route) }
+                    ),
+                painter = painterResource(id = R.drawable.addpresentpicture),
+                contentDescription = "Tilføj ønske",
+                alignment = Alignment.Center,
+            )
 
         }
     }
-
 }
 
 // """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
