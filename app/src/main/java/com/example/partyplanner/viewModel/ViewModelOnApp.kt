@@ -35,6 +35,11 @@ class ViewModelOnApp : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
 
+    fun updateTopBarString(string: String) {
+        userInfo.update { t -> t.copy(topBarString = string) }
+
+    }
+
     fun createEvent(
         eventName: String,
         date: String,
@@ -123,14 +128,14 @@ class ViewModelOnApp : ViewModel() {
                     }
                 }
 
-
             }
             userInfo.update { t ->
                 t.copy(
-                    eventsDataState = EventsDataState.Success(tempEventsList),
+                    eventsDataState = EventsDataState.Success(tempEventsList)
                 )
             }
-
+        }.addOnFailureListener {
+            Log.v("i will try to fetch events", "Could not get the events from the server")
 
         }
 
