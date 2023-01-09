@@ -7,13 +7,18 @@
     <string name="Din_profil">Din Profil</string>
     <string name="Coming_events">Go to coming events</string>
     <string name="Event_Picture">Picture from coming event</string>
+    <string name="Profile_Description">Profil Beskrivelse</string>
+    <string name="Profile_Picture">Profil Billede</string>
+
+
     /Here under are the topBar strings
     <string name="ComingEvents">Kommende begivenheder </string>
     <string name="Specific_Event">Din begivenhed</string>
     <string name="Profile_page">Din profil</string>
-    <string name="Dine_ønskeLister">Dine ønskelister </string>
-    <string name="Ny_Begivenhed">Ny begivenhed </string>
-    <string name="Edit_Event">Rediger din begivenhed </string>
+    <string name="Dine_ønskeLister">Dine ønskelister</string>
+    <string name="Ny_Begivenhed">Ny begivenhed</string>
+    <string name="Edit_Event">Rediger din begivenhed</string>
+
 
 
 

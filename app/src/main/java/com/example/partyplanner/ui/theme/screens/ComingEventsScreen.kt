@@ -103,7 +103,7 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
             Text(text = event.date)
             Box(modifier = Modifier.fillMaxHeight(0.8F)) {
                 Image(
-                    painter = painterResource(id = R.drawable.loading_picture),
+                    painter = painterResource(id = R.drawable.ballon),
                     contentDescription = stringResource(id = R.string.Coming_events),
                     modifier = Modifier
                         .fillMaxHeight()

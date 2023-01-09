@@ -202,6 +202,7 @@ class ViewModelOnApp : ViewModel() {
 
         user.get().addOnSuccessListener { doc ->
             val userFromDB = doc.toObject(User::class.java)
+            userInfo.update { t -> t.copy(user = userFromDB!!) }
         }
 
 
