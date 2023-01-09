@@ -50,6 +50,11 @@ fun InnerNav(
                 viewModel
             )
         }
+
+        composable(Destination.Wishes.route) {
+            Wishes(navController = onMainAppNavHostController)
+        }
+
         composable(Destination.AddWishToList.route) {
             AddWishToList(
                 navController = onMainAppNavHostController

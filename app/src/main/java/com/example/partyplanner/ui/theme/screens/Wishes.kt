@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.model.GiftList
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -27,8 +28,9 @@ fun Wishes(navController: NavHostController) {
     val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
     val gift4 = Gift("Gaveideer", "Se ønskelisten her")
     val gift5 = Gift("Lejlighed", "Se ønskelisten her")
-
-    val list = listOf(gift1, gift2, gift3, gift4, gift5)
+    val gift6 = Gift("ligemeget", "wishwishtest","0")
+    gift6.realWish=false
+    val list = listOf(gift1, gift2, gift3, gift4, gift5, gift6)
 
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
@@ -57,56 +59,77 @@ fun Wishes(navController: NavHostController) {
 @Composable
 fun WishesComposer(gave: Gift, navController: NavHostController) {
     var popupControl by remember { mutableStateOf(false) }
-    Card(
-        // onClick = { popupControl = true },
-        border = BorderStroke(width = 2.dp, color = dustyRose),
-        modifier = Modifier
-            .size(width = 350.dp, height = 150.dp)
-            .padding(5.dp), backgroundColor = beige
-    ) {
-        Column(
+
+    if (gave.realWish) {
+        Card(
+            // onClick = { popupControl = true },
+            border = BorderStroke(width = 2.dp, color = dustyRose),
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(1F)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .size(width = 350.dp, height = 150.dp)
+                .padding(5.dp), backgroundColor = beige
         ) {
-            Text(text = "wish-name")
-            Box(modifier = Modifier.fillMaxHeight(1F), Alignment.BottomEnd) {
-                Image(
-                    painter = painterResource(id = R.drawable.loading_picture),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(),
-                    contentScale = ContentScale.Crop,
-                )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(1F)
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "wish-name")
+                Box(modifier = Modifier.fillMaxHeight(1F), Alignment.BottomEnd) {
+                    Image(
+                        painter = painterResource(id = R.drawable.loading_picture),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(),
+                        contentScale = ContentScale.Crop,
+                    )
 
-                Row(horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.Bottom) {
-
-                    Button(
-                        onClick = { popupControl = true },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
                     ) {
-                        Text(text = "Gå til")
+
+                        Button(
+                            onClick = { popupControl = true },
+                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+                        ) {
+                            Text(text = "Gå til")
+                        }
                     }
                 }
-            }
-            /**
-             *  button for "add a wish"
-             * */
-            Image(
+                /**
+                 *  button for "add a wish"
+                 *  Image(
                 modifier = Modifier
-                    .size(70.dp, 70.dp)
-                    .clickable(
-                        onClick = { navController.navigate(Destination.AddWishToList.route) }
-                    ),
+                .size(70.dp, 70.dp)
+                .clickable(
+                onClick = { navController.navigate(Destination.AddWishToList.route) }
+                ),
                 painter = painterResource(id = R.drawable.addpresentpicture),
                 contentDescription = "Tilføj ønske",
                 alignment = Alignment.Center,
-            )
+                )
+                 * */
 
+
+            }
         }
+    } else {
+      /*  Card(
+            // onClick = { popupControl = true },
+            modifier = Modifier
+                .size(width = 350.dp, height = 150.dp)
+                .padding(5.dp), backgroundColor = beige
+        ) { */
+            Image(
+                painter = painterResource(id = R.drawable.greenaddition2new),
+                contentDescription = null,
+                modifier = Modifier.height(20.dp).width(20.dp),
+          //      contentScale = ContentScale.Crop,
+            )
+       // }
     }
 }
 

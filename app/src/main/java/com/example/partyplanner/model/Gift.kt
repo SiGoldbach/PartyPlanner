@@ -3,7 +3,7 @@ package com.example.partyplanner.model
 /**
  * This is the initial thought i have on
  */
-data class Gift(
+data class GiftList(
     val id: String = "ID",
     val name: String = "",
     val description: String = "",
@@ -13,6 +13,18 @@ data class Gift(
     val ownerUID: String = "ownerUID"
 
     )
+data class Gift(
+    val id: String = "ID",
+    val name: String = "",
+    val description: String = "",
+    val link: String = "",
+    val picture: String = "",
+    val price: Int = 0,
+    val ownerUID: String = "ownerUID",
+    var realWish: Boolean = true
+
+)
+
 
 data class GiftHelper(
     val id: String = "id",

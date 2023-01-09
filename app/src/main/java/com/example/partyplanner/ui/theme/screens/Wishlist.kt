@@ -21,18 +21,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.model.Gift
+import com.example.partyplanner.model.GiftList
 import com.example.partyplanner.naviagion.Destination
 
 // The mainscreen for wishlist
 
 @Composable
 fun Wishlist(navController: NavController) {
-    val gift1 = Gift("Konfirmation", "Se ønskelisten her")
-    val gift2 = Gift("Juleaften", "Se ønskelisten her")
-    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
-    val gift4 = Gift("Gaveideer", "Se ønskelisten her")
-    val gift5 = Gift("Lejlighed", "Se ønskelisten her")
+    val gift1 = GiftList("Konfirmation", "Se ønskelisten her")
+    val gift2 = GiftList("Juleaften", "Se ønskelisten her")
+    val gift3 = GiftList("Fødselsdagsønsker", "Se ønskelisten her")
+    val gift4 = GiftList("Gaveideer", "Se ønskelisten her")
+    val gift5 = GiftList("Lejlighed", "Se ønskelisten her")
 
 
     val list = listOf(gift1, gift2, gift3, gift4, gift5)
@@ -90,12 +90,12 @@ fun Wishlist(navController: NavController) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishListComposer(gift: Gift, navController: NavController) {
+fun WishListComposer(giftList: GiftList, navController: NavController) {
     Card(
         modifier = Modifier
 
             .padding(start = 5.dp, end = 5.dp),
-        onClick = {/* TODO */ },
+        onClick = {navController.navigate(Destination.Wishes.route) },
         backgroundColor = dustyRose,
 
         ) {
@@ -125,9 +125,9 @@ fun WishListComposer(gift: Gift, navController: NavController) {
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text(text = gift.name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text(text = giftList.name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                     Text(
-                        text = gift.description,
+                        text = giftList.description,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.align(alignment = Alignment.Start)
