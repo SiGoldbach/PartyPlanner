@@ -47,7 +47,7 @@ fun ExperimentalScreen(
                 items = listOf(
                     MenuItem(
                         id = "home",
-                        title = "Home",
+                        title = "Begivenheder",
                         contentDescription = "The menu",
                         icon = Icons.Filled.Menu
                     ),
@@ -59,7 +59,7 @@ fun ExperimentalScreen(
                     ),
                     MenuItem(
                         id = "begivenhed",
-                        title = "Begivenheder",
+                        title = "Opret begivenhed",
                         contentDescription = "Begivenheder",
                         icon = Icons.Filled.Add
                     ),
