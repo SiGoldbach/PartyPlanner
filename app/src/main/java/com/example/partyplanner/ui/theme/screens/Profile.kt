@@ -2,23 +2,23 @@ package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,9 +27,17 @@ import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 @Composable
-fun Profile(internalNavController: NavController, externalNavController: NavController) {
+fun Profile(
+    internalNavController: NavController,
+    externalNavController: NavController,
+    viewModelOnApp: ViewModelOnApp
+) {
+    val appState by viewModelOnApp.uiState.collectAsState()
+    viewModelOnApp.getProfileInfoAndUpdate()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,7 +46,7 @@ fun Profile(internalNavController: NavController, externalNavController: NavCont
         Spacer(modifier = Modifier.height(10.dp))
         Image(
             painter = painterResource(id = R.drawable.profilepicexample),
-            contentDescription = "avatar",
+            contentDescription = stringResource(id = R.string.Profile_Picture),
             contentScale = ContentScale.Crop,            // crop the image if it's not a square
             modifier = Modifier
                 .size(128.dp)
@@ -62,23 +70,23 @@ fun Profile(internalNavController: NavController, externalNavController: NavCont
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "name: MyName",
+                    text = appState.user.name + " " + appState.user.surname,
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
                 Text(
-                    text = "mail: myMail@gmail.com",
+                    text = appState.user.email,
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
                 Text(
-                    text = "Profile description:",
+                    text = stringResource(id = R.string.Profile_Description),
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
 
                 Text(
-                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis interdum dignissim est, sit amet molestie leo feugiat ut. Vestibulum quis felis sem. Donec ornare odio a luctus sodales. Fusce ipsum libero, efficitur in iaculis et, aliquam sit amet leo. Nullam in efficitur justo, sit amet volutpat lacus. Maecenas porta mi et ex molestie, sit amet placerat nunc commodo. Pellentesque sed lobortis erat. Maecenas faucibus ante interdum, pulvinar nunc consectetur, euismod mi.",
+                    text = appState.user.description,
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )

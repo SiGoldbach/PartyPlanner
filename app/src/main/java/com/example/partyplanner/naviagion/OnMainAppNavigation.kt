@@ -63,7 +63,7 @@ fun InnerNav(
 
             Profile(
                 internalNavController = onMainAppNavHostController,
-                externalNavController = externalNavHostController
+                externalNavController = externalNavHostController, viewModelOnApp = viewModel
             )
         }
         composable(Destination.WishList.route) {

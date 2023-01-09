@@ -3,7 +3,6 @@ package com.example.partyplanner.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.model.*
-import com.example.partyplanner.synchronisationhelp.EventListHelper
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -203,6 +202,7 @@ class ViewModelOnApp : ViewModel() {
 
         user.get().addOnSuccessListener { doc ->
             val userFromDB = doc.toObject(User::class.java)
+            userInfo.update { t -> t.copy(user = userFromDB!!) }
         }
 
 
