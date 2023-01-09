@@ -1,6 +1,7 @@
 package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -21,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.naviagion.Destination
 
 // The mainscreen for wishlist
 
@@ -35,9 +37,9 @@ fun Wishlist(navController: NavController) {
 
     val list = listOf(gift1, gift2, gift3, gift4, gift5)
 
-    Column {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = "Ønskeliste",
+            text = "Ønskelister",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic,
@@ -45,7 +47,6 @@ fun Wishlist(navController: NavController) {
             modifier = Modifier
                 .padding(10.dp)
                 .fillMaxWidth(
-                    //Align "Wishlist" text in center of screen
                 )
 
         )
@@ -56,7 +57,7 @@ fun Wishlist(navController: NavController) {
 
         LazyVerticalGrid(
             modifier = Modifier
-                .fillMaxHeight(),
+                .fillMaxHeight(0.7F),
             columns = GridCells.Adaptive(minSize = 200.dp),
             verticalArrangement = Arrangement.spacedBy(5.dp),
             horizontalArrangement = Arrangement.spacedBy(5.dp)
@@ -67,18 +68,24 @@ fun Wishlist(navController: NavController) {
             }
 
         }
-
-        LazyVerticalGrid(
+        // ADD A "Add wish-list" button.
+        Image(
             modifier = Modifier
-                .fillMaxHeight(),
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-        ) {
-            items(list) { item ->
-                WishListComposer(item, navController)
-            }
-        }
+                .size(70.dp, 70.dp)
+                .clickable(
+                    onClick = { navController.navigate(Destination.CreateWishlist.route) }
+                ),
+            painter = painterResource(id = R.drawable.addpresentpicture),
+            contentDescription = "Tilføj ønskeliste",
+            alignment = Alignment.Center,
+        )
     }
+
+
+    //   Row(modifier = Modifier.fillMaxSize(),
+    // horizontalArrangement = Arrangement.Center,
+    // verticalAlignment = Alignment.Bottom) {
+    //   }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -128,17 +135,6 @@ fun WishListComposer(gift: Gift, navController: NavController) {
 
                 }
             }
-            /*
-    *  ADD A "Add wish-list" button. Noget ala nedenstående.
-    * Button(onClick = { navController.navigate(Destination.AddWishToList.route) })
-        {
-            Image(
-                painter = painterResource(id = R.drawable.addpresentpicture),
-                contentDescription = "Tilføj ønskeliste"
-            )
-    }
-    */
-
         }
     }
 }

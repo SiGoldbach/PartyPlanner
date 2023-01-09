@@ -1,5 +1,6 @@
 package com.example.partyplanner.naviagion
 
+import AddWishToList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
@@ -48,6 +49,14 @@ fun InnerNav(
                 navController = onMainAppNavHostController,
                 viewModel
             )
+        }
+        composable(Destination.AddWishToList.route) {
+            AddWishToList(
+                navController = onMainAppNavHostController
+            )
+        }
+        composable(Destination.CreateWishlist.route) {
+
         }
         composable(Destination.MyEventEditScreen.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Edit_Event))
