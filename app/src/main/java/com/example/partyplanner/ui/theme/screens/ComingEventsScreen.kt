@@ -43,6 +43,7 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
+        //Text(text = "Du har " + appState.events.size + " events")
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxHeight(),

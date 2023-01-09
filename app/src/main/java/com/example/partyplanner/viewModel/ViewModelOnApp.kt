@@ -3,7 +3,7 @@ package com.example.partyplanner.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.model.*
-import com.google.firebase.auth.FirebaseAuth
+import com.example.partyplanner.synchronisationhelp.EventListHelper
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ViewModelOnApp : ViewModel() {
 
@@ -103,7 +105,7 @@ class ViewModelOnApp : ViewModel() {
 
 
     private fun getAllEvents() {
-
+        val eventListHelper: EventListHelper = EventListHelper()
         val user = db.collection("USERS").document(userInfo.value.uid)
         val eventsInDB = db.collection("events")
         val tempEventsList = mutableListOf<Event>()
@@ -114,19 +116,25 @@ class ViewModelOnApp : ViewModel() {
             Log.v("i will try to fetch events", userFromDB!!.eventIdentifiers.size.toString())
 
 
-            for (event in userFromDB!!.eventIdentifiers) {
-                println("Looping once ")
+            for (event in userFromDB.eventIdentifiers) {
                 eventsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
                     val gotEvent = docWithEvent.toObject(Event::class.java)
                     tempEventsList.add(gotEvent!!)
                     println("List has size " + tempEventsList.size.toString())
                     println(tempEventsList[0].ownerUID)
-                    userInfo.update { t ->
-                        t.copy(
-                            events = tempEventsList,
-                        )
+                    //This if only updates when all the elements have been added to the list
+                    if (tempEventsList.size == userFromDB.eventIdentifiers.size){
+                        userInfo.update { t ->
+                            t.copy(
+                                events = tempEventsList,
+                            )
+                        }
                     }
+
+                }.addOnFailureListener {
+                    println("Could not find event")
                 }
+
 
             }
             userInfo.update { t ->
