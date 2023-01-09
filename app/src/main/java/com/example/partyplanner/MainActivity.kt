@@ -16,6 +16,7 @@ import com.example.partyplanner.ui.theme.PartyPlannerTheme
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.ui.theme.screens.ComingEvents
+import com.example.partyplanner.ui.theme.screens.CreateWishlist
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.firebase.auth.ktx.auth
