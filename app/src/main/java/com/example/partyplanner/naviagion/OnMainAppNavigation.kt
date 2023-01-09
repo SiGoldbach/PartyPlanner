@@ -85,6 +85,9 @@ fun InnerNav(
 
             Wishlist(navController = onMainAppNavHostController)
         }
+        composable(Destination.CreateWishlist.route) {
+            CreateWishlist(navController = onMainAppNavHostController)
+        }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")
             if(elementId == null){
