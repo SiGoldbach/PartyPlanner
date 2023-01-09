@@ -104,7 +104,6 @@ class ViewModelOnApp : ViewModel() {
 
 
     private fun getAllEvents() {
-        val eventListHelper: EventListHelper = EventListHelper()
         val user = db.collection("USERS").document(userInfo.value.uid)
         val eventsInDB = db.collection("events")
         val tempEventsList = mutableListOf<Event>()
@@ -122,7 +121,7 @@ class ViewModelOnApp : ViewModel() {
                     println("List has size " + tempEventsList.size.toString())
                     println(tempEventsList[0].ownerUID)
                     //This if only updates when all the elements have been added to the list
-                    if (tempEventsList.size == userFromDB.eventIdentifiers.size){
+                    if (tempEventsList.size == userFromDB.eventIdentifiers.size) {
                         userInfo.update { t ->
                             t.copy(
                                 events = tempEventsList,
@@ -195,6 +194,16 @@ class ViewModelOnApp : ViewModel() {
 
     fun setCurrentEventId(id: String) {
         userInfo.update { t -> t.copy(currentEventID = id) }
+
+
+    }
+
+    fun getProfileInfoAndUpdate() {
+        val user = db.collection("USERS").document(userInfo.value.uid)
+
+        user.get().addOnSuccessListener { doc ->
+            val userFromDB = doc.toObject(User::class.java)
+        }
 
 
     }
