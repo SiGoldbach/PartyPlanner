@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -28,8 +31,8 @@ fun Wishes(navController: NavHostController) {
     val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
     val gift4 = Gift("Gaveideer", "Se ønskelisten her")
     val gift5 = Gift("Lejlighed", "Se ønskelisten her")
-    val gift6 = Gift("ligemeget", "wishwishtest","0")
-    gift6.realWish=false
+    val gift6 = Gift("ligemeget", "wishwishtest", "0")
+    gift6.realWish = false
     val list = listOf(gift1, gift2, gift3, gift4, gift5, gift6)
 
 
@@ -117,19 +120,27 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
             }
         }
     } else {
-      /*  Card(
+        /*  Card(
             // onClick = { popupControl = true },
             modifier = Modifier
                 .size(width = 350.dp, height = 150.dp)
                 .padding(5.dp), backgroundColor = beige
         ) { */
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center
+        ) {
             Image(
-                painter = painterResource(id = R.drawable.greenaddition2new),
+                painter = painterResource(id = R.drawable.additionpicturefiveremovebgpreview),
                 contentDescription = null,
-                modifier = Modifier.height(20.dp).width(20.dp),
-          //      contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(150.dp, 150.dp),
+                contentScale = ContentScale.Crop,
             )
-       // }
+        }
+        // }
     }
 }
 
