@@ -120,27 +120,28 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
             }
         }
     } else {
-        /*  Card(
-            // onClick = { popupControl = true },
-            modifier = Modifier
-                .size(width = 350.dp, height = 150.dp)
-                .padding(5.dp), backgroundColor = beige
-        ) { */
-        Column(
+
+
+
+
+       Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.additionpicturefiveremovebgpreview),
-                contentDescription = null,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(150.dp, 150.dp),
-                contentScale = ContentScale.Crop,
-            )
+           Row(verticalAlignment = Alignment.CenterVertically) {
+               Image(
+                   painter = painterResource(id = R.drawable.addpresentpicture),
+                   contentDescription = "Denne knap tilføjer et ønske",
+                   modifier = Modifier
+                       .clip(CircleShape)
+                       .size(100.dp, 100.dp),
+                   contentScale = ContentScale.Crop,
+               )
+           }
+
         }
-        // }
+
     }
 }
 
