@@ -349,7 +349,7 @@ class ViewModelOnApp : ViewModel() {
 
     fun createGift(gift: Gift) {
         val generatedID = (0..99999999999).random().toString()
-        val addGift = db.collection(EVENTS)
+        val addGift = db.collection(GIFTS)
         val data1 = hashMapOf(
             GiftHelper().ID to generatedID,
             GiftHelper().DESCRIPTION to gift.description,
@@ -357,8 +357,8 @@ class ViewModelOnApp : ViewModel() {
             GiftHelper().NAME to gift.name,
             GiftHelper().PICTURE to gift.picture,
             GiftHelper().OWNER_UID to uiState.value.uid,
-            GiftHelper().WISHLIST_IDS to listOf<String>(),
-            GiftHelper().REALWISH to false,
+            GiftHelper().WISHLIST_IDS to listOf<String>(uiState.value.currentWishListId),
+            GiftHelper().REALWISH to true,
         )
         addGift.document(generatedID).set(data1).addOnSuccessListener {
             userInfo.update { t -> t.copy(currentGiftID = generatedID) }
@@ -366,10 +366,9 @@ class ViewModelOnApp : ViewModel() {
             user.get().addOnSuccessListener { doc ->
                 val specificUser = doc.toObject(WishList::class.java)
                 val newList = specificUser!!.giftAddressees.toMutableList()
-                specificUser.giftAddressees = newList
                 newList.add(generatedID)
-                db.collection(USERS).document(userInfo.value.uid)
-                    .update(UserHelper().EVENT_IDS, specificUser.giftAddressees)
+                db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
+                    .update(WishListHelper().GIFT_ADDRESSES, newList)
                     .addOnFailureListener {
                         Log.v("FirebaseService", "Could not add the gift to the wishlist")
                     }

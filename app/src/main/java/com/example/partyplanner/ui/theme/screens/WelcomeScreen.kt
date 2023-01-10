@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 
 
 @Composable
@@ -75,6 +76,7 @@ fun WelcomeScreen(navController: NavController) {
                 )
             }
         }
+        val test: OpretBrugerViewmodel = OpretBrugerViewmodel()
 
         Spacer(modifier = Modifier.height(425.dp))
         StandardButton(
@@ -86,7 +88,8 @@ fun WelcomeScreen(navController: NavController) {
             lambda = { navController.navigate(Destination.MakeUserScreen.route) })
         StandardButton(
             output = "Test",
-            lambda = { navController.navigate(Destination.ComingEvents.route) })
+            lambda = {
+                navController.navigate(Destination.ComingEvents.route) })
     }
 
 }

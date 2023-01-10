@@ -45,7 +45,7 @@ fun Wishes(
 
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text(text = "There are: " + (appState.currentGiftList.size-1).toString() + " Gifts in this wishlist")
+        Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
         if (viewModelWishesData.popupControl) {
             AlertDialog(onDismissRequest = {
                 viewModelWishes.disablePopUp()
@@ -77,7 +77,7 @@ fun Wishes(
             horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             items(appState.currentGiftList) { item ->
-                WishesComposer(item, navController, viewModelWishes)
+                WishesComposer(item, navController, viewModelWishes, viewModelOnApp)
             }
         }
     }
@@ -90,7 +90,12 @@ fun Wishes(
  */
 
 @Composable
-fun WishesComposer(gave: Gift, navController: NavHostController, viewModelWishes: ViewModelWishes) {
+fun WishesComposer(
+    gave: Gift,
+    navController: NavHostController,
+    viewModelWishes: ViewModelWishes,
+    viewModelOnApp: ViewModelOnApp
+) {
 
     if (gave.realWish) {
         Card(
@@ -165,12 +170,23 @@ fun WishesComposer(gave: Gift, navController: NavHostController, viewModelWishes
                         .size(100.dp, 100.dp),
                     contentScale = ContentScale.Crop,
                 )
+                Button(onClick = {
+                    createDummyEvent(viewModelOnApp = viewModelOnApp)
+                }) {
+
+                }
 
             }
 
         }
 
     }
+}
+
+fun createDummyEvent(viewModelOnApp: ViewModelOnApp) {
+    viewModelOnApp.createGift(Gift(realWish = true))
+
+
 }
 
 // """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
