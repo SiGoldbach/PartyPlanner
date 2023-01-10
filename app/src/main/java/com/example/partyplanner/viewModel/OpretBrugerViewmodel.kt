@@ -81,6 +81,12 @@ class OpretBrugerViewmodel : ViewModel() {
             UserHelper().PHONE_NUMBER to ""
         )
         addNewUser.document(uid).set(userMap)
+            .addOnSuccessListener {
+                Log.v("makeUser", "User has been created")
+            }
+            .addOnFailureListener {
+                Log.v("makeUser", "User has not been created")
+            }
 
 
     }
