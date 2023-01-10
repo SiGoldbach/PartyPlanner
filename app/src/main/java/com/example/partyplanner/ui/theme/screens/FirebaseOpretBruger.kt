@@ -28,7 +28,10 @@ fun FBOpretBruger(
     var password by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TextField(value = firstName, onValueChange = { firstName = it }, label = { Text("Fornavn") })
+        TextField(
+            value = firstName,
+            onValueChange = { firstName = it },
+            label = { Text("Fornavn") })
         TextField(value = lastName,
             onValueChange = { lastName = it },
             label = { Text("Efternavn") })
