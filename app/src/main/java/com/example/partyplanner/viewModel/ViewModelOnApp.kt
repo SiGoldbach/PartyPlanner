@@ -97,15 +97,22 @@ class ViewModelOnApp : ViewModel() {
             WishListHelper().PICTURE to "EMPTY",
             WishListHelper().OWNER_UID to userInfo.value.uid
         )
+        println("The event name is: " + name)
+        println("The event id is: " + generatedID)
+        println("The uid is: " + userInfo.value.uid)
         userInfo.update { t -> t.copy(currentWishListId = generatedID) }
 
         addWishList.document(generatedID).set(data1)
             .addOnSuccessListener {
+                println("Getting here into the succesListener ")
                 val user = db.collection("USERS").document(userInfo.value.uid)
                 user.get().addOnSuccessListener { doc ->
                     val specificUser = doc.toObject(User::class.java)
                     val newList = specificUser!!.wishListIdentifiers.toMutableList()
+                    println("The length of the currentWishList is: " + newList.size)
                     newList.add(generatedID)
+                    println("The length of the currentWishList is: " + newList.size)
+                    specificUser.wishListIdentifiers = newList
                     db.collection("USERS").document(userInfo.value.uid)
                         .update(UserHelper().WISHlIST_IDENTIFIERS, specificUser.wishListIdentifiers)
 
