@@ -29,7 +29,7 @@ data class Gift(
 data class WishListHelper(
     val ID: String = "id",
     val NAME: String = "name",
-    val PICTURE: String = "",
+    val PICTURE: String = "picture",
     val OWNER_UID: String = "ownerUID",
     val GIFT_ADDRESSES: String = "giftAddressees"
 

@@ -25,8 +25,7 @@ fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var kodeord by remember { mutableStateOf(TextFieldValue("")) }
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()
     ) {
         Spacer(modifier = Modifier.height(35.dp))
 
@@ -35,7 +34,8 @@ fun LoginScreen(navController: NavController) {
                 text = "Log ind",
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold,
-                fontSize = 26.sp, color = Color.Black
+                fontSize = 26.sp,
+                color = Color.Black
             )
         }
         Spacer(modifier = Modifier.height(standardDP))
@@ -50,18 +50,15 @@ fun LoginScreen(navController: NavController) {
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = email,
             label = { Text(text = "E-mail", color = dustyRose) },
-            onValueChange = { email = it }
-        )
+            onValueChange = { email = it })
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = kodeord,
             label = { Text(text = "Kodeord", color = dustyRose) },
-            onValueChange = { kodeord = it }
-        )
+            onValueChange = { kodeord = it })
 
         Spacer(modifier = Modifier.height(50.dp))
-        StandardButton(
-            output = "Log på",
+        StandardButton(output = "Log på",
             lambda = { navController.navigate(Destination.ComingEvents.route) })
         Spacer(modifier = Modifier.height(standardDP))
         Box {
@@ -69,15 +66,15 @@ fun LoginScreen(navController: NavController) {
                 onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(backgroundColor = beige),
                 shape = RoundedCornerShape(30.dp),
-                modifier = Modifier
-                    .size(width = 250.dp, height = 42.dp)
+                modifier = Modifier.size(width = 250.dp, height = 42.dp)
 
             ) {
                 Text(
                     text = "Glemt adgangskode?",
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp, color = Color.Black
+                    fontSize = 16.sp,
+                    color = Color.Black
                 )
             }
         }

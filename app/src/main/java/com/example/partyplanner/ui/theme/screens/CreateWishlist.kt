@@ -58,6 +58,6 @@ fun onclickForButtonWishlist(
     name: String
 
 ) {
-    navController.navigate(Destination.Event.route)
+    navController.navigate(Destination.Wishes.route)
     viewModel.createWishList(name)
 }
