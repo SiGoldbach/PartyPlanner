@@ -133,7 +133,7 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
                 ) {
-                    Text(text = "Gå til")
+                    Text(text = "Gå til", color = Color.White)
 
                 }
 
