@@ -67,7 +67,7 @@ fun Wishlist(navController: NavController, viewModelOnApp: ViewModelOnApp) {
 
         ) {
             items(appState.wishLists) { item ->
-                WishListComposer(item, navController)
+                WishListComposer(item, navController, viewModelOnApp)
             }
 
         }
@@ -93,12 +93,19 @@ fun Wishlist(navController: NavController, viewModelOnApp: ViewModelOnApp) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishListComposer(wishList: WishList, navController: NavController) {
+fun WishListComposer(
+    wishList: WishList,
+    navController: NavController,
+    viewModelOnApp: ViewModelOnApp
+) {
     Card(
         modifier = Modifier
 
             .padding(start = 5.dp, end = 5.dp),
-        onClick = { navController.navigate(Destination.Wishes.route) },
+        onClick = {
+            viewModelOnApp.setCurrentWisHListId(wishList.id)
+            navController.navigate(Destination.Wishes.route)
+        },
         backgroundColor = dustyRose,
 
         ) {

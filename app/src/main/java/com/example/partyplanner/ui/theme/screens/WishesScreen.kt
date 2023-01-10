@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
@@ -30,6 +31,8 @@ fun Wishes(
     viewModelWishes: ViewModelWishes
 ) {
     val viewModelWishesData by viewModelWishes.uiState.collectAsState()
+    val appState by viewModelOnApp.uiState.collectAsState()
+    viewModelOnApp.getAllGiftsInWishList()
 
     val gift1 = Gift("Konfirmation", "Se ønskelisten her", realWish = true)
     val gift2 = Gift("Juleaften", "Se ønskelisten her", realWish = true)
@@ -42,7 +45,7 @@ fun Wishes(
 
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text(text = "Button has been click: " + viewModelWishesData.testCounter.toString() + " Times")
+        Text(text = "There are: " + (appState.currentGiftList.size-1).toString() + " Gifts in this wishlist")
         if (viewModelWishesData.popupControl) {
             AlertDialog(onDismissRequest = {
                 viewModelWishes.disablePopUp()
@@ -73,7 +76,7 @@ fun Wishes(
             verticalArrangement = Arrangement.spacedBy(1.dp),
             horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
-            items(list) { item ->
+            items(appState.currentGiftList) { item ->
                 WishesComposer(item, navController, viewModelWishes)
             }
         }
@@ -162,6 +165,7 @@ fun WishesComposer(gave: Gift, navController: NavHostController, viewModelWishes
                         .size(100.dp, 100.dp),
                     contentScale = ContentScale.Crop,
                 )
+
             }
 
         }

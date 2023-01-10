@@ -2,9 +2,7 @@ package com.example.partyplanner.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.partyplanner.fireBaseServices.EVENTS
-import com.example.partyplanner.fireBaseServices.USERS
-import com.example.partyplanner.fireBaseServices.WISHLISTS
+import com.example.partyplanner.fireBaseServices.*
 import com.example.partyplanner.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -226,6 +224,55 @@ class ViewModelOnApp : ViewModel() {
         }
     }
 
+    fun getAllGiftsInWishList() {
+        val wishList = db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
+        val giftListsInDB = db.collection(GIFTS)
+        val tempGiftList = mutableListOf<Gift>()
+        Log.v(
+            FIREBASE_SERVICE_TAG,
+            "Trying to get all wishes from wishlist with id: " + userInfo.value.currentWishListId
+        )
+        println("Trying to get all wishes from wishlist with id: " + userInfo.value.currentWishListId)
+
+        wishList.get().addOnSuccessListener { doc ->
+            val wishListFromDB = doc.toObject(WishList::class.java)
+            Log.v(
+                FIREBASE_SERVICE_TAG,
+                "Trying to get: " + wishListFromDB!!.giftAddressees.size.toString() + " from the db"
+            )
+            if (wishListFromDB.giftAddressees.isEmpty()) {
+                tempGiftList.add(Gift(realWish = false))
+                Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
+                userInfo.update { t ->
+                    t.copy(
+                        currentGiftList = tempGiftList
+                    )
+                }
+            }
+            for (giftIdentifier in wishListFromDB.giftAddressees) {
+                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener {
+                    val gotGift = doc.toObject(Gift::class.java)
+                    tempGiftList.add(gotGift!!)
+                    println("GiftList has size: " + tempGiftList.size)
+                    if (tempGiftList.size == wishListFromDB.giftAddressees.size) {
+                        tempGiftList.add(Gift(realWish = false))
+                        Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
+                        userInfo.update { t ->
+                            t.copy(
+                                currentGiftList = tempGiftList
+                            )
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+
+    }
+
     fun getSingleEvent(eventId: String) {
         val eventsInDB = db.collection(EVENTS).document(eventId)
         eventsInDB.get().addOnSuccessListener { curEventDoc ->
@@ -293,6 +340,13 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
+    fun setCurrentWisHListId(wishListId: String) {
+        userInfo.update { t -> t.copy(currentWishListId = wishListId) }
+
+
+    }
+
+
     fun createGift(gift: Gift) {
         val generatedID = (0..99999999999).random().toString()
         val addGift = db.collection(EVENTS)
@@ -306,7 +360,7 @@ class ViewModelOnApp : ViewModel() {
             GiftHelper().WISHLIST_IDS to listOf<String>(),
             GiftHelper().REALWISH to false,
         )
-        addGift.document(generatedID).set(data1).addOnSuccessListener { doc ->
+        addGift.document(generatedID).set(data1).addOnSuccessListener {
             userInfo.update { t -> t.copy(currentGiftID = generatedID) }
             val user = db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
             user.get().addOnSuccessListener { doc ->

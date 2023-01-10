@@ -5,6 +5,7 @@ data class OnAppModel(
     var currentEventID: String = "",
     var events: List<Event> = listOf(),
     var wishLists: List<WishList> = listOf(),
+    var currentGiftList: List<Gift> = listOf(),
     var eventsDataState: EventsDataState = EventsDataState.Loading,
     var currentEvent: Event = Event(),
     var topBarString: String = "",
