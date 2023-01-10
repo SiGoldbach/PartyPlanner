@@ -10,6 +10,7 @@ import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
 import com.example.partyplanner.viewModel.ViewModelOnApp
+import com.example.partyplanner.viewModel.ViewModelWishes
 
 /**
  * This is the internal naviagtion of the app this should work with now having two navcontrollers
@@ -22,6 +23,7 @@ fun InnerNav(
     externalNavHostController: NavHostController,
     viewModel: ViewModelOnApp
 ) {
+    val viewModelWishes = ViewModelWishes()
     //Here i am making a viewmodel since this nav function will only be called once every time,
     //a new user logs into the app
     NavHost(
@@ -52,7 +54,12 @@ fun InnerNav(
         }
 
         composable(Destination.Wishes.route) {
-            Wishes(navController = onMainAppNavHostController)
+            viewModel.updateTopBarString("Din nuværende ønskeliste")
+            Wishes(
+                navController = onMainAppNavHostController,
+                viewModelOnApp = viewModel,
+                viewModelWishes = viewModelWishes
+            )
         }
 
         composable(Destination.AddWishToList.route) {
@@ -87,7 +94,7 @@ fun InnerNav(
         composable(Destination.WishList.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Dine_wisList))
 
-            Wishlist(navController = onMainAppNavHostController,viewModel)
+            Wishlist(navController = onMainAppNavHostController, viewModel)
         }
         composable(Destination.CreateWishlist.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Opret_ønskeliste))

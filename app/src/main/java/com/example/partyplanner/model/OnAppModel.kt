@@ -10,5 +10,6 @@ data class OnAppModel(
     var topBarString: String = "",
     var user: User = User(),
     var currentWishListId: String = "",
-    var currentGiftID: String = ""
+    var currentGiftID: String = "",
+    var currentGift: Gift = Gift()
 )

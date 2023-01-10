@@ -286,5 +286,11 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
+    fun setCurrentGift(gift: Gift) {
+        userInfo.update { t -> t.copy(currentGift = gift) }
+
+
+    }
+
 
 }

@@ -19,10 +19,18 @@ import com.example.partyplanner.R
 import com.example.partyplanner.model.Gift
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.viewModel.ViewModelOnApp
+import com.example.partyplanner.viewModel.ViewModelWishes
 
 
 @Composable
-fun Wishes(navController: NavHostController) {
+fun Wishes(
+    navController: NavHostController,
+    viewModelOnApp: ViewModelOnApp,
+    viewModelWishes: ViewModelWishes
+) {
+    val viewModelWishesData by viewModelWishes.uiState.collectAsState()
+
     val gift1 = Gift("Konfirmation", "Se ønskelisten her")
     val gift2 = Gift("Juleaften", "Se ønskelisten her")
     val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
@@ -33,7 +41,29 @@ fun Wishes(navController: NavHostController) {
     val list = listOf(gift1, gift2, gift3, gift4, gift5, gift6)
 
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
+        Text(text = "Button has been click: " + viewModelWishesData.testCounter.toString() + " Times")
+        if (viewModelWishesData.popupControl) {
+            AlertDialog(onDismissRequest = {
+                viewModelWishes.disablePopUp()
+            }, title = {
+                Text(text = viewModelWishesData.currentGift.name)
+            }, text = {
+                Text(viewModelWishesData.currentGift.description)
+            }, confirmButton = {
+                Button(onClick = {
+                    viewModelWishes.disablePopUp()
+                }) {
+                    Text("This is the Confirm Button")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    viewModelWishes.disablePopUp()
+                }) {
+                    Text("This is the dismiss Button")
+                }
+            })
+        }
 
         LazyVerticalGrid(
             modifier = Modifier
@@ -44,7 +74,7 @@ fun Wishes(navController: NavHostController) {
             horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             items(list) { item ->
-                WishesComposer(item, navController)
+                WishesComposer(item, navController, viewModelWishes)
             }
         }
     }
@@ -57,8 +87,7 @@ fun Wishes(navController: NavHostController) {
  */
 
 @Composable
-fun WishesComposer(gave: Gift, navController: NavHostController) {
-    var popupControl by remember { mutableStateOf(false) }
+fun WishesComposer(gave: Gift, navController: NavHostController, viewModelWishes: ViewModelWishes) {
 
     if (gave.realWish) {
         Card(
@@ -92,7 +121,7 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
                     ) {
 
                         Button(
-                            onClick = { popupControl = true },
+                            onClick = { viewModelWishes.enablePopUpAnChangeCurrentWish(gift = gave) },
                             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
                         ) {
                             Text(text = "Gå til")
@@ -119,23 +148,21 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
     } else {
 
 
-
-
-       Column(
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-           Row(verticalAlignment = Alignment.CenterVertically) {
-               Image(
-                   painter = painterResource(id = R.drawable.addpresentpicture),
-                   contentDescription = "Denne knap tilføjer et ønske",
-                   modifier = Modifier
-                       .clip(CircleShape)
-                       .size(100.dp, 100.dp),
-                   contentScale = ContentScale.Crop,
-               )
-           }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.addpresentpicture),
+                    contentDescription = "Denne knap tilføjer et ønske",
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(100.dp, 100.dp),
+                    contentScale = ContentScale.Crop,
+                )
+            }
 
         }
 
