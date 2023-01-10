@@ -19,31 +19,36 @@ fun FBOpretBruger(
 ) {
 
     val auth = FirebaseAuth.getInstance()
-    var forNavn by remember { mutableStateOf(TextFieldValue("")) }
-    var efterNavn by remember { mutableStateOf(TextFieldValue("")) }
+    var firstName by remember { mutableStateOf(TextFieldValue("")) }
+
+    var lastName by remember { mutableStateOf(TextFieldValue("")) }
+
     var email by remember { mutableStateOf(TextFieldValue("")) }
-    var kodeord by remember { mutableStateOf(TextFieldValue("")) }
+
+    var password by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TextField(value = forNavn, onValueChange = { forNavn = it }, label = { Text("Fornavn") })
-        TextField(value = efterNavn,
-            onValueChange = { efterNavn = it },
+        TextField(
+            value = firstName,
+            onValueChange = { firstName = it },
+            label = { Text("Fornavn") })
+        TextField(value = lastName,
+            onValueChange = { lastName = it },
             label = { Text("Efternavn") })
         TextField(value = email, onValueChange = { email = it }, label = { Text("Email") })
         TextField(keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            value = kodeord,
-            onValueChange = { kodeord = it },
+            value = password,
+            onValueChange = { password = it },
             label = { Text("Kodeord") }
 
         )
         Button(onClick = {
             OpretBrugerViewmodel().putCredentialsAndCreateUser(
-                forNavn = forNavn.text,
-                efterNavn = efterNavn.text,
+                forNavn = firstName.text,
+                efterNavn = lastName.text,
                 email = email.text,
-                kodeord = kodeord.text
+                kodeord = password.text
             )
-            navController.navigate("LoginScreen")
         }) {
             Text("Opret Bruger")
         }

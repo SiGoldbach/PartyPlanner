@@ -2,42 +2,54 @@ package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
 fun HelpScreen() {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = "Hjælp",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth()
-        )
+    Column {
+        val openDialog = remember { mutableStateOf(false) }
+        //horizontalAlignment = Alignment.CenterHorizontally,
+        //modifier = Modifier.width(200.dp),
+        //verticalArrangement = Arrangement.Center,
 
-        Divider(color = Color.Black, thickness = 0.5.dp)
+        //Spacer(modifier = Modifier.height(5.dp))
 
-        Spacer(modifier = Modifier.height(15.dp))
-
-        Button(
-            onClick = { /* TODO */ },
-            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
-        ) {
-            Text("Button 1")
+        Button(onClick = {
+            openDialog.value = true
+        }) {
+            Text("")
         }
+        if (openDialog.value) {
+            AlertDialog(onDismissRequest = {
+                openDialog.value = false
+            }, title = {
+                Text(text = "Dialog Title")
+            }, text = {
+                Text("Here is a text")
+            }, confirmButton = {
+                Button(onClick = {
+                    openDialog.value = false
+                }) {
+                    Text("This is the Confirm Button")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    openDialog.value = false
+                }) {
+                    Text("This is the dismiss Button")
+                }
+            })
+        }
+
+        //colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
 
         Button(
             onClick = { /* Do something! */ },
