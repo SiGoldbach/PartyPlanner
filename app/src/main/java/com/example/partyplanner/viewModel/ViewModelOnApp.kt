@@ -182,7 +182,7 @@ class ViewModelOnApp : ViewModel() {
 
     fun getAllWishLists() {
         val user = db.collection("USERS").document(userInfo.value.uid)
-        val wishListsInDB = db.collection("wishList")
+        val wishListsInDB = db.collection("wishLists")
         val tempWishList = mutableListOf<WishList>()
 
         user.get().addOnSuccessListener { doc ->
@@ -192,24 +192,26 @@ class ViewModelOnApp : ViewModel() {
                 "i will try to fetch wishlists: ",
                 userFromDB!!.wishListIdentifiers.size.toString()
             )
-            for (event in userFromDB.wishListIdentifiers) {
-                wishListsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
-                    val gotEvent = docWithEvent.toObject(WishList::class.java)
-                    tempWishList.add(gotEvent!!)
-                    println("List has size " + tempWishList.size.toString())
-                    println(tempWishList[0].ownerUID)
-                    //This if only updates when all the elements have been added to the list
-                    if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
-                        userInfo.update { t ->
-                            t.copy(
-                                wishLists = tempWishList
-                            )
+            for (wishListIdentifier in userFromDB.wishListIdentifiers) {
+                wishListsInDB.document(wishListIdentifier).get()
+                    .addOnSuccessListener { docWithEvent ->
+                        println("I fecthed this document:" + docWithEvent.id)
+                        val gotWishList = docWithEvent.toObject(WishList::class.java)
+                        gotWishList!!.id
+                        tempWishList.add(gotWishList)
+                        println("List has size " + tempWishList.size.toString())
+                        //This if only updates when all the elements have been added to the list
+                        if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
+                            userInfo.update { t ->
+                                t.copy(
+                                    wishLists = tempWishList
+                                )
+                            }
                         }
-                    }
 
-                }.addOnFailureListener {
-                    println("Could not find wishlist")
-                }
+                    }.addOnFailureListener {
+                        println("Could not find wishlist")
+                    }
 
 
             }

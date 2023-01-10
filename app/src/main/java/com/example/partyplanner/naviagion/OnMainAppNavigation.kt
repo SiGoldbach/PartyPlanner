@@ -87,7 +87,7 @@ fun InnerNav(
         composable(Destination.WishList.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Dine_wisList))
 
-            Wishlist(navController = onMainAppNavHostController)
+            Wishlist(navController = onMainAppNavHostController,viewModel)
         }
         composable(Destination.CreateWishlist.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Opret_ønskeliste))
