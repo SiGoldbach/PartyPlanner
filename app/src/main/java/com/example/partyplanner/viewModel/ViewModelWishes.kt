@@ -13,6 +13,7 @@ class ViewModelWishes : ViewModel() {
     private val userInfo =
         MutableStateFlow(
             WishesModel(
+                currentGift = Gift(realWish = true)
             )
         )
     val uiState: StateFlow<WishesModel> = userInfo.asStateFlow()

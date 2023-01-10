@@ -31,12 +31,12 @@ fun Wishes(
 ) {
     val viewModelWishesData by viewModelWishes.uiState.collectAsState()
 
-    val gift1 = Gift("Konfirmation", "Se ønskelisten her")
-    val gift2 = Gift("Juleaften", "Se ønskelisten her")
-    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
-    val gift4 = Gift("Gaveideer", "Se ønskelisten her")
-    val gift5 = Gift("Lejlighed", "Se ønskelisten her")
-    val gift6 = Gift("ligemeget", "wishwishtest", "0")
+    val gift1 = Gift("Konfirmation", "Se ønskelisten her", realWish = true)
+    val gift2 = Gift("Juleaften", "Se ønskelisten her", realWish = true)
+    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her", realWish = true)
+    val gift4 = Gift("Gaveideer", "Se ønskelisten her", realWish = true)
+    val gift5 = Gift("Lejlighed", "Se ønskelisten her", realWish = true)
+    val gift6 = Gift("ligemeget", "wishwishtest", "0", realWish = true)
     gift6.realWish = false
     val list = listOf(gift1, gift2, gift3, gift4, gift5, gift6)
 

@@ -21,6 +21,7 @@ class ViewModelOnApp : ViewModel() {
     private val userInfo =
         MutableStateFlow(
             OnAppModel(
+                currentGift = Gift(realWish = true)
             )
         )
     val uiState: StateFlow<OnAppModel> = userInfo.asStateFlow()
