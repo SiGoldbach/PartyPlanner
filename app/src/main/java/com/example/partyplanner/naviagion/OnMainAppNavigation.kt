@@ -71,7 +71,11 @@ fun InnerNav(
                 viewModelOnApp = viewModel
             )
         }
-        composable(Destination.TestScreen.route) { TestScreen(navController = onMainAppNavHostController) }
+        composable(Destination.Help.route) {
+            viewModel.updateTopBarString(stringResource(id = R.string.Help_Screen))
+
+            HelpScreen()
+        }
         composable(Destination.Profile.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Profile_page))
 
@@ -86,7 +90,8 @@ fun InnerNav(
             Wishlist(navController = onMainAppNavHostController)
         }
         composable(Destination.CreateWishlist.route) {
-            CreateWishlist(navController = onMainAppNavHostController)
+            viewModel.updateTopBarString(stringResource(id = R.string.Opret_ønskeliste))
+            CreateWishlist(navController = onMainAppNavHostController, viewModel)
         }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")

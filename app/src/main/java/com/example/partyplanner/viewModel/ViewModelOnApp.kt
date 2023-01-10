@@ -76,22 +76,48 @@ class ViewModelOnApp : ViewModel() {
                     val newList = specificUser!!.eventIdentifiers.toMutableList()
                     newList.add(generatedID)
                     specificUser.eventIdentifiers = newList
-                    val userMap = hashMapOf(
-                        UserHelper().EMAIl to specificUser.email,
-                        UserHelper().NAME to specificUser.name,
-                        UserHelper().UID to specificUser.uid,
-                        UserHelper().SURNAME to specificUser.surname,
-                        UserHelper().DESCRIPTION to specificUser.description,
-                        UserHelper().EVENT_IDS to specificUser.eventIdentifiers,
-                        UserHelper().PHONE_NUMBER to specificUser.phoneNumber,
-                        UserHelper().WISHlIST_IDENTIFIERS to specificUser.wishListIdentifiers
-                    )
-                    db.collection("USERS").document(userInfo.value.uid).set(userMap)
+                    db.collection("USERS").document(userInfo.value.uid)
+                        .update(UserHelper().EVENT_IDS, specificUser.eventIdentifiers)
                 }
 
 
             }.addOnFailureListener { println("Failure") }
         return boolean
+    }
+
+    fun createWishList(name: String) {
+        val generatedID = (0..99999999999).random().toString()
+        val addWishList = db.collection("wishLists")
+
+
+        val data1 = hashMapOf(
+            WishListHelper().ID to generatedID,
+            WishListHelper().NAME to name,
+            WishListHelper().GIFT_ADDRESSES to listOf<String>(),
+            WishListHelper().PICTURE to "EMPTY",
+            WishListHelper().OWNER_UID to userInfo.value.uid
+        )
+        userInfo.update { t -> t.copy(currentWishListId = generatedID) }
+
+        addWishList.document(generatedID).set(data1)
+            .addOnSuccessListener {
+                val user = db.collection("USERS").document(userInfo.value.uid)
+                user.get().addOnSuccessListener { doc ->
+                    val specificUser = doc.toObject(User::class.java)
+                    val newList = specificUser!!.wishListIdentifiers.toMutableList()
+                    newList.add(generatedID)
+                    db.collection("USERS").document(userInfo.value.uid)
+                        .update(UserHelper().WISHlIST_IDENTIFIERS, specificUser.wishListIdentifiers)
+
+
+                }
+
+
+            }.addOnFailureListener {
+                println("Cant update wishlist")
+            }
+
+
     }
 
 
@@ -117,8 +143,8 @@ class ViewModelOnApp : ViewModel() {
                 eventsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
                     val gotEvent = docWithEvent.toObject(Event::class.java)
                     tempEventsList.add(gotEvent!!)
-                    println("List has size " + tempEventsList.size.toString())
-                    println(tempEventsList[0].ownerUID)
+                    //println("List has size " + tempEventsList.size.toString())
+                    //println(tempEventsList[0].ownerUID)
                     //This if only updates when all the elements have been added to the list
                     if (tempEventsList.size == userFromDB.eventIdentifiers.size) {
                         userInfo.update { t ->
@@ -145,6 +171,46 @@ class ViewModelOnApp : ViewModel() {
         }
 
 
+    }
+
+    fun getAllWishLists() {
+        val user = db.collection("USERS").document(userInfo.value.uid)
+        val wishListsInDB = db.collection("wishList")
+        val tempWishList = mutableListOf<WishList>()
+
+        user.get().addOnSuccessListener { doc ->
+            val userFromDB = doc.toObject(User::class.java)
+            //Log.v("events", "Getting events")
+            Log.v(
+                "i will try to fetch wishlists: ",
+                userFromDB!!.wishListIdentifiers.size.toString()
+            )
+            for (event in userFromDB.wishListIdentifiers) {
+                wishListsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
+                    val gotEvent = docWithEvent.toObject(WishList::class.java)
+                    tempWishList.add(gotEvent!!)
+                    println("List has size " + tempWishList.size.toString())
+                    println(tempWishList[0].ownerUID)
+                    //This if only updates when all the elements have been added to the list
+                    if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
+                        userInfo.update { t ->
+                            t.copy(
+                                wishLists = tempWishList
+                            )
+                        }
+                    }
+
+                }.addOnFailureListener {
+                    println("Could not find wishlist")
+                }
+
+
+            }
+
+
+        }.addOnFailureListener {
+            println("Could not find the user")
+        }
     }
 
     fun getSingleEvent(eventId: String) {

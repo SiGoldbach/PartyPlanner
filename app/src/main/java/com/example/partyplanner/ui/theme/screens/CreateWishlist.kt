@@ -9,10 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 @Composable
-fun CreateWishlist(navController: NavHostController) {
+fun CreateWishlist(navController: NavHostController, viewModel: ViewModelOnApp) {
 
     var wishListName by remember { mutableStateOf(TextFieldValue("")) }
 
@@ -30,6 +32,11 @@ fun CreateWishlist(navController: NavHostController) {
         Button(
             onClick = {
 
+                onclickForButtonWishlist(
+                    navController = navController,
+                    viewModel = viewModel,
+                    name = wishListName.text
+                )
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
             shape = RoundedCornerShape(30.dp),
@@ -43,4 +50,14 @@ fun CreateWishlist(navController: NavHostController) {
 
     }
 
+}
+
+fun onclickForButtonWishlist(
+    navController: NavHostController,
+    viewModel: ViewModelOnApp,
+    name: String
+
+) {
+    navController.navigate(Destination.Event.route)
+    viewModel.createWishList(name)
 }

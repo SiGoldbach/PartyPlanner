@@ -21,18 +21,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.model.GiftList
+import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
 
 // The mainscreen for wishlist
 
 @Composable
 fun Wishlist(navController: NavController) {
-    val gift1 = GiftList(name = "Konfirmation")
-    val gift2 = GiftList(name = "Juleaften")
-    val gift3 = GiftList(name = "Fødselsdagsønsker")
-    val gift4 = GiftList(name = "Gaveideer")
-    val gift5 = GiftList(name = "Lejlighed")
+    val gift1 = WishList(name = "Konfirmation")
+    val gift2 = WishList(name = "Juleaften")
+    val gift3 = WishList(name = "Fødselsdagsønsker")
+    val gift4 = WishList(name = "Gaveideer")
+    val gift5 = WishList(name = "Lejlighed")
 
 
     val list = listOf(gift1, gift2, gift3, gift4, gift5)
@@ -90,7 +90,7 @@ fun Wishlist(navController: NavController) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishListComposer(giftList: GiftList, navController: NavController) {
+fun WishListComposer(wishList: WishList, navController: NavController) {
     Card(
         modifier = Modifier
 
@@ -120,14 +120,14 @@ fun WishListComposer(giftList: GiftList, navController: NavController) {
                     .align(alignment = Alignment.CenterVertically)
                 Image(
                     painter = painterResource(id = R.drawable.gift),
-                    contentDescription = "Dette er ønskelisten for" + giftList.name,
+                    contentDescription = "Dette er ønskelisten for" + wishList.name,
                     contentScale = ContentScale.Crop,
                     modifier = imageModifier.padding(3.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text(text = giftList.name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text(text = wishList.name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                     Text(
                         text = "",
                         fontSize = 12.sp,

@@ -82,7 +82,7 @@ fun ExperimentalScreen(
                         "profile" -> internalNav.navigate(Destination.Profile.route)
                         "begivenhed" -> internalNav.navigate(Destination.NewEvent.route)
                         "ønskeliste" -> internalNav.navigate(Destination.WishList.route)
-                        "hjælp" -> internalNav.navigate(Destination.TestScreen.route)
+                        "hjælp" -> internalNav.navigate(Destination.Help.route)
                     }
                     scope.launch { scaffoldState.drawerState.close() }
 

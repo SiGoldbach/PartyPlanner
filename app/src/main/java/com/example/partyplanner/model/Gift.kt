@@ -3,14 +3,12 @@ package com.example.partyplanner.model
 /**
  * This is the initial thought i have on
  */
-data class GiftList(
-    val id: String = "ID",
+data class WishList(
+    val id: String = "",
     val name: String = "",
     val picture: String = "",
     val ownerUID: String = "ownerUID",
-    var listOfGifts: MutableList<Gift> = mutableListOf(),
     val giftAddressees: List<String> = listOf()
-
 
 
 )
@@ -28,13 +26,11 @@ data class Gift(
 )
 
 
-data class GiftHelper(
-    val id: String = "id",
+data class WishListHelper(
+    val ID: String = "id",
     val NAME: String = "name",
-    val DESCRIPTION: String = "description",
-    val LINK: String = "",
     val PICTURE: String = "",
-    val PRICE: Int = 0,
-    val OWNER_UID: String = "ownerUID"
+    val OWNER_UID: String = "ownerUID",
+    val GIFT_ADDRESSES: String = "giftAddressees"
 
 )

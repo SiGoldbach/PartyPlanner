@@ -8,7 +8,7 @@ sealed class Destination (val route: String) {
     // OnMainAppNavigation:
     object Event : Destination("event")
     object NewEvent : Destination("newEvent")
-    object TestScreen : Destination("testScreen")
+    object Help : Destination("HelpScreen")
     object ComingEvents: Destination("mineEventsScreen")
     object WishList: Destination("WishlistScreen")
     object Profile: Destination("Profile")

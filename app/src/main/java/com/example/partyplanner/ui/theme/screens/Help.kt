@@ -13,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.partyplanner.ui.theme.dustyRose
-import com.google.android.datatransport.runtime.Destination
 
 @Composable
 fun HelpScreen() {
