@@ -20,9 +20,6 @@ import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 
-//Import and use topbar
-
-
 @Composable
 fun OpretBruger(
     navController: NavController,
@@ -35,8 +32,7 @@ fun OpretBruger(
     var kodeord by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()
     ) {
         Spacer(modifier = Modifier.height(35.dp))
 
@@ -45,7 +41,8 @@ fun OpretBruger(
                 text = "Opret Bruger",
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold,
-                fontSize = 26.sp, color = Color.Black
+                fontSize = 26.sp,
+                color = Color.Black
             )
         }
         Spacer(modifier = Modifier.height(standardDP))
@@ -60,26 +57,22 @@ fun OpretBruger(
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = forNavn,
             label = { Text(text = "Fornavn", color = dustyRose) },
-            onValueChange = { forNavn = it }
-        )
+            onValueChange = { forNavn = it })
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = efterNavn,
             label = { Text(text = "Efternavn", color = dustyRose) },
-            onValueChange = { efterNavn = it }
-        )
+            onValueChange = { efterNavn = it })
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = email,
             label = { Text(text = "E-mail", color = dustyRose) },
-            onValueChange = { email = it }
-        )
+            onValueChange = { email = it })
         Spacer(modifier = Modifier.height(standardDP))
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = kodeord,
             label = { Text(text = "Kodeord", color = dustyRose) },
-            onValueChange = { kodeord = it }
-        )
+            onValueChange = { kodeord = it })
 
         Spacer(modifier = Modifier.height(50.dp))
         //MAKING A STANDARD BUTTON FOR TRYING THE LOGIN
@@ -90,26 +83,23 @@ fun OpretBruger(
                 email = email.text,
                 kodeord = kodeord.text
             )
-            //Navigation skal lige fixes
+            //Navigation
             navController.navigate(Destination.ComingEvents.route)
         }) {
-            Text("Opret Bruger")
+            Text("Opret")
         }
 
     }
     // Skal være en "tilbage" button.
     Box(contentAlignment = Alignment.Center) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(Destination.LoginScreen.route) },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
             shape = CircleShape,
-            modifier = Modifier
-                .size(width = 40.dp, height = 40.dp)
+            modifier = Modifier.size(width = 40.dp, height = 40.dp)
         ) {
             Text(
-                text = "<",
-                fontStyle = FontStyle.Normal,
-                fontSize = 20.sp, color = Color.White
+                text = "<", fontStyle = FontStyle.Normal, fontSize = 20.sp, color = Color.White
             )
         }
     }
