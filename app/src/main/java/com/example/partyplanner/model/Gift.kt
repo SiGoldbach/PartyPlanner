@@ -8,7 +8,7 @@ data class WishList(
     val name: String = "",
     val picture: String = "",
     val ownerUID: String = "ownerUID",
-    val giftAddressees: List<String> = listOf()
+    var giftAddressees: List<String> = listOf()
 
 
 )
@@ -21,7 +21,7 @@ data class Gift(
     val picture: String = "",
     val price: Int = 0,
     val ownerUID: String = "ownerUID",
-    val wishListIDs: List<String> = listOf(),
+    var wishListIDs: List<String> = listOf(),
     var realWish: Boolean = true
 
 )
