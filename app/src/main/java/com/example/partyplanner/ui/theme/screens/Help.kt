@@ -1,9 +1,7 @@
 package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,21 +32,63 @@ fun HelpScreen() {
         Divider(color = Color.Black, thickness = 0.5.dp)
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        Button(
+            onClick = { /* TODO */ },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
+        ) {
+            Text("Button 1")
+        }
+
+        Button(
+            onClick = { /* Do something! */ },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
+        ) {
+            Text("Button 2")
+        }
+
+        Button(
+            onClick = { /* Do something! */ },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
+        ) {
+            Text("Button 3")
+        }
+
+        Button(
+            onClick = { /* Do something! */ },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
+        ) {
+            Text("Button 4")
+        }
+
+        Button(
+            onClick = { /* Do something! */ },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
+        ) {
+            Text("Button 5")
+        }
+
+        Button(
+            onClick = { /* Do something! */ },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose)
+        ) {
+            Text("Button 6")
+        }
     }
 }
 
 //@Composable
 //fun HelpComposer() {
-    //Card(
-        //modifier = Modifier.padding(start = 5.dp),
-        //onClick = { navControler.navigate(Destination.Help.route) },
-        //backroundColor = dustyRose
-    //)
-    //Column(
-        //modifier = Modifier
-            //.padding(start = 3.dp)
-            //.fillMaxWidth(),
-    //)
+//Card(
+//modifier = Modifier.padding(start = 5.dp),
+//onClick = { navControler.navigate(Destination.Help.route) },
+//backroundColor = dustyRose
+//)
+//Column(
+//modifier = Modifier
+//.padding(start = 3.dp)
+//.fillMaxWidth(),
+//)
 //}
 
 @Composable
