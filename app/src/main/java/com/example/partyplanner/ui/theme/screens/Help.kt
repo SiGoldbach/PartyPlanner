@@ -1,10 +1,8 @@
 package com.example.partyplanner.ui.theme.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -13,8 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
@@ -31,16 +31,19 @@ fun HelpScreen() {
         Spacer(modifier = Modifier.height(30.dp))
 
         Button(
+            modifier = Modifier
+                .size(width = 350.dp, height = 50.dp),
             onClick = { openDialogOne.value = true },
             colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-            shape = CircleShape
-        ) { Text("Oprettelse af begivenheder", color = Color.White) }
+            shape = RoundedCornerShape(30.dp)
+        ) { Text("Oprettelse af begivenheder", color = Color.White, fontSize = 16.sp, textAlign = TextAlign.Start) }
         if (openDialogOne.value) {
             AlertDialog(onDismissRequest = { openDialogOne.value = false }, title = {
                 Text(
                     text = "Oprettelse af begivenheder",
                     color = Color.Black,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
                 )
             }, text = { Text("Here is a text", color = Color.Black) }, confirmButton = {
                 Button(
