@@ -23,11 +23,14 @@ import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 // The mainscreen for wishlist
 
 @Composable
-fun Wishlist(navController: NavController) {
+fun Wishlist(navController: NavController, viewModelOnApp: ViewModelOnApp) {
+    val appState by viewModelOnApp.uiState.collectAsState()
+    viewModelOnApp.getAllWishLists()
     val gift1 = WishList(name = "Konfirmation")
     val gift2 = WishList(name = "Juleaften")
     val gift3 = WishList(name = "Fødselsdagsønsker")
@@ -63,8 +66,8 @@ fun Wishlist(navController: NavController) {
             horizontalArrangement = Arrangement.spacedBy(5.dp)
 
         ) {
-            items(list) { item ->
-                WishListComposer(item, navController)
+            items(appState.wishLists) { item ->
+                WishListComposer(item, navController, viewModelOnApp)
             }
 
         }
@@ -90,12 +93,19 @@ fun Wishlist(navController: NavController) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishListComposer(wishList: WishList, navController: NavController) {
+fun WishListComposer(
+    wishList: WishList,
+    navController: NavController,
+    viewModelOnApp: ViewModelOnApp
+) {
     Card(
         modifier = Modifier
 
             .padding(start = 5.dp, end = 5.dp),
-        onClick = { navController.navigate(Destination.Wishes.route) },
+        onClick = {
+            viewModelOnApp.setCurrentWisHListId(wishList.id)
+            navController.navigate(Destination.Wishes.route)
+        },
         backgroundColor = dustyRose,
 
         ) {

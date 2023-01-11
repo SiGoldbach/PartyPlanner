@@ -17,23 +17,56 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Gift
+import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.viewModel.ViewModelOnApp
+import com.example.partyplanner.viewModel.ViewModelWishes
 
 
 @Composable
-fun Wishes(navController: NavHostController) {
-    val gift1 = Gift("Konfirmation", "Se ønskelisten her")
-    val gift2 = Gift("Juleaften", "Se ønskelisten her")
-    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her")
-    val gift4 = Gift("Gaveideer", "Se ønskelisten her")
-    val gift5 = Gift("Lejlighed", "Se ønskelisten her")
-    val gift6 = Gift("ligemeget", "wishwishtest", "0")
+fun Wishes(
+    navController: NavHostController,
+    viewModelOnApp: ViewModelOnApp,
+    viewModelWishes: ViewModelWishes
+) {
+    val viewModelWishesData by viewModelWishes.uiState.collectAsState()
+    val appState by viewModelOnApp.uiState.collectAsState()
+    viewModelOnApp.getAllGiftsInWishList()
+
+    val gift1 = Gift("Konfirmation", "Se ønskelisten her", realWish = true)
+    val gift2 = Gift("Juleaften", "Se ønskelisten her", realWish = true)
+    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her", realWish = true)
+    val gift4 = Gift("Gaveideer", "Se ønskelisten her", realWish = true)
+    val gift5 = Gift("Lejlighed", "Se ønskelisten her", realWish = true)
+    val gift6 = Gift("ligemeget", "wishwishtest", "0", realWish = true)
     gift6.realWish = false
     val list = listOf(gift1, gift2, gift3, gift4, gift5, gift6)
 
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
+        Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
+        if (viewModelWishesData.popupControl) {
+            AlertDialog(onDismissRequest = {
+                viewModelWishes.disablePopUp()
+            }, title = {
+                Text(text = viewModelWishesData.currentGift.name)
+            }, text = {
+                Text(viewModelWishesData.currentGift.description)
+            }, confirmButton = {
+                Button(onClick = {
+                    viewModelWishes.disablePopUp()
+                }) {
+                    Text("This is the Confirm Button")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    viewModelWishes.disablePopUp()
+                }) {
+                    Text("This is the dismiss Button")
+                }
+            })
+        }
 
         LazyVerticalGrid(
             modifier = Modifier
@@ -43,8 +76,8 @@ fun Wishes(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(1.dp),
             horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
-            items(list) { item ->
-                WishesComposer(item, navController)
+            items(appState.currentGiftList) { item ->
+                WishesComposer(item, navController, viewModelWishes, viewModelOnApp)
             }
         }
     }
@@ -57,8 +90,12 @@ fun Wishes(navController: NavHostController) {
  */
 
 @Composable
-fun WishesComposer(gave: Gift, navController: NavHostController) {
-    var popupControl by remember { mutableStateOf(false) }
+fun WishesComposer(
+    gave: Gift,
+    navController: NavHostController,
+    viewModelWishes: ViewModelWishes,
+    viewModelOnApp: ViewModelOnApp
+) {
 
     if (gave.realWish) {
         Card(
@@ -92,7 +129,7 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
                     ) {
 
                         Button(
-                            onClick = { popupControl = true },
+                            onClick = { viewModelWishes.enablePopUpAnChangeCurrentWish(gift = gave) },
                             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
                         ) {
                             Text(text = "Gå til")
@@ -119,27 +156,37 @@ fun WishesComposer(gave: Gift, navController: NavHostController) {
     } else {
 
 
-
-
-       Column(
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-           Row(verticalAlignment = Alignment.CenterVertically) {
-               Image(
-                   painter = painterResource(id = R.drawable.addpresentpicture),
-                   contentDescription = "Denne knap tilføjer et ønske",
-                   modifier = Modifier
-                       .clip(CircleShape)
-                       .size(100.dp, 100.dp),
-                   contentScale = ContentScale.Crop,
-               )
-           }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.addpresentpicture),
+                    contentDescription = "Denne knap tilføjer et ønske",
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(100.dp, 100.dp),
+                    contentScale = ContentScale.Crop,
+                )
+                Button(onClick = {
+                    createDummyEvent(viewModelOnApp = viewModelOnApp)
+                }) {
+
+                }
+
+            }
 
         }
 
     }
+}
+
+fun createDummyEvent(viewModelOnApp: ViewModelOnApp) {
+    viewModelOnApp.createGift(Gift(realWish = true))
+
+
 }
 
 // """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

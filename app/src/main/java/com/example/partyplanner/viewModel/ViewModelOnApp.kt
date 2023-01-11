@@ -2,6 +2,7 @@ package com.example.partyplanner.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.partyplanner.fireBaseServices.*
 import com.example.partyplanner.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +19,7 @@ class ViewModelOnApp : ViewModel() {
     private val userInfo =
         MutableStateFlow(
             OnAppModel(
+                currentGift = Gift(realWish = true)
             )
         )
     val uiState: StateFlow<OnAppModel> = userInfo.asStateFlow()
@@ -49,7 +51,7 @@ class ViewModelOnApp : ViewModel() {
         val generatedID = (0..99999999999).random().toString()
 
         var boolean = false
-        val addEvent = db.collection("events")
+        val addEvent = db.collection(EVENTS)
         val data1 = hashMapOf(
             EventHelper().id to generatedID,
             EventHelper().NAME to eventName,
@@ -70,13 +72,13 @@ class ViewModelOnApp : ViewModel() {
         addEvent.document(generatedID).set(data1)
             .addOnSuccessListener {
                 boolean = true
-                val user = db.collection("USERS").document(userInfo.value.uid)
+                val user = db.collection(USERS).document(userInfo.value.uid)
                 user.get().addOnSuccessListener { doc ->
                     val specificUser = doc.toObject(User::class.java)
                     val newList = specificUser!!.eventIdentifiers.toMutableList()
                     newList.add(generatedID)
                     specificUser.eventIdentifiers = newList
-                    db.collection("USERS").document(userInfo.value.uid)
+                    db.collection(USERS).document(userInfo.value.uid)
                         .update(UserHelper().EVENT_IDS, specificUser.eventIdentifiers)
                 }
 
@@ -87,7 +89,7 @@ class ViewModelOnApp : ViewModel() {
 
     fun createWishList(name: String) {
         val generatedID = (0..99999999999).random().toString()
-        val addWishList = db.collection("wishLists")
+        val addWishList = db.collection(WISHLISTS)
 
 
         val data1 = hashMapOf(
@@ -105,7 +107,7 @@ class ViewModelOnApp : ViewModel() {
         addWishList.document(generatedID).set(data1)
             .addOnSuccessListener {
                 println("Getting here into the succesListener ")
-                val user = db.collection("USERS").document(userInfo.value.uid)
+                val user = db.collection(USERS).document(userInfo.value.uid)
                 user.get().addOnSuccessListener { doc ->
                     val specificUser = doc.toObject(User::class.java)
                     val newList = specificUser!!.wishListIdentifiers.toMutableList()
@@ -113,7 +115,7 @@ class ViewModelOnApp : ViewModel() {
                     newList.add(generatedID)
                     println("The length of the currentWishList is: " + newList.size)
                     specificUser.wishListIdentifiers = newList
-                    db.collection("USERS").document(userInfo.value.uid)
+                    db.collection(USERS).document(userInfo.value.uid)
                         .update(UserHelper().WISHlIST_IDENTIFIERS, specificUser.wishListIdentifiers)
 
 
@@ -136,8 +138,8 @@ class ViewModelOnApp : ViewModel() {
 
 
     private fun getAllEvents() {
-        val user = db.collection("USERS").document(userInfo.value.uid)
-        val eventsInDB = db.collection("events")
+        val user = db.collection(USERS).document(userInfo.value.uid)
+        val eventsInDB = db.collection(EVENTS)
         val tempEventsList = mutableListOf<Event>()
 
         user.get().addOnSuccessListener { doc ->
@@ -181,8 +183,8 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun getAllWishLists() {
-        val user = db.collection("USERS").document(userInfo.value.uid)
-        val wishListsInDB = db.collection("wishList")
+        val user = db.collection(USERS).document(userInfo.value.uid)
+        val wishListsInDB = db.collection(WISHLISTS)
         val tempWishList = mutableListOf<WishList>()
 
         user.get().addOnSuccessListener { doc ->
@@ -192,24 +194,26 @@ class ViewModelOnApp : ViewModel() {
                 "i will try to fetch wishlists: ",
                 userFromDB!!.wishListIdentifiers.size.toString()
             )
-            for (event in userFromDB.wishListIdentifiers) {
-                wishListsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
-                    val gotEvent = docWithEvent.toObject(WishList::class.java)
-                    tempWishList.add(gotEvent!!)
-                    println("List has size " + tempWishList.size.toString())
-                    println(tempWishList[0].ownerUID)
-                    //This if only updates when all the elements have been added to the list
-                    if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
-                        userInfo.update { t ->
-                            t.copy(
-                                wishLists = tempWishList
-                            )
+            for (wishListIdentifier in userFromDB.wishListIdentifiers) {
+                wishListsInDB.document(wishListIdentifier).get()
+                    .addOnSuccessListener { docWithEvent ->
+                        println("I fecthed this document:" + docWithEvent.id)
+                        val gotWishList = docWithEvent.toObject(WishList::class.java)
+                        gotWishList!!.id
+                        tempWishList.add(gotWishList)
+                        println("List has size " + tempWishList.size.toString())
+                        //This if only updates when all the elements have been added to the list
+                        if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
+                            userInfo.update { t ->
+                                t.copy(
+                                    wishLists = tempWishList
+                                )
+                            }
                         }
-                    }
 
-                }.addOnFailureListener {
-                    println("Could not find wishlist")
-                }
+                    }.addOnFailureListener {
+                        println("Could not find wishlist")
+                    }
 
 
             }
@@ -220,8 +224,57 @@ class ViewModelOnApp : ViewModel() {
         }
     }
 
+    fun getAllGiftsInWishList() {
+        val wishList = db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
+        val giftListsInDB = db.collection(GIFTS)
+        val tempGiftList = mutableListOf<Gift>()
+        Log.v(
+            FIREBASE_SERVICE_TAG,
+            "Trying to get all wishes from wishlist with id: " + userInfo.value.currentWishListId
+        )
+        println("Trying to get all wishes from wishlist with id: " + userInfo.value.currentWishListId)
+
+        wishList.get().addOnSuccessListener { doc ->
+            val wishListFromDB = doc.toObject(WishList::class.java)
+            Log.v(
+                FIREBASE_SERVICE_TAG,
+                "Trying to get: " + wishListFromDB!!.giftAddressees.size.toString() + " from the db"
+            )
+            if (wishListFromDB.giftAddressees.isEmpty()) {
+                tempGiftList.add(Gift(realWish = false))
+                Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
+                userInfo.update { t ->
+                    t.copy(
+                        currentGiftList = tempGiftList
+                    )
+                }
+            }
+            for (giftIdentifier in wishListFromDB.giftAddressees) {
+                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener {
+                    val gotGift = doc.toObject(Gift::class.java)
+                    tempGiftList.add(gotGift!!)
+                    println("GiftList has size: " + tempGiftList.size)
+                    if (tempGiftList.size == wishListFromDB.giftAddressees.size) {
+                        tempGiftList.add(Gift(realWish = false))
+                        Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
+                        userInfo.update { t ->
+                            t.copy(
+                                currentGiftList = tempGiftList
+                            )
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+
+    }
+
     fun getSingleEvent(eventId: String) {
-        val eventsInDB = db.collection("events").document(eventId)
+        val eventsInDB = db.collection(EVENTS).document(eventId)
         eventsInDB.get().addOnSuccessListener { curEventDoc ->
             val eventFromDB = curEventDoc.toObject(Event::class.java)
 
@@ -245,7 +298,7 @@ class ViewModelOnApp : ViewModel() {
      * Maybe in the future some changes are so common values might be changed one at a time.
      */
     fun updateEventValues(event: Event) {
-        val addEvent = db.collection("events")
+        val addEvent = db.collection(EVENTS)
             .document(event.id)
         val data1 = hashMapOf(
             EventHelper().id to event.id,
@@ -271,11 +324,59 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun getProfileInfoAndUpdate() {
-        val user = db.collection("USERS").document(userInfo.value.uid)
+        val user = db.collection(USERS).document(userInfo.value.uid)
 
         user.get().addOnSuccessListener { doc ->
             val userFromDB = doc.toObject(User::class.java)
             userInfo.update { t -> t.copy(user = userFromDB!!) }
+        }
+
+
+    }
+
+    fun setCurrentGift(gift: Gift) {
+        userInfo.update { t -> t.copy(currentGift = gift) }
+
+
+    }
+
+    fun setCurrentWisHListId(wishListId: String) {
+        userInfo.update { t -> t.copy(currentWishListId = wishListId) }
+
+
+    }
+
+
+    fun createGift(gift: Gift) {
+        val generatedID = (0..99999999999).random().toString()
+        val addGift = db.collection(GIFTS)
+        val data1 = hashMapOf(
+            GiftHelper().ID to generatedID,
+            GiftHelper().DESCRIPTION to gift.description,
+            GiftHelper().LINK to gift.link,
+            GiftHelper().NAME to gift.name,
+            GiftHelper().PICTURE to gift.picture,
+            GiftHelper().OWNER_UID to uiState.value.uid,
+            GiftHelper().WISHLIST_IDS to listOf<String>(uiState.value.currentWishListId),
+            GiftHelper().REALWISH to true,
+        )
+        addGift.document(generatedID).set(data1).addOnSuccessListener {
+            userInfo.update { t -> t.copy(currentGiftID = generatedID) }
+            val user = db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
+            user.get().addOnSuccessListener { doc ->
+                val specificUser = doc.toObject(WishList::class.java)
+                val newList = specificUser!!.giftAddressees.toMutableList()
+                newList.add(generatedID)
+                db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
+                    .update(WishListHelper().GIFT_ADDRESSES, newList)
+                    .addOnFailureListener {
+                        Log.v("FirebaseService", "Could not add the gift to the wishlist")
+                    }
+            }
+
+
+        }.addOnFailureListener {
+            Log.v("FirebaseService", "Could not upload the gift properly")
         }
 
 
