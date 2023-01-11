@@ -70,18 +70,18 @@ private fun ContactCard(contact: Contact) {
             if (isDialogOpen.value) {
                 AlertDialog(
                     onDismissRequest = { isDialogOpen.value = false },
-                    title = { Text("Delete Contact") },
+                    title = { Text("Slet kontakt") },
                     text = {
-                        Text("Are you sure you want to delete the contact ${contact.name} ?")
+                        Text("Er du sikker på at du vil slette ${contact.name} ?")
                     },
                     buttons = {
                         Row {
                             Button(onClick = { isDialogOpen.value = false }) {
-                                Text("Cancel")
+                                Text("Afbryd")
                             }
                             Spacer(modifier = Modifier.width(8.dp))
                             Button(onClick = { isDialogOpen.value = false }) {
-                                Text("Delete")
+                                Text("Slet")
                             }
                         }
                     }
@@ -92,5 +92,6 @@ private fun ContactCard(contact: Contact) {
 }
 
 data class Contact(val name: String, val phone: String, val email: String){
+
 
 }
