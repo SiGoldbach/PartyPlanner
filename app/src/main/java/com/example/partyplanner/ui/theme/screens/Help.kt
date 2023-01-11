@@ -1,11 +1,11 @@
 package com.example.partyplanner.ui.theme.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,185 +18,183 @@ import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
 fun HelpScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        val openDialogOne = remember { mutableStateOf(false) }
+        val openDialogTwo = remember { mutableStateOf(false) }
+        val openDialogThree = remember { mutableStateOf(false) }
+        val openDialogFour = remember { mutableStateOf(false) }
+        val openDialogFive = remember { mutableStateOf(false) }
+        val openDialogSix = remember { mutableStateOf(false) }
 
-        Column {
-            val openDialog = remember { mutableStateOf(false) }
+        Spacer(modifier = Modifier.height(30.dp))
 
-            Spacer(modifier = Modifier.height(30.dp))
-
-            Button(
-                onClick = { openDialog.value = true },
-                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
-            ) { Text("Button 1", color = Color.White) }
-            if (openDialog.value) {
-                AlertDialog(onDismissRequest = {
-                    openDialog.value = false
-                }, title = {
-                    Text(text = "Dialog Title")
-                }, text = {
-                    Text("Here is a text")
-                }, confirmButton = {
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = CircleShape
+        ) { Text("Oprettelse af begivenheder", color = Color.White) }
+        if (openDialogOne.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogOne.value = false },
+                title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
+                text = { Text("Here is a text", color = Color.Black) },
+                confirmButton = {
                     Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the Confirm Button")
-                    }
-                }, dismissButton = {
+                        openDialogOne.value = false
+                    }) { Text("OK") }
+                },
+                dismissButton = {
                     Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the dismiss Button")
-                    }
+                        openDialogOne.value = false
+                    }) { Text("Cancel") }
                 })
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                onClick = { openDialog.value = true },
-                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
-            ) { Text("Button 2", color = Color.White) }
-            if (openDialog.value) {
-                AlertDialog(onDismissRequest = {
-                    openDialog.value = false
-                }, title = {
-                    Text(text = "Dialog Title")
-                }, text = {
-                    Text("Here is a text")
-                }, confirmButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the Confirm Button")
-                    }
-                }, dismissButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the dismiss Button")
-                    }
-                })
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                onClick = { openDialog.value = true },
-                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
-            ) { Text("Button 3", color = Color.White) }
-            if (openDialog.value) {
-                AlertDialog(onDismissRequest = {
-                    openDialog.value = false
-                }, title = {
-                    Text(text = "Dialog Title")
-                }, text = {
-                    Text("Here is a text")
-                }, confirmButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the Confirm Button")
-                    }
-                }, dismissButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the dismiss Button")
-                    }
-                })
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                onClick = { openDialog.value = true },
-                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
-            ) { Text("Button 4", color = Color.White) }
-            if (openDialog.value) {
-                AlertDialog(onDismissRequest = {
-                    openDialog.value = false
-                }, title = {
-                    Text(text = "Dialog Title")
-                }, text = {
-                    Text("Here is a text")
-                }, confirmButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the Confirm Button")
-                    }
-                }, dismissButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the dismiss Button")
-                    }
-                })
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                onClick = { openDialog.value = true },
-                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
-            ) { Text("Button 5", color = Color.White) }
-            if (openDialog.value) {
-                AlertDialog(onDismissRequest = {
-                    openDialog.value = false
-                }, title = {
-                    Text(text = "Dialog Title")
-                }, text = {
-                    Text("Here is a text")
-                }, confirmButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the Confirm Button")
-                    }
-                }, dismissButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the dismiss Button")
-                    }
-                })
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                onClick = { openDialog.value = true },
-                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
-            ) { Text("Button 6", color = Color.White) }
-            if (openDialog.value) {
-                AlertDialog(onDismissRequest = {
-                    openDialog.value = false
-                }, title = {
-                    Text(text = "Dialog Title")
-                }, text = {
-                    Text("Here is a text")
-                }, confirmButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the Confirm Button")
-                    }
-                }, dismissButton = {
-                    Button(onClick = {
-                        openDialog.value = false
-                    }) {
-                        Text("This is the dismiss Button")
-                    }
-                })
-            }
         }
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(
+            onClick = { openDialogTwo.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = CircleShape
+        ) { Text("Invitationer", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Invitationer") },
+                text = { Text("Here is a text") },
+                confirmButton = {
+                    Button(onClick = {
+                    openDialogTwo.value = false
+                }) { Text("OK") }
+            },
+                dismissButton = {
+                    Button(onClick = { openDialogTwo.value = false })
+                    { Text("Cancel") }
+            })
+        }
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(
+            onClick = { openDialogThree.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = CircleShape
+        ) { Text("Deltagerliste", color = Color.White) }
+        if (openDialogThree.value) {
+            AlertDialog(onDismissRequest = {
+                openDialogThree.value = false
+            }, title = {
+                Text(text = "Dialog Title")
+            }, text = {
+                Text("Here is a text")
+            }, confirmButton = {
+                Button(onClick = {
+                    openDialogThree.value = false
+                }) {
+                    Text("OK")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    openDialogThree.value = false
+                }) {
+                    Text("Cancel")
+                }
+            })
+        }
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(
+            onClick = { openDialogFour.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = CircleShape
+        ) { Text("Ønskeliste", color = Color.White) }
+        if (openDialogFour.value) {
+            AlertDialog(onDismissRequest = {
+                openDialogFour.value = false
+            }, title = {
+                Text(text = "Dialog Title")
+            }, text = {
+                Text("Here is a text")
+            }, confirmButton = {
+                Button(onClick = {
+                    openDialogFour.value = false
+                }) {
+                    Text("OK")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    openDialogFour.value = false
+                }) {
+                    Text("Cancel")
+                }
+            })
+        }
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(
+            onClick = { openDialogFive.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = CircleShape
+        ) { Text("Jurdiske Vilkår", color = Color.White) }
+        if (openDialogFive.value) {
+            AlertDialog(onDismissRequest = {
+                openDialogFive.value = false
+            }, title = {
+                Text(text = "Dialog Title")
+            }, text = {
+                Text("Here is a text")
+            }, confirmButton = {
+                Button(onClick = {
+                    openDialogFive.value = false
+                }) {
+                    Text("OK")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    openDialogFive.value = false
+                }) {
+                    Text("Cancel")
+                }
+            })
+        }
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(
+            onClick = { openDialogSix.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = CircleShape
+        ) { Text("Fik du ikke hjælp til dit problem?", color = Color.White) }
+        if (openDialogSix.value) {
+            AlertDialog(onDismissRequest = {
+                openDialogSix.value = false
+            }, title = {
+                Text(text = "Fik du ikke hjælp til dit problem?")
+            }, text = {
+                Text("Here is a text")
+            }, confirmButton = {
+                Button(onClick = {
+                    openDialogSix.value = false
+                }) {
+                    Text("OK")
+                }
+            }, dismissButton = {
+                Button(onClick = {
+                    openDialogSix.value = false
+                }) {
+                    Text("Cancel")
+                }
+            })
+        }
+
+        //Button(openDialog = openDialogOne)
+        //DialogTwo(openDialog = dialogTwoOpen)
     }
 }
+
 
 @Composable
 @Preview(showBackground = true)
 fun HelpScreenPreview() {
     HelpScreen()
 }
+
+//DialogOne(openDialog = dialogOneOpen)
+//DialogTwo(openDialog = dialogTwoOpen)
