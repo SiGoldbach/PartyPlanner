@@ -5,7 +5,9 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
+/**
+ * Written by our good friend chatGPT
+ */
 public class MailSender {
 
     private static final String FROM_EMAIL = "partyplannerdk@gmail.com";

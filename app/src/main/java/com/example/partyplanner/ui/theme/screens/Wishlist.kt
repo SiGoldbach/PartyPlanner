@@ -31,14 +31,6 @@ import com.example.partyplanner.viewModel.ViewModelOnApp
 fun Wishlist(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllWishLists()
-    val gift1 = WishList(name = "Konfirmation")
-    val gift2 = WishList(name = "Juleaften")
-    val gift3 = WishList(name = "Fødselsdagsønsker")
-    val gift4 = WishList(name = "Gaveideer")
-    val gift5 = WishList(name = "Lejlighed")
-
-
-    val list = listOf(gift1, gift2, gift3, gift4, gift5)
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
@@ -129,7 +121,7 @@ fun WishListComposer(
                     .fillMaxWidth()
                     .align(alignment = Alignment.CenterVertically)
                 Image(
-                    painter = painterResource(id = R.drawable.gift),
+                    painter = painterResource(id = R.drawable.wishlistpicture),
                     contentDescription = "Dette er ønskelisten for" + wishList.name,
                     contentScale = ContentScale.Crop,
                     modifier = imageModifier.padding(3.dp)
