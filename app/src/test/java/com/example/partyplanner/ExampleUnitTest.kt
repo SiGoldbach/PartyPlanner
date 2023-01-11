@@ -1,13 +1,10 @@
 package com.example.partyplanner
 
 import com.example.partyplanner.fireBaseServices.MailSender
+import com.example.partyplanner.fireBaseServices.generateId
 import org.junit.Test
 
 import org.junit.Assert.*
-import java.util.Properties
-import javax.mail.*
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeMessage
 
 
 /**
@@ -21,21 +18,17 @@ class ExampleUnitTest {
         assertEquals(4, 2 + 2)
     }
 
-
-
-        @Test
-        fun sendEmailTest() {
-            val credentials = EmailCredentials("partyplannerdk@gmail.com", "isznshvcwlewebov")
-            val mailConfig = MailConfig("smtp.gmail.com", 587, true, true)
-            val mailProperties = MailProperties()
-
-            val props = mailProperties.getProperties(mailConfig)
-
-            Assertions.assertDoesNotThrow {
-                MailSender.sendEmail(credentials, props, "recipient@example.com", "Test Subject", "Test Body")
-
-        }
+    @Test
+    fun testGenerateId() {
+        println(generateId())
     }
 
+
+    @Test
+    fun sendEmailTest() {
+        MailSender.sendEmail("sig.goldbach@gmail.com", "MailFromApp", "Trying to send mail")
+
+
+    }
 }
 

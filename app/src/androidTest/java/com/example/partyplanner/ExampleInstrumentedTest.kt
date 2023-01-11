@@ -23,12 +23,6 @@ class ExampleInstrumentedTest {
     }
 
     /**
-     * The purpose of this test is to create 5 events and then get them. from firebase,
-     * will never work since the app needs to be started to work
-     */
-
-
-    /**
      * Testing time
      */
     @Test

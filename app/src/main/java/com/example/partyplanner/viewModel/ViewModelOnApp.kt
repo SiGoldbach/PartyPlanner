@@ -88,7 +88,7 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun createWishList(name: String) {
-        val generatedID = (0..99999999999).random().toString()
+        val generatedID = generateId()
         val addWishList = db.collection(WISHLISTS)
 
 
@@ -346,7 +346,6 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
-
     fun createGift(gift: Gift) {
         val generatedID = (0..99999999999).random().toString()
         val addGift = db.collection(GIFTS)
@@ -381,6 +380,8 @@ class ViewModelOnApp : ViewModel() {
 
 
     }
+
+
 
 
 }

@@ -100,6 +100,7 @@ dependencies {
     //Maven javax
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     androidTestImplementation "com.google.dagger:hilt-android-testing:2.43.2"
