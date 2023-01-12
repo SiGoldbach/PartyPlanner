@@ -234,8 +234,8 @@ class ViewModelOnApp : ViewModel() {
         )
         println("Trying to get all wishes from wishlist with id: " + userInfo.value.currentWishListId)
 
-        wishList.get().addOnSuccessListener { doc ->
-            val wishListFromDB = doc.toObject(WishList::class.java)
+        wishList.get().addOnSuccessListener { docWishList ->
+            val wishListFromDB = docWishList.toObject(WishList::class.java)
             Log.v(
                 FIREBASE_SERVICE_TAG,
                 "Trying to get: " + wishListFromDB!!.giftAddressees.size.toString() + " from the db"
@@ -250,8 +250,8 @@ class ViewModelOnApp : ViewModel() {
                 }
             }
             for (giftIdentifier in wishListFromDB.giftAddressees) {
-                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener {
-                    val gotGift = doc.toObject(Gift::class.java)
+                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener { docGift->
+                    val gotGift = docGift.toObject(Gift::class.java)
                     tempGiftList.add(gotGift!!)
                     println("GiftList has size: " + tempGiftList.size)
                     if (tempGiftList.size == wishListFromDB.giftAddressees.size) {
@@ -347,7 +347,7 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun createGift(gift: Gift) {
-        val generatedID = (0..99999999999).random().toString()
+        val generatedID = generateId()
         val addGift = db.collection(GIFTS)
         val data1 = hashMapOf(
             GiftHelper().ID to generatedID,
