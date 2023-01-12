@@ -23,11 +23,9 @@ class ExampleUnitTest {
         println(generateId())
     }
 
-
     @Test
     fun sendEmailTest() {
-        MailSender.sendEmail("sig.goldbach@gmail.com", "MailFromApp", "Trying to send mail")
-
+        MailSender.sendEmail("sig.goldbach@gmail.com", "MailFromApp", "Trying to send mail with a lot of text to see if the text can fit inside the email.")
 
     }
 }

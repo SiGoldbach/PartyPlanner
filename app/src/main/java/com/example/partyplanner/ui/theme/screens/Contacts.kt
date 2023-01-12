@@ -1,97 +1,116 @@
 package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+
+import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
-fun ContactsPage(navController: NavController) {
-    val dummyContacts = listOf(
-        Contact("John Doe", "555-555-5555", "johndoe@example.com"),
-        Contact("Jane Smith", "555-555-5556", "janesmith@example.com"),
-        Contact("Bob Johnson", "555-555-5557", "bobjohnson@example.com")
-    )
-
-    Column(modifier = Modifier.padding(16.dp)) {
-        for (contact in dummyContacts) {
-            ContactCard(contact)
-        }
-    }
-}
-
-@Composable
-private fun ContactCard(contact: Contact) {
-    val isDialogOpen = remember { mutableStateOf(false) }
-    Card(
-        modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(4.dp),
-        elevation = 4.dp
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = contact.name,
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
-            )
-            Text(
-                text = contact.phone,
-                style = TextStyle(
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 14.sp
-                )
-            )
-            Text(
-                text = contact.email,
-                style = TextStyle(
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 14.sp
-                )
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            IconButton(onClick = { isDialogOpen.value = true }) {
-                Icons.Default.Delete
-            }
-            if (isDialogOpen.value) {
+fun ContactCard(navController: NavHostController) {
+    val openDialogOne = remember { mutableStateOf(false) }
+    val openDialogTwo = remember { mutableStateOf(false) }
+    val openDialogThree = remember { mutableStateOf(false) }
+    val openDialogFour = remember { mutableStateOf(false) }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column() {
+            Button(
+                onClick = { openDialogOne.value = true },
+                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+                shape = CircleShape
+            ) { Text("Valdemar Nielsen", color = Color.White) }
+            if (openDialogOne.value) {
                 AlertDialog(
-                    onDismissRequest = { isDialogOpen.value = false },
-                    title = { Text("Slet kontakt") },
-                    text = {
-                        Text("Er du sikker på at du vil slette ${contact.name} ?")
+                    onDismissRequest = { openDialogOne.value = false },
+                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
+                    text = { Text("Here is a text", color = Color.Black) },
+                    confirmButton = {
+                        Button(onClick = {
+                            openDialogOne.value = false
+                        }) { Text("OK") }
                     },
-                    buttons = {
-                        Row {
-                            Button(onClick = { isDialogOpen.value = false }) {
-                                Text("Afbryd")
-                            }
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Button(onClick = { isDialogOpen.value = false }) {
-                                Text("Slet")
-                            }
-                        }
-                    }
-                )
+                    dismissButton = {
+                        Button(onClick = {
+                            openDialogOne.value = false
+                        }) { Text("Cancel") }
+                    })
             }
+            Spacer(modifier = Modifier.height(15.dp))
+            Button(
+                onClick = { openDialogOne.value = true },
+                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+                shape = CircleShape
+            ) { Text("Sebastian Goldbach", color = Color.White) }
+            if (openDialogTwo.value) {
+                AlertDialog(
+                    onDismissRequest = { openDialogTwo.value = false },
+                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
+                    text = { Text("Here is a text", color = Color.Black) },
+                    confirmButton = {
+                        Button(onClick = {
+                            openDialogTwo.value = false
+                        }) { Text("OK") }
+                    },
+                    dismissButton = {
+                        Button(onClick = {
+                            openDialogTwo.value = false
+                        }) { Text("Cancel") }
+                    })
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+            Button(
+                onClick = { openDialogOne.value = true },
+                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+                shape = CircleShape
+            ) { Text("Christian Hyltoft", color = Color.White) }
+            if (openDialogThree.value) {
+                AlertDialog(
+                    onDismissRequest = { openDialogThree.value = false },
+                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
+                    text = { Text("Here is a text", color = Color.Black) },
+                    confirmButton = {
+                        Button(onClick = {
+                            openDialogThree.value = false
+                        }) { Text("OK") }
+                    },
+                    dismissButton = {
+                        Button(onClick = {
+                            openDialogThree.value = false
+                        }) { Text("Cancel") }
+                    })
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+            Button(
+                onClick = { openDialogFour.value = true },
+                colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+                shape = CircleShape
+            ) { Text("Ismail Ali", color = Color.White) }
+            if (openDialogFour.value) {
+                AlertDialog(
+                    onDismissRequest = { openDialogFour.value = false },
+                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
+                    text = { Text("Here is a text", color = Color.Black) },
+                    confirmButton = {
+                        Button(onClick = {
+                            openDialogFour.value = false
+                        }) { Text("OK") }
+                    },
+                    dismissButton = {
+                        Button(onClick = {
+                            openDialogFour.value = false
+                        }) { Text("Cancel") }
+                    })
+            }
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
-}
-
-data class Contact(val name: String, val phone: String, val email: String){
-
-
 }

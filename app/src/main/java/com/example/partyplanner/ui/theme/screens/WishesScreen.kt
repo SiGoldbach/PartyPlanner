@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -142,29 +144,34 @@ fun WishesComposer(
         }
     } else {
 
+        Box(contentAlignment = Alignment.Center) {
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.addpresentpicture),
-                    contentDescription = "Denne knap tilføjer et ønske",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(100.dp, 100.dp),
-                    contentScale = ContentScale.Crop,
-                )
-                Button(onClick = {
-                    createDummyEvent(viewModelOnApp = viewModelOnApp)
-                }) {
 
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxSize(),
+
+                ) {
+                //    Spacer(modifier = Modifier.h)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxHeight()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.addpresentpicture),
+                        contentDescription = "Denne knap tilføjer et ønske",
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(100.dp, 100.dp)
+                            .clickable(
+                                onClick = { createDummyEvent(viewModelOnApp = viewModelOnApp) }
+                            ),
+                        contentScale = ContentScale.Fit,
+                        alignment = Alignment.Center
+                    )
                 }
-
             }
-
         }
 
     }
