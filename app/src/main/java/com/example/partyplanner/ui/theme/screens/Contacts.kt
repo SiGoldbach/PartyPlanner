@@ -9,24 +9,37 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.partyplanner.ui.theme.NavigationDrawerComposeTheme
 
 import com.example.partyplanner.ui.theme.dustyRose
 
 @Composable
 fun ContactCard(navController: NavHostController) {
+    Contacts()
+}
+
+
+@Composable
+fun Contacts () {
     val openDialogOne = remember { mutableStateOf(false) }
     val openDialogTwo = remember { mutableStateOf(false) }
     val openDialogThree = remember { mutableStateOf(false) }
     val openDialogFour = remember { mutableStateOf(false) }
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column() {
+            Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = { openDialogOne.value = true },
                 colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
+                shape = RectangleShape,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(45.dp)
             ) { Text("Valdemar Nielsen", color = Color.White) }
             if (openDialogOne.value) {
                 AlertDialog(
@@ -42,15 +55,18 @@ fun ContactCard(navController: NavHostController) {
                     confirmButton = {
                         Button(onClick = {
                             openDialogOne.value = false
-                        }) { Text("OK") }
+                        }) { Text("LUK") }
                     },
                 )
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Button(
                 onClick = { openDialogOne.value = true },
                 colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
+                shape = RectangleShape,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(45.dp)
             ) { Text("Sebastian Goldbach", color = Color.White) }
             if (openDialogTwo.value) {
                 AlertDialog(
@@ -64,16 +80,20 @@ fun ContactCard(navController: NavHostController) {
 
                     confirmButton = {
                         Button(onClick = {
-                            openDialogOne.value = false
-                        }) { Text("OK") }
+                            openDialogTwo.value = false
+                        }) { Text("LUK") }
                     },
                 )
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Button(
                 onClick = { openDialogThree.value = true },
                 colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
+                shape = RectangleShape,
+                //Size of the button
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(45.dp)
             ) { Text("Christian Hyltoft", color = Color.White) }
             if (openDialogThree.value) {
                 AlertDialog(
@@ -87,16 +107,19 @@ fun ContactCard(navController: NavHostController) {
 
                     confirmButton = {
                         Button(onClick = {
-                            openDialogOne.value = false
-                        }) { Text("OK") }
+                            openDialogThree.value = false
+                        }) { Text("LUK") }
                     },
                 )
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Button(
                 onClick = { openDialogFour.value = true },
                 colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
-                shape = CircleShape
+                shape = RectangleShape,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(45.dp)
             ) { Text("Ismail Ali", color = Color.White) }
             if (openDialogFour.value) {
                 AlertDialog(
@@ -110,12 +133,12 @@ fun ContactCard(navController: NavHostController) {
 
                     confirmButton = {
                         Button(onClick = {
-                            openDialogOne.value = false
-                        }) { Text("OK") }
+                            openDialogFour.value = false
+                        }) { Text("LUK") }
                     },
                 )
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
