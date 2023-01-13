@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
+import com.example.partyplanner.viewModel.ViewModelHelp
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.example.partyplanner.viewModel.ViewModelWishes
 
@@ -23,6 +24,7 @@ fun InnerNav(
     externalNavHostController: NavHostController,
     viewModel: ViewModelOnApp
 ) {
+    val viewModelHelp = ViewModelHelp()
     val viewModelWishes = ViewModelWishes()
     //Here i am making a viewmodel since this nav function will only be called once every time,
     //a new user logs into the app
@@ -81,7 +83,7 @@ fun InnerNav(
         composable(Destination.Help.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Help_Screen))
 
-            HelpScreen()
+            HelpScreen(viewModelHelp)
         }
         composable(Destination.Profile.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Profile_page))

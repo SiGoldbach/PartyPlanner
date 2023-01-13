@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,18 +36,9 @@ fun Wishes(
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllGiftsInWishList()
 
-    val gift1 = Gift("Konfirmation", "Se ønskelisten her", realWish = true)
-    val gift2 = Gift("Juleaften", "Se ønskelisten her", realWish = true)
-    val gift3 = Gift("Fødselsdagsønsker", "Se ønskelisten her", realWish = true)
-    val gift4 = Gift("Gaveideer", "Se ønskelisten her", realWish = true)
-    val gift5 = Gift("Lejlighed", "Se ønskelisten her", realWish = true)
-    val gift6 = Gift("ligemeget", "wishwishtest", "0", realWish = true)
-    gift6.realWish = false
-    val list = listOf(gift1, gift2, gift3, gift4, gift5, gift6)
-
-
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
         Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
+
         if (viewModelWishesData.popupControl) {
             AlertDialog(onDismissRequest = {
                 viewModelWishes.disablePopUp()
@@ -105,14 +98,8 @@ fun WishesComposer(
                 .size(width = 350.dp, height = 150.dp)
                 .padding(5.dp), backgroundColor = beige
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(1F)
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "wish-name")
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = gave.name, modifier = Modifier.padding(5.dp))
                 Box(modifier = Modifier.fillMaxHeight(1F), Alignment.BottomEnd) {
                     Image(
                         painter = painterResource(id = R.drawable.loading_picture),
@@ -136,55 +123,62 @@ fun WishesComposer(
                         }
                     }
                 }
-                /**
-                 *  button for "add a wish"
-                 *  Image(
-                modifier = Modifier
-                .size(70.dp, 70.dp)
-                .clickable(
-                onClick = { navController.navigate(Destination.AddWishToList.route) }
-                ),
-                painter = painterResource(id = R.drawable.addpresentpicture),
-                contentDescription = "Tilføj ønske",
-                alignment = Alignment.Center,
-                )
-                 * */
-
-
             }
+
+
+            /**
+             *  button for "add a wish"
+             *  Image(
+            modifier = Modifier
+            .size(70.dp, 70.dp)
+            .clickable(
+            onClick = { navController.navigate(Destination.AddWishToList.route) }
+            ),
+            painter = painterResource(id = R.drawable.addpresentpicture),
+            contentDescription = "Tilføj ønske",
+            alignment = Alignment.Center,
+            )
+             * */
+
+
         }
     } else {
 
+        Box(contentAlignment = Alignment.Center) {
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.addpresentpicture),
-                    contentDescription = "Denne knap tilføjer et ønske",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(100.dp, 100.dp),
-                    contentScale = ContentScale.Crop,
-                )
-                Button(onClick = {
-                    createDummyEvent(viewModelOnApp = viewModelOnApp)
-                }) {
 
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxSize(),
+
+                ) {
+                //    Spacer(modifier = Modifier.h)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxHeight()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.addpresentpicture),
+                        contentDescription = "Denne knap tilføjer et ønske",
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(100.dp, 100.dp)
+                            .clickable(
+                                onClick = { createDummyEvent(viewModelOnApp = viewModelOnApp) }
+                            ),
+                        contentScale = ContentScale.Fit,
+                        alignment = Alignment.Center
+                    )
                 }
-
             }
-
         }
 
     }
 }
 
 fun createDummyEvent(viewModelOnApp: ViewModelOnApp) {
-    viewModelOnApp.createGift(Gift(realWish = true))
+    viewModelOnApp.createGift(Gift(realWish = true, name = "MyGift"))
 
 
 }
