@@ -11,17 +11,17 @@
     <string name="Profile_Picture">Profil Billede</string>
 
 
-    /Here under are the topBar strings
-    <string name="ComingEvents">Kommende begivenheder </string>
+    //Here under are the topBar strings
+    <string name="Coming_Events">Kommende begivenheder </string>
     <string name="Specific_Event">Din begivenhed</string>
-    <string name="Profile_page">Din profil</string>
-    <string name="Dine_ønskeLister">Dine ønskelister</string>
+    <string name="Profile_Page">Din profil</string>
+    <string name="Dine_ØnskeLister">Dine ønskelister</string>
     <string name="Ny_Begivenhed">Ny begivenhed</string>
     <string name="Edit_Event">Rediger din begivenhed</string>
     <string name="Opret_ønskeliste">Ny ønskeliste</string>
     <string name="Help_Screen">Hjælp</string>
 
-    /Here are the text fields for the help screen
+    //Here are the text fields for the help screen
 
 
 
