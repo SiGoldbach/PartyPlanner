@@ -7,6 +7,7 @@ import com.example.partyplanner.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,6 +37,7 @@ class ViewModelOnApp : ViewModel() {
     }
 
     private val db = FirebaseFirestore.getInstance()
+    private val cloudStorage = Firebase.storage
 
     fun updateTopBarString(string: String) {
         userInfo.update { t -> t.copy(topBarString = string) }
@@ -250,7 +252,7 @@ class ViewModelOnApp : ViewModel() {
                 }
             }
             for (giftIdentifier in wishListFromDB.giftAddressees) {
-                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener { docGift->
+                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener { docGift ->
                     val gotGift = docGift.toObject(Gift::class.java)
                     tempGiftList.add(gotGift!!)
                     println("GiftList has size: " + tempGiftList.size)
@@ -380,8 +382,6 @@ class ViewModelOnApp : ViewModel() {
 
 
     }
-
-
 
 
 }

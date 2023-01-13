@@ -144,35 +144,35 @@ fun WishesComposer(
         }
     } else {
 
-        Box(contentAlignment = Alignment.Center) {
+        Card(
+            modifier = Modifier
+                .size(width = 350.dp, height = 150.dp)
+                .padding(5.dp),
+            backgroundColor = beige,
+            elevation = 0.dp,
 
-
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxSize(),
-
-                ) {
-                //    Spacer(modifier = Modifier.h)
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxHeight()
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.addpresentpicture),
-                        contentDescription = "Denne knap tilføjer et ønske",
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(100.dp, 100.dp)
-                            .clickable(
-                                onClick = { createDummyEvent(viewModelOnApp = viewModelOnApp) }
-                            ),
-                        contentScale = ContentScale.Fit,
-                        alignment = Alignment.Center
-                    )
-                }
+            ) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Image(
+                    painter = painterResource(id = R.drawable.addpresentpicture),
+                    contentDescription = "Denne knap tilføjer et ønske",
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(100.dp, 100.dp)
+                        .clickable(
+                            onClick = { createDummyEvent(viewModelOnApp = viewModelOnApp) }
+                        ),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center
+                )
             }
+
+
         }
+
+
+        //    Spacer(modifier = Modifier.h)
+
 
     }
 }
