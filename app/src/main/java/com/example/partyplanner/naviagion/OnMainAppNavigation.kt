@@ -34,7 +34,7 @@ fun InnerNav(
     ) {
         //Here there is no dependency injection yet so a standard event just get put in.
         composable(Destination.ComingEvents.route) {
-            viewModel.updateTopBarString(stringResource(id = R.string.ComingEvents))
+            viewModel.updateTopBarString(stringResource(id = R.string.Coming_Events))
             ComingEvents(
                 navController = onMainAppNavHostController,
                 viewModelOnApp = viewModel
@@ -86,7 +86,7 @@ fun InnerNav(
             HelpScreen(viewModelHelp)
         }
         composable(Destination.Profile.route) {
-            viewModel.updateTopBarString(stringResource(id = R.string.Profile_page))
+            viewModel.updateTopBarString(stringResource(id = R.string.Profile_Page))
 
             Profile(
                 internalNavController = onMainAppNavHostController,
@@ -101,6 +101,9 @@ fun InnerNav(
         composable(Destination.CreateWishlist.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Opret_ønskeliste))
             CreateWishlist(navController = onMainAppNavHostController, viewModel)
+        }
+        composable(Destination.Contacts.route){
+            ContactCard(navController = onMainAppNavHostController)
         }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")

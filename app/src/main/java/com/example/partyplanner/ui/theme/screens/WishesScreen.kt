@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -36,29 +37,43 @@ fun Wishes(
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllGiftsInWishList()
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center
+    ) {
         Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
 
         if (viewModelWishesData.popupControl) {
-            AlertDialog(onDismissRequest = {
-                viewModelWishes.disablePopUp()
-            }, title = {
-                Text(text = viewModelWishesData.currentGift.name)
-            }, text = {
-                Text(viewModelWishesData.currentGift.description)
-            }, confirmButton = {
-                Button(onClick = {
-                    viewModelWishes.disablePopUp()
-                }) {
-                    Text("This is the Confirm Button")
+                Row(
+                ) {
+                    AlertDialog(
+                        modifier = Modifier.fillMaxHeight().padding(vertical = 30.dp),
+                        backgroundColor = beige,
+                        onDismissRequest = {
+                            viewModelWishes.disablePopUp()
+                        },
+                        title = { Text(text = viewModelWishesData.currentGift.name) },
+                        text = { Text(viewModelWishesData.currentGift.description) },
+                        confirmButton = {
+                            Button(
+                                onClick = { viewModelWishes.disablePopUp() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                            ) {
+                                Text("Opdater")
+                            }
+                        }, dismissButton = {
+                            Button(
+                                onClick = { viewModelWishes.disablePopUp() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+                            ) {
+                                Text("Slet")
+                            }
+                        }
+
+                    )
                 }
-            }, dismissButton = {
-                Button(onClick = {
-                    viewModelWishes.disablePopUp()
-                }) {
-                    Text("This is the dismiss Button")
-                }
-            })
+
         }
 
         LazyVerticalGrid(
