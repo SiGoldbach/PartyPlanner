@@ -1,19 +1,20 @@
 package com.example.partyplanner.ui.theme.screens
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Star
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -45,34 +46,35 @@ fun Wishes(
         Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
 
         if (viewModelWishesData.popupControl) {
-                Row(
-                ) {
-                    AlertDialog(
-                        modifier = Modifier.fillMaxHeight().padding(vertical = 30.dp),
-                        backgroundColor = beige,
-                        onDismissRequest = {
-                            viewModelWishes.disablePopUp()
-                        },
-                        title = { Text(text = viewModelWishesData.currentGift.name) },
-                        text = { Text(viewModelWishesData.currentGift.description) },
-                        confirmButton = {
-                            Button(
-                                onClick = { viewModelWishes.disablePopUp() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-                            ) {
-                                Text("Opdater")
-                            }
-                        }, dismissButton = {
-                            Button(
-                                onClick = { viewModelWishes.disablePopUp() },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-                            ) {
-                                Text("Slet")
-                            }
+            Row {
+                AlertDialog(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(vertical = 30.dp),
+                    backgroundColor = beige,
+                    onDismissRequest = {
+                        viewModelWishes.disablePopUp()
+                    },
+                    title = { Text(text = viewModelWishesData.currentGift.name) },
+                    text = { Text(viewModelWishesData.currentGift.description) },
+                    confirmButton = {
+                        Button(
+                            onClick = { viewModelWishes.disablePopUp() },
+                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                        ) {
+                            Text("Opdater")
                         }
+                    }, dismissButton = {
+                        Button(
+                            onClick = { viewModelWishes.disablePopUp() },
+                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+                        ) {
+                            Text("Slet")
+                        }
+                    }
 
-                    )
-                }
+                )
+            }
 
         }
 
@@ -175,7 +177,7 @@ fun WishesComposer(
                         .clip(CircleShape)
                         .size(100.dp, 100.dp)
                         .clickable(
-                            onClick = { createDummyEvent(viewModelOnApp = viewModelOnApp) }
+                            onClick = { navController.navigate(Destination.CreateWish.route) }
                         ),
                     contentScale = ContentScale.Fit,
                     alignment = Alignment.Center
