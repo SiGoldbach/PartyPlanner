@@ -32,7 +32,7 @@ fun ContactCard(navController: NavHostController) {
                 AlertDialog(
                     onDismissRequest = { openDialogOne.value = false },
                     title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
-                    text = { Text("Here is a text", color = Color.Black) },
+                    text = { Text("", color = Color.Black) },
                     confirmButton = {
                         Button(onClick = {
                             openDialogOne.value = false
