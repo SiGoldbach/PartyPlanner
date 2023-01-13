@@ -102,6 +102,9 @@ fun InnerNav(
             viewModel.updateTopBarString(stringResource(id = R.string.Opret_ønskeliste))
             CreateWishlist(navController = onMainAppNavHostController, viewModel)
         }
+        composable(Destination.Contacts.route){
+            ContactCard(navController = onMainAppNavHostController)
+        }
         /*composable(Destination.Detail.route) { backStackEntry ->
             val elementId = backStackEntry.arguments?.getString("elementId")
             if(elementId == null){

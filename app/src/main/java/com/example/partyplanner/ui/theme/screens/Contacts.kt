@@ -31,18 +31,20 @@ fun ContactCard(navController: NavHostController) {
             if (openDialogOne.value) {
                 AlertDialog(
                     onDismissRequest = { openDialogOne.value = false },
-                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
-                    text = { Text("", color = Color.Black) },
+                    title = { Text(text = "Valdemar Nielsen", color = Color.Black) },
+                    text = {
+                        Text(
+                            "Adresse: Langevej 22 " + "Mail:valdemar@gmail.com " + "Telefon:12345678", color = Color.Black
+                        )
+                    },
+
+
                     confirmButton = {
                         Button(onClick = {
                             openDialogOne.value = false
                         }) { Text("OK") }
                     },
-                    dismissButton = {
-                        Button(onClick = {
-                            openDialogOne.value = false
-                        }) { Text("Cancel") }
-                    })
+                )
             }
             Spacer(modifier = Modifier.height(15.dp))
             Button(
@@ -53,40 +55,42 @@ fun ContactCard(navController: NavHostController) {
             if (openDialogTwo.value) {
                 AlertDialog(
                     onDismissRequest = { openDialogTwo.value = false },
-                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
-                    text = { Text("Here is a text", color = Color.Black) },
+                    title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                    text = { Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678", color = Color.Black
+                    )
+                    },
+
+
                     confirmButton = {
                         Button(onClick = {
-                            openDialogTwo.value = false
+                            openDialogOne.value = false
                         }) { Text("OK") }
                     },
-                    dismissButton = {
-                        Button(onClick = {
-                            openDialogTwo.value = false
-                        }) { Text("Cancel") }
-                    })
+                )
             }
             Spacer(modifier = Modifier.height(15.dp))
             Button(
-                onClick = { openDialogOne.value = true },
+                onClick = { openDialogThree.value = true },
                 colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
                 shape = CircleShape
             ) { Text("Christian Hyltoft", color = Color.White) }
             if (openDialogThree.value) {
                 AlertDialog(
                     onDismissRequest = { openDialogThree.value = false },
-                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
-                    text = { Text("Here is a text", color = Color.Black) },
+                    title = { Text(text = "Christian Hyltoft", color = Color.Black) },
+                    text = { Text(
+                        "Adresse: Langevej 22 " + "Mail:chrishy@gmail.com " + "Telefon:12345678", color = Color.Black
+                    )
+                    },
+
+
                     confirmButton = {
                         Button(onClick = {
-                            openDialogThree.value = false
+                            openDialogOne.value = false
                         }) { Text("OK") }
                     },
-                    dismissButton = {
-                        Button(onClick = {
-                            openDialogThree.value = false
-                        }) { Text("Cancel") }
-                    })
+                )
             }
             Spacer(modifier = Modifier.height(15.dp))
             Button(
@@ -97,18 +101,19 @@ fun ContactCard(navController: NavHostController) {
             if (openDialogFour.value) {
                 AlertDialog(
                     onDismissRequest = { openDialogFour.value = false },
-                    title = { Text(text = "Oprettelse af begivenheder", color = Color.Black) },
-                    text = { Text("Here is a text", color = Color.Black) },
+                    title = { Text(text = "Ismail Ali", color = Color.Black) },
+                    text = { Text(
+                        "Adresse: Langevej 22 " + "Mail:ismail@gmail.com " + "Telefon:12345678", color = Color.Black
+                    )
+                    },
+
+
                     confirmButton = {
                         Button(onClick = {
-                            openDialogFour.value = false
+                            openDialogOne.value = false
                         }) { Text("OK") }
                     },
-                    dismissButton = {
-                        Button(onClick = {
-                            openDialogFour.value = false
-                        }) { Text("Cancel") }
-                    })
+                )
             }
             Spacer(modifier = Modifier.height(15.dp))
         }
