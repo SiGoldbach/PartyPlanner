@@ -1,5 +1,7 @@
 package com.example.partyplanner.viewModel
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.*
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.io.ByteArrayOutputStream
 
 
 class ViewModelOnApp : ViewModel() {
@@ -382,6 +385,13 @@ class ViewModelOnApp : ViewModel() {
 
 
     }
+
+    fun getContactToFirebaseStorage(){
+        cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg")
+
+
+    }
+
 
 
 }
