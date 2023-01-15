@@ -120,7 +120,14 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         modifier = Modifier
                             .width(7.dp)
                     )
-                    StdText(string = "Ønsker")
+                    Text(
+                        text = "Ønsker",
+                        fontSize = 18.sp, color = Color.Black,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight.Bold
+
+
+                    )
 
                 }
                 Button(
@@ -139,7 +146,14 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         modifier = Modifier
                             .width(7.dp)
                     )
-                    StdText(string = "Gæster")
+                    Text(
+                        text = "Gæster",
+                        fontSize = 18.sp, color = Color.Black,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight.Bold
+
+
+                    )
                 }
 
             }
