@@ -157,18 +157,19 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 }
 
             }
-            Box(contentAlignment = Alignment.BottomEnd) {
-                Row(horizontalArrangement = Arrangement.End) {
+
+            Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
                     Button(
                         onClick = { navController.navigate(Destination.MyEventEditScreen.route) },
                         colors = ButtonDefaults.buttonColors(backgroundColor = beige),
                         shape = CircleShape,
-                        modifier = Modifier.size(width = 54.dp, height = 45.dp)
+                        modifier = Modifier.size(width = 69.dp, height = 60.dp)
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.pencildrawing),
                             contentDescription = null,
-                            modifier = Modifier.size(width = 20.dp, height = 20.dp),
+                            modifier = Modifier.size(width = 35.dp, height = 35.dp),
                             contentScale = ContentScale.Crop
                         )
                     }
@@ -178,27 +179,4 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
 
         }
     }
-    // Here we have the edit button
-    /*
-    Box(v) {
-        Button(
-            onClick = { /*TODO*/ },
-            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-            shape = RoundedCornerShape(30.dp),
-            modifier = Modifier
-                .size(width = 60.dp, height = 60.dp),
-
-            ) {
-            Image(
-                painter = painterResource(id = R.drawable.editpencilfour),
-                contentDescription = null,
-                modifier = Modifier
-                    .height(800.dp)
-                    .width(70.dp)
-                    .clip(CircleShape),
-            )
-        }
-
-    } */
-
 }
