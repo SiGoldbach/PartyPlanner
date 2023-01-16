@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.io.ByteArrayOutputStream
+import java.io.InputStream
 
 
 class ViewModelOnApp : ViewModel() {
@@ -386,12 +387,16 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
-    fun getContactToFirebaseStorage(){
+    fun getContactToFirebaseStorage() {
         cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg")
 
 
     }
 
+    fun uploadPhoto(inputStream: InputStream) {
+
+
+    }
 
 
 }

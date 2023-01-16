@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -21,14 +22,17 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import java.io.InputStream
 
 @Composable
 fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostController) {
+    val context = LocalContext.current
     val uri = Uri.parse("res/drawable-tvdpi/adidas_shoe.PNG")
     var selectImages by remember { mutableStateOf<Uri?>(uri) }
     var wishName by remember { mutableStateOf(TextFieldValue("")) }
     var wishPrice by remember { mutableStateOf(TextFieldValue("")) }
     val cloudStorage = Firebase.storage
+    var pic: InputStream?
 
     cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg").downloadUrl.addOnSuccessListener {
         selectImages = it
@@ -38,11 +42,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     val galleryLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uriFromSelector ->
             selectImages = uriFromSelector
-            if (uriFromSelector != null) {
 
-
-
-            }
 
 
         }
@@ -94,7 +94,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
                 )
             }
         }
-        Button(onClick = { uploadPic() }) {
+        Button(onClick = { uploadPic(viewModelOnApp) }) {
             Text(text = "Try to upload photo")
 
         }
@@ -110,5 +110,5 @@ fun createWIshAndGoBack(gift: Gift, viewModelOnApp: ViewModelOnApp) {
 
 }
 
-fun uploadPic() {
+fun uploadPic(viewModelOnApp: ViewModelOnApp) {
 }
