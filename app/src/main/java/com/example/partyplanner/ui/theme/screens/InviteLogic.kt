@@ -50,7 +50,10 @@ fun InvitationScreenLogic(
                 makeSubjectForEmail(
                     event = mainAppState.currentEvent,
                     user = mainAppState.user
-                ), makeStringForEmail(event = mainAppState.currentEvent)
+                ), makeStringForEmail(
+                    event = mainAppState.currentEvent,
+                    user = mainAppState.user
+                )
             )
         },
         //Align center
@@ -111,11 +114,16 @@ fun InvitationScreenLogic(
 
 }
 
-fun makeStringForEmail(event: Event): String {
-    return ""
+fun makeStringForEmail(event: Event, user: User): String {
+    return "hfhg"
+    //Email body of invitation
+    //return user.name + " has invited you to join "+ event.name + " and are looking forward to hearing from you! " + "The event will be hosted on: " + event.date + " and more information can be found on the event page via the app:" + event.description
 }
 
 fun makeSubjectForEmail(event: Event, user: User): String {
-    return ""
+    return "yjfyjgjh"
+    //Email subject of invitation
+    //return user.name + " has invited you to join "+ event.name
+   // return "Invitation to " + event.name + " from " + user.name
 
 }
