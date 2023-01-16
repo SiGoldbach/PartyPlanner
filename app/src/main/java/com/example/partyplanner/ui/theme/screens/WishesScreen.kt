@@ -48,7 +48,7 @@ fun Wishes(
         if (viewModelWishesData.popupControl) {
             Row {
                 AlertDialog(modifier = Modifier
-                    .fillMaxHeight()
+                    .fillMaxHeight(0.6F)
                     .padding(vertical = 30.dp),
                     backgroundColor = beige,
                     onDismissRequest = {
@@ -62,14 +62,6 @@ fun Wishes(
                             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
                         ) {
                             Text("Opdater")
-                        }
-                    },
-                    dismissButton = {
-                        Button(
-                            onClick = { viewModelWishes.disablePopUp() },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-                        ) {
-                            Text("Slet")
                         }
                     }
 
@@ -98,6 +90,7 @@ fun Wishes(
  * this is similar to eventComposer
  */
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WishesComposer(
     gave: Gift,
@@ -113,7 +106,8 @@ fun WishesComposer(
             modifier = Modifier
                 .size(width = 350.dp, height = 150.dp)
                 .padding(5.dp),
-            backgroundColor = beige
+            backgroundColor = beige,
+            onClick = { viewModelWishes.enablePopUpAnChangeCurrentWish(gift = gave) }
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = gave.name, modifier = Modifier.padding(5.dp))
@@ -132,12 +126,7 @@ fun WishesComposer(
                         verticalAlignment = Alignment.Bottom
                     ) {
 
-                        Button(
-                            onClick = { viewModelWishes.enablePopUpAnChangeCurrentWish(gift = gave) },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-                        ) {
-                            Text(text = "Gå til")
-                        }
+
                     }
                 }
             }
@@ -170,14 +159,16 @@ fun WishesComposer(
 
             ) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Image(painter = painterResource(id = R.drawable.addpresentpicture),
+                Image(
+                    painter = painterResource(id = R.drawable.addpresentpicture),
                     contentDescription = "Denne knap tilføjer et ønske",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(100.dp, 100.dp)
                         .clickable(onClick = { navController.navigate(Destination.CreateWish.route) }),
                     contentScale = ContentScale.Fit,
-                    alignment = Alignment.Center)
+                    alignment = Alignment.Center
+                )
             }
         }
     }

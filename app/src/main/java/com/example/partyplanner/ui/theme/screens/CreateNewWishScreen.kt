@@ -40,6 +40,8 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
             selectImages = uriFromSelector
             if (uriFromSelector != null) {
 
+
+
             }
 
 
