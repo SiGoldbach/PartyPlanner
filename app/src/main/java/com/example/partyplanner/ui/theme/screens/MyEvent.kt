@@ -157,7 +157,36 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 }
 
             }
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .size(width = 180.dp, height = 80.dp),
 
+                ) {
+                Image(
+                    painter = painterResource(id = R.drawable.invitationsimageremovebg),
+                    contentDescription = null
+                )
+                Spacer(
+                    modifier = Modifier
+                        .width(7.dp)
+                )
+                Text(
+                    text = "Inviter",
+                    fontSize = 18.sp, color = Color.Black,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.Bold
+                )
+
+            }
+        }
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
                     Button(
@@ -174,6 +203,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         )
                     }
                 }
+
             }
             // new row can be added here
 

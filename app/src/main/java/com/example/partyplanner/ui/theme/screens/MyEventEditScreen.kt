@@ -136,6 +136,8 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             modifier = Modifier.width(350.dp)
 
         )
+
+
         Spacer(modifier = Modifier.height(50.dp))
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {
             Button(
