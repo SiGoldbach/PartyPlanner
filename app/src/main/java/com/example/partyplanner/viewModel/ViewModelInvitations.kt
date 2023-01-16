@@ -1,6 +1,7 @@
 package com.example.partyplanner.viewModel
 
 import androidx.lifecycle.ViewModel
+import com.example.partyplanner.fireBaseServices.MailSender
 import com.example.partyplanner.model.InvitationModel
 import com.example.partyplanner.model.Invitations
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,5 +33,10 @@ class ViewModelInvitations : ViewModel() {
         uiState.update { t -> t.copy(listinvitation = localList) }
 
 
+    }
+    fun sendInvite(String: String) {
+        for (invite in uiState.value.listinvitation) {
+            MailSender.sendEmail(invite.id,"party",String)
+        }
     }
 }

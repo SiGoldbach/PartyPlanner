@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -23,9 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.partyplanner.viewModel.ViewModelInvitations
 
+
 @Composable
-
-
 fun InvitationScreenLogic(ViewModelInvitations: ViewModelInvitations) {
     val appState by ViewModelInvitations.state.collectAsState()
 
@@ -34,6 +34,18 @@ fun InvitationScreenLogic(ViewModelInvitations: ViewModelInvitations) {
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
     )
+    //SEND INVITATION BUTTON
+    Button(
+        onClick = {
+            ViewModelInvitations.sendInvite(String = "")
+        },
+        //Align center
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp)
+    ) {
+        Text(text = "Send invitation")
+    }
 
     if (appState.listinvitation.isEmpty())
         Text(
@@ -80,5 +92,7 @@ fun InvitationScreenLogic(ViewModelInvitations: ViewModelInvitations) {
                 }
             }
         }
+
     }
+
 }

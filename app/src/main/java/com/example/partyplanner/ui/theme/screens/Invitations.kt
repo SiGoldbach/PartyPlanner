@@ -65,8 +65,6 @@ fun InvitationScreen(
 
             InvitationScreenLogic(ViewModelInvitations = viewModelInvitations)
         }
-
-
     }
 }
 
@@ -147,10 +145,7 @@ fun FullScreenDialog(
                 )
             }
         }
-
     )
-
-
 }
 
 
