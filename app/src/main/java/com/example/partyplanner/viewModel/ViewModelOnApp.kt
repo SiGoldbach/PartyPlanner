@@ -435,5 +435,15 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
+    //Sign out method
+    fun signOut() {
+        val auth = Firebase.auth
+        if (auth.currentUser != null) {
+            auth.signOut()
+        }
+
+
+    }
+
 
 }

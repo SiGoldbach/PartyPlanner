@@ -89,7 +89,7 @@ fun WelcomeScreen(navController: NavController) {
         StandardButton(
             output = "Test",
             lambda = {
-                navController.navigate(Destination.ComingEvents.route) })
+                navController.navigate(Destination.OnMainAppStartScreen.route) })
     }
 
 }

@@ -97,7 +97,12 @@ fun Profile(
 
         }
         Button(
-            onClick = { externalNavController.navigate(Destination.Welcome.route) },
+            onClick = {
+                viewModelOnApp.signOut()
+                externalNavController.navigate(Destination.Welcome.route) {
+                    popUpTo(0)
+                }
+            },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
         ) {
             Text(text = "Log ud")

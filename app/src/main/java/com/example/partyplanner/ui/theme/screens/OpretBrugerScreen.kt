@@ -112,23 +112,10 @@ fun OpretBruger(
                 kodeord = kodeord.text
             )
             //Navigation
-            navController.navigate(Destination.ComingEvents.route)
+            navController.navigate(Destination.OnMainAppStartScreen.route)
         }, colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)) {
             Text("Opret")
         }
 
-    }
-// Skal være en "tilbage" button.
-    Box(contentAlignment = Alignment.Center) {
-        Button(
-            onClick = { navController.navigate(Destination.LoginScreen.route) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-            shape = CircleShape,
-            modifier = Modifier.size(width = 40.dp, height = 40.dp)
-        ) {
-            Text(
-                text = "<", fontStyle = FontStyle.Normal, fontSize = 20.sp, color = Color.White
-            )
-        }
     }
 }

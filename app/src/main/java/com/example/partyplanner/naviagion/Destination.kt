@@ -19,13 +19,14 @@ sealed class Destination(val route: String) {
     object Contacts : Destination("contacts")
     object CreateWish : Destination("newWish")
     object AddWishlistToEvent : Destination("AddWishlist")
-    object InvitationScreen: Destination("InvitationsScreen")
+    object InvitationScreen : Destination("InvitationsScreen")
 
 
     //Onboarding Navigation:
     object LoginScreen : Destination("loginScreen")
     object Welcome : Destination("WelcomeScreen")
     object MakeUserScreen : Destination("createUserScreen")
+    object OnMainAppStartScreen : Destination("onMainAppStartScreen")
 
 
 }
