@@ -33,15 +33,12 @@ fun CreateWishlist(navController: NavHostController, viewModel: ViewModelOnApp) 
             onClick = {
 
                 onclickForButtonWishlist(
-                    navController = navController,
-                    viewModel = viewModel,
-                    name = wishListName.text
+                    navController = navController, viewModel = viewModel, name = wishListName.text
                 )
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
             shape = RoundedCornerShape(30.dp),
-            modifier = Modifier
-                .size(width = 220.dp, height = 50.dp)
+            modifier = Modifier.size(width = 220.dp, height = 50.dp)
 
         ) {
             StandardText(text = "Opret ønskeliste")
@@ -53,9 +50,7 @@ fun CreateWishlist(navController: NavHostController, viewModel: ViewModelOnApp) 
 }
 
 fun onclickForButtonWishlist(
-    navController: NavHostController,
-    viewModel: ViewModelOnApp,
-    name: String
+    navController: NavHostController, viewModel: ViewModelOnApp, name: String
 
 ) {
     navController.navigate(Destination.Wishes.route)

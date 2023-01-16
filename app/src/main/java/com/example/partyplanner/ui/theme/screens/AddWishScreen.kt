@@ -3,7 +3,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 
-fun AddWishToList (navController: NavHostController) {
+fun AddWishToList(navController: NavHostController) {
 
 
 }
