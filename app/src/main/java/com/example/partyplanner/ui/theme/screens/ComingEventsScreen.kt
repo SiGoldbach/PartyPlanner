@@ -130,10 +130,10 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
                 Spacer(modifier = Modifier.padding(5.dp))
                 Column {
                     Row {
-                        Text(text = event.totalInvites.toString())
+                        Text(text = event.totalInvites.toString()+" Deltagere")
                     }
                     Row {
-                        Text(text = event.participants.toString())
+                        Text(text = event.participants.toString()+" Inviterede")
                     }
                 }
                 Spacer(modifier = Modifier.weight(1F))
