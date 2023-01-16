@@ -43,10 +43,5 @@ public class MailSender {
             throw new RuntimeException(e);
         }
     }
-
-    public static void main(String[] args) {
-        sendEmail("v.nielsen@live.dk", "Lets go", "Vibdusccoop");
-    }
-
 }
 
