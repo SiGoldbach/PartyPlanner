@@ -24,7 +24,7 @@ fun ContactCard(navController: NavHostController) {
 
 
 @Composable
-fun Contacts () {
+fun Contacts() {
     val openDialogOne = remember { mutableStateOf(false) }
     val openDialogTwo = remember { mutableStateOf(false) }
     val openDialogThree = remember { mutableStateOf(false) }
@@ -47,7 +47,8 @@ fun Contacts () {
                     title = { Text(text = "Valdemar Nielsen", color = Color.Black) },
                     text = {
                         Text(
-                            "Adresse: Langevej 22 " + "Mail:valdemar@gmail.com " + "Telefon:12345678", color = Color.Black
+                            "Adresse: Langevej 22 " + "Mail:valdemar@gmail.com " + "Telefon:12345678",
+                            color = Color.Black
                         )
                     },
 
@@ -72,9 +73,11 @@ fun Contacts () {
                 AlertDialog(
                     onDismissRequest = { openDialogTwo.value = false },
                     title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
-                    text = { Text(
-                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678", color = Color.Black
-                    )
+                    text = {
+                        Text(
+                            "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                            color = Color.Black
+                        )
                     },
 
 
@@ -99,9 +102,11 @@ fun Contacts () {
                 AlertDialog(
                     onDismissRequest = { openDialogThree.value = false },
                     title = { Text(text = "Christian Hyltoft", color = Color.Black) },
-                    text = { Text(
-                        "Adresse: Langevej 22 " + "Mail:chrishy@gmail.com " + "Telefon:12345678", color = Color.Black
-                    )
+                    text = {
+                        Text(
+                            "Adresse: Langevej 22 " + "Mail:chrishy@gmail.com " + "Telefon:12345678",
+                            color = Color.Black
+                        )
                     },
 
 
@@ -125,9 +130,11 @@ fun Contacts () {
                 AlertDialog(
                     onDismissRequest = { openDialogFour.value = false },
                     title = { Text(text = "Ismail Ali", color = Color.Black) },
-                    text = { Text(
-                        "Adresse: Langevej 22 " + "Mail:ismail@gmail.com " + "Telefon:12345678", color = Color.Black
-                    )
+                    text = {
+                        Text(
+                            "Adresse: Langevej 22 " + "Mail:ismail@gmail.com " + "Telefon:12345678",
+                            color = Color.Black
+                        )
                     },
 
 

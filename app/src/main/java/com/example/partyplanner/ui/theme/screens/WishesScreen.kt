@@ -47,10 +47,9 @@ fun Wishes(
 
         if (viewModelWishesData.popupControl) {
             Row {
-                AlertDialog(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(vertical = 30.dp),
+                AlertDialog(modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(vertical = 30.dp),
                     backgroundColor = beige,
                     onDismissRequest = {
                         viewModelWishes.disablePopUp()
@@ -64,7 +63,8 @@ fun Wishes(
                         ) {
                             Text("Opdater")
                         }
-                    }, dismissButton = {
+                    },
+                    dismissButton = {
                         Button(
                             onClick = { viewModelWishes.disablePopUp() },
                             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
@@ -79,8 +79,7 @@ fun Wishes(
         }
 
         LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxHeight(),
+            modifier = Modifier.fillMaxHeight(),
             columns = GridCells.Adaptive(minSize = 160.dp),
             // cells = GridCells.Adaptive(minSize = 160.dp),
             verticalArrangement = Arrangement.spacedBy(1.dp),
@@ -113,7 +112,8 @@ fun WishesComposer(
             border = BorderStroke(width = 2.dp, color = dustyRose),
             modifier = Modifier
                 .size(width = 350.dp, height = 150.dp)
-                .padding(5.dp), backgroundColor = beige
+                .padding(5.dp),
+            backgroundColor = beige
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = gave.name, modifier = Modifier.padding(5.dp))
@@ -170,18 +170,14 @@ fun WishesComposer(
 
             ) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Image(
-                    painter = painterResource(id = R.drawable.addpresentpicture),
+                Image(painter = painterResource(id = R.drawable.addpresentpicture),
                     contentDescription = "Denne knap tilføjer et ønske",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(100.dp, 100.dp)
-                        .clickable(
-                            onClick = { navController.navigate(Destination.CreateWish.route) }
-                        ),
+                        .clickable(onClick = { navController.navigate(Destination.CreateWish.route) }),
                     contentScale = ContentScale.Fit,
-                    alignment = Alignment.Center
-                )
+                    alignment = Alignment.Center)
             }
 
 
