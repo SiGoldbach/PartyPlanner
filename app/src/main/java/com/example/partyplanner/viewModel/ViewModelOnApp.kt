@@ -394,7 +394,17 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun uploadPhoto(inputStream: InputStream) {
+        val mountainsRef = cloudStorage.reference.child("/eventPictures" + generateId() + ".jpg")
 
+
+        var uploadTask = mountainsRef.putStream(inputStream)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            println("File has been uploaded correctly")
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+        }
 
     }
 

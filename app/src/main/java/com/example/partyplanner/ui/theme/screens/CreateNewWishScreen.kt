@@ -32,7 +32,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     var wishName by remember { mutableStateOf(TextFieldValue("")) }
     var wishPrice by remember { mutableStateOf(TextFieldValue("")) }
     val cloudStorage = Firebase.storage
-    var pic: InputStream?
+    var pic: InputStream? = null
 
     cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg").downloadUrl.addOnSuccessListener {
         selectImages = it
@@ -42,7 +42,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     val galleryLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uriFromSelector ->
             selectImages = uriFromSelector
-
+            pic = uriFromSelector?.let { context.contentResolver.openInputStream(it) }
 
 
         }
@@ -94,7 +94,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
                 )
             }
         }
-        Button(onClick = { uploadPic(viewModelOnApp) }) {
+        Button(onClick = { viewModelOnApp.uploadPhoto(pic!!) }) {
             Text(text = "Try to upload photo")
 
         }
