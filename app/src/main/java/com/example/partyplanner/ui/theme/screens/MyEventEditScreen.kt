@@ -162,7 +162,10 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
                         appState.currentEvent.ownerUID
                     )
                     viewModelOnApp.updateEventValues(newEvent)
-                    navController.navigate(Destination.Event.route)
+                    navController.navigate(Destination.Event.route) {
+                        popUpTo(Destination.ComingEvents.route)
+                    }
+
                 }
 
             ) {
@@ -172,7 +175,12 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             Spacer(modifier = Modifier.width(standardDP))
 
             Button(
-                onClick = { navController.navigate(Destination.Event.route) },
+                onClick = {
+                    navController.navigate(Destination.Event.route) {
+                        popUpTo(Destination.ComingEvents.route)
+                    }
+
+                },
             ) {
                 Text(text = "X")
             }
