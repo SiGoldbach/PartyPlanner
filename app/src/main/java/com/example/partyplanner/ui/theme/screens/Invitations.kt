@@ -17,12 +17,15 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavHostController
 import com.example.partyplanner.model.Invitations
 import com.example.partyplanner.viewModel.ViewModelInvitations
-import java.util.*
 
 //Dataclass for ViewModel
 @Composable
-fun InvitationScreen(viewModelInvitations: ViewModelInvitations, navHostController: NavHostController) {
-    val openDialog = remember { mutableStateOf(false) }// for remembering the value of dialog is open or not
+fun InvitationScreen(
+    viewModelInvitations: ViewModelInvitations,
+    navHostController: NavHostController
+) {
+    val openDialog =
+        remember { mutableStateOf(false) }// for remembering the value of dialog is open or not
     val viewModelInvitations by remember { mutableStateOf(ViewModelInvitations()) } // for remembering the value of dialog is open or not
 
     Scaffold(
@@ -38,19 +41,19 @@ fun InvitationScreen(viewModelInvitations: ViewModelInvitations, navHostControll
                     contentDescription = "Inviter andre",
                 )
 
-                    if (openDialog.value) {
-                        //check if openDialog value is true then it display Alert Dialog
-                        FullScreenDialog(
-                            openDialog = openDialog,
-                            viewModelInvitations = viewModelInvitations
-                        )
+                if (openDialog.value) {
+                    //check if openDialog value is true then it display Alert Dialog
+                    FullScreenDialog(
+                        openDialog = openDialog,
+                        viewModelInvitations = viewModelInvitations
+                    )
 
-                    }
+                }
             }
         },
 
 
-    ) {
+        ) {
         Column(
 
             modifier = Modifier
