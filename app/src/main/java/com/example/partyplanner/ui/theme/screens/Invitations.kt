@@ -17,12 +17,14 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavHostController
 import com.example.partyplanner.model.Invitations
 import com.example.partyplanner.viewModel.ViewModelInvitations
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 //Dataclass for ViewModel
 @Composable
 fun InvitationScreen(
     viewModelInvitations: ViewModelInvitations,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    viewModelOnApp: ViewModelOnApp
 ) {
     val openDialog =
         remember { mutableStateOf(false) }// for remembering the value of dialog is open or not
@@ -45,7 +47,8 @@ fun InvitationScreen(
                     //check if openDialog value is true then it display Alert Dialog
                     FullScreenDialog(
                         openDialog = openDialog,
-                        viewModelInvitations = viewModelInvitations
+                        viewModelInvitations = viewModelInvitations,
+                        viewModelOnApp = viewModelOnApp
                     )
 
                 }
@@ -63,7 +66,10 @@ fun InvitationScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            InvitationScreenLogic(ViewModelInvitations = viewModelInvitations)
+            InvitationScreenLogic(
+                ViewModelInvitations = viewModelInvitations,
+                viewModelOnApp = viewModelOnApp
+            )
         }
     }
 }
@@ -71,7 +77,8 @@ fun InvitationScreen(
 @Composable
 fun FullScreenDialog(
     openDialog: MutableState<Boolean>,
-    viewModelInvitations: ViewModelInvitations
+    viewModelInvitations: ViewModelInvitations,
+    viewModelOnApp: ViewModelOnApp
 
 ) {
 

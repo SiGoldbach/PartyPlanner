@@ -164,7 +164,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
             )
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(Destination.InvitationScreen.route) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
                 shape = RoundedCornerShape(30.dp),
                 modifier = Modifier

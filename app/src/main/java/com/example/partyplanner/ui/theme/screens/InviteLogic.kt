@@ -22,12 +22,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.User
 import com.example.partyplanner.viewModel.ViewModelInvitations
+import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
 @Composable
-fun InvitationScreenLogic(ViewModelInvitations: ViewModelInvitations) {
+fun InvitationScreenLogic(
+    ViewModelInvitations: ViewModelInvitations,
+    viewModelOnApp: ViewModelOnApp
+) {
     val appState by ViewModelInvitations.state.collectAsState()
+    val mainAppState by viewModelOnApp.uiState.collectAsState()
+
+
 
     Text(
         text = "Inviterede",
@@ -37,7 +46,12 @@ fun InvitationScreenLogic(ViewModelInvitations: ViewModelInvitations) {
     //SEND INVITATION BUTTON
     Button(
         onClick = {
-            ViewModelInvitations.sendInvite(String = "")
+            ViewModelInvitations.sendInvite(
+                makeSubjectForEmail(
+                    event = mainAppState.currentEvent,
+                    user = mainAppState.user
+                ), makeStringForEmail(event = mainAppState.currentEvent)
+            )
         },
         //Align center
         modifier = Modifier
@@ -94,5 +108,14 @@ fun InvitationScreenLogic(ViewModelInvitations: ViewModelInvitations) {
         }
 
     }
+
+}
+
+fun makeStringForEmail(event: Event): String {
+    return ""
+}
+
+fun makeSubjectForEmail(event: Event, user: User): String {
+    return ""
 
 }

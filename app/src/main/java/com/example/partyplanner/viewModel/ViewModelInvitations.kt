@@ -34,9 +34,10 @@ class ViewModelInvitations : ViewModel() {
 
 
     }
-    fun sendInvite(String: String) {
+
+    fun sendInvite(subject: String, body: String) {
         for (invite in uiState.value.listinvitation) {
-            MailSender.sendEmail(invite.id,"party",String)
+            MailSender.sendEmail(invite.id, subject, body)
         }
     }
 }

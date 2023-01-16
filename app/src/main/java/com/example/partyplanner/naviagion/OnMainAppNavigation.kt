@@ -10,6 +10,7 @@ import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
 import com.example.partyplanner.viewModel.ViewModelHelp
+import com.example.partyplanner.viewModel.ViewModelInvitations
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.example.partyplanner.viewModel.ViewModelWishes
 
@@ -26,6 +27,7 @@ fun InnerNav(
 ) {
     val viewModelHelp = ViewModelHelp()
     val viewModelWishes = ViewModelWishes()
+    val viewModelInvitations = ViewModelInvitations()
     //Here i am making a viewmodel since this nav function will only be called once every time,
     //a new user logs into the app
     NavHost(
@@ -115,6 +117,12 @@ fun InnerNav(
         composable(Destination.CreateWish.route) {
             CreateNewWIsh(
                 viewModelOnApp = viewModel,
+                navHostController = onMainAppNavHostController
+            )
+        }
+        composable(Destination.InvitationScreen.route) {
+            InvitationScreen(
+                viewModelInvitations = viewModelInvitations,
                 navHostController = onMainAppNavHostController
             )
         }
