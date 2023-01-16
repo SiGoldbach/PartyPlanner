@@ -8,11 +8,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.partyplanner.R
+import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelHelp
 
@@ -31,6 +34,7 @@ fun HelpScreen(viewModelHelp: ViewModelHelp) {
 
         if (helpScreenState.dialogOpener) {
             AlertDialog(
+                backgroundColor = beige,
                 onDismissRequest = { viewModelHelp.setPopupFalse() },
                 title = {
                     Text(
@@ -49,19 +53,12 @@ fun HelpScreen(viewModelHelp: ViewModelHelp) {
         }
         Spacer(modifier = Modifier.padding(10.dp))
 
-
-
-
-
-
-
-
         HelpButtons(
-            output = "Test",
+            output = stringResource(id = R.string.Oprettelse_af_begivenhed_titel),
             lambda = {
                 openDialogAndChangeText(
                     viewModelHelp = viewModelHelp,
-                    title = "test",
+                    title = "Test",
                     descriptionText = "test",
                     buttonText = "test"
                 )

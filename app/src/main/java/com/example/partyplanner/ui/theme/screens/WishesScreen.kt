@@ -183,14 +183,7 @@ fun WishesComposer(
                     alignment = Alignment.Center
                 )
             }
-
-
         }
-
-
-        //    Spacer(modifier = Modifier.h)
-
-
     }
 }
 
@@ -199,49 +192,4 @@ fun createDummyEvent(viewModelOnApp: ViewModelOnApp) {
 
 
 }
-
-// """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-/*  if (popupControl) {
-      Popup(
-          alignment = Alignment.Center,
-      ) {
-
-      }
-
-
-// What has to be shown in the pop-up.
-Card(
-    border = BorderStroke(width = 2.dp, color = Color.Black),
-    onClick = { popupControl = false },
-    modifier = Modifier
-        .size(width = 350.dp, height = 500.dp)
-        .padding(5.dp),
-    backgroundColor = Color.Cyan,
-) {
-    Text("hello")
-    Button(onClick = { popupControl = false }) {
-        Text("Close")
-    }
-}
-}
-} */
-
-/*
-@Composable
-fun PopupWindow() {
-    var popupControl by remember { mutableStateOf(false) }
-    val buttonTitle by remember { mutableStateOf("close") }
-
-    Column(modifier = Modifier
-        .size(350.dp, 500.dp),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center) {
-        Button(modifier = Modifier.fillMaxWidth(), onClick = { popupControl = false }) {
-            if (popupControl == false) {
-                buttonTitle.value = "testtest"
-            }
-        }
-    }
-}
-*/
 
