@@ -31,8 +31,6 @@ class ViewModelInvitations : ViewModel() {
         var localList = uiState.value.listinvitation
         localList.find { it == inviteItem }?.isComplete = value
         uiState.update { t -> t.copy(listinvitation = localList) }
-
-
     }
 
     fun sendInvite(subject: String, body: String) {

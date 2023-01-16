@@ -123,7 +123,8 @@ fun InnerNav(
         composable(Destination.InvitationScreen.route) {
             InvitationScreen(
                 viewModelInvitations = viewModelInvitations,
-                navHostController = onMainAppNavHostController
+                navHostController = onMainAppNavHostController,
+                viewModelOnApp = viewModel
             )
         }
         /*composable(Destination.Detail.route) { backStackEntry ->
