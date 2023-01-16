@@ -98,7 +98,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.2.2")
 
     testImplementation 'junit:junit:4.+'
-
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:<latest-version>'
     //Maven javax
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 
