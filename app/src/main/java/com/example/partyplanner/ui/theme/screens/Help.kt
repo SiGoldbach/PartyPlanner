@@ -47,61 +47,67 @@ fun HelpScreen(viewModelHelp: ViewModelHelp) {
         }
         Spacer(modifier = Modifier.padding(10.dp))
 
-        HelpButtons(output = "Oprettelse af begivenheder", lambda = {
+        HelpButtons(output = "Oprettelse af begivenheder") {
             openDialogAndChangeText(
                 viewModelHelp = viewModelHelp,
                 title = "Oprettelse af begivenheder",
                 descriptionText = "1. Klik på (Opret begivenhed) fra menuen. \n2. Giv begivenheden et navn, beskrivelse, lokation samt en dato. \n3. Klik på (Opret begivenhed). \n\nSå er du godt igang med din nye begivenhed.",
                 buttonText = "OK"
             )
-        })
-        HelpButtons(output = "Ønskeliste", lambda = {
+        }
+        HelpButtons(output = "Ønskeliste") {
             openDialogAndChangeText(
                 viewModelHelp = viewModelHelp,
                 title = "Oprettelse af Ønskeliste",
                 descriptionText = "1. Klik på (Ønskeliste) fra menuen. \n2. Klik på + knappen. \n3. Giv ønskelisten et navn. \n4. Tryk på (Opret ønskeliste).",
                 buttonText = "OK"
             )
-        })
-        HelpButtons(output = "Invitationer", lambda = {
+        }
+        HelpButtons(output = "Invitationer") {
             openDialogAndChangeText(
                 viewModelHelp = viewModelHelp,
                 title = "Invitationer",
                 descriptionText = "Indsæt tekst",
                 buttonText = "OK"
             )
-        })
-        HelpButtons(output = "Deltagerliste", lambda = {
+        }
+        HelpButtons(output = "Deltagerliste") {
             openDialogAndChangeText(
                 viewModelHelp = viewModelHelp,
                 title = "Deltagerliste",
                 descriptionText = "Indsæt tekst",
                 buttonText = "OK"
             )
-        })
-        HelpButtons(output = "Juridiske vilkår", lambda = {
+        }
+        HelpButtons(output = "Juridiske vilkår") {
             openDialogAndChangeText(
                 viewModelHelp = viewModelHelp,
                 title = "Juridiske vilkår",
                 descriptionText = "Indsæt tekst",
                 buttonText = "OK"
             )
-        })
-        Column(modifier = Modifier.fillMaxSize() .padding(10.dp), verticalArrangement = Arrangement.Bottom, horizontalAlignment = Alignment.CenterHorizontally) {
-            HelpButtons(output = "Om", lambda = {
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            HelpButtons(output = "Om") {
                 openDialogAndChangeText(
                     viewModelHelp = viewModelHelp,
                     title = "Om",
                     descriptionText = "Alle har en begivenhed de gerne vil arrangere. Nu har du et sted at oprette dem med få klik. \n\nMed PartyPlanner har du appen med dig over alt, hvor du opgså kan dele dine begivenheder med dine venner og familie. \nHer kan du have styr på alt hvad der skal med til dine kommende begivenheder.",
                     buttonText = "OK"
                 )
-            })
+            }
         }
     }
 }
 
 @Composable
-fun HelpButtons(output: String, modifier: Modifier = Modifier, lambda: () -> Unit) {
+fun HelpButtons(output: String, lambda: () -> Unit) {
     Button(
         onClick = lambda,
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
