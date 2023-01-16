@@ -88,6 +88,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 )
                 // Date text here comes from "event".
                 StdText(string = appState.currentEvent.date)
+                StdText(string = appState.currentEvent.location)
 
                 Spacer(
                     modifier = Modifier
@@ -95,7 +96,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 )
                 // Description here comes from "event".
                 StdText(string = appState.currentEvent.description)
-                StdText(string = appState.currentEvent.location)
+
             }
         }
         // insert 2 buttons for Attending and NOT attending. (amount + face picture)
