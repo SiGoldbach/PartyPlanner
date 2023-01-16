@@ -58,6 +58,11 @@ class OpretBrugerViewmodel : ViewModel() {
                         dbCreateUser(forNavn, auth.uid!!, efterNavn, email)
 
                     }
+                    auth.signInWithEmailAndPassword(uiState.value.email, uiState.value.password)
+                        .addOnCompleteListener {
+                            Log.v("makeUser", "Now the user account is created and the user should be signed in. ")
+
+                        }
 
                     // User has been successfully created
                 } else {

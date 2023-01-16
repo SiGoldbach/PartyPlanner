@@ -1,7 +1,5 @@
 package com.example.partyplanner.viewModel
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.*
@@ -14,7 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 
@@ -32,12 +29,38 @@ class ViewModelOnApp : ViewModel() {
 
     init {
         val testUID = "TESTUIDFORNOW"
-        val auth = Firebase.auth
-        userInfo.update { t ->
-            t.copy(
-                uid = testUID
-            )
+        val auth = Firebase.auth.currentUser
+        if (auth != null) {
+            userInfo.update { t -> t.copy(uid = auth.uid) }
+
+        } else {
+            userInfo.update { t ->
+                t.copy(
+                    uid = testUID
+                )
+            }
         }
+
+    }
+
+    /**
+     * This is used before an event some method since this viewmodel is made beffore the current user is signed in
+     */
+    private fun makeSureCorrectUIDIsUsed() {
+        val testUID = "TESTUIDFORNOW"
+        val auth = Firebase.auth.currentUser
+        if (auth != null) {
+            userInfo.update { t -> t.copy(uid = auth.uid) }
+
+        } else {
+            userInfo.update { t ->
+                t.copy(
+                    uid = testUID
+                )
+            }
+        }
+
+
     }
 
     private val db = FirebaseFirestore.getInstance()
@@ -144,6 +167,7 @@ class ViewModelOnApp : ViewModel() {
 
 
     private fun getAllEvents() {
+        makeSureCorrectUIDIsUsed()
         val user = db.collection(USERS).document(userInfo.value.uid)
         val eventsInDB = db.collection(EVENTS)
         val tempEventsList = mutableListOf<Event>()
@@ -189,6 +213,7 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun getAllWishLists() {
+        makeSureCorrectUIDIsUsed()
         val user = db.collection(USERS).document(userInfo.value.uid)
         val wishListsInDB = db.collection(WISHLISTS)
         val tempWishList = mutableListOf<WishList>()
@@ -231,6 +256,7 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun getAllGiftsInWishList() {
+        makeSureCorrectUIDIsUsed()
         val wishList = db.collection(WISHLISTS).document(userInfo.value.currentWishListId)
         val giftListsInDB = db.collection(GIFTS)
         val tempGiftList = mutableListOf<Gift>()
@@ -330,6 +356,7 @@ class ViewModelOnApp : ViewModel() {
     }
 
     fun getProfileInfoAndUpdate() {
+        makeSureCorrectUIDIsUsed()
         val user = db.collection(USERS).document(userInfo.value.uid)
 
         user.get().addOnSuccessListener { doc ->
