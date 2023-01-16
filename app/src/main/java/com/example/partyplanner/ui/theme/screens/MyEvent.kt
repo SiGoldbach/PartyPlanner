@@ -38,7 +38,6 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
-                // .size(width = 350.dp, height = 300.dp)
                 .padding(10.dp),
             backgroundColor = beige
         ) {
@@ -71,8 +70,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(10.dp)) {
-                // Her skal Event name komme fra "event".
-                // Gør text større, tykkere og mere overskrift-agtigt.
+                // Her kommer Event name fra "event".
                 Text(
                     text = appState.currentEvent.name,
                     fontStyle = FontStyle.Normal,
@@ -96,8 +94,6 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
 
             }
         }
-        // insert 2 buttons for Attending and NOT attending. (amount + face picture)
-        // insert wish-list button with default text.
         Column {
             Row(
                 modifier = Modifier
@@ -113,6 +109,9 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         .size(width = 180.dp, height = 80.dp)
 
                 ) {
+                    /**
+                     * This should show the connected wishlists presents and not the wishlist.
+                     */
                     Image(
                         painter = painterResource(id = R.drawable.wishlistpicture),
                         contentDescription = null
