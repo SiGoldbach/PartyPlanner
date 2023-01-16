@@ -69,7 +69,8 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
             backgroundColor = beige,
             border = BorderStroke(width = 2.dp, color = dustyRose)
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(10.dp)) {
                 // Her skal Event name komme fra "event".
                 // Gør text større, tykkere og mere overskrift-agtigt.
                 Text(

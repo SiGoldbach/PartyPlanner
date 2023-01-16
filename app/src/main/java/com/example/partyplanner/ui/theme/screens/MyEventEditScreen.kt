@@ -136,9 +136,17 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             modifier = Modifier.width(350.dp)
 
         )
+        Spacer(modifier = Modifier.height(standardDP))
+        Button(onClick = { navController.navigate(Destination.AddWishlistToEvent.route) },
+            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+            shape = RoundedCornerShape(30.dp),
+            modifier = Modifier
+                .size(width = 350.dp, height = 50.dp))
+        {
+            Text(text="Tilføj ønskeliste")
+        }
 
-
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {
             Button(
                 onClick = {
@@ -154,7 +162,10 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
                         appState.currentEvent.ownerUID
                     )
                     viewModelOnApp.updateEventValues(newEvent)
-                    navController.navigate(Destination.Event.route)
+                    navController.navigate(Destination.Event.route) {
+                        popUpTo(Destination.ComingEvents.route)
+                    }
+
                 }
 
             ) {
@@ -164,7 +175,12 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             Spacer(modifier = Modifier.width(standardDP))
 
             Button(
-                onClick = { navController.navigate(Destination.Event.route) },
+                onClick = {
+                    navController.navigate(Destination.Event.route) {
+                        popUpTo(Destination.ComingEvents.route)
+                    }
+
+                },
             ) {
                 Text(text = "X")
             }

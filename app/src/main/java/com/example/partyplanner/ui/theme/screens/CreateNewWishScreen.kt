@@ -1,9 +1,6 @@
 package com.example.partyplanner.ui.theme.screens
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import android.widget.ImageView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -11,25 +8,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
-import com.example.partyplanner.fireBaseServices.generateId
 import com.example.partyplanner.model.Gift
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.io.ByteArrayOutputStream
-import java.io.FileInputStream
-import kotlin.coroutines.coroutineContext
 
 @Composable
 fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostController) {
@@ -38,7 +29,6 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     var wishName by remember { mutableStateOf(TextFieldValue("")) }
     var wishPrice by remember { mutableStateOf(TextFieldValue("")) }
     val cloudStorage = Firebase.storage
-    var imageView = ImageView(null)
 
     cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg").downloadUrl.addOnSuccessListener {
         selectImages = it
@@ -46,9 +36,13 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
 
 
     val galleryLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            selectImages = uri
-            imageView.setImageURI(uri)
+        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uriFromSelector ->
+            selectImages = uriFromSelector
+            if (uriFromSelector != null) {
+
+
+
+            }
 
 
         }
@@ -100,7 +94,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
                 )
             }
         }
-        Button(onClick = { uploadPic(imageView) }) {
+        Button(onClick = { uploadPic() }) {
             Text(text = "Try to upload photo")
 
         }
@@ -116,21 +110,5 @@ fun createWIshAndGoBack(gift: Gift, viewModelOnApp: ViewModelOnApp) {
 
 }
 
-fun uploadPic(imageView: ImageView) {
-    val cloudStorage = Firebase.storage.reference
-    cloudStorage.child("/eventPictures" + generateId())
-    val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-    val baos = ByteArrayOutputStream()
-    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-    val data = baos.toByteArray()
-
-    val uploadTask = cloudStorage.putBytes(data)
-    uploadTask.addOnFailureListener {
-        // Handle unsuccessful uploads
-    }.addOnSuccessListener { taskSnapshot ->
-        // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-        // ...
-    }
-
-
+fun uploadPic() {
 }

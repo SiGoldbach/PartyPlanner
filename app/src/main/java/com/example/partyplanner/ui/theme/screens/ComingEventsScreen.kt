@@ -7,10 +7,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -46,7 +43,7 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
         //Text(text = "Du har " + appState.events.size + " events")
         LazyVerticalGrid(
             modifier = Modifier
-                .fillMaxHeight(),
+                .fillMaxHeight(0.9F),
             columns = GridCells.Adaptive(minSize = 160.dp),
             // cells = GridCells.Adaptive(minSize = 160.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp),
@@ -55,6 +52,15 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
             items(appState.events) { item ->
                 EventComposer(item, navController, viewModelOnApp)
             }
+        }
+        FloatingActionButton(
+            onClick = { navController.navigate(Destination.NewEvent.route) },
+            backgroundColor = dustyRose,
+            contentColor = Color.White,
+            modifier = Modifier.size(width = 200.dp, height = 50.dp)
+        ) {
+            Text(text = "Opret event")
+
         }
 
 
@@ -85,13 +91,21 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
  * Here is the standard eventComposer, now with just a default image of loading.
  * Since no picture has been loaded yet from the viewmodels apis.
  */
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     Card(
         border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
             .size(width = 350.dp, height = 300.dp)
-            .padding(10.dp), backgroundColor = beige
+            .padding(10.dp), backgroundColor = beige,
+        onClick = {
+            clickOnEvent(
+                navController = navController,
+                viewModelOnApp = viewModelOnApp,
+                event = event
+            )
+        }
     ) {
         Column(
             modifier = Modifier
@@ -116,27 +130,13 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
                 Spacer(modifier = Modifier.padding(5.dp))
                 Column {
                     Row {
-                        Text(text = event.totalInvites.toString())
+                        Text(text = event.totalInvites.toString()+" Deltagere")
                     }
                     Row {
-                        Text(text = event.participants.toString())
+                        Text(text = event.participants.toString()+" Inviterede")
                     }
                 }
                 Spacer(modifier = Modifier.weight(1F))
-                Button(
-                    onClick = {
-                        clickOnEvent(
-                            navController = navController,
-                            viewModelOnApp = viewModelOnApp,
-                            event = event
-                        )
-                    },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-                ) {
-                    Text(text = "Gå til", color = Color.White)
-
-                }
-
             }
 
 
