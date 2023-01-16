@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">s213456 Lykkehjulet</string>
+    <string name="app_name">PartyPlanner01</string>
     <string name="Kommende_Begivenheder">Kommende begivenheder</string>
     <string name="Create_event">Lav nyt event</string>
     <string name="Dit_Event">Dit Event</string>
@@ -21,15 +21,14 @@
     <string name="Opret_ønskeliste">Ny ønskeliste</string>
     <string name="Help_Screen">Hjælp</string>
 
-    //Here are the text fields for the help screen
-
-
-
-
-
-
-
-
-
+    /** Here are the text fields for the help screen
+    // Help for creating an event.
+    <string name="Oprettelse_af_begivenhed_titel">Oprettelse af begivenhed</string>
+    <string name="Oprettelse_af_begivenhed">For at oprette en begivenhed, skal du navngive begivenheden. Resten kan du ændre senere. Du kan tilføje et billede fra din kamerarulle som inviterede personer vil kunne se. Skabelonen viser hvordan invitationen vil se ud på mail</string>
+    <string name="d">d</string>
+    <string name="e">e</string>
+    <string name="f">f</string>
+    <string name="g">g</string>
+    */
 
 </resources>
