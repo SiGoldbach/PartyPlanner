@@ -26,8 +26,8 @@ import com.example.partyplanner.model.Gift
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
-import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.example.partyplanner.viewModel.ViewModelWishes
 import com.google.firebase.ktx.Firebase
@@ -42,7 +42,7 @@ fun Wishes(
 ) {
     val viewModelWishesData by viewModelWishes.uiState.collectAsState()
     val appState by viewModelOnApp.uiState.collectAsState()
-    viewModelOnApp.getAllGiftsInWishList()
+    //viewModelOnApp.getAllGiftsInWishList()
 
     if (appState.dataStateWishes == DataStateWishes.Loading) {
         loadingScreen(text = "Loader ønsker")
@@ -142,13 +142,20 @@ fun WishesComposer(
             // onClick = { popupControl = true },
             border = BorderStroke(width = 2.dp, color = dustyRose),
             modifier = Modifier
-                .size(width = 350.dp, height = 150.dp)
+                .size(width = 350.dp, height = 455.dp)
                 .padding(5.dp),
             backgroundColor = beige,
             onClick = { viewModelWishes.enablePopUpAnChangeCurrentWish(gift = gave) }
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = gave.name, modifier = Modifier.padding(5.dp))
+                Box(modifier = Modifier.fillMaxHeight(0.2F)) {
+                    Column() {
+                        Text(text = gave.name, modifier = Modifier.padding(5.dp))
+                        Text(text = gave.price.toString(), modifier = Modifier.padding(5.dp))
+                    }
+
+
+                }
                 Box(modifier = Modifier.fillMaxHeight(1F), Alignment.BottomEnd) {
                     Image(
                         painter = rememberAsyncImagePainter(model = selectImages),

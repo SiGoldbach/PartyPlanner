@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
@@ -26,15 +25,12 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.model.DataStateEvent
-import com.example.partyplanner.model.Gift
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
-import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
-import kotlinx.coroutines.runBlocking
-import java.io.InputStream
 
 
 val standardDP: Dp = 10.dp

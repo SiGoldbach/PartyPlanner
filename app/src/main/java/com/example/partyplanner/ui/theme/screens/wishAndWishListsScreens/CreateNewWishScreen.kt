@@ -31,17 +31,10 @@ import java.io.InputStream
 @Composable
 fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostController) {
     val context = LocalContext.current
-    val uri = Uri.parse("res/drawable-tvdpi/adidas_shoe.PNG")
-    var selectImages by remember { mutableStateOf<Uri?>(uri) }
+    var selectImages by remember { mutableStateOf<Uri?>(null) }
     var wishName by remember { mutableStateOf(TextFieldValue("")) }
     var wishPrice by remember { mutableStateOf(TextFieldValue("")) }
-    val cloudStorage = Firebase.storage
     var pic: InputStream? = null
-
-    cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/giftPictures/sko.png").downloadUrl.addOnSuccessListener {
-        selectImages = it
-    }
-
 
     val galleryLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uriFromSelector ->
@@ -100,7 +93,9 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
         }
         Button(
             onClick = {
-                viewModelOnApp.out(pic!!, gift = Gift())
+                if(pic!=null){
+                    viewModelOnApp.out(pic!!, gift = Gift())
+                }
             },
             colors = ButtonDefaults.buttonColors(
                 dustyRose
