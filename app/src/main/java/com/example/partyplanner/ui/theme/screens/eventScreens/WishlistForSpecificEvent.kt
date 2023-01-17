@@ -2,13 +2,19 @@ package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -17,14 +23,14 @@ import com.example.partyplanner.model.DataStateWishLists
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
-import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
-// The mainscreen for wishlist
+// The screen to chose a specific event for an event. Linking them together.
 
 @Composable
-fun WishlistForEvent(navController: NavController, viewModelOnApp: ViewModelOnApp) {
+fun Wishlist2(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllWishLists()
 
@@ -44,11 +50,42 @@ fun WishlistForEvent(navController: NavController, viewModelOnApp: ViewModelOnAp
         Text(text = "Kunne ikke hente dine ønskelister prøv igen senere")
 
     }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = "Ønskelister",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth(
+                )
+
+        )
+
+        Divider(color = Color.Black, thickness = 0.5.dp)
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        LazyVerticalGrid(
+            modifier = Modifier
+                .fillMaxHeight(0.7F),
+            columns = GridCells.Adaptive(minSize = 200.dp),
+            verticalArrangement = Arrangement.spacedBy(5.dp),
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
+
+        ) {
+            items(appState.wishLists) { item ->
+                WishListComposer2(item, navController, viewModelOnApp)
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun WishListComposerForEvent(
+fun WishListComposer2(
     wishList: WishList,
     navController: NavController,
     viewModelOnApp: ViewModelOnApp

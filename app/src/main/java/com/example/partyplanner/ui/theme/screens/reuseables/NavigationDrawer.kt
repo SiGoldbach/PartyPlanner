@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens.reuseAbles
+package com.example.partyplanner.ui.theme.screens.reuseables
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

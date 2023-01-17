@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens.reuseAbles
+package com.example.partyplanner.ui.theme.screens.reuseables
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
