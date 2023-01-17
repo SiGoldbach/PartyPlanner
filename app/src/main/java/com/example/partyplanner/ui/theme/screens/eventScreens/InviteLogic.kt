@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.eventScreens
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -73,7 +73,7 @@ fun InvitationScreenLogic(
         LazyColumn(modifier = Modifier.fillMaxHeight()) {
 
             items(appState.listinvitation) { index ->
-                Log.e("_InviteList", "Mail Tilføjet" + index)
+                Log.e("_InviteList", "Mail Tilføjet$index")
 
                 Card(
                     backgroundColor = Color.Gray,

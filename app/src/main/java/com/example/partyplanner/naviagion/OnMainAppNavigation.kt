@@ -1,14 +1,19 @@
 package com.example.partyplanner.naviagion
 
-import AddWishToList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.partyplanner.R
-import com.example.partyplanner.ui.theme.TestScreen
 import com.example.partyplanner.ui.theme.screens.*
+import com.example.partyplanner.ui.theme.screens.eventScreens.CreateNewEvent
+import com.example.partyplanner.ui.theme.screens.eventScreens.InvitationScreen
+import com.example.partyplanner.ui.theme.screens.eventScreens.UpdateEvent
+import com.example.partyplanner.ui.theme.screens.eventScreens.Wishlist2
+import com.example.partyplanner.ui.theme.screens.profileScreens.Profile
+import com.example.partyplanner.ui.theme.screens.profileScreens.ProfileEditScreen
+import com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens.*
 import com.example.partyplanner.viewModel.ViewModelHelp
 import com.example.partyplanner.viewModel.ViewModelInvitations
 import com.example.partyplanner.viewModel.ViewModelOnApp

@@ -29,7 +29,7 @@ fun Contacts() {
     val openDialogFour = remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Column() {
+        Column {
             Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = { openDialogOne.value = true },

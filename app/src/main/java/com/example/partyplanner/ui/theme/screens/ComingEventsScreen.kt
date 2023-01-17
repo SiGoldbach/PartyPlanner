@@ -28,6 +28,8 @@ import com.example.partyplanner.model.DataStateEvent
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 

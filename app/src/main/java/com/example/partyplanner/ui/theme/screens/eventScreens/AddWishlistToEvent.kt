@@ -1,7 +1,6 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.eventScreens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -20,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
-import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 // The screen for adding a wishlist to an event.

@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.profileScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

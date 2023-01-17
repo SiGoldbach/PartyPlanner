@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.eventScreens
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
@@ -21,6 +21,8 @@ import androidx.navigation.NavHostController
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.StandardText
+import com.example.partyplanner.ui.theme.screens.standardDP
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import java.util.*
 
