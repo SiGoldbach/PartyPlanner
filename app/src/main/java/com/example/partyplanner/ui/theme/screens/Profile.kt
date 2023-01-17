@@ -75,11 +75,13 @@ fun Profile(
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
+
                 Text(
                     text = appState.user.email,
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
+
                 Text(
                     text = stringResource(id = R.string.Profile_Description),
                     fontStyle = FontStyle.Normal,
