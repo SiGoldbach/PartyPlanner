@@ -145,5 +145,369 @@ fun Contacts() {
             }
             Spacer(modifier = Modifier.height(10.dp))
         }
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = { openDialogOne.value = true },
+            colors = ButtonDefaults.textButtonColors(backgroundColor = dustyRose),
+            shape = RectangleShape,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+        ) { Text("Sebastian Goldbach", color = Color.White) }
+        if (openDialogTwo.value) {
+            AlertDialog(
+                onDismissRequest = { openDialogTwo.value = false },
+                title = { Text(text = "Sebastian Goldbach", color = Color.Black) },
+                text = {
+                    Text(
+                        "Adresse: Langevej 22 " + "Mail:sebgold@gmail.com " + "Telefon:12345678",
+                        color = Color.Black
+                    )
+                },
+
+
+                confirmButton = {
+                    Button(onClick = {
+                        openDialogTwo.value = false
+                    }) { Text("LUK") }
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
