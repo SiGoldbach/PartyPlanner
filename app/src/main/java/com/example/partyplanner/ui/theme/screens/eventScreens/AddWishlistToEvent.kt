@@ -1,5 +1,5 @@
 package com.example.partyplanner.ui.theme.screens.eventScreens
-
+/*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -130,6 +130,6 @@ fun WishListComposer2(
             }
         }
     }
-}
+} */
 
 

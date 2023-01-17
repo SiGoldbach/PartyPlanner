@@ -3,9 +3,12 @@ package com.example.partyplanner.ui.theme.screens.eventScreens
 import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -38,7 +41,10 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
 
     viewModelOnApp.getSingleEvent(appState.currentEventID)
 
-    Column {
+    Column (modifier = Modifier
+        .fillMaxWidth()
+        .verticalScroll(rememberScrollState())
+    ){
 
         //Top picture with event name
         Card(

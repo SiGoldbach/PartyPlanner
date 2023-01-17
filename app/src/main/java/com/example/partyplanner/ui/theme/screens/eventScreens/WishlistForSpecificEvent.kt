@@ -96,7 +96,7 @@ fun WishListComposer2(
             .padding(start = 5.dp, end = 5.dp),
         onClick = {
             viewModelOnApp.setCurrentWisHListId(wishList.id)
-            navController.navigate(Destination.Wishes.route)
+            navController.navigate(Destination.MyEventEditScreen.route)
         },
         backgroundColor = dustyRose,
 
