@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.DataStateEvent
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -36,35 +37,52 @@ val standardDP: Dp = 10.dp
 fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.updateEventList()
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        //Text(text = "Du har " + appState.events.size + " events")
-        LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxHeight(0.9F),
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            // cells = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(2.dp),
-            horizontalArrangement = Arrangement.spacedBy(2.dp)
-        ) {
-            items(appState.events) { item ->
-                EventComposer(item, navController, viewModelOnApp)
-            }
-        }
-        FloatingActionButton(
-            onClick = { navController.navigate(Destination.NewEvent.route) },
-            backgroundColor = dustyRose,
-            contentColor = Color.White,
-            modifier = Modifier.size(width = 200.dp, height = 50.dp)
-        ) {
-            Text(text = "Opret event")
-
-        }
-
-
+    if (appState.dataStateEvent == DataStateEvent.Loading) {
+        loadingScreen(text = "Loader events")
     }
+    if (appState.dataStateEvent == DataStateEvent.Empty) {
+        emptyLoadingScreen(
+            text = "Ingen events er lavet endnu lav et ny event ",
+            buttonText = "Opret ny event"
+        ) {
+            navController.navigate(Destination.NewEvent.route)
+        }
+    }
+    if (appState.dataStateEvent == DataStateEvent.Success) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            //Text(text = "Du har " + appState.events.size + " events")
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .fillMaxHeight(0.9F),
+                columns = GridCells.Adaptive(minSize = 160.dp),
+                // cells = GridCells.Adaptive(minSize = 160.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+                horizontalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                items(appState.events) { item ->
+                    EventComposer(item, navController, viewModelOnApp)
+                }
+            }
+            FloatingActionButton(
+                onClick = { navController.navigate(Destination.NewEvent.route) },
+                backgroundColor = dustyRose,
+                contentColor = Color.White,
+                modifier = Modifier.size(width = 200.dp, height = 50.dp)
+            ) {
+                Text(text = "Opret event")
+
+            }
+
+
+        }
+    }
+    if (appState.dataStateEvent == DataStateEvent.Failure) {
+        Text(text = "Kunne ikke hente dine event prøv at luk og åben appen igen")
+    }
+
 }
 
 
@@ -130,10 +148,10 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
                 Spacer(modifier = Modifier.padding(5.dp))
                 Column {
                     Row {
-                        Text(text = event.totalInvites.toString()+" Deltagere")
+                        Text(text = event.totalInvites.toString() + " Deltagere")
                     }
                     Row {
-                        Text(text = event.participants.toString()+" Inviterede")
+                        Text(text = event.participants.toString() + " Inviterede")
                     }
                 }
                 Spacer(modifier = Modifier.weight(1F))

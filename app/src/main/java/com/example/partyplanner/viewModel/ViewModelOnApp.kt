@@ -177,33 +177,38 @@ class ViewModelOnApp : ViewModel() {
             //Log.v("events", "Getting events")
             Log.v("i will try to fetch events", userFromDB!!.eventIdentifiers.size.toString())
 
-
-            for (event in userFromDB.eventIdentifiers) {
-                eventsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
-                    val gotEvent = docWithEvent.toObject(Event::class.java)
-                    tempEventsList.add(gotEvent!!)
-                    //println("List has size " + tempEventsList.size.toString())
-                    //println(tempEventsList[0].ownerUID)
-                    //This if only updates when all the elements have been added to the list
-                    if (tempEventsList.size == userFromDB.eventIdentifiers.size) {
-                        userInfo.update { t ->
-                            t.copy(
-                                events = tempEventsList,
-                            )
+            if (userFromDB.eventIdentifiers.isEmpty()) {
+                userInfo.update { t ->
+                    t.copy(
+                        dataStateEvent = DataStateEvent.Empty
+                    )
+                }
+            } else {
+                for (event in userFromDB.eventIdentifiers) {
+                    eventsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
+                        val gotEvent = docWithEvent.toObject(Event::class.java)
+                        tempEventsList.add(gotEvent!!)
+                        if (tempEventsList.size == userFromDB.eventIdentifiers.size) {
+                            userInfo.update { t ->
+                                t.copy(
+                                    events = tempEventsList,
+                                )
+                            }
                         }
+
+                    }.addOnFailureListener {
+                        println("Could not find event")
                     }
 
-                }.addOnFailureListener {
-                    println("Could not find event")
+
                 }
-
-
+                userInfo.update { t ->
+                    t.copy(
+                        dataStateEvent = DataStateEvent.Success
+                    )
+                }
             }
-            userInfo.update { t ->
-                t.copy(
-                    eventsDataState = EventsDataState.Success(tempEventsList)
-                )
-            }
+
         }.addOnFailureListener {
             Log.v("i will try to fetch events", "Could not get the events from the server")
 
@@ -225,32 +230,55 @@ class ViewModelOnApp : ViewModel() {
                 "i will try to fetch wishlists: ",
                 userFromDB!!.wishListIdentifiers.size.toString()
             )
-            for (wishListIdentifier in userFromDB.wishListIdentifiers) {
-                wishListsInDB.document(wishListIdentifier).get()
-                    .addOnSuccessListener { docWithEvent ->
-                        println("I fecthed this document:" + docWithEvent.id)
-                        val gotWishList = docWithEvent.toObject(WishList::class.java)
-                        gotWishList!!.id
-                        tempWishList.add(gotWishList)
-                        println("List has size " + tempWishList.size.toString())
-                        //This if only updates when all the elements have been added to the list
-                        if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
+            if (userFromDB.wishListIdentifiers.isEmpty()) {
+                userInfo.update { t ->
+                    t.copy(
+                        dataStateWishLists = DataStateWishLists.Empty
+                    )
+                }
+
+
+            } else {
+                for (wishListIdentifier in userFromDB.wishListIdentifiers) {
+                    wishListsInDB.document(wishListIdentifier).get()
+                        .addOnSuccessListener { docWithEvent ->
+                            println("I fecthed this document:" + docWithEvent.id)
+                            val gotWishList = docWithEvent.toObject(WishList::class.java)
+                            gotWishList!!.id
+                            tempWishList.add(gotWishList)
+                            println("List has size " + tempWishList.size.toString())
+                            //This if only updates when all the elements have been added to the list
+                            if (tempWishList.size == userFromDB.wishListIdentifiers.size) {
+                                userInfo.update { t ->
+                                    t.copy(
+                                        wishLists = tempWishList,
+                                        dataStateWishLists = DataStateWishLists.Success
+                                    )
+                                }
+                            }
+
+                        }.addOnFailureListener {
                             userInfo.update { t ->
                                 t.copy(
-                                    wishLists = tempWishList
+                                    wishLists = tempWishList,
+                                    dataStateWishLists = DataStateWishLists.Failure
                                 )
                             }
+                            println("Could not find wishlist")
                         }
 
-                    }.addOnFailureListener {
-                        println("Could not find wishlist")
-                    }
 
-
+                }
             }
 
 
         }.addOnFailureListener {
+            userInfo.update { t ->
+                t.copy(
+                    wishLists = tempWishList,
+                    dataStateWishLists = DataStateWishLists.Failure
+                )
+            }
             println("Could not find the user")
         }
     }
@@ -273,32 +301,33 @@ class ViewModelOnApp : ViewModel() {
                 "Trying to get: " + wishListFromDB!!.giftAddressees.size.toString() + " from the db"
             )
             if (wishListFromDB.giftAddressees.isEmpty()) {
-                tempGiftList.add(Gift(realWish = false))
-                Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
                 userInfo.update { t ->
                     t.copy(
-                        currentGiftList = tempGiftList
+                        dataStateWishes = DataStateWishes.Empty
                     )
                 }
-            }
-            for (giftIdentifier in wishListFromDB.giftAddressees) {
-                giftListsInDB.document(giftIdentifier).get().addOnSuccessListener { docGift ->
-                    val gotGift = docGift.toObject(Gift::class.java)
-                    tempGiftList.add(gotGift!!)
-                    println("GiftList has size: " + tempGiftList.size)
-                    if (tempGiftList.size == wishListFromDB.giftAddressees.size) {
-                        tempGiftList.add(Gift(realWish = false))
-                        Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
-                        userInfo.update { t ->
-                            t.copy(
-                                currentGiftList = tempGiftList
-                            )
+            } else {
+                for (giftIdentifier in wishListFromDB.giftAddressees) {
+                    giftListsInDB.document(giftIdentifier).get().addOnSuccessListener { docGift ->
+                        val gotGift = docGift.toObject(Gift::class.java)
+                        tempGiftList.add(gotGift!!)
+                        println("GiftList has size: " + tempGiftList.size)
+                        if (tempGiftList.size == wishListFromDB.giftAddressees.size) {
+                            tempGiftList.add(Gift(realWish = false))
+                            Log.v(FIREBASE_SERVICE_TAG, "Trying to add the fake gift to the list ")
+                            userInfo.update { t ->
+                                t.copy(
+                                    currentGiftList = tempGiftList,
+                                    dataStateWishes = DataStateWishes.Success
+                                )
+                            }
                         }
+
                     }
 
                 }
-
             }
+
 
         }
 
@@ -389,7 +418,7 @@ class ViewModelOnApp : ViewModel() {
             GiftHelper().NAME to gift.name,
             GiftHelper().PICTURE to gift.picture,
             GiftHelper().OWNER_UID to uiState.value.uid,
-            GiftHelper().WISHLIST_IDS to listOf<String>(uiState.value.currentWishListId),
+            GiftHelper().WISHLIST_IDS to listOf(uiState.value.currentWishListId),
             GiftHelper().REALWISH to true,
         )
         addGift.document(generatedID).set(data1).addOnSuccessListener {
@@ -427,7 +456,7 @@ class ViewModelOnApp : ViewModel() {
         var uploadTask = mountainsRef.putStream(inputStream)
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
-        }.addOnSuccessListener { taskSnapshot ->
+        }.addOnSuccessListener { _ ->
             println("File has been uploaded correctly")
             // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
             // ...
@@ -443,6 +472,19 @@ class ViewModelOnApp : ViewModel() {
         }
 
 
+    }
+    //Three methods to
+
+    fun setEventStateLoading() {
+        userInfo.update { t -> t.copy(dataStateEvent = DataStateEvent.Loading) }
+    }
+
+    fun setEventWishListsStateLoading() {
+        userInfo.update { t -> t.copy(dataStateWishLists = DataStateWishLists.Loading) }
+    }
+
+    fun setWishesStateLoading() {
+        userInfo.update { t -> t.copy(dataStateWishes = DataStateWishes.Loading) }
     }
 
 

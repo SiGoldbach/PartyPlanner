@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
+import com.example.partyplanner.model.DataStateWishes
 import com.example.partyplanner.model.Gift
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
@@ -38,50 +39,66 @@ fun Wishes(
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllGiftsInWishList()
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
-
-        if (viewModelWishesData.popupControl) {
-            Row {
-                AlertDialog(modifier = Modifier
-                    .fillMaxHeight(0.6F)
-                    .padding(vertical = 30.dp),
-                    backgroundColor = beige,
-                    onDismissRequest = {
-                        viewModelWishes.disablePopUp()
-                    },
-                    title = { Text(text = viewModelWishesData.currentGift.name) },
-                    text = { Text(viewModelWishesData.currentGift.description) },
-                    confirmButton = {
-                        Button(
-                            onClick = { viewModelWishes.disablePopUp() },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-                        ) {
-                            Text("Opdater")
-                        }
-                    }
-
-                )
-            }
+    if (appState.dataStateWishes == DataStateWishes.Loading) {
+        loadingScreen(text = "Loader ønsker")
+    }
+    if (appState.dataStateWishes == DataStateWishes.Empty) {
+        emptyLoadingScreen(
+            text = "Det er godt nok tomt her opret et ønske",
+            buttonText = "Opret ønske"
+        ) {
+            navController.navigate(Destination.CreateWish.route)
 
         }
-
-        LazyVerticalGrid(
-            modifier = Modifier.fillMaxHeight(),
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            // cells = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(1.dp),
-            horizontalArrangement = Arrangement.spacedBy(1.dp)
+    }
+    if (appState.dataStateWishes == DataStateWishes.Success) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center
         ) {
-            items(appState.currentGiftList) { item ->
-                WishesComposer(item, navController, viewModelWishes, viewModelOnApp)
+            Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
+
+            if (viewModelWishesData.popupControl) {
+                Row {
+                    AlertDialog(modifier = Modifier
+                        .fillMaxHeight(0.6F)
+                        .padding(vertical = 30.dp),
+                        backgroundColor = beige,
+                        onDismissRequest = {
+                            viewModelWishes.disablePopUp()
+                        },
+                        title = { Text(text = viewModelWishesData.currentGift.name) },
+                        text = { Text(viewModelWishesData.currentGift.description) },
+                        confirmButton = {
+                            Button(
+                                onClick = { viewModelWishes.disablePopUp() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                            ) {
+                                Text("Opdater")
+                            }
+                        }
+
+                    )
+                }
+
+            }
+
+            LazyVerticalGrid(
+                modifier = Modifier.fillMaxHeight(),
+                columns = GridCells.Adaptive(minSize = 160.dp),
+                // cells = GridCells.Adaptive(minSize = 160.dp),
+                verticalArrangement = Arrangement.spacedBy(1.dp),
+                horizontalArrangement = Arrangement.spacedBy(1.dp)
+            ) {
+                items(appState.currentGiftList) { item ->
+                    WishesComposer(item, navController, viewModelWishes, viewModelOnApp)
+                }
             }
         }
     }
+
+
 }
 
 /**

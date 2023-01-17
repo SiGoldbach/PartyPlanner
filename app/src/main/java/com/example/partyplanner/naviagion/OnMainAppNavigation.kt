@@ -36,6 +36,7 @@ fun InnerNav(
     ) {
         //Here there is no dependency injection yet so a standard event just get put in.
         composable(Destination.ComingEvents.route) {
+            viewModel.setEventStateLoading()
             viewModel.updateTopBarString(stringResource(id = R.string.Coming_Events))
             ComingEvents(
                 navController = onMainAppNavHostController,
@@ -65,6 +66,7 @@ fun InnerNav(
         }
 
         composable(Destination.Wishes.route) {
+            viewModel.setWishesStateLoading()
             viewModel.updateTopBarString("Din nuværende ønskeliste")
             Wishes(
                 navController = onMainAppNavHostController,
@@ -103,6 +105,7 @@ fun InnerNav(
             )
         }
         composable(Destination.WishList.route) {
+            viewModel.setEventWishListsStateLoading()
             viewModel.updateTopBarString(stringResource(id = R.string.Dine_wisList))
 
             Wishlist(navController = onMainAppNavHostController, viewModel)

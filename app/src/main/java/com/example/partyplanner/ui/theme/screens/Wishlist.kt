@@ -20,9 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
-import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.model.DataStateWishLists
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
+import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 // The mainscreen for wishlist
@@ -32,48 +33,65 @@ fun Wishlist(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllWishLists()
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = "Ønskelister",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth(
-                )
-
-        )
-
-        Divider(color = Color.Black, thickness = 0.5.dp)
-
-        Spacer(modifier = Modifier.height(15.dp))
-
-        LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxHeight(0.7F),
-            columns = GridCells.Adaptive(minSize = 200.dp),
-            verticalArrangement = Arrangement.spacedBy(5.dp),
-            horizontalArrangement = Arrangement.spacedBy(5.dp)
-
+    if (appState.dataStateWishLists == DataStateWishLists.Loading) {
+        loadingScreen(text = "Loader ønskelister")
+    }
+    if (appState.dataStateWishLists == DataStateWishLists.Empty) {
+        emptyLoadingScreen(
+            text = "Her er godt nok tomt opret en ny ønskeliste ",
+            buttonText = "Lav nyt ønske"
         ) {
-            items(appState.wishLists) { item ->
-                WishListComposer(item, navController, viewModelOnApp)
-            }
-
+            navController.navigate(Destination.CreateWishlist.route)
         }
-        // ADD A "Add wish-list" button.
-        Image(
-            modifier = Modifier
-                .size(70.dp, 70.dp)
-                .clickable(
-                    onClick = { navController.navigate(Destination.CreateWishlist.route) }
-                ),
-            painter = painterResource(id = R.drawable.addpresentpicture),
-            contentDescription = "Tilføj ønskeliste",
-            alignment = Alignment.Center,
-        )
+    }
+    if (appState.dataStateWishLists == DataStateWishLists.Success) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "Ønskelister",
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                fontStyle = FontStyle.Italic,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth(
+                    )
+
+            )
+
+            Divider(color = Color.Black, thickness = 0.5.dp)
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .fillMaxHeight(0.7F),
+                columns = GridCells.Adaptive(minSize = 200.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+                horizontalArrangement = Arrangement.spacedBy(5.dp)
+
+            ) {
+                items(appState.wishLists) { item ->
+                    WishListComposer(item, navController, viewModelOnApp)
+                }
+
+            }
+            // ADD A "Add wish-list" button.
+            Image(
+                modifier = Modifier
+                    .size(70.dp, 70.dp)
+                    .clickable(
+                        onClick = { navController.navigate(Destination.CreateWishlist.route) }
+                    ),
+                painter = painterResource(id = R.drawable.addpresentpicture),
+                contentDescription = "Tilføj ønskeliste",
+                alignment = Alignment.Center,
+            )
+        }
+    }
+    if (appState.dataStateWishLists == DataStateWishLists.Failure) {
+        Text(text = "Kunne ikke hente dine ønskelister prøv igen senere")
+
     }
 
 
