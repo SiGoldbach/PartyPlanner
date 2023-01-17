@@ -116,14 +116,25 @@ fun ProfileEditScreen(
         }
         Row(modifier = Modifier.fillMaxWidth(), Arrangement.Center) {
             Button(
-                onClick = { internalNavController.navigate(Destination.Profile.route) },
+                onClick = {
+                    internalNavController.navigate(Destination.Profile.route) {
+                        internalNavController.popBackStack()
+                        internalNavController.popBackStack()                    }
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
             ) {
                 Text(text = "Afbryd")
             }
             Spacer(modifier = Modifier.width(20.dp))
             Button(
-                onClick = { internalNavController.navigate(Destination.Profile.route) },
+                onClick = {
+                    internalNavController.navigate(Destination.Profile.route) {
+                        internalNavController.popBackStack()
+                        internalNavController.popBackStack()
+
+
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
             ) {
                 Text(text = "Gem")
