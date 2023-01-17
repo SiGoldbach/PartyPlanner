@@ -6,10 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.partyplanner.ui.theme.screens.ExperimentalScreen
-import com.example.partyplanner.ui.theme.screens.LoginScreen
-import com.example.partyplanner.ui.theme.screens.OpretBruger
-import com.example.partyplanner.ui.theme.screens.WelcomeScreen
+import com.example.partyplanner.ui.theme.screens.externalNavigationScreens.ExperimentalScreen
+import com.example.partyplanner.ui.theme.screens.externalNavigationScreens.LoginScreen
+import com.example.partyplanner.ui.theme.screens.externalNavigationScreens.OpretBruger
+import com.example.partyplanner.ui.theme.screens.externalNavigationScreens.WelcomeScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

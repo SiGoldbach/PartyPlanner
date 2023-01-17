@@ -1,8 +1,7 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.externalNavigationScreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.standardDP
 import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 
 //Passord visibility from video

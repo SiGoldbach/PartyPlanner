@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.eventScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,35 +19,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
-import com.example.partyplanner.model.DataStateWishLists
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
-// The screen to chose a specific event for an event. Linking them together.
+// The screen for adding a wishlist to an event.
 
 @Composable
 fun Wishlist2(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getAllWishLists()
 
-    if (appState.dataStateWishLists == DataStateWishLists.Loading) {
-        loadingScreen(text = "Loader ønskelister")
-    }
-    if (appState.dataStateWishLists == DataStateWishLists.Empty) {
-        emptyLoadingScreen(
-            text = "Her er godt nok tomt opret en ny ønskeliste ",
-            buttonText = "Lav nyt ønske"
-        ) {
-            navController.navigate(Destination.CreateWishlist.route)
-        }
-    }
-
-    if (appState.dataStateWishLists == DataStateWishLists.Failure) {
-        Text(text = "Kunne ikke hente dine ønskelister prøv igen senere")
-
-    }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "Ønskelister",
@@ -77,8 +60,16 @@ fun Wishlist2(navController: NavController, viewModelOnApp: ViewModelOnApp) {
             items(appState.wishLists) { item ->
                 WishListComposer2(item, navController, viewModelOnApp)
             }
+
         }
+
     }
+
+
+    //   Row(modifier = Modifier.fillMaxSize(),
+    // horizontalArrangement = Arrangement.Center,
+    // verticalAlignment = Alignment.Bottom) {
+    //   }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -94,7 +85,7 @@ fun WishListComposer2(
             .padding(start = 5.dp, end = 5.dp),
         onClick = {
             viewModelOnApp.setCurrentWisHListId(wishList.id)
-            navController.navigate(Destination.Wishes.route)
+            navController.navigate(Destination.MyEventEditScreen.route)
         },
         backgroundColor = dustyRose,
 

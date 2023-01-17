@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.externalNavigationScreens
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.example.partyplanner.R
 import com.example.partyplanner.model.MenuItem
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.naviagion.InnerNav
 import com.example.partyplanner.ui.theme.AppBar
 import com.example.partyplanner.ui.theme.beige
+import com.example.partyplanner.ui.theme.screens.reuseAbles.DrawerBody
+import com.example.partyplanner.ui.theme.screens.reuseAbles.DrawerHeader
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import kotlinx.coroutines.launch
 

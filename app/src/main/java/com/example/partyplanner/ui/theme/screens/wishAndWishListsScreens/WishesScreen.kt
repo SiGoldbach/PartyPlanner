@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -25,6 +25,8 @@ import com.example.partyplanner.model.Gift
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.example.partyplanner.viewModel.ViewModelWishes
 
@@ -155,7 +157,7 @@ fun WishesComposer(
             modifier = Modifier
             .size(70.dp, 70.dp)
             .clickable(
-            onClick = { navController.navigate(Destination.AddWishToList.route) }
+            onClick = { navController.navigate(Destination.com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens.AddWishToList.route) }
             ),
             painter = painterResource(id = R.drawable.addpresentpicture),
             contentDescription = "Tilføj ønske",

@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -19,6 +19,8 @@ import coil.compose.rememberImagePainter
 import com.example.partyplanner.model.Gift
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.StandardButton
+import com.example.partyplanner.ui.theme.screens.standardDP
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage

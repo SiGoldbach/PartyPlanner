@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.externalNavigationScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,7 +19,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
-import com.example.partyplanner.viewModel.OpretBrugerViewmodel
+import com.example.partyplanner.ui.theme.screens.StandardButton
+import com.example.partyplanner.ui.theme.screens.standardDP
 
 
 @Composable
@@ -76,7 +77,6 @@ fun WelcomeScreen(navController: NavController) {
                 )
             }
         }
-        val test: OpretBrugerViewmodel = OpretBrugerViewmodel()
 
         Spacer(modifier = Modifier.height(425.dp))
         StandardButton(

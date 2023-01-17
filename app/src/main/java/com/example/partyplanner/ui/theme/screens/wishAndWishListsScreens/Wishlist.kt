@@ -1,4 +1,4 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -24,6 +24,8 @@ import com.example.partyplanner.model.DataStateWishLists
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
+import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 // The mainscreen for wishlist
