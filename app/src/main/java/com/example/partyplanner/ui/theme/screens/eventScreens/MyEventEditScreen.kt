@@ -136,7 +136,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         )
         Spacer(modifier = Modifier.height(standardDP))
         Button(
-            onClick = { navController.navigate(Destination.AddWishlistToEvent.route) },
+            onClick = { navController.navigate(Destination.WishlistForSpecificEvent.route) },
             colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
             shape = RoundedCornerShape(30.dp),
             modifier = Modifier
