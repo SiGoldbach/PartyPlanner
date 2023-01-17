@@ -42,7 +42,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
 
     val context = LocalContext.current
 
-    val date = remember { mutableStateOf("") }
+    val date = remember { mutableStateOf(appState.currentEvent.date) }
     val calender = Calendar.getInstance()
 
     year = calender.get(Calendar.YEAR)
