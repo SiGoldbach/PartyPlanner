@@ -76,27 +76,32 @@ fun Profile(
                     fontSize = 16.sp, color = Color.Black
                 )
 
+                Spacer(modifier = Modifier.height(20.dp))
+
                 Text(
                     text = appState.user.email,
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
 
-                Text(
-                    text = stringResource(id = R.string.Profile_Description),
-                    fontStyle = FontStyle.Normal,
-                    fontSize = 16.sp, color = Color.Black
-                )
+                Spacer(modifier = Modifier.height(20.dp))
 
-                Text(
-                    text = appState.user.description,
-                    fontStyle = FontStyle.Normal,
-                    fontSize = 16.sp, color = Color.Black
-                )
+                if (appState.user.description.isEmpty()) {
+                    Text(
+                        text = "Profilbeskrivelse",
+                        fontStyle = FontStyle.Normal,
+                        fontSize = 16.sp, color = Color.Black
+                    )
+                } else {
 
+                    Text(
+                        text = appState.user.description,
+                        fontStyle = FontStyle.Normal,
+                        fontSize = 16.sp, color = Color.Black
+                    )
+                }
 
             }
-
 
         }
         Button(
@@ -114,8 +119,8 @@ fun Profile(
         Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
                 Button(
-                   onClick = {  internalNavController.navigate(Destination.ProfileEditScreen.route) },
-                   colors = ButtonDefaults.buttonColors(backgroundColor = beige),
+                    onClick = { internalNavController.navigate(Destination.ProfileEditScreen.route) },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = beige),
                     shape = CircleShape,
                     modifier = Modifier.size(width = 69.dp, height = 60.dp)
                 ) {

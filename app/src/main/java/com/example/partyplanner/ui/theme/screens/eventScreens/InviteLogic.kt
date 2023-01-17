@@ -123,6 +123,5 @@ fun makeSubjectForEmail(event: Event, user: User): String {
     return "yjfyjgjh"
     //Email subject of invitation
     //return user.name + " has invited you to join "+ event.name
-   // return "Invitation to " + event.name + " from " + user.name
-
+    // return "Invitation to " + event.name + " from " + user.name
 }

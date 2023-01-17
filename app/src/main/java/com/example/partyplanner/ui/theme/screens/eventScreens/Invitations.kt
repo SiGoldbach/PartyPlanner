@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavHostController
 import com.example.partyplanner.model.Invitations
+import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.viewModel.ViewModelInvitations
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
@@ -31,7 +32,8 @@ fun InvitationScreen(
     val viewModelInvitations by remember { mutableStateOf(ViewModelInvitations()) } // for remembering the value of dialog is open or not
 
     Scaffold(
-
+        modifier = Modifier.fillMaxSize(),
+        backgroundColor = beige,
         floatingActionButton = { //floating acion button
             FloatingActionButton(
                 onClick = { // when floating action button click it change the value of opendialog to true,

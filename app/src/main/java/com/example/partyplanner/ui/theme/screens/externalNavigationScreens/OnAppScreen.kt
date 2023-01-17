@@ -14,8 +14,8 @@ import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.naviagion.InnerNav
 import com.example.partyplanner.ui.theme.AppBar
 import com.example.partyplanner.ui.theme.beige
-import com.example.partyplanner.ui.theme.screens.reuseAbles.DrawerBody
-import com.example.partyplanner.ui.theme.screens.reuseAbles.DrawerHeader
+import com.example.partyplanner.ui.theme.screens.reuseables.DrawerBody
+import com.example.partyplanner.ui.theme.screens.reuseables.DrawerHeader
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import kotlinx.coroutines.launch
 
