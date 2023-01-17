@@ -68,15 +68,13 @@ fun InnerNav(
         }
         composable(Destination.AddWishlistToEvent.route) {
             viewModel.updateTopBarString("Dine Ønskelister")
-            Wishlist2(
-                navController = onMainAppNavHostController,
-                viewModel
-            )
+
         }
 
         composable(Destination.Wishes.route) {
             viewModel.setWishesStateLoading()
             viewModel.updateTopBarString("Din nuværende ønskeliste")
+            viewModel.getAllGiftsInWishList()
             Wishes(
                 navController = onMainAppNavHostController,
                 viewModelOnApp = viewModel,
