@@ -1,7 +1,9 @@
 package com.example.partyplanner.ui.theme.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -24,7 +26,8 @@ fun HelpScreen(viewModelHelp: ViewModelHelp) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp),
+            .padding(5.dp)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -45,7 +48,8 @@ fun HelpScreen(viewModelHelp: ViewModelHelp) {
                     ) { Text(helpScreenState.buttonText, color = Color.White) }
                 })
         }
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(10.dp)
+        )
 
         HelpButtons(output = "Oprettelse af begivenheder") {
             openDialogAndChangeText(
@@ -79,11 +83,12 @@ fun HelpScreen(viewModelHelp: ViewModelHelp) {
                 buttonText = "OK"
             )
         }
-        HelpButtons(output = "Juridiske vilkår") {
+        HelpButtons(output = "Vilkår og Betingelser") {
             openDialogAndChangeText(
                 viewModelHelp = viewModelHelp,
-                title = "Juridiske vilkår",
-                descriptionText = "Indsæt tekst",
+                title = "Vilkår og Betingelser",
+                descriptionText = "1. Introduktion: Disse vilkår og betingelser (\"Betingelserne\") regulerer din brug af PartyPlanner (\"Appen\") og ethvert indhold eller tjenester, der leveres gennem App'en. Ved at bruge appen accepterer du at være bundet af disse vilkår. Hvis du ikke accepterer disse vilkår, bør du ikke bruge appen. \n\n2. Aldersbegrænsninger: Du skal være mindst 18 år for at bruge appen. Ved at bruge appen repræsenterer og garanterer du, at du er 18 år eller ældre. \n\n3. Brugeradfærd: Du accepterer kun at bruge appen til lovlige formål og i overensstemmelse med disse vilkår. Du accepterer ikke at bruge appen til at uploade, poste, transmittere eller på anden måde gøre indhold tilgængeligt, der er ulovligt, skadeligt, truende, misbrugende, chikanerende, indviklet, ærekrænkende, vulgært, uanstændigt, inkrænkende, krænkende i en andens privatliv, hadefuldt eller racemæssigt, etnisk eller på anden måde anstødeligt. \n\n4. Immaterielle rettigheder: App'en og alt indhold og alle tjenester, der leveres gennem appen, inklusive men ikke begrænset til tekst, grafik, logoer, billeder og software, tilhører PartyPlanner og/eller dets licensgivere og er beskyttet af ophavsret, varemærke og andre love om intellektuel ejendomsret. Du accepterer ikke at bruge noget indhold eller tjenester leveret gennem appen til kommercielle formål uden udtrykkeligt skriftligt samtykke fra PartyPlanner. \n\n5. Ansvarsfraskrivelser: Appen og alt indhold og alle tjenester, der leveres gennem appen, leveres på \"som den er\" og \"som tilgængelig\". PartyPlanner giver ingen erklæringer eller garantier af nogen art, udtrykkelige eller underforståede, med hensyn til driften af appen eller oplysningerne, indholdet, materialerne eller produkterne inkluderet i appen. PartyPlanner garanterer ikke, at appen, dens servere eller nogen e-mail sendt fra PartyPlanner er fri for virus eller andre skadelige komponenter. \n\n6. Ansvarsbegrænsning: PartyPlanner kan under ingen omstændigheder holdes ansvarlig for nogen form for skader, der måtte opstå som følge af brugen af appen, inklusive men ikke begrænset til direkte, indirekte, tilfældige, straf- og følgeskader. \n7. Ændringer af vilkår: PartyPlanner forbeholder sig retten til at ændre disse vilkår til enhver tid, og du er bundet af sådanne ændringer. Du bør jævnligt tjekke disse vilkår for ændringer. \n\n8. Gældende lov: Disse vilkår skal være underlagt og fortolkes i overensstemmelse med lovgivningen i Danmark uden at give virkning til nogen principper om lovkonflikter. \n9. Kontakt os: Hvis du har spørgsmål eller bekymringer vedrørende disse vilkår, bedes du kontakte os på partyplanner@partyplanner.dk" +
+                        "\n\nVed at bruge appen accepterer du at være bundet af disse vilkår. Hvis du ikke accepterer disse vilkår, bør du ikke bruge appen.",
                 buttonText = "OK"
             )
         }
