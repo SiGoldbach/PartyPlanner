@@ -44,7 +44,7 @@ fun Wishes(
     }
     if (appState.dataStateWishes == DataStateWishes.Empty) {
         emptyLoadingScreen(
-            text = "Det er godt nok tomt her opret et ønske",
+            text = "Det er godt nok tomt her, opret et ønske",
             buttonText = "Opret ønske"
         ) {
             navController.navigate(Destination.CreateWish.route)
