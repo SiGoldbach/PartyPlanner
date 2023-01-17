@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
@@ -24,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.model.User
+import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelInvitations
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
@@ -59,7 +57,8 @@ fun InvitationScreenLogic(
         //Align center
         modifier = Modifier
             .fillMaxWidth()
-            .padding(20.dp)
+            .padding(20.dp),
+        colors = ButtonDefaults.buttonColors(dustyRose)
     ) {
         Text(text = "Send invitation")
     }
