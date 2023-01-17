@@ -41,33 +41,30 @@ fun InnerNav(
             viewModel.setEventStateLoading()
             viewModel.updateTopBarString(stringResource(id = R.string.Coming_Events))
             ComingEvents(
-                navController = onMainAppNavHostController,
-                viewModelOnApp = viewModel
+                navController = onMainAppNavHostController, viewModelOnApp = viewModel
             )
         }
         composable(Destination.Event.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Dit_Event))
             MyEventScreen(
-                navController = onMainAppNavHostController,
-                viewModelOnApp = viewModel
+                navController = onMainAppNavHostController, viewModelOnApp = viewModel
             )
         }
         composable(Destination.NewEvent.route) {
             viewModel.updateTopBarString(stringResource(id = R.string.Ny_Begivenhed))
             CreateNewEvent(
-                navController = onMainAppNavHostController,
-                viewModel
+                navController = onMainAppNavHostController, viewModel
             )
         }
         composable(Destination.ProfileEditScreen.route) {
             viewModel.updateTopBarString("Rediger profil")
             ProfileEditScreen(
-                internalNavController = onMainAppNavHostController,
-                viewModelOnApp = viewModel
+                internalNavController = onMainAppNavHostController, viewModelOnApp = viewModel
             )
         }
-        composable(Destination.AddWishlistToEvent.route) {
+        composable(Destination.WishlistForSpecificEvent.route) {
             viewModel.updateTopBarString("Dine Ønskelister")
+            Wishlist2(navController = onMainAppNavHostController, viewModelOnApp = viewModel)
 
         }
 
@@ -94,8 +91,7 @@ fun InnerNav(
             viewModel.updateTopBarString(stringResource(id = R.string.Edit_Event))
 
             UpdateEvent(
-                navController = onMainAppNavHostController,
-                viewModelOnApp = viewModel
+                navController = onMainAppNavHostController, viewModelOnApp = viewModel
             )
         }
         composable(Destination.Help.route) {
@@ -108,7 +104,8 @@ fun InnerNav(
 
             Profile(
                 internalNavController = onMainAppNavHostController,
-                externalNavController = externalNavHostController, viewModelOnApp = viewModel
+                externalNavController = externalNavHostController,
+                viewModelOnApp = viewModel
             )
         }
         composable(Destination.WishList.route) {
@@ -126,8 +123,7 @@ fun InnerNav(
         }
         composable(Destination.CreateWish.route) {
             CreateNewWIsh(
-                viewModelOnApp = viewModel,
-                navHostController = onMainAppNavHostController
+                viewModelOnApp = viewModel, navHostController = onMainAppNavHostController
             )
         }
         composable(Destination.InvitationScreen.route) {

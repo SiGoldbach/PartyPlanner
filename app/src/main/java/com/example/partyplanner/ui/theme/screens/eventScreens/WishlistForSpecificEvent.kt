@@ -23,8 +23,8 @@ import com.example.partyplanner.model.DataStateWishLists
 import com.example.partyplanner.model.WishList
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
-import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
-import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
+import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 // The screen to chose a specific event for an event. Linking them together.
@@ -80,8 +80,11 @@ fun Wishlist2(navController: NavController, viewModelOnApp: ViewModelOnApp) {
                 WishListComposer2(item, navController, viewModelOnApp)
             }
         }
+
     }
+
 }
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
