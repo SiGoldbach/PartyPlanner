@@ -100,7 +100,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:<latest-version>'
     //Maven javax
-    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+// https://mvnrepository.com/artifact/javax.mail/mail
+    implementation("javax.mail:mail:1.5.0-b01")
 
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

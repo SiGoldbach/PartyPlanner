@@ -10,20 +10,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
+import com.google.android.material.R
 
 @Composable
 fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var kodeord by remember { mutableStateOf(TextFieldValue("")) }
+
+    var passwordVisibility by remember { mutableStateOf(false) }
+
+    val icon = if (passwordVisibility) {
+        painterResource(id = R.drawable.design_ic_visibility)
+    } else {
+        painterResource(id = R.drawable.design_ic_visibility_off)
+    }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()
     ) {
@@ -55,7 +67,20 @@ fun LoginScreen(navController: NavController) {
         OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = kodeord,
             label = { Text(text = "Kodeord", color = dustyRose) },
-            onValueChange = { kodeord = it })
+            onValueChange = { kodeord = it },
+            trailingIcon = {
+                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                    Icon(
+                        painter = icon,
+                        contentDescription = "Visibility Icon"
+                    )
+
+                }
+            }, visualTransformation = if (passwordVisibility) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            })
 
         Spacer(modifier = Modifier.height(50.dp))
         StandardButton(output = "Log på",

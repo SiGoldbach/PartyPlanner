@@ -38,6 +38,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
+                // .size(width = 350.dp, height = 300.dp)
                 .padding(10.dp),
             backgroundColor = beige
         ) {
@@ -68,9 +69,12 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
             backgroundColor = beige,
             border = BorderStroke(width = 2.dp, color = dustyRose)
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(10.dp)) {
-                // Her kommer Event name fra "event".
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(10.dp)
+            ) {
+                // Her skal Event name komme fra "event".
+                // Gør text større, tykkere og mere overskrift-agtigt.
                 Text(
                     text = appState.currentEvent.name,
                     fontStyle = FontStyle.Normal,
@@ -84,6 +88,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 )
                 // Date text here comes from "event".
                 StdText(string = appState.currentEvent.date)
+                StdText(string = appState.currentEvent.location)
 
                 Spacer(
                     modifier = Modifier
@@ -94,6 +99,8 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
 
             }
         }
+        // insert 2 buttons for Attending and NOT attending. (amount + face picture)
+        // insert wish-list button with default text.
         Column {
             Row(
                 modifier = Modifier
@@ -109,9 +116,6 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         .size(width = 180.dp, height = 80.dp)
 
                 ) {
-                    /**
-                     * This should show the connected wishlists presents and not the wishlist.
-                     */
                     Image(
                         painter = painterResource(id = R.drawable.wishlistpicture),
                         contentDescription = null
@@ -161,32 +165,35 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 modifier = Modifier
                     .height(10.dp)
             )
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            Button(
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
-                shape = RoundedCornerShape(30.dp),
-                modifier = Modifier
-                    .size(width = 180.dp, height = 80.dp),
-
-                ) {
-                Image(
-                    painter = painterResource(id = R.drawable.invitationsimageremovebg),
-                    contentDescription = null
-                )
-                Spacer(
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(
+                    onClick = { navController.navigate(Destination.InvitationScreen.route) },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                    shape = RoundedCornerShape(30.dp),
                     modifier = Modifier
-                        .width(7.dp)
-                )
-                Text(
-                    text = "Inviter",
-                    fontSize = 18.sp, color = Color.Black,
-                    fontStyle = FontStyle.Normal,
-                    fontWeight = FontWeight.Bold
-                )
+                        .size(width = 180.dp, height = 80.dp),
 
+                    ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.invitationsimageremovebg),
+                        contentDescription = null
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .width(7.dp)
+                    )
+                    Text(
+                        text = "Inviter",
+                        fontSize = 18.sp, color = Color.Black,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                }
             }
-        }
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
                     Button(

@@ -1,6 +1,5 @@
 package com.example.partyplanner.naviagion
 
-import AddWishToList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
@@ -12,13 +11,21 @@ import com.example.partyplanner.ui.theme.screens.LoginScreen
 import com.example.partyplanner.ui.theme.screens.OpretBruger
 import com.example.partyplanner.ui.theme.screens.WelcomeScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun NavigationAppHost(navController: NavHostController) {
     val viewModel = ViewModelOnApp()
     val ctx = LocalContext.current
+    var dependableStartDestination: String = Destination.Welcome.route
+    //If user is already logged in he goes to coming events screen.
+    if (Firebase.auth.currentUser != null) {
+        dependableStartDestination = Destination.LoginScreen.route
+    }
 
-    NavHost(navController = navController, startDestination = Destination.Welcome.route) {
+
+    NavHost(navController = navController, startDestination = dependableStartDestination) {
         //Here there is no dependency injection yet so a standard event just get put in.
 
         composable(Destination.LoginScreen.route) { LoginScreen(navController = navController) }
