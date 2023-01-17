@@ -4,7 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -24,6 +23,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
@@ -31,11 +31,11 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 @Composable
-fun Profile(
+fun ProfileEditScreen(
     internalNavController: NavController,
-    externalNavController: NavController,
     viewModelOnApp: ViewModelOnApp
 ) {
+
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.getProfileInfoAndUpdate()
 
@@ -92,37 +92,22 @@ fun Profile(
                     fontSize = 16.sp, color = Color.Black
                 )
 
-
-            }
-
-
-        }
-        Button(
-            onClick = { externalNavController.navigate(Destination.Welcome.route) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-        ) {
-            Text(text = "Log ud")
-
-        }
-        Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
-                Button(
-                   onClick = {  internalNavController.navigate(Destination.ProfileEditScreen.route) },
-                   colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-                    shape = CircleShape,
-                    modifier = Modifier.size(width = 69.dp, height = 60.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.pencildrawing),
-                        contentDescription = null,
-                        modifier = Modifier.size(width = 35.dp, height = 35.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                }
             }
 
         }
-
+        Row (modifier = Modifier.fillMaxWidth(), Arrangement.SpaceAround) {
+            Button(
+                onClick = {  internalNavController.navigate(Destination.Profile.route) },
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+            ) {
+                Text(text = "Afbryd")
+            }
+            Button(
+                onClick = { internalNavController.navigate(Destination.Profile.route)},
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+            ) {
+                Text(text = "Gem")
+            }
+        }
     }
-
 }

@@ -56,6 +56,13 @@ fun InnerNav(
                 viewModel
             )
         }
+        composable(Destination.ProfileEditScreen.route) {
+            viewModel.updateTopBarString("Rediger profil")
+            ProfileEditScreen(
+                internalNavController = onMainAppNavHostController,
+                viewModelOnApp = viewModel
+            )
+        }
         composable(Destination.AddWishlistToEvent.route) {
             viewModel.updateTopBarString("Dine Ønskelister")
             Wishlist2(
