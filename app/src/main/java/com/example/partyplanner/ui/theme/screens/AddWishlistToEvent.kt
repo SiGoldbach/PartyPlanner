@@ -1,5 +1,6 @@
-package com.example.partyplanner.ui.theme.screens
 
+package com.example.partyplanner.ui.theme.screens
+/*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -133,4 +134,4 @@ fun WishListComposer2(
     }
 }
 
-
+*/
