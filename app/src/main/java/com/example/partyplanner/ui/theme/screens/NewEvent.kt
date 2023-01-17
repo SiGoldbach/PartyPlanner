@@ -24,7 +24,7 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import java.util.*
 
-//Calendar implemented with inspiration and tutorial from https://www.geeksforgeeks.org/date-picker-in-android-using-jetpack-compose/
+//Calendar implemented with help from tutorial from https://www.geeksforgeeks.org/date-picker-in-android-using-jetpack-compose/
 @Composable
 fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     //There is no need for a state collector here only to create the event in the firebase.
@@ -156,7 +156,9 @@ fun onclickForButton(
     eventDescription: String,
     eventLocation: String
 ) {
-    navController.navigate(Destination.Event.route)
+    navController.navigate(Destination.Event.route){
+        navController.popBackStack()
+    }
     viewModel.createEvent(name, date, eventDescription, eventLocation)
 }
 

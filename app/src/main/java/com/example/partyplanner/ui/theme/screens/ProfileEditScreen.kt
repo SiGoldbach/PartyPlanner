@@ -31,7 +31,9 @@ fun ProfileEditScreen(
     viewModelOnApp: ViewModelOnApp
 ) {
     val appState by viewModelOnApp.uiState.collectAsState()
-    var brugernavn by remember { mutableStateOf(TextFieldValue(appState.user.name + " " + appState.user.surname)) }
+    var name by remember { mutableStateOf(TextFieldValue(appState.user.name)) }
+    var surname by remember { mutableStateOf(TextFieldValue(appState.user.surname)) }
+
     var profilBeskrivelse by remember { mutableStateOf(TextFieldValue(appState.user.description)) }
     viewModelOnApp.getProfileInfoAndUpdate()
 
@@ -73,9 +75,17 @@ fun ProfileEditScreen(
                  ) */
                 OutlinedTextField(
                     colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
-                    value = brugernavn,
+                    value = name,
                     label = { Text(text = "Brugernavn", color = dustyRose) },
-                    onValueChange = { brugernavn = it },
+                    onValueChange = { name = it },
+                    modifier = Modifier.width(350.dp)
+
+                )
+                OutlinedTextField(
+                    colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+                    value = surname,
+                    label = { Text(text = "Efternavn", color = dustyRose) },
+                    onValueChange = { surname = it },
                     modifier = Modifier.width(350.dp)
 
                 )
@@ -115,14 +125,27 @@ fun ProfileEditScreen(
         }
         Row(modifier = Modifier.fillMaxWidth(), Arrangement.Center) {
             Button(
-                onClick = { internalNavController.navigate(Destination.Profile.route) },
+                onClick = {
+                    internalNavController.navigate(Destination.Profile.route) {
+                        internalNavController.popBackStack()
+                        internalNavController.popBackStack()
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
             ) {
                 Text(text = "Afbryd")
             }
             Spacer(modifier = Modifier.width(20.dp))
             Button(
-                onClick = { internalNavController.navigate(Destination.Profile.route) },
+                onClick = {
+                    viewModelOnApp.updateUser(name = name.text, surname = surname.text, description = profilBeskrivelse.text)
+                    internalNavController.navigate(Destination.Profile.route) {
+                        internalNavController.popBackStack()
+                        internalNavController.popBackStack()
+
+
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
             ) {
                 Text(text = "Gem")

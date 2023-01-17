@@ -77,7 +77,7 @@ class ViewModelOnApp : ViewModel() {
         description: String,
         location: String
     ): Boolean {
-        val generatedID = (0..99999999999).random().toString()
+        val generatedID = generateId()
 
         var boolean = false
         val addEvent = db.collection(EVENTS)
@@ -485,6 +485,23 @@ class ViewModelOnApp : ViewModel() {
 
     fun setWishesStateLoading() {
         userInfo.update { t -> t.copy(dataStateWishes = DataStateWishes.Loading) }
+    }
+
+    fun updateUser(name: String, surname: String, description: String) {
+        val locationForUpdate = db.collection(USERS)
+        val userMap = hashMapOf(
+            UserHelper().NAME to name,
+            UserHelper().SURNAME to surname,
+            UserHelper().DESCRIPTION to description
+        )
+        locationForUpdate.document(userInfo.value.uid).update(userMap as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.v("makeUser", "User has been created")
+            }
+            .addOnFailureListener {
+                Log.v("makeUser", "User has not been created")
+            }
+
     }
 
 

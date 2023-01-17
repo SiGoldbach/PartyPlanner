@@ -2,10 +2,10 @@ package com.example.partyplanner.model
 
 data class User(
     val email: String = "",
-    val name: String = "",
-    val surname: String = "",
+    var name: String = "",
+    var surname: String = "",
     val uid: String = "TEST2",
-    val description: String = "Write a description about yourself here",
+    var description: String = "Write a description about yourself here",
     var eventIdentifiers: List<String> = listOf(),
     var wishListIdentifiers: MutableList<String> = mutableListOf(),
     val phoneNumber: String = ""
