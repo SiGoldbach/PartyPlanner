@@ -4,15 +4,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,9 +15,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
@@ -31,12 +27,13 @@ import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 @Composable
-fun Profile(
+fun ProfileEditScreen(
     internalNavController: NavController,
-    externalNavController: NavController,
     viewModelOnApp: ViewModelOnApp
 ) {
     val appState by viewModelOnApp.uiState.collectAsState()
+    var brugernavn by remember { mutableStateOf(TextFieldValue(appState.user.name + " " + appState.user.surname)) }
+    var profilBeskrivelse by remember { mutableStateOf(TextFieldValue(appState.user.description)) }
     viewModelOnApp.getProfileInfoAndUpdate()
 
     Column(
@@ -70,11 +67,20 @@ fun Profile(
                     .padding(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = appState.user.name + " " + appState.user.surname,
-                    fontStyle = FontStyle.Normal,
-                    fontSize = 16.sp, color = Color.Black
+                /* Text(
+                     text = appState.user.name + " " + appState.user.surname,
+                     fontStyle = FontStyle.Normal,
+                     fontSize = 16.sp, color = Color.Black
+                 ) */
+                OutlinedTextField(
+                    colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+                    value = brugernavn,
+                    label = { Text(text = "Brugernavn", color = dustyRose) },
+                    onValueChange = { brugernavn = it },
+                    modifier = Modifier.width(350.dp)
+
                 )
+                Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
                     text = appState.user.email,
@@ -82,6 +88,17 @@ fun Profile(
                     fontSize = 16.sp, color = Color.Black
                 )
 
+                Spacer(modifier = Modifier.height(10.dp))
+
+                OutlinedTextField(
+                    colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+                    value = profilBeskrivelse,
+                    label = { Text(text = "Profilbeskrivelse", color = dustyRose) },
+                    onValueChange = { profilBeskrivelse = it },
+                    modifier = Modifier.width(350.dp)
+
+                )
+                /*
                 Text(
                     text = stringResource(id = R.string.Profile_Description),
                     fontStyle = FontStyle.Normal,
@@ -93,43 +110,24 @@ fun Profile(
                     fontStyle = FontStyle.Normal,
                     fontSize = 16.sp, color = Color.Black
                 )
-
-
-            }
-
-
-        }
-        Button(
-            onClick = {
-                viewModelOnApp.signOut()
-                externalNavController.navigate(Destination.Welcome.route) {
-                    popUpTo(0)
-                }
-            },
-            colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
-        ) {
-            Text(text = "Log ud")
-
-        }
-        Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
-                Button(
-                   onClick = {  internalNavController.navigate(Destination.ProfileEditScreen.route) },
-                   colors = ButtonDefaults.buttonColors(backgroundColor = beige),
-                    shape = CircleShape,
-                    modifier = Modifier.size(width = 69.dp, height = 60.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.pencildrawing),
-                        contentDescription = null,
-                        modifier = Modifier.size(width = 35.dp, height = 35.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                }
+                */
             }
 
         }
-
+        Row(modifier = Modifier.fillMaxWidth(), Arrangement.Center) {
+            Button(
+                onClick = { internalNavController.navigate(Destination.Profile.route) },
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+            ) {
+                Text(text = "Afbryd")
+            }
+            Spacer(modifier = Modifier.width(20.dp))
+            Button(
+                onClick = { internalNavController.navigate(Destination.Profile.route) },
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)
+            ) {
+                Text(text = "Gem")
+            }
+        }
     }
-
 }
