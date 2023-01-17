@@ -22,15 +22,19 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.R
 import com.example.partyplanner.model.Event
 import com.example.partyplanner.model.DataStateEvent
+import com.example.partyplanner.model.Gift
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
 import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
+import kotlinx.coroutines.runBlocking
+import java.io.InputStream
 
 
 val standardDP: Dp = 10.dp
@@ -137,12 +141,11 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
             Text(text = event.date)
             Box(modifier = Modifier.fillMaxHeight(0.8F)) {
                 Image(
-                    painter = painterResource(id = R.drawable.ballon),
+                    painter = rememberAsyncImagePainter(model = "gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg"),
                     contentDescription = stringResource(id = R.string.Coming_events),
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(),
-                    contentScale = ContentScale.Crop,
+                        .size(200.dp),
+                    contentScale = ContentScale.Fit,
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
@@ -182,6 +185,8 @@ fun StandardText(text: String) {
     )
 
 }
+
+
 
 
 

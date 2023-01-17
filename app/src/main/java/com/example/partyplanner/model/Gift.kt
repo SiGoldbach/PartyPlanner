@@ -15,14 +15,14 @@ data class WishList(
 
 data class Gift(
     val id: String = "ID",
-    val name: String = "",
-    val description: String = "",
-    val link: String = "",
-    val picture: String = "",
+    val name: String = "NAME",
+    val description: String = "EMPTY",
+    val link: String = "EMPTY",
+    var picture: String = "gs://partyplanner-7fed9.appspot.com/giftPictures/sko.png",
     val price: Int = 0,
     val ownerUID: String = "ownerUID",
     var wishListIDs: List<String> = listOf(),
-    var realWish: Boolean = true
+    var realWish: Boolean = true,
 
 )
 

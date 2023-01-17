@@ -1,5 +1,6 @@
-package com.example.partyplanner.ui.theme.screens
+package com.example.partyplanner.ui.theme.screens.eventScreens
 
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -9,9 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.StdText
@@ -33,6 +33,9 @@ import com.example.partyplanner.viewModel.ViewModelOnApp
 @Composable
 fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val appState by viewModelOnApp.uiState.collectAsState()
+    val uri = Uri.parse("res/drawable-tvdpi/weddinghands.png")
+    var selectImages by remember { mutableStateOf<Uri?>(uri) }
+
     viewModelOnApp.getSingleEvent(appState.currentEventID)
 
     Column {
@@ -56,7 +59,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 Box(modifier = Modifier.fillMaxHeight(1F)) {
                     Image(
                         // billede her skal komme fra event.
-                        painter = painterResource(id = R.drawable.weddinghands),
+                        painter = rememberAsyncImagePainter(model = selectImages),
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxHeight()

@@ -18,10 +18,6 @@ class ViewModelWishes : ViewModel() {
         )
     val uiState: StateFlow<WishesModel> = userInfo.asStateFlow()
 
-    init {
-
-    }
-
     private fun setCurrentGift(gift: Gift) {
         userInfo.update { t -> t.copy(currentGift = gift) }
 

@@ -1,5 +1,6 @@
 package com.example.partyplanner.viewModel
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.*
@@ -12,6 +13,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
+import okhttp3.internal.wait
 import java.io.InputStream
 
 
@@ -128,8 +132,8 @@ class ViewModelOnApp : ViewModel() {
             WishListHelper().PICTURE to "EMPTY",
             WishListHelper().OWNER_UID to userInfo.value.uid
         )
-        println("The event name is: " + name)
-        println("The event id is: " + generatedID)
+        println("The event name is: $name")
+        println("The event id is: $generatedID")
         println("The uid is: " + userInfo.value.uid)
         userInfo.update { t -> t.copy(currentWishListId = generatedID) }
 
@@ -449,19 +453,19 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
-    fun uploadPhoto(inputStream: InputStream) {
-        val mountainsRef = cloudStorage.reference.child("/eventPictures" + generateId() + ".jpg")
+    fun uploadPhoto(inputStream: InputStream): String {
+        val mountainsRef = cloudStorage.reference.child("/eventPictures/" + generateId() + ".jpg")
 
 
-        var uploadTask = mountainsRef.putStream(inputStream)
+        val uploadTask = mountainsRef.putStream(inputStream)
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
-        }.addOnSuccessListener { _ ->
+        }.addOnSuccessListener {
             println("File has been uploaded correctly")
             // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
             // ...
         }
-
+        return mountainsRef.path
     }
 
     //Sign out method
@@ -501,6 +505,14 @@ class ViewModelOnApp : ViewModel() {
             .addOnFailureListener {
                 Log.v("makeUser", "User has not been created")
             }
+
+    }
+
+    fun out(inputStream: InputStream, gift: Gift) = runBlocking {
+        val picLocation = uploadPhoto(inputStream)
+        gift.picture=picLocation
+        createGift(gift)
+
 
     }
 

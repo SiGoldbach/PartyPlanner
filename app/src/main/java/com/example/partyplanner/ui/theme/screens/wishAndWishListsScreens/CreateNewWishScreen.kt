@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.model.Gift
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -24,6 +24,8 @@ import com.example.partyplanner.ui.theme.screens.standardDP
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.InputStream
 
 @Composable
@@ -36,7 +38,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     val cloudStorage = Firebase.storage
     var pic: InputStream? = null
 
-    cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg").downloadUrl.addOnSuccessListener {
+    cloudStorage.getReferenceFromUrl("gs://partyplanner-7fed9.appspot.com/giftPictures/sko.png").downloadUrl.addOnSuccessListener {
         selectImages = it
     }
 
@@ -85,7 +87,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
         Card(modifier = Modifier.size(200.dp), backgroundColor = beige) {
             if (selectImages != null) {
                 Image(
-                    painter = rememberImagePainter(data = selectImages),
+                    painter = rememberAsyncImagePainter(model = selectImages),
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
                     modifier = Modifier
@@ -96,8 +98,15 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
                 )
             }
         }
-        Button(onClick = { viewModelOnApp.uploadPhoto(pic!!) }) {
-            Text(text = "Try to upload photo")
+        Button(
+            onClick = {
+                viewModelOnApp.out(pic!!, gift = Gift())
+            },
+            colors = ButtonDefaults.buttonColors(
+                dustyRose
+            )
+        ) {
+            Text(text = "Create gift")
 
         }
 

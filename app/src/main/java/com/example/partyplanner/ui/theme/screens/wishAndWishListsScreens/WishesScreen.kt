@@ -1,5 +1,7 @@
 package com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens
 
+import android.content.Context
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -9,9 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.R
 import com.example.partyplanner.model.DataStateWishes
 import com.example.partyplanner.model.Gift
@@ -29,6 +30,8 @@ import com.example.partyplanner.ui.theme.screens.reuseAbles.emptyLoadingScreen
 import com.example.partyplanner.ui.theme.screens.reuseAbles.loadingScreen
 import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.example.partyplanner.viewModel.ViewModelWishes
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 @Composable
@@ -60,6 +63,10 @@ fun Wishes(
             verticalArrangement = Arrangement.Center
         ) {
             Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
+            Text("gs://partyplanner-7fed9.appspot.com" + viewModelWishesData.currentGift.picture)
+            Text("gs://partyplanner-7fed9.appspot.com/eventPictures/ac4b1b6b-0894-46c1-99db-95031ee593bf.jpg")
+
+
 
             if (viewModelWishesData.popupControl) {
                 Row {
@@ -71,7 +78,6 @@ fun Wishes(
                             viewModelWishes.disablePopUp()
                         },
                         title = { Text(text = viewModelWishesData.currentGift.name) },
-                        text = { Text(viewModelWishesData.currentGift.description) },
                         confirmButton = {
                             Button(
                                 onClick = { viewModelWishes.disablePopUp() },
@@ -117,6 +123,19 @@ fun WishesComposer(
     viewModelWishes: ViewModelWishes,
     viewModelOnApp: ViewModelOnApp
 ) {
+    val cloudStorage = Firebase
+    val context: Context
+    val uri3 = Uri.parse("android.resource://" + "drawable+" + "/" + R.drawable.loading_picture)
+    var selectImages by remember { mutableStateOf<Uri?>(uri3) }
+    val uri = "gs://partyplanner-7fed9.appspot.com" + gave.picture
+    val uri2 =
+        "gs://partyplanner-7fed9.appspot.com/eventPictures/ac4b1b6b-0894-46c1-99db-95031ee593bf.jpg"
+
+
+    cloudStorage.storage.reference.child(gave.picture).downloadUrl.addOnSuccessListener {
+        selectImages = it
+    }
+
 
     if (gave.realWish) {
         Card(
@@ -132,12 +151,12 @@ fun WishesComposer(
                 Text(text = gave.name, modifier = Modifier.padding(5.dp))
                 Box(modifier = Modifier.fillMaxHeight(1F), Alignment.BottomEnd) {
                     Image(
-                        painter = painterResource(id = R.drawable.loading_picture),
+                        painter = rememberAsyncImagePainter(model = selectImages),
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(),
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Fit,
                     )
 
                     Row(
@@ -193,9 +212,4 @@ fun WishesComposer(
     }
 }
 
-fun createDummyEvent(viewModelOnApp: ViewModelOnApp) {
-    viewModelOnApp.createGift(Gift(realWish = true, name = "MyGift"))
-
-
-}
 

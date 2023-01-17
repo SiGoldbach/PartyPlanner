@@ -7,10 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.partyplanner.R
 import com.example.partyplanner.ui.theme.screens.*
-import com.example.partyplanner.ui.theme.screens.eventScreens.CreateNewEvent
-import com.example.partyplanner.ui.theme.screens.eventScreens.InvitationScreen
-import com.example.partyplanner.ui.theme.screens.eventScreens.UpdateEvent
-import com.example.partyplanner.ui.theme.screens.eventScreens.Wishlist2
+import com.example.partyplanner.ui.theme.screens.eventScreens.*
 import com.example.partyplanner.ui.theme.screens.profileScreens.Profile
 import com.example.partyplanner.ui.theme.screens.profileScreens.ProfileEditScreen
 import com.example.partyplanner.ui.theme.screens.wishAndWishListsScreens.*
