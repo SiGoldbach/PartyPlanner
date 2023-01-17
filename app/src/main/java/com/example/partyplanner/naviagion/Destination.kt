@@ -27,6 +27,7 @@ sealed class Destination(val route: String) {
     object LoginScreen : Destination("loginScreen")
     object Welcome : Destination("WelcomeScreen")
     object MakeUserScreen : Destination("createUserScreen")
+    object OnMainAppStartScreen : Destination("onMainAppStartScreen")
 
 
 }

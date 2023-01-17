@@ -21,7 +21,7 @@ fun NavigationAppHost(navController: NavHostController) {
     var dependableStartDestination: String = Destination.Welcome.route
     //If user is already logged in he goes to coming events screen.
     if (Firebase.auth.currentUser != null) {
-        dependableStartDestination = Destination.LoginScreen.route
+        dependableStartDestination = Destination.OnMainAppStartScreen.route
     }
 
 
@@ -36,7 +36,7 @@ fun NavigationAppHost(navController: NavHostController) {
         }
 
         composable(Destination.Welcome.route) { WelcomeScreen(navController = navController) }
-        composable(Destination.ComingEvents.route) {
+        composable(Destination.OnMainAppStartScreen.route) {
             ExperimentalScreen(
                 externalNav = navController,
                 internalNav = rememberNavController(),

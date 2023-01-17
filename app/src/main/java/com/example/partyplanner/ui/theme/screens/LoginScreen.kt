@@ -84,7 +84,7 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(50.dp))
         StandardButton(output = "Log på",
-            lambda = { navController.navigate(Destination.ComingEvents.route) })
+            lambda = { navController.navigate(Destination.OnMainAppStartScreen.route) })
         Spacer(modifier = Modifier.height(standardDP))
         Box {
             Button(
