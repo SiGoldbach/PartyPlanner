@@ -35,6 +35,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     var selectImages by remember { mutableStateOf<Uri?>(uri) }
     var wishName by remember { mutableStateOf(TextFieldValue("")) }
     var wishPrice by remember { mutableStateOf(TextFieldValue("")) }
+    var wishDescription by remember { mutableStateOf(TextFieldValue("")) }
     val cloudStorage = Firebase.storage
     var pic: InputStream? = null
 
@@ -74,6 +75,17 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
             value = wishPrice,
             label = { Text(text = "Ønskets pris", color = dustyRose) },
             onValueChange = { wishPrice = it },
+            modifier = Modifier.width(width = 350.dp)
+
+
+        )
+        Spacer(modifier = Modifier.height(standardDP))
+
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
+            value = wishDescription,
+            label = { Text(text = "Gavebeskrivelse", color = dustyRose) },
+            onValueChange = { wishDescription = it },
             modifier = Modifier.width(width = 350.dp)
 
 
