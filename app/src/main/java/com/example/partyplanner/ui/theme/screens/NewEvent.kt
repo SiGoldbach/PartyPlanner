@@ -156,7 +156,9 @@ fun onclickForButton(
     eventDescription: String,
     eventLocation: String
 ) {
-    navController.navigate(Destination.Event.route)
+    navController.navigate(Destination.Event.route){
+        navController.popBackStack()
+    }
     viewModel.createEvent(name, date, eventDescription, eventLocation)
 }
 

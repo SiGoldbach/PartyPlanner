@@ -77,7 +77,7 @@ class ViewModelOnApp : ViewModel() {
         description: String,
         location: String
     ): Boolean {
-        val generatedID = (0..99999999999).random().toString()
+        val generatedID = generateId()
 
         var boolean = false
         val addEvent = db.collection(EVENTS)
