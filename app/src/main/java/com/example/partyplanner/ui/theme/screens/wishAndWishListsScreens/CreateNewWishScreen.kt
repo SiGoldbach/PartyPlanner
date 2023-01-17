@@ -34,6 +34,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
     var selectImages by remember { mutableStateOf<Uri?>(null) }
     var wishName by remember { mutableStateOf(TextFieldValue("")) }
     var wishPrice by remember { mutableStateOf(TextFieldValue("")) }
+    var wishDescription by remember { mutableStateOf(TextFieldValue("")) }
     var pic: InputStream? = null
 
     val galleryLauncher =
