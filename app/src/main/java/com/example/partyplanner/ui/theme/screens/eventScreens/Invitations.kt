@@ -133,7 +133,7 @@ fun FullScreenDialog(
                     openDialog.value = false
                     viewModelInvitations.addInviteToList(Invitations(task.text))
                 },
-                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green),
             ) {
                 Text(
                     "Tilføj", color = Color.White,
