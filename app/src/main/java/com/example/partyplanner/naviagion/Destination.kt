@@ -29,5 +29,4 @@ sealed class Destination(val route: String) {
     object MakeUserScreen : Destination("createUserScreen")
     object OnMainAppStartScreen : Destination("onMainAppStartScreen")
 
-
 }
