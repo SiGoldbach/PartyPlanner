@@ -40,7 +40,7 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.updateEventList()
     if (appState.dataStateEvent == DataStateEvent.Loading) {
-        loadingScreen(text = "Loader events")
+        loadingScreen(text = "Loader kommende begivenheder")
     }
     if (appState.dataStateEvent == DataStateEvent.Empty) {
         emptyLoadingScreen(
