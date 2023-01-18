@@ -151,7 +151,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             Button(
                 colors = ButtonDefaults.buttonColors(dustyRose),
                 onClick = {
-                    val nyEvent = Event(
+                    val newEvent = Event(
                         eventName.text,
                         date.value,
                         eventDescription.text,
@@ -162,7 +162,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
                         appState.currentEvent.specificParticipants,
                         appState.currentEvent.ownerUID
                     )
-                    viewModelOnApp.updateEventValues(nyEvent)
+                    viewModelOnApp.updateEventValues(newEvent)
                     navController.navigate(Destination.Event.route) {
                         popUpTo(Destination.ComingEvents.route)
                     }
