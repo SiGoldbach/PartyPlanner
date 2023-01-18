@@ -87,7 +87,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventName,
-            label = { Text(text = "Event name", color = dustyRose) },
+            label = { Text(text = "Begivenhedsnavn", color = dustyRose) },
             onValueChange = { eventName = it },
             modifier = Modifier.width(350.dp)
         )
@@ -118,7 +118,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventDescription,
-            label = { Text(text = "Event description", color = dustyRose) },
+            label = { Text(text = "Begivenheds beskrivelse", color = dustyRose) },
             onValueChange = { eventDescription = it },
             modifier = Modifier.width(350.dp)
 
@@ -129,7 +129,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventLocation,
-            label = { Text(text = "Event location", color = dustyRose) },
+            label = { Text(text = "Lokation på begivenhed", color = dustyRose) },
             onValueChange = { eventLocation = it },
             modifier = Modifier.width(350.dp)
 
@@ -151,7 +151,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             Button(
                 colors = ButtonDefaults.buttonColors(dustyRose),
                 onClick = {
-                    val newEvent = Event(
+                    val nyEvent = Event(
                         eventName.text,
                         date.value,
                         eventDescription.text,
@@ -162,7 +162,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
                         appState.currentEvent.specificParticipants,
                         appState.currentEvent.ownerUID
                     )
-                    viewModelOnApp.updateEventValues(newEvent)
+                    viewModelOnApp.updateEventValues(nyEvent)
                     navController.navigate(Destination.Event.route) {
                         popUpTo(Destination.ComingEvents.route)
                     }

@@ -11,7 +11,6 @@ data class Event(
     val specificParticipants: List<String> = listOf(),
     val ownerUID: String = "T2"
     //These are all the corresponding values you can add so only use these instead of your own string.
-
 )
 
 data class EventHelper(
