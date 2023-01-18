@@ -63,8 +63,6 @@ fun Wishes(
             verticalArrangement = Arrangement.Center
         ) {
             Text(text = "There are: " + (appState.currentGiftList.size - 1).toString() + " Gifts in this wishlist")
-            Text("gs://partyplanner-7fed9.appspot.com" + viewModelWishesData.currentGift.picture)
-            Text("gs://partyplanner-7fed9.appspot.com/eventPictures/ac4b1b6b-0894-46c1-99db-95031ee593bf.jpg")
 
 
 
@@ -163,7 +161,7 @@ fun WishesComposer(
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(),
-                        contentScale = ContentScale.Fit,
+                        contentScale = ContentScale.Crop,
                     )
 
                     Row(

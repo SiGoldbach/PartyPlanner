@@ -1,5 +1,6 @@
 package com.example.partyplanner.ui.theme.screens
 
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -8,9 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +31,8 @@ import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
 import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
 
 import com.example.partyplanner.viewModel.ViewModelOnApp
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 val standardDP: Dp = 10.dp
@@ -115,6 +116,14 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
+    val cloudStorage = Firebase
+    val uri3 = Uri.parse("android.resource://" + "drawable+" + "/" + R.drawable.loading_picture)
+    var selectImages by remember { mutableStateOf<Uri?>(uri3) }
+        cloudStorage.storage.reference.child(event.picture).downloadUrl.addOnSuccessListener {
+            selectImages = it
+        }
+
+
     Card(
         border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
@@ -138,7 +147,7 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
             Text(text = event.date)
             Box(modifier = Modifier.fillMaxHeight(0.8F)) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = "gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg"),
+                    painter = rememberAsyncImagePainter(model = selectImages),
                     contentDescription = stringResource(id = R.string.Coming_events),
                     modifier = Modifier
                         .size(200.dp),

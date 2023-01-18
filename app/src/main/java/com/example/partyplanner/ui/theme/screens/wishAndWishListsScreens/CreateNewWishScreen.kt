@@ -44,6 +44,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
 
 
         }
+
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -55,7 +56,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = wishName,
-            label = { Text(text = "Ønskeliste navn", color = dustyRose) },
+            label = { Text(text = "Ønskets navn", color = dustyRose) },
             onValueChange = { wishName = it },
             modifier = Modifier.width(width = 350.dp)
 
@@ -77,7 +78,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = wishDescription,
-            label = { Text(text = "Gavebeskrivelse", color = dustyRose) },
+            label = { Text(text = "Ønskebeskrivelse", color = dustyRose) },
             onValueChange = { wishDescription = it },
             modifier = Modifier.width(width = 350.dp)
 
@@ -85,7 +86,7 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
         )
         Spacer(modifier = Modifier.height(standardDP))
 
-        StandardButton(output = "Vælg et billede til din gave") {
+        StandardButton(output = "Vælg et billede til dit ønske") {
             galleryLauncher.launch("image/*")
 
         }
@@ -105,15 +106,22 @@ fun CreateNewWIsh(viewModelOnApp: ViewModelOnApp, navHostController: NavHostCont
         }
         Button(
             onClick = {
-                if(pic!=null){
-                    viewModelOnApp.out(pic!!, gift = Gift())
+                if (pic != null) {
+                    viewModelOnApp.out(
+                        pic!!,
+                        gift = Gift(
+                            name = wishName.text,
+                            description = wishDescription.text,
+                            price = wishPrice.text
+                        )
+                    )
                 }
             },
             colors = ButtonDefaults.buttonColors(
                 dustyRose
             )
         ) {
-            Text(text = "Create gift")
+            Text(text = "Opret ønske")
 
         }
 

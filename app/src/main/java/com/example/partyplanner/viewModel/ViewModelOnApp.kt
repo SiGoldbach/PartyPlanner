@@ -3,6 +3,7 @@ package com.example.partyplanner.viewModel
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.example.partyplanner.fireBaseServices.*
 import com.example.partyplanner.model.*
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +27,7 @@ class ViewModelOnApp : ViewModel() {
         MutableStateFlow(
             OnAppModel(
                 currentGift = Gift(realWish = true)
+
             )
         )
     val uiState: StateFlow<OnAppModel> = userInfo.asStateFlow()
@@ -79,7 +81,8 @@ class ViewModelOnApp : ViewModel() {
         eventName: String,
         date: String,
         description: String,
-        location: String
+        location: String,
+        pictureString: String
     ): Boolean {
         val generatedID = generateId()
 
@@ -94,7 +97,8 @@ class ViewModelOnApp : ViewModel() {
             EventHelper().TOTAL_INVITES to 0,
             EventHelper().LOCATION to location,
             EventHelper().SPECIFIC_PARTICIPANTS to listOf<String>(),
-            EventHelper().OWNER_UID to userInfo.value.uid
+            EventHelper().OWNER_UID to userInfo.value.uid,
+            EventHelper().PICTURE to pictureString
 
 
         )
@@ -376,7 +380,7 @@ class ViewModelOnApp : ViewModel() {
             EventHelper().SPECIFIC_PARTICIPANTS to event.specificParticipants,
             EventHelper().OWNER_UID to event.ownerUID
         )
-        addEvent.set(data1)
+        addEvent.update(data1)
             .addOnSuccessListener { Log.d("Firestore", "Event updated successfully") }
             .addOnFailureListener { e -> Log.d("Firestore", "Fail in update", e) }
 
@@ -424,6 +428,7 @@ class ViewModelOnApp : ViewModel() {
             GiftHelper().OWNER_UID to uiState.value.uid,
             GiftHelper().WISHLIST_IDS to listOf(uiState.value.currentWishListId),
             GiftHelper().REALWISH to true,
+            GiftHelper().PRICE to gift.price
         )
         addGift.document(generatedID).set(data1).addOnSuccessListener {
             userInfo.update { t -> t.copy(currentGiftID = generatedID) }
@@ -510,10 +515,29 @@ class ViewModelOnApp : ViewModel() {
 
     fun out(inputStream: InputStream, gift: Gift) = runBlocking {
         val picLocation = uploadPhoto(inputStream)
-        gift.picture=picLocation
+        gift.picture = picLocation
         createGift(gift)
 
 
+    }
+
+    fun createEventWithPic(
+        pic: InputStream?,
+        navController: NavHostController,
+        viewModel: ViewModelOnApp,
+        name: String,
+        date: String,
+        eventDescription: String,
+        eventLocation: String,
+    ) = runBlocking {
+        val picLocation = uploadPhoto(inputStream = pic!!)
+        createEvent(
+            eventName = name,
+            date = date,
+            description = eventDescription,
+            location = eventLocation,
+            pictureString = picLocation
+        )
     }
 
 

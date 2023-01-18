@@ -60,7 +60,10 @@ class OpretBrugerViewmodel : ViewModel() {
                     }
                     auth.signInWithEmailAndPassword(uiState.value.email, uiState.value.password)
                         .addOnCompleteListener {
-                            Log.v("makeUser", "Now the user account is created and the user should be signed in. ")
+                            Log.v(
+                                "makeUser",
+                                "Now the user account is created and the user should be signed in. "
+                            )
 
                         }
 
@@ -69,6 +72,7 @@ class OpretBrugerViewmodel : ViewModel() {
                     // User has not been created
                 }
             }
+        Thread.sleep(5000)
 
     }
 

@@ -11,7 +11,7 @@ data class OnAppModel(
     var dataStateWishes: DataStateWishes = DataStateWishes.Loading,
     var dataStateWishLists: DataStateWishLists = DataStateWishLists.Loading,
 
-    var currentEvent: Event = Event(),
+    var currentEvent: Event = Event(picture = "EMPTY"),
     var topBarString: String = "",
     var user: User = User(),
     var currentWishListId: String = "",

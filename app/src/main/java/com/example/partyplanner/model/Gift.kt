@@ -19,12 +19,12 @@ data class Gift(
     val description: String = "EMPTY",
     val link: String = "EMPTY",
     var picture: String = "gs://partyplanner-7fed9.appspot.com/giftPictures/sko.png",
-    val price: Int = 0,
+    val price: String = "0 kr",
     val ownerUID: String = "ownerUID",
     var wishListIDs: List<String> = listOf(),
     var realWish: Boolean = true,
 
-)
+    )
 
 
 data class WishListHelper(

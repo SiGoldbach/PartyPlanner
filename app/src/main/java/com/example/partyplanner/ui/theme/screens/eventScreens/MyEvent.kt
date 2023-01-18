@@ -31,13 +31,19 @@ import com.example.partyplanner.ui.theme.StdText
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelOnApp
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 @Composable
 fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) {
+    val cloudStorage = Firebase
     val appState by viewModelOnApp.uiState.collectAsState()
     val uri = Uri.parse("res/drawable-tvdpi/weddinghands.png")
     var selectImages by remember { mutableStateOf<Uri?>(uri) }
+    cloudStorage.storage.reference.child(appState.currentEvent.picture).downloadUrl.addOnSuccessListener {
+        selectImages = it
+    }
 
     viewModelOnApp.getSingleEvent(appState.currentEventID)
 
