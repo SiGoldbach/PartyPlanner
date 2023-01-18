@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.R
 import com.example.partyplanner.model.DataStateEvent
-import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.Begivenhed
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -40,7 +40,7 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.updateEventList()
     if (appState.dataStateEvent == DataStateEvent.Loading) {
-        loadingScreen(text = "Loader kommende begivenheder")
+        loadingScreen(text = "Indlæser kommende begivenheder")
     }
     if (appState.dataStateEvent == DataStateEvent.Empty) {
         emptyLoadingScreen(
@@ -109,7 +109,7 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
+fun EventComposer(event: Begivenhed, navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
     Card(border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
             .size(width = 350.dp, height = 300.dp)
@@ -156,7 +156,7 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
 
 }
 
-fun clickOnEvent(navController: NavHostController, event: Event, viewModelOnApp: ViewModelOnApp) {
+fun clickOnEvent(navController: NavHostController, event: Begivenhed, viewModelOnApp: ViewModelOnApp) {
     navController.navigate(Destination.Event.route)
     viewModelOnApp.setCurrentEventId(event.id)
 }
