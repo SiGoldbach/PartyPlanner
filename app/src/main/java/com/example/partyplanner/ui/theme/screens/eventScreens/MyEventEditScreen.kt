@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.partyplanner.R
-import com.example.partyplanner.model.Begivenhed
+import com.example.partyplanner.model.Event
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
@@ -151,7 +151,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
             Button(
                 colors = ButtonDefaults.buttonColors(dustyRose),
                 onClick = {
-                    val nyBegivenhed = Begivenhed(
+                    val nyEvent = Event(
                         eventName.text,
                         date.value,
                         eventDescription.text,
@@ -162,7 +162,7 @@ fun UpdateEvent(navController: NavHostController, viewModelOnApp: ViewModelOnApp
                         appState.currentEvent.specificParticipants,
                         appState.currentEvent.ownerUID
                     )
-                    viewModelOnApp.updateEventValues(nyBegivenhed)
+                    viewModelOnApp.updateEventValues(nyEvent)
                     navController.navigate(Destination.Event.route) {
                         popUpTo(Destination.ComingEvents.route)
                     }

@@ -1,6 +1,6 @@
 package com.example.partyplanner.model
 
-data class Begivenhed(
+data class Event(
     val name: String = "",
     val date: String = "",
     val description: String = "",
@@ -11,7 +11,6 @@ data class Begivenhed(
     val specificParticipants: List<String> = listOf(),
     val ownerUID: String = "T2"
     //These are all the corresponding values you can add so only use these instead of your own string.
-
 )
 
 data class EventHelper(

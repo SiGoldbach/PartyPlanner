@@ -171,7 +171,7 @@ class ViewModelOnApp : ViewModel() {
         makeSureCorrectUIDIsUsed()
         val user = db.collection(USERS).document(userInfo.value.uid)
         val eventsInDB = db.collection(EVENTS)
-        val tempEventsList = mutableListOf<Begivenhed>()
+        val tempEventsList = mutableListOf<Event>()
 
         user.get().addOnSuccessListener { doc ->
             val userFromDB = doc.toObject(User::class.java)
@@ -187,7 +187,7 @@ class ViewModelOnApp : ViewModel() {
             } else {
                 for (event in userFromDB.eventIdentifiers) {
                     eventsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
-                        val gotEvent = docWithEvent.toObject(Begivenhed::class.java)
+                        val gotEvent = docWithEvent.toObject(Event::class.java)
                         tempEventsList.add(gotEvent!!)
                         if (tempEventsList.size == userFromDB.eventIdentifiers.size) {
                             userInfo.update { t ->
@@ -338,7 +338,7 @@ class ViewModelOnApp : ViewModel() {
     fun getSingleEvent(eventId: String) {
         val eventsInDB = db.collection(EVENTS).document(eventId)
         eventsInDB.get().addOnSuccessListener { curEventDoc ->
-            val eventFromDB = curEventDoc.toObject(Begivenhed::class.java)
+            val eventFromDB = curEventDoc.toObject(Event::class.java)
 
             userInfo.update { t -> t.copy(currentEvent = eventFromDB!!) }
         }
@@ -346,7 +346,7 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
-    fun setCurrentEvent(event: Begivenhed) {
+    fun setCurrentEvent(event: Event) {
         userInfo.update { t ->
             t.copy(
                 currentEvent = event,
@@ -359,7 +359,7 @@ class ViewModelOnApp : ViewModel() {
      * This updates the whole event and should be fine for this project,
      * Maybe in the future some changes are so common values might be changed one at a time.
      */
-    fun updateEventValues(event: Begivenhed) {
+    fun updateEventValues(event: Event) {
         val addEvent = db.collection(EVENTS)
             .document(event.id)
         val data1 = hashMapOf(
