@@ -35,8 +35,9 @@ fun Wishlist2(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     viewModelOnApp.getAllWishLists()
 
     if (appState.dataStateWishLists == DataStateWishLists.Loading) {
-        loadingScreen(text = "Loader ønskelister")
+        loadingScreen(text = "Indlæser ønskelister")
     }
+
     if (appState.dataStateWishLists == DataStateWishLists.Empty) {
         emptyLoadingScreen(
             text = "Her er godt nok tomt opret en ny ønskeliste ",
