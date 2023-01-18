@@ -31,8 +31,6 @@ import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
 import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
 
 import com.example.partyplanner.viewModel.ViewModelOnApp
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
 
 val standardDP: Dp = 10.dp
@@ -42,25 +40,22 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
     val appState by viewModelOnApp.uiState.collectAsState()
     viewModelOnApp.updateEventList()
     if (appState.dataStateEvent == DataStateEvent.Loading) {
-        loadingScreen(text = "Loader events")
+        loadingScreen(text = "Indlæser kommende begivenheder")
     }
     if (appState.dataStateEvent == DataStateEvent.Empty) {
         emptyLoadingScreen(
-            text = "Ingen events er lavet endnu lav et ny event ",
-            buttonText = "Opret ny event"
+            text = "Ingen begivenheder er lavet endnu, lav en ny begivenhed ", buttonText = "Opret ny begivenhed"
         ) {
             navController.navigate(Destination.NewEvent.route)
         }
     }
     if (appState.dataStateEvent == DataStateEvent.Success) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()
         ) {
             //Text(text = "Du har " + appState.events.size + " events")
             LazyVerticalGrid(
-                modifier = Modifier
-                    .fillMaxHeight(0.9F),
+                modifier = Modifier.fillMaxHeight(0.9F),
                 columns = GridCells.Adaptive(minSize = 160.dp),
                 // cells = GridCells.Adaptive(minSize = 160.dp),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
@@ -99,8 +94,7 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
         onClick = lambda,
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
         shape = RoundedCornerShape(30.dp),
-        modifier = Modifier
-            .size(width = 350.dp, height = 50.dp)
+        modifier = Modifier.size(width = 350.dp, height = 50.dp)
 
     ) {
         StandardText(text = output)
@@ -147,7 +141,7 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
             Text(text = event.date)
             Box(modifier = Modifier.fillMaxHeight(0.8F)) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = selectImages),
+                    painter = rememberAsyncImagePainter(model = "gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg"),
                     contentDescription = stringResource(id = R.string.Coming_events),
                     modifier = Modifier
                         .size(200.dp),

@@ -26,10 +26,10 @@ import com.example.partyplanner.viewModel.ViewModelInvitations
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
+//Method for displaying the invitation screen
 @Composable
 fun InvitationScreenLogic(
-    ViewModelInvitations: ViewModelInvitations,
-    viewModelOnApp: ViewModelOnApp
+    ViewModelInvitations: ViewModelInvitations, viewModelOnApp: ViewModelOnApp
 ) {
     val appState by ViewModelInvitations.state.collectAsState()
     val mainAppState by viewModelOnApp.uiState.collectAsState()
@@ -46,11 +46,9 @@ fun InvitationScreenLogic(
         onClick = {
             ViewModelInvitations.sendInvite(
                 makeSubjectForEmail(
-                    event = mainAppState.currentEvent,
-                    user = mainAppState.user
+                    event = mainAppState.currentEvent, user = mainAppState.user
                 ), makeStringForEmail(
-                    event = mainAppState.currentEvent,
-                    user = mainAppState.user
+                    event = mainAppState.currentEvent, user = mainAppState.user
                 )
             )
         },
@@ -62,13 +60,12 @@ fun InvitationScreenLogic(
     ) {
         Text(text = "Send invitation")
     }
-
-    if (appState.listinvitation.isEmpty())
-        Text(
-            text = "Klik nederst på '+' for at tilføje en mailadresse",
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxHeight()
-        )
+//ADD MAIL BUTTON
+    if (appState.listinvitation.isEmpty()) Text(
+        text = "Klik nederst på '+' for at tilføje en mailadresse",
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxHeight()
+    )
     else {
         LazyColumn(modifier = Modifier.fillMaxHeight()) {
 
@@ -101,8 +98,7 @@ fun InvitationScreenLogic(
                                 ViewModelInvitations.removeInviteItem(
                                     inviteItem = index,
                                 )
-                            },
-                            tint = Color.Red
+                            }, tint = Color.Red
                         )
                     }
                 }

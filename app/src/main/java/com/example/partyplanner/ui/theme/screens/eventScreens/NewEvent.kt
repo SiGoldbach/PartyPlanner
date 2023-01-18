@@ -87,7 +87,7 @@ fun CreateNewEvent(navController: NavHostController, viewModelOnApp: ViewModelOn
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = dustyRose),
             value = eventName,
-            label = { Text(text = "Event navn", color = dustyRose) },
+            label = { Text(text = "Navn på begivenhed", color = dustyRose) },
             onValueChange = { eventName = it },
             modifier = Modifier.width(width = 350.dp)
         )

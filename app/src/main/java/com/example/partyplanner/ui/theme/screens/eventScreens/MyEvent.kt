@@ -34,7 +34,7 @@ import com.example.partyplanner.viewModel.ViewModelOnApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-
+//A method for creating a card with a picture and a text to show an event on the eventscreen
 @Composable
 fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) {
     val cloudStorage = Firebase
@@ -126,7 +126,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
-
+        // Button for attending
                 Button(
                     onClick = { /*TODO*/ },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
@@ -153,6 +153,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                     )
 
                 }
+                // Button for guests / button for gæster
                 Button(
                     onClick = { /*TODO*/ },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
@@ -188,6 +189,7 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
+                // Button for inviting
                 Button(
                     onClick = { navController.navigate(Destination.InvitationScreen.route) },
                     colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
@@ -210,7 +212,6 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         fontStyle = FontStyle.Normal,
                         fontWeight = FontWeight.Bold
                     )
-
                 }
             }
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxSize()) {
@@ -229,10 +230,8 @@ fun MyEventScreen(navController: NavController, viewModelOnApp: ViewModelOnApp) 
                         )
                     }
                 }
-
             }
-            // new row can be added here
-
+            //Row here
         }
     }
 }

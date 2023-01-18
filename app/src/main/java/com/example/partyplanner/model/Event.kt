@@ -12,7 +12,6 @@ data class Event(
     val ownerUID: String = "T2",
     val picture: String = "",
     //These are all the corresponding values you can add so only use these instead of your own string.
-
 )
 
 data class EventHelper(
