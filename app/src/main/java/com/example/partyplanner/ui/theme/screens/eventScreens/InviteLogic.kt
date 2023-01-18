@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.partyplanner.model.Event
+import com.example.partyplanner.model.Begivenhed
 import com.example.partyplanner.model.User
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelInvitations
@@ -109,13 +109,13 @@ fun InvitationScreenLogic(
 
 }
 
-fun makeStringForEmail(event: Event, user: User): String {
+fun makeStringForEmail(event: Begivenhed, user: User): String {
     return "hfhg"
     //Email body of invitation
     //return user.name + " has invited you to join "+ event.name + " and are looking forward to hearing from you! " + "The event will be hosted on: " + event.date + " and more information can be found on the event page via the app:" + event.description
 }
 
-fun makeSubjectForEmail(event: Event, user: User): String {
+fun makeSubjectForEmail(event: Begivenhed, user: User): String {
     return "yjfyjgjh"
     //Email subject of invitation
     //return user.name + " has invited you to join "+ event.name

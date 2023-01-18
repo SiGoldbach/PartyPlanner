@@ -1,6 +1,6 @@
 package com.example.partyplanner.model
 
-data class Event(
+data class Begivenhed(
     val name: String = "",
     val date: String = "",
     val description: String = "",
