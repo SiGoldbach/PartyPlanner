@@ -1,6 +1,5 @@
 package com.example.partyplanner.viewModel
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.partyplanner.fireBaseServices.*
@@ -14,8 +13,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.await
-import okhttp3.internal.wait
 import java.io.InputStream
 
 
@@ -174,7 +171,7 @@ class ViewModelOnApp : ViewModel() {
         makeSureCorrectUIDIsUsed()
         val user = db.collection(USERS).document(userInfo.value.uid)
         val eventsInDB = db.collection(EVENTS)
-        val tempEventsList = mutableListOf<Event>()
+        val tempEventsList = mutableListOf<Begivenhed>()
 
         user.get().addOnSuccessListener { doc ->
             val userFromDB = doc.toObject(User::class.java)
@@ -190,7 +187,7 @@ class ViewModelOnApp : ViewModel() {
             } else {
                 for (event in userFromDB.eventIdentifiers) {
                     eventsInDB.document(event).get().addOnSuccessListener { docWithEvent ->
-                        val gotEvent = docWithEvent.toObject(Event::class.java)
+                        val gotEvent = docWithEvent.toObject(Begivenhed::class.java)
                         tempEventsList.add(gotEvent!!)
                         if (tempEventsList.size == userFromDB.eventIdentifiers.size) {
                             userInfo.update { t ->
@@ -341,7 +338,7 @@ class ViewModelOnApp : ViewModel() {
     fun getSingleEvent(eventId: String) {
         val eventsInDB = db.collection(EVENTS).document(eventId)
         eventsInDB.get().addOnSuccessListener { curEventDoc ->
-            val eventFromDB = curEventDoc.toObject(Event::class.java)
+            val eventFromDB = curEventDoc.toObject(Begivenhed::class.java)
 
             userInfo.update { t -> t.copy(currentEvent = eventFromDB!!) }
         }
@@ -349,7 +346,7 @@ class ViewModelOnApp : ViewModel() {
 
     }
 
-    fun setCurrentEvent(event: Event) {
+    fun setCurrentEvent(event: Begivenhed) {
         userInfo.update { t ->
             t.copy(
                 currentEvent = event,
@@ -362,7 +359,7 @@ class ViewModelOnApp : ViewModel() {
      * This updates the whole event and should be fine for this project,
      * Maybe in the future some changes are so common values might be changed one at a time.
      */
-    fun updateEventValues(event: Event) {
+    fun updateEventValues(event: Begivenhed) {
         val addEvent = db.collection(EVENTS)
             .document(event.id)
         val data1 = hashMapOf(
