@@ -44,7 +44,7 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
     }
     if (appState.dataStateEvent == DataStateEvent.Empty) {
         emptyLoadingScreen(
-            text = "Ingen events er lavet endnu lav et ny event ", buttonText = "Opret ny event"
+            text = "Ingen begivenheder er lavet endnu, lav en ny begivenhed ", buttonText = "Opret ny event"
         ) {
             navController.navigate(Destination.NewEvent.route)
         }
