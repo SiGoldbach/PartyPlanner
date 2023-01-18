@@ -23,14 +23,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.partyplanner.R
-import com.example.partyplanner.model.Event
 import com.example.partyplanner.model.DataStateEvent
+import com.example.partyplanner.model.Event
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.beige
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.ui.theme.screens.reuseables.emptyLoadingScreen
 import com.example.partyplanner.ui.theme.screens.reuseables.loadingScreen
-
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
 
@@ -45,21 +44,18 @@ fun ComingEvents(navController: NavHostController, viewModelOnApp: ViewModelOnAp
     }
     if (appState.dataStateEvent == DataStateEvent.Empty) {
         emptyLoadingScreen(
-            text = "Ingen events er lavet endnu lav et ny event ",
-            buttonText = "Opret ny event"
+            text = "Ingen events er lavet endnu lav et ny event ", buttonText = "Opret ny event"
         ) {
             navController.navigate(Destination.NewEvent.route)
         }
     }
     if (appState.dataStateEvent == DataStateEvent.Success) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()
         ) {
             //Text(text = "Du har " + appState.events.size + " events")
             LazyVerticalGrid(
-                modifier = Modifier
-                    .fillMaxHeight(0.9F),
+                modifier = Modifier.fillMaxHeight(0.9F),
                 columns = GridCells.Adaptive(minSize = 160.dp),
                 // cells = GridCells.Adaptive(minSize = 160.dp),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
@@ -98,8 +94,7 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
         onClick = lambda,
         colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
         shape = RoundedCornerShape(30.dp),
-        modifier = Modifier
-            .size(width = 350.dp, height = 50.dp)
+        modifier = Modifier.size(width = 350.dp, height = 50.dp)
 
     ) {
         StandardText(text = output)
@@ -115,19 +110,16 @@ fun StandardButton(output: String, modifier: Modifier = Modifier, lambda: () -> 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp: ViewModelOnApp) {
-    Card(
-        border = BorderStroke(width = 2.dp, color = dustyRose),
+    Card(border = BorderStroke(width = 2.dp, color = dustyRose),
         modifier = Modifier
             .size(width = 350.dp, height = 300.dp)
-            .padding(10.dp), backgroundColor = beige,
+            .padding(10.dp),
+        backgroundColor = beige,
         onClick = {
             clickOnEvent(
-                navController = navController,
-                viewModelOnApp = viewModelOnApp,
-                event = event
+                navController = navController, viewModelOnApp = viewModelOnApp, event = event
             )
-        }
-    ) {
+        }) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -140,8 +132,7 @@ fun EventComposer(event: Event, navController: NavHostController, viewModelOnApp
                 Image(
                     painter = rememberAsyncImagePainter(model = "gs://partyplanner-7fed9.appspot.com/LnRrYf6e_400x400.jpg"),
                     contentDescription = stringResource(id = R.string.Coming_events),
-                    modifier = Modifier
-                        .size(200.dp),
+                    modifier = Modifier.size(200.dp),
                     contentScale = ContentScale.Fit,
                 )
             }
@@ -176,17 +167,7 @@ fun clickOnEvent(navController: NavHostController, event: Event, viewModelOnApp:
 @Composable
 fun StandardText(text: String) {
     Text(
-        text = text,
-        fontStyle = FontStyle.Normal,
-        fontSize = 16.sp, color = Color.White
+        text = text, fontStyle = FontStyle.Normal, fontSize = 16.sp, color = Color.White
     )
 
 }
-
-
-
-
-
-
-
-
