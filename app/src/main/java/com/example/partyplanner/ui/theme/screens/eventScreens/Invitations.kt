@@ -17,6 +17,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavHostController
 import com.example.partyplanner.model.Invitations
 import com.example.partyplanner.ui.theme.beige
+import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.viewModel.ViewModelInvitations
 import com.example.partyplanner.viewModel.ViewModelOnApp
 
@@ -132,7 +133,7 @@ fun FullScreenDialog(
                     openDialog.value = false
                     viewModelInvitations.addInviteToList(Invitations(task.text))
                 },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green),
+                colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose),
             ) {
                 Text(
                     "Tilføj", color = Color.White,
