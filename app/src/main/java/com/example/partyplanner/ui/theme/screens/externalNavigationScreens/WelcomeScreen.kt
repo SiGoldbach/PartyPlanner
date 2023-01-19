@@ -29,7 +29,8 @@ fun WelcomeText(text: String) {
         text = text,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold,
-        fontSize = 38.sp, color = Color.Black
+        fontSize = 38.sp,
+        color = Color.Black
     )
 
 }
@@ -59,7 +60,8 @@ fun WelcomeScreen(navController: NavController) {
 
             ) {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
                     .padding(9.dp)
                     .fillMaxWidth()
             ) {
@@ -79,17 +81,13 @@ fun WelcomeScreen(navController: NavController) {
         }
 
         Spacer(modifier = Modifier.height(425.dp))
-        StandardButton(
-            output = "Login",
-            lambda = { navController.navigate(Destination.LoginScreen.route) }
-        )
-        StandardButton(
-            output = "Opret Bruger",
+        StandardButton(output = "Login",
+            lambda = { navController.navigate(Destination.LoginScreen.route) })
+        StandardButton(output = "Opret Bruger",
             lambda = { navController.navigate(Destination.MakeUserScreen.route) })
-        StandardButton(
-            output = "Test",
-            lambda = {
-                navController.navigate(Destination.OnMainAppStartScreen.route) })
+        StandardButton(output = "Test", lambda = {
+            navController.navigate(Destination.OnMainAppStartScreen.route)
+        })
     }
 
 }
