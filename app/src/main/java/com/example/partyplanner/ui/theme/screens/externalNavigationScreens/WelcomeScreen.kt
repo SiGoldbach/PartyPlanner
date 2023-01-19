@@ -1,5 +1,6 @@
 package com.example.partyplanner.ui.theme.screens.externalNavigationScreens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,8 @@ import com.example.partyplanner.R
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.screens.StandardButton
 import com.example.partyplanner.ui.theme.screens.standardDP
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
@@ -89,7 +92,22 @@ fun WelcomeScreen(navController: NavController) {
         StandardButton(
             output = "Test",
             lambda = {
-                navController.navigate(Destination.OnMainAppStartScreen.route) })
+                Firebase.auth.signInWithEmailAndPassword("userfinal2exam@mail.com", "userfinal2")
+                    .addOnSuccessListener {
+                        if (Firebase.auth.currentUser != null) {
+                            navController.navigate(Destination.OnMainAppStartScreen.route)
+                        }
+                    }.addOnFailureListener {
+                        Log.v(
+                            "LOGIN_SERVICE",
+                            "FAILED TO LOG IN WHICH IS FIREBASE'S FAULT NOT ANYONE ELSE. " +
+                                    "SINCE IT IS JUST AN ABSTRACTED METHOD THAT IS BEING CALLED WITHOUT ANY IMPLEMENTATION FROM OUR SIDE" +
+                                    "IT MIGHT BE THE WRONG CODE BUT PROBABLY NOT. IT IS IMPOSSIBLE TO TELL SINCE THERE IS NO ERROR HANDLING "
+                        )
+                    }
+
+
+            })
     }
 
 }

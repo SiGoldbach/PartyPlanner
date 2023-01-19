@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.partyplanner.naviagion.Destination
 import com.example.partyplanner.ui.theme.dustyRose
 import com.example.partyplanner.ui.theme.screens.standardDP
@@ -27,7 +28,7 @@ import com.example.partyplanner.viewModel.OpretBrugerViewmodel
 // https://www.google.com/search?q=making+password+hidden+compose&sxsrf=AJOqlzXVKGa8wXyv4vyAV-DwT7TR5Ozamw%3A1673903286638&ei=trzFY4rIJuesxc8PkKKUkAU&ved=0ahUKEwiK-6bW_8z8AhVnVvEDHRARBVIQ4dUDCA8&uact=5&oq=making+password+hidden+compose&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCCEQoAEyBQghEKABMgUIIRCgAToHCCMQ6gIQJzoECCMQJzoECC4QJzoGCCMQJxATOggIABCABBCxAzoICC4QsQMQgwE6CwgAEIAEELEDEIMBOg4ILhCABBCxAxDHARDRAzoFCAAQgAQ6BAgAEEM6BwguENQCEEM6DgguEIAEELEDEIMBENQCOgsILhCABBCxAxCDAToFCC4QgAQ6CAgAEIAEEMsBOggILhCABBDLAToGCAAQHhANOggIABAeEA8QDToGCAAQFhAeOggIABAWEB4QDzoECCEQFToICCEQFhAeEB06CgghEBYQHhAPEB1KBAhBGABKBAhGGABQvARYiCxgmS1oAXABeACAAWyIAZUQkgEEMjguMpgBAKABAbABCsABAQ&sclient=gws-wiz-serp#fpstate=ive&vld=cid:12c764d6,vid:eNAhOqF83Kg
 @Composable
 fun OpretBruger(
-    navController: NavController,
+    navController: NavHostController,
     viewModel: OpretBrugerViewmodel = OpretBrugerViewmodel(),
 ) {
 
@@ -106,13 +107,14 @@ fun OpretBruger(
         //MAKING A STANDARD BUTTON FOR TRYING THE LOGIN
         Button(onClick = {
             viewModel.putCredentialsAndCreateUser(
+                internalNavHostController = navController,
                 forNavn = forNavn.text,
                 efterNavn = efterNavn.text,
                 email = email.text,
                 kodeord = kodeord.text
             )
+            Thread.sleep(5000)
             //Navigation
-            navController.navigate(Destination.OnMainAppStartScreen.route)
         }, colors = ButtonDefaults.buttonColors(backgroundColor = dustyRose)) {
             Text("Opret")
         }
